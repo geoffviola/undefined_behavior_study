@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.6)
+project(undefined_behavior_study)
+
+add_executable(array_out_of_bounds src/array_out_of_bounds.cpp)
+add_executable(dereferencing_nullptr src/dereferencing_nullptr.cpp)
+add_executable(divide_by_zero src/divide_by_zero.cpp)
+add_executable(reading_unitialized_value src/reading_unitialized_value.cpp)
+add_executable(out_of_bounds_pointer src/out_of_bounds_pointer.cpp)
+add_executable(shifting_more_than_width src/shifting_more_than_width.cpp)
+add_executable(signed_integer_overflow src/signed_integer_overflow.cpp)
+add_executable(stack_overflow src/stack_overflow.cpp)
