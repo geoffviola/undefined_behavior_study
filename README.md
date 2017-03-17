@@ -52,15 +52,15 @@ valgrind | gcc | signed integer overflow | ❌ | ❌ |
 valgrind | gcc | stack overflow | ✔️ | ❌ |
 
 ## Versions
-- GCC: (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609
 - clang: 3.8.0-2ubuntu4 (tags/RELEASE\_380/final)
+- GCC: (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609
 - MSVC: 2015 Version 14.0.25431.01 Update 3
 - valgrind: 3.11.0
 
 ## Notes
 Passing means the process halted. Tests were on intel x86\_64. MSVC was tested on Windows 10 and the rest was tested on Ubuntu 16.04. Debug mode and RelWithDebInfo is in reference to CMake's build types.
 
-There is only one case of each type. It's expected that slightly different implementations of the same types of undefined behavior yield different results.
+There is only one case of each type. It's expected that slightly different implementations of the same types of undefined behavior may yield different results.
 
 ## Analysis
 When in debug mode, MSVC halted on the most undefined behavior. Clang and GCC both benefited with the additional "-Wall" flag to catch undefined behavior as warnings. No extra flags made MSVC catch more undefined behavior.
