@@ -42,6 +42,15 @@ valgrind | gcc (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609 | reading unitiali
 valgrind | gcc (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609 | shifting more than width | ❌ | ❌ |
 valgrind | gcc (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609 | signed integer overflow | ❌ | ❌ |
 valgrind | gcc (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609 | stack overflow | ✔️ | ❌ |
+clang undefined sanitizer | clang | array out of bounds | ❌ | ✔️ |
+clang undefined sanitizer | clang | dereferencing nullptr | ✔️ | ✔️ |
+clang undefined sanitizer | clang | divide by zero | ✔️ | ✔️ |
+clang undefined sanitizer | clang | out of bounds pointer | ❌ | ✔️ |
+clang undefined sanitizer | clang | reading unitialized value | ❌ | ❌ |
+clang undefined sanitizer | clang | shifting more than width | ✔️ | ✔️ |
+clang undefined sanitizer | clang | signed integer overflow | ✔️ | ✔️ |
+clang undefined sanitizer | clang | stack overflow | ✔️ | ✔️ |
+
 
 ## Notes
 Passing means the process halted. Tests were on intel x86_64. MSVC was tested on Windows 10 and the rest was tested on Ubuntu 16.04.
