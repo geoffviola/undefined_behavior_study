@@ -1,4 +1,4 @@
-# undefined_behavior_study
+# Undefined Behavior Study
 A study of undefined behavior on various platforms, compilers, and tools. The undefined behavior types were inspired by https://www.nayuki.io/page/undefined-behavior-in-c-and-cplusplus-programs.
 
 ## Compiler Study
@@ -53,9 +53,18 @@ valgrind | gcc | stack overflow | ✔️ | ❌ |
 
 ## Versions
 - GCC: (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609
-- clang: 3.8.0-2ubuntu4 (tags/RELEASE_380/final)
+- clang: 3.8.0-2ubuntu4 (tags/RELEASE\_380/final)
 - MSVC: 2015 Version 14.0.25431.01 Update 3
 - valgrind: 3.11.0
 
 ## Notes
-Passing means the process halted. Tests were on intel x86_64. MSVC was tested on Windows 10 and the rest was tested on Ubuntu 16.04.
+Passing means the process halted. Tests were on intel x86\_64. MSVC was tested on Windows 10 and the rest was tested on Ubuntu 16.04. Debug mode and RelWithDebInfo is in reference to CMake's build types.
+
+There is only one case of each type. It's expected that slightly different implementations of the same types of undefined behavior yield different results.
+
+## Analysis
+When in debug mode, MSVC halted on the most undefined behavior. Clang and GCC both benefited with the additional "-Wall" flag to catch undefined behavior as warnings. No extra flags made MSVC catch more undefined behavior.
+
+Valgrind only caught one additional case over running the programs directly. The additional case was reading uninitialized value, but it only caught it in debug mode. It did provide more actionable messages than just "seg fault." Clang with the "-fsanitize=undefined" performed much better in Release mode. It caught all types but reading from an unitialized value.
+
+Reading from an uninitialized value is a very common mistake for beginners and experts. Compilers sometimes catch it as warnings. None of the compiler generate a halt instruction nor do the dynamic analyzers.
