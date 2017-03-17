@@ -11,3 +11,14 @@ MSVC 2015 Version 14.0.25431.01 Update 3 | reading unitialized value | ✔️ /W
 MSVC 2015 Version 14.0.25431.01 Update 3 | shifting more than width | ✔️ /W1 | ❌ | ❌ |
 MSVC 2015 Version 14.0.25431.01 Update 3 | signed integer overflow | ❌ | ❌ | ❌ |
 MSVC 2015 Version 14.0.25431.01 Update 3 | stack overflow | ✔️ /W1 | ✔️ | ❌ |
+gcc (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609 | array out of bounds | ❌ | ❌ | ❌ |
+gcc (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609 | dereferencing nullptr | ❌ | ✔️ | ✔️ |
+gcc (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609 | divide by zero | ✔️ | ✔️ | ✔️ |
+gcc (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609 | out of bounds pointer | ❌ | ❌ | ❌ |
+gcc (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609 | reading unitialized value | ✔️ /Wall | ❌| ❌ |
+gcc (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609 | shifting more than width | ✔️ | ❌ | ❌ |
+gcc (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609 | signed integer overflow | ❌ | ❌ | ❌ |
+gcc (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609 | stack overflow | ❌ | ✔️ | ❌ |
+
+# Notes
+Passing means the process halted. Tests were on intel x86_64. MSVC was tested on Windows 10 and the rest was tested on Ubuntu 16.04.

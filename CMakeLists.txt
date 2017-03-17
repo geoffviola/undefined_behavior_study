@@ -1,5 +1,9 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.5)
 project(undefined_behavior_study)
+
+if (CMAKE_COMPILER_IS_GNUCXX OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -Wextra -Wpedantic")
+endif ()
 
 add_executable(array_out_of_bounds src/array_out_of_bounds.cpp)
 add_executable(dereferencing_nullptr src/dereferencing_nullptr.cpp)
