@@ -21,6 +21,14 @@ gcc (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609 | reading unitialized value |
 gcc (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609 | shifting more than width | ✔️ | ❌ | ❌ |
 gcc (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609 | signed integer overflow | ❌ | ❌ | ❌ |
 gcc (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609 | stack overflow | ❌ | ✔️ | ❌ |
+clang version 3.8.0-2ubuntu4 (tags/RELEASE_380/final) | array out of bounds | ❌ | ❌ | ❌ |
+clang version 3.8.0-2ubuntu4 (tags/RELEASE_380/final) | dereferencing nullptr | ❌ | ✔️ | ❌ |
+clang version 3.8.0-2ubuntu4 (tags/RELEASE_380/final) | divide by zero | ✔️ | ✔️ | ❌ |
+clang version 3.8.0-2ubuntu4 (tags/RELEASE_380/final) | out of bounds pointer | ❌ | ❌ | ❌ |
+clang version 3.8.0-2ubuntu4 (tags/RELEASE_380/final) | reading unitialized value | ✔️ -Wall  | ❌| ❌ |
+clang version 3.8.0-2ubuntu4 (tags/RELEASE_380/final) | shifting more than width | ✔️ | ❌ | ❌ |
+clang version 3.8.0-2ubuntu4 (tags/RELEASE_380/final) | signed integer overflow | ❌ | ❌ | ❌ |
+clang version 3.8.0-2ubuntu4 (tags/RELEASE_380/final) | stack overflow | ✔️ -Wall  | ✔️ | ❌ |
 
 ## Dynamic Analyzer Study
 
