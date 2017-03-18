@@ -7,6 +7,7 @@ uint32_t global = 1;
 static uint32_t call_self()
 {
   global = call_self() + 1;
+  return global;
 }
 
 int main()
