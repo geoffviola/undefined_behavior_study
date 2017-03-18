@@ -9,7 +9,7 @@ install:
   - sudo apt-get -qq install gcc-5 clang-3.8 lldb-3.8 valgrind
   - sudo unlink /usr/bin/g++
   - sudo ln -s /usr/bin/g++5 /usr/bin/g++
-  - sudo unlink /usr/bin/clang++
-  - sudo ln -s /usr/bin/clang++-3.8 /usr/bin/clang++
+  #- sudo unlink /usr/bin/clang++
+  #- sudo ln -s /usr/bin/clang++-3.8 /usr/bin/clang++
 script: ./generate_results.bash
 os: linux
