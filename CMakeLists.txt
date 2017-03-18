@@ -9,6 +9,7 @@ set(executables
   array_out_of_bounds
   dereferencing_nullptr
   divide_by_zero
+  no_undefined_behavior
   out_of_bounds_pointer
   reading_unitialized_value
   shifting_more_than_width
