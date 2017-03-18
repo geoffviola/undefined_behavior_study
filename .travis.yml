@@ -8,7 +8,11 @@ install:
   - sudo apt-get -qq update
   - sudo apt-get -qq install g++-5 clang-3.8
   - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60 --slave /usr/bin/g++ g++ /usr/bin/g++-5
-  - sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-3.8 60 --slave /usr/bin/clang++ clang++ /usr/bin/clang++-3.8
+  - ls -la /usr/bin | grep clang
+  - sudo unlink /usr/bin/clang++
+  - sudo ln -s /usr/bin/clang++-3.8 /usr/bin/clang++
+  - ls -la /usr/bin | grep clang
+  #- sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-3.8 60 --slave /usr/bin/clang++ clang++ /usr/bin/clang++-3.8
   - curl -O https://cmake.org/files/v3.5/cmake-3.5.1-Linux-x86_64.tar.gz
   - tar xfz cmake-3.5.1-Linux-x86_64.tar.gz
   - sudo unlink /usr/bin/cmake
