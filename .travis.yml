@@ -1,7 +1,8 @@
 language: cpp
 compiler: gcc
 install:
+  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   - sudo apt-get -qq update
-  - sudo apt-get -qq install valgrind
+  - sudo apt-get -qq install gcc-5 clang-3.8 valgrind
 script: ./generate_results.bash
 os: linux
