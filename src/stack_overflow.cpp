@@ -2,15 +2,15 @@
 #include <cstdint>
 #include <stdio.h>
 
-int32_t global = 1;
+uint32_t global = 1;
 
-static int call_self()
+static uint32_t call_self()
 {
   global = call_self() + 1;
 }
 
 int main()
 {
-  printf("%d\n", call_self());
+  printf("%u\n", call_self());
   return EXIT_SUCCESS;
 }
