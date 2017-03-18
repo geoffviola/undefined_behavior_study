@@ -11,6 +11,7 @@ install:
   - ls -la /usr/bin | grep clang
   - sudo unlink /usr/bin/clang++
   - sudo ln -s /usr/bin/clang++-3.8 /usr/bin/clang++
+  - which clang++
   - ls -la /usr/bin | grep clang
   #- sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-3.8 60 --slave /usr/bin/clang++ clang++ /usr/bin/clang++-3.8
   - curl -O https://cmake.org/files/v3.5/cmake-3.5.1-Linux-x86_64.tar.gz
