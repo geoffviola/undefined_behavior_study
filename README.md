@@ -1,6 +1,14 @@
 # Undefined Behavior Study
 A study of undefined behavior on various platforms, compilers, and tools. The undefined behavior types were inspired by https://www.nayuki.io/page/undefined-behavior-in-c-and-cplusplus-programs.
 
+## Automated Results
+
+Linux 
+[![Build Status](https://travis-ci.org/geoffviola/undefined_behavior_study.svg?branch=master)](https://travis-ci.org/geoffviola/undefined_behavior_study)
+
+Windows 
+[![Build status](https://ci.appveyor.com/api/projects/status/sewu7060d0mn6v8i/branch/master?svg=true)](https://ci.appveyor.com/project/geoffviola/undefined_behavior_study/branch/master)
+
 ## Compiler Study
 
 Compiler | Undefined Behavior Type | Warnings | Debug | RelWithDebInfo
