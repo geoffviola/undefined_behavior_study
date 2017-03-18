@@ -24,11 +24,11 @@ gcc | stack overflow | ❌ | ✔️ | ✔️ |
 MSVC | array out of bounds | ❌ | ✔️ | ❌ |
 MSVC | dereferencing nullptr | ❌ | ✔️ | ✔️ |
 MSVC | divide by zero | ✔️ /W3 | ✔️ | ✔️ |
-MSVC | out of bounds pointer | ❌ | ✔️ | ❌ |
+MSVC | out of bounds pointer | ❌ | ❌ | ❌ |
 MSVC | reading unitialized value | ✔️ /W1 | ✔️ | ❌ |
 MSVC | shifting more than width | ✔️ /W1 | ❌ | ❌ |
 MSVC | signed integer overflow | ❌ | ❌ | ❌ |
-MSVC | stack overflow | ✔️ /W1 | ✔️ | ❌ |
+MSVC | stack overflow | ✔️ /W1 | ✔️ | ✔️ |
 
 ## Dynamic Analyzer Study
 
