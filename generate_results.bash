@@ -9,7 +9,7 @@ for file in `ls -1` ; do
     if [ -x $file ] && [ -f $file ] ; then
         timeout 1 ./$file
         echo $file $? >> runtime_results.txt
-        timeout 5 valgrind ./$file
+        timeout 5 valgrind --error-exitcode=1 ./$file
         echo $file $? >> valgrind_results.txt
     fi
 done
@@ -23,7 +23,7 @@ for file in `ls -1` ; do
     if [ -x $file ] && [ -f $file ] ; then
         timeout 1 ./$file
         echo $file $? >> runtime_results.txt
-        timeout 5 valgrind ./$file
+        timeout 5 valgrind --error-exitcode=1 ./$file
         echo $file $? >> valgrind_results.txt
     fi
 done
