@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION VERSION 2.8.12)
+cmake_minimum_required(VERSION VERSION 2.8.7)
 project(undefined_behavior_study)
 
 if (CMAKE_COMPILER_IS_GNUCXX OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")

@@ -1,6 +1,7 @@
 language: cpp
-compiler:
-- gcc
+compiler: gcc
+install:
+  - sudo apt-get -qq update
+  - sudo apt-get -qq install valgrind
 script: ./generate_results.bash
-os:
-- linux
+os: linux
