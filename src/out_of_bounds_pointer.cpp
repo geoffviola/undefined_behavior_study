@@ -5,6 +5,6 @@
 int main()
 {
   std::array<int32_t, 10> arr;
-  printf("%p\n", static_cast<void*>(&arr[arr.size()]));
+  printf("%p\n", static_cast<void*>(arr.data() + arr.size()));
   return EXIT_SUCCESS;
 }

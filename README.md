@@ -37,7 +37,7 @@ Tool | Compiler | Undefined Behavior Type | Debug | RelWithDebInfo
 clang undefined sanitizer | clang | array out of bounds | ❌ | ✔️ |
 clang undefined sanitizer | clang | dereferencing nullptr | ✔️ | ✔️ |
 clang undefined sanitizer | clang | divide by zero | ✔️ | ✔️ |
-clang undefined sanitizer | clang | out of bounds pointer | ❌ | ✔️ |
+clang undefined sanitizer | clang | out of bounds pointer | ❌ | ❌  |
 clang undefined sanitizer | clang | reading unitialized value | ❌ | ❌ |
 clang undefined sanitizer | clang | shifting more than width | ✔️ | ✔️ |
 clang undefined sanitizer | clang | signed integer overflow | ✔️ | ✔️ |
