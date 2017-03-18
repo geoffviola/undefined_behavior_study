@@ -1,12 +1,16 @@
 #include <cstdlib>
+#include <cstdint>
+#include <stdio.h>
 
-static void call_self()
+int32_t global = 1;
+
+static int call_self()
 {
-  call_self();
+  global = call_self() + 1;
 }
 
 int main()
 {
-  call_self();
+  printf("%d\n", call_self());
   return EXIT_SUCCESS;
 }

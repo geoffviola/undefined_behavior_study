@@ -12,7 +12,7 @@ clang | out of bounds pointer | ❌ | ❌ | ❌ |
 clang | reading unitialized value | ✔️ -Wall  | ❌| ❌ |
 clang | shifting more than width | ✔️ | ❌ | ❌ |
 clang | signed integer overflow | ❌ | ❌ | ❌ |
-clang | stack overflow | ✔️ -Wall  | ✔️ | ❌ |
+clang | stack overflow | ✔️ -Wall  | ✔️ | ✔️ |
 gcc | array out of bounds | ❌ | ❌ | ❌ |
 gcc | dereferencing nullptr | ❌ | ✔️ | ✔️ |
 gcc | divide by zero | ✔️ | ✔️ | ✔️ |
@@ -20,7 +20,7 @@ gcc | out of bounds pointer | ❌ | ❌ | ❌ |
 gcc | reading unitialized value | ✔️ /Wall | ❌| ❌ |
 gcc | shifting more than width | ✔️ | ❌ | ❌ |
 gcc | signed integer overflow | ❌ | ❌ | ❌ |
-gcc | stack overflow | ❌ | ✔️ | ❌ |
+gcc | stack overflow | ❌ | ✔️ | ✔️ |
 MSVC | array out of bounds | ❌ | ✔️ | ❌ |
 MSVC | dereferencing nullptr | ❌ | ✔️ | ✔️ |
 MSVC | divide by zero | ✔️ /W3 | ✔️ | ✔️ |
@@ -49,7 +49,7 @@ valgrind | gcc | out of bounds pointer | ❌ | ❌ |
 valgrind | gcc | reading unitialized value | ✔️| ❌ |
 valgrind | gcc | shifting more than width | ❌ | ❌ |
 valgrind | gcc | signed integer overflow | ❌ | ❌ |
-valgrind | gcc | stack overflow | ✔️ | ❌ |
+valgrind | gcc | stack overflow | ✔️ | ✔️ |
 
 ## Versions
 - clang: 3.8.0-2ubuntu4 (tags/RELEASE\_380/final)
