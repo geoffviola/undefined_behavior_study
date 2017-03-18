@@ -1,0 +1,6 @@
+language: cpp
+compiler:
+- gcc
+script: ./generate_results.bash
+os:
+- linux
