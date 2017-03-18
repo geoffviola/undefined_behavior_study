@@ -8,6 +8,7 @@ install:
   - sudo apt-get -qq update
   - sudo apt-get -qq install g++-5 clang-3.8
   - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60 --slave /usr/bin/g++ g++ /usr/bin/g++-5
+  - sudo rm -r /usr/local/clang-3.4
   - ls -la /usr/bin | grep clang
   - echo $PATH
   #- sudo unlink /usr/bin/clang++
