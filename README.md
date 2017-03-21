@@ -17,7 +17,10 @@ clang | array out of bounds | ❌ | ❌ | ❌ |
 clang | dereferencing nullptr | ❌ | ✔️ | ❌ |
 clang | divide by zero | ✔️ | ✔️ | ❌ |
 clang | out of bounds pointer | ❌ | ❌ | ❌ |
-clang | reading unitialized value | ✔️ -Wall  | ❌| ❌ |
+clang | reading unitialized value add | ✔️ -Wall  | ❌| ❌ |
+clang | reading unitialized value cout | ✔️ -Wall  | ❌| ❌ |
+clang | reading unitialized value if | ✔️ -Wall  | ❌| ❌ |
+clang | reading unitialized value printf | ✔️ -Wall  | ❌| ❌ |
 clang | shifting more than width | ✔️ | ❌ | ❌ |
 clang | signed integer overflow | ❌ | ❌ | ❌ |
 clang | stack overflow | ✔️ -Wall  | ✔️ | ✔️ |
@@ -25,7 +28,10 @@ gcc | array out of bounds | ❌ | ❌ | ❌ |
 gcc | dereferencing nullptr | ❌ | ✔️ | ✔️ |
 gcc | divide by zero | ✔️ | ✔️ | ✔️ |
 gcc | out of bounds pointer | ❌ | ❌ | ❌ |
-gcc | reading unitialized value | ✔️ /Wall | ❌| ❌ |
+gcc | reading unitialized value add | ✔️ /Wall | ❌| ❌ |
+gcc | reading unitialized value cout | ✔️ /Wall | ❌| ❌ |
+gcc | reading unitialized value if | ✔️ /Wall | ❌| ❌ |
+gcc | reading unitialized value printf | ✔️ /Wall | ❌| ❌ |
 gcc | shifting more than width | ✔️ | ❌ | ❌ |
 gcc | signed integer overflow | ❌ | ❌ | ❌ |
 gcc | stack overflow | ❌ | ✔️ | ✔️ |
@@ -49,15 +55,21 @@ clang undefined sanitizer | clang | array out of bounds | ❌ | ✔️ |
 clang undefined sanitizer | clang | dereferencing nullptr | ✔️ | ✔️ |
 clang undefined sanitizer | clang | divide by zero | ✔️ | ✔️ |
 clang undefined sanitizer | clang | out of bounds pointer | ❌ | ❌  |
-clang undefined sanitizer | clang | reading unitialized value | ❌ | ❌ |
+clang undefined sanitizer | clang | reading unitialized value add | ❌ | ✔️ |
+clang undefined sanitizer | clang | reading unitialized value cout | ❌ | ❌ |
+clang undefined sanitizer | clang | reading unitialized value if | ❌ | ❌ |
+clang undefined sanitizer | clang | reading unitialized value printf | ❌ | ❌ |
 clang undefined sanitizer | clang | shifting more than width | ✔️ | ✔️ |
 clang undefined sanitizer | clang | signed integer overflow | ✔️ | ✔️ |
 clang undefined sanitizer | clang | stack overflow | ✔️ | ✔️ |
-valgrind | gcc | array out of bounds | ❌ | ❌ |
+valgrind | gcc | array out of bounds | ✔️ | ✔️ |
 valgrind | gcc | dereferencing nullptr | ✔️ | ✔️ |
 valgrind | gcc | divide by zero | ✔️ | ✔️ |
 valgrind | gcc | out of bounds pointer | ❌ | ❌ |
-valgrind | gcc | reading unitialized value | ✔️| ❌ |
+valgrind | gcc | reading unitialized value add | ✔️| ✔️ |
+valgrind | gcc | reading unitialized value cout | ✔️| ✔️ |
+valgrind | gcc | reading unitialized value if | ✔️| ✔️ |
+valgrind | gcc | reading unitialized value printf | ✔️| ✔️ |
 valgrind | gcc | shifting more than width | ❌ | ❌ |
 valgrind | gcc | signed integer overflow | ❌ | ❌ |
 valgrind | gcc | stack overflow | ✔️ | ✔️ |
@@ -76,6 +88,6 @@ There is only one case of each type. It's expected that slightly different imple
 ## Analysis
 When in debug mode, MSVC halted on the most undefined behavior. Clang and GCC both benefited with the additional "-Wall" flag to catch undefined behavior as warnings. No extra flags made MSVC catch more undefined behavior.
 
-Valgrind only caught one additional case over running the programs directly. The additional case was reading uninitialized value, but it only caught it in debug mode. It did provide more actionable messages than just "seg fault." Clang with the "-fsanitize=undefined" performed much better in Release mode. It caught all types but reading from an unitialized value.
+Valgrind caught a few more cases of undefined behavior over running the programs directly. The additional cases were reading uninitialized values and dereferencing an array out of its bounds. It did provide more actionable messages than just "seg fault." Clang with the "-fsanitize=undefined" performed much better in RelWithDebInfo mode over just Debug mode. It caught all types but reading from an unitialized value and out of bounds pointer.
 
-Reading from an uninitialized value is a very common mistake for beginners and experts. Compilers sometimes catch it as warnings. None of the compiler generate a halt instruction nor do the dynamic analyzers.
+Reading from an uninitialized value is a very common mistake for beginners and experts. Compilers sometimes catch it as warnings. Valgrind can detect it, but clang with fsantize can often miss it.
