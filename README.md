@@ -33,7 +33,10 @@ MSVC | array out of bounds | ❌ | ✔️ | ❌ |
 MSVC | dereferencing nullptr | ❌ | ✔️ | ✔️ |
 MSVC | divide by zero | ✔️ /W3 | ✔️ | ✔️ |
 MSVC | out of bounds pointer | ❌ | ❌ | ❌ |
-MSVC | reading unitialized value | ✔️ /W1 | ✔️ | ❌ |
+MSVC | reading unitialized value add | ✔️ /W1 | ✔️ | ❌ |
+MSVC | reading unitialized value cout | ✔️ /W1 | ✔️ | ❌ |
+MSVC | reading unitialized value if | ✔️ /W1 | ✔️ | ❌ |
+MSVC | reading unitialized value printf | ✔️ /W1 | ✔️ | ❌ |
 MSVC | shifting more than width | ✔️ /W1 | ❌ | ❌ |
 MSVC | signed integer overflow | ❌ | ❌ | ❌ |
 MSVC | stack overflow | ✔️ /W1 | ✔️ | ✔️ |
