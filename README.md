@@ -75,10 +75,11 @@ valgrind | gcc | signed integer overflow | ❌ | ❌ |
 valgrind | gcc | stack overflow | ✔️ | ✔️ |
 
 ## Versions
-- clang: 3.8.0-2ubuntu4 (tags/RELEASE\_380/final)
-- GCC: (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609
+- Linux 6e685b1d7f64 4.4.0-101-generic #124~14.04.1-Ubuntu SMP Fri Nov 10 19:05:36 UTC 2017 x86\_64 x86\_64 x86\_64 GNU/Linux
+- clang: 6.0.0-1ubuntu2 (tags/RELEASE\_600/final)
+- GCC: (Ubuntu 7.3.0-27ubuntu1~18.04) 7.3.0 -std=c++17
 - MSVC: 2015 Version 14.0.25431.01 Update 3
-- valgrind: 3.11.0
+- valgrind: 3.13.0
 
 ## Notes
 Passing means the process halted. Tests were on intel x86\_64. MSVC was tested on Windows 10 and the rest was tested on Ubuntu 16.04. Debug mode and RelWithDebInfo is in reference to CMake's build types.
