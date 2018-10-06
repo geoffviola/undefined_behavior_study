@@ -83,6 +83,7 @@ echo
 echo
 echo VERSIONS
 echo 
+uname -a
 gcc --version
 valgrind --version
 echo 
