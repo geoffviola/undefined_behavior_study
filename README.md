@@ -61,8 +61,8 @@ clang undefined sanitizer | clang | reading uninitialized value if | ❌ | ❌ |
 clang undefined sanitizer | clang | reading uninitialized value printf | ❌ | ❌ |
 clang undefined sanitizer | clang | shifting more than width | ✔️ | ✔️ |
 clang undefined sanitizer | clang | signed integer overflow | ✔️ | ✔️ |
-clang undefined sanitizer | clang | stack overflow | ✔️ | ✔️ |
-valgrind | gcc | array out of bounds | ✔️ | ✔️ |
+clang undefined sanitizer | clang | stack overflow | ✔️ | ❌ |
+valgrind | gcc | array out of bounds | ❌ | ❌ |
 valgrind | gcc | dereferencing nullptr | ✔️ | ✔️ |
 valgrind | gcc | divide by zero | ✔️ | ✔️ |
 valgrind | gcc | out of bounds pointer | ❌ | ❌ |
