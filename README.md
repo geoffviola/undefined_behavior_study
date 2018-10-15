@@ -92,3 +92,6 @@ When in debug mode, MSVC halted on the most undefined behavior. Clang and GCC bo
 Valgrind caught a few more cases of undefined behavior over running the programs directly. The additional cases were reading uninitialized values and dereferencing an array out of its bounds. It did provide more actionable messages than just "seg fault." Clang with the "-fsanitize=undefined" performed much better in RelWithDebInfo mode over just Debug mode. It caught all types but reading from an uninitialized value and out of bounds pointer.
 
 Reading from an uninitialized value is a very common mistake for beginners and experts. Compilers sometimes catch it as warnings. Valgrind can detect it, but clang with fsantize can often miss it.
+
+## 2018/10/14 Changes
+In moving from Ubuntu 16.04 like tools to 18.04 tools, valgrind stopped checking array boundaries. See commit: d13924dde2183abc687c5108825941218e078ebe. There was also a typo on how clang fsanitize handles stack overflow in release with debug info.
