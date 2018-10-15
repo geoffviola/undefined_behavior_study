@@ -92,27 +92,26 @@ echo
 echo
 echo DATA
 cd ../..
-echo GCC debug
-cat gcc/debug/runtime_results.txt
-echo
-echo GCC valgrind debug
-cat gcc/debug/valgrind_results.txt
-echo
-echo GCC rel_with_deb_info
-cat gcc/debug/runtime_results.txt
-echo
-echo GCC valgrind rel_with_deb_info
-cat gcc/debug/valgrind_results.txt
-echo
 echo clang debug
 cat clang/debug/runtime_results.txt
 echo
 echo clang rel_with_deb_info
 cat clang/rel_with_deb_info/runtime_results.txt
 echo
+echo GCC debug
+cat gcc/debug/runtime_results.txt
+echo
+echo GCC rel_with_deb_info
+cat gcc/debug/runtime_results.txt
+echo
 echo clang_fsanitize debug
 cat clang_fsanitize/debug/runtime_results.txt
 echo
 echo clang_fsanitize rel_with_deb_info
 cat clang_fsanitize/rel_with_deb_info/runtime_results.txt
-
+echo
+echo GCC valgrind debug
+cat gcc/debug/valgrind_results.txt
+echo
+echo GCC valgrind rel_with_deb_info
+cat gcc/debug/valgrind_results.txt
