@@ -54,10 +54,12 @@ for file in `ls -1` ; do
 done
 
 cd ../..
-mkdir -p clang_fsanitize/debug
-cd clang_fsanitize/debug
+
+clang_build() {
+mkdir -p clang_fsanitize_$1/debug
+cd clang_fsanitize_$1/debug
 export CXX=clang++
-cmake ../../.. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="-fsanitize=undefined  -fno-sanitize-recover=undefined"
+cmake ../../.. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="-fsanitize=$1  -fno-sanitize-recover=$1"
 make -j6
 for file in `ls -1` ; do
     if [ -x $file ] && [ -f $file ] ; then
@@ -69,7 +71,7 @@ done
 cd ..
 mkdir rel_with_deb_info
 cd rel_with_deb_info
-cmake ../../.. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_FLAGS="-fsanitize=undefined -fno-sanitize-recover=undefined"
+cmake ../../.. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_FLAGS="-fsanitize=$1 -fno-sanitize-recover=$1"
 make -j6
 for file in `ls -1` ; do
     if [ -x $file ] && [ -f $file ] ; then
@@ -77,6 +79,11 @@ for file in `ls -1` ; do
         echo $file $? >> runtime_results.txt
     fi
 done
+cd ../..
+}
+
+clang_build undefined
+clang_build address
 
 #print results
 echo
@@ -91,7 +98,6 @@ clang++ --version
 echo
 echo
 echo DATA
-cd ../..
 echo clang debug
 cat clang/debug/runtime_results.txt
 echo
@@ -104,11 +110,17 @@ echo
 echo GCC rel_with_deb_info
 cat gcc/debug/runtime_results.txt
 echo
-echo clang_fsanitize debug
-cat clang_fsanitize/debug/runtime_results.txt
+echo clang_fsanitize_address debug
+cat clang_fsanitize_address/debug/runtime_results.txt
 echo
-echo clang_fsanitize rel_with_deb_info
-cat clang_fsanitize/rel_with_deb_info/runtime_results.txt
+echo clang_fsanitize_address rel_with_deb_info
+cat clang_fsanitize_address/rel_with_deb_info/runtime_results.txt
+echo
+echo clang_fsanitize_undefined debug
+cat clang_fsanitize_undefined/debug/runtime_results.txt
+echo
+echo clang_fsanitize_undefined rel_with_deb_info
+cat clang_fsanitize_undefined/rel_with_deb_info/runtime_results.txt
 echo
 echo GCC valgrind debug
 cat gcc/debug/valgrind_results.txt

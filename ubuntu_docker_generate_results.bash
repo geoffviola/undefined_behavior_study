@@ -19,6 +19,10 @@ EOL
 cat "$tmpfile"
 chmod +x "$tmpfile"
 
-docker run --mount type=bind,source=$(pwd),target=$(pwd) ubuntu:bionic-20180821 /bin/bash -x $(pwd)/"$tmpfile"
+docker run \
+  --cap-add SYS_PTRACE \
+  --mount type=bind,source=$(pwd),target=$(pwd) \
+  ubuntu:bionic-20180821 \
+  /bin/bash -x $(pwd)/"$tmpfile"
 rm "$tmpfile"
 

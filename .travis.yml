@@ -1,2 +1,2 @@
-script: ./ubuntu_docker_generate_results.txt
+script: ./ubuntu_docker_generate_results.bash
 os: linux

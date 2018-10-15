@@ -51,6 +51,17 @@ MSVC | stack overflow | ✔️ /W1 | ✔️ | ✔️ |
 
 Tool | Compiler | Undefined Behavior Type | Debug | RelWithDebInfo
 --- | --- | --- | --- | ---
+clang address sanitizer | clang | array out of bounds | ✔️  | ❌  |
+clang address sanitizer | clang | dereferencing nullptr | ✔️ | ❌  |
+clang address sanitizer | clang | divide by zero | ✔️ | ❌ |
+clang address sanitizer | clang | out of bounds pointer | ❌ |  ❌  |
+clang address sanitizer | clang | reading uninitialized value add | ❌  | ❌  |
+clang address sanitizer | clang | reading uninitialized value cout | ❌  | ❌  |
+clang address sanitizer | clang | reading uninitialized value if | ❌  | ❌ |
+clang address sanitizer | clang | reading uninitialized value printf | ❌  | ❌   |
+clang address sanitizer | clang | shifting more than width | ❌   | ❌ |
+clang address sanitizer | clang | signed integer overflow | ❌  | ❌ |
+clang address sanitizer | clang | stack overflow | ✔️   | ❌ |
 clang undefined sanitizer | clang | array out of bounds | ❌ | ✔️ |
 clang undefined sanitizer | clang | dereferencing nullptr | ✔️ | ✔️ |
 clang undefined sanitizer | clang | divide by zero | ✔️ | ✔️ |
@@ -89,9 +100,10 @@ There is only one case of each type. It's expected that slightly different imple
 ## Analysis
 When in debug mode, MSVC halted on the most undefined behavior. Clang and GCC both benefited with the additional "-Wall" flag to catch undefined behavior as warnings. No extra flags made MSVC catch more undefined behavior.
 
-Valgrind caught a few more cases of undefined behavior over running the programs directly. The additional cases were reading uninitialized values and dereferencing an array out of its bounds. It did provide more actionable messages than just "seg fault." Clang with the "-fsanitize=undefined" performed much better in RelWithDebInfo mode over just Debug mode. It caught all types but reading from an uninitialized value and out of bounds pointer.
+Valgrind caught a few more cases of undefined behavior over running the programs directly. The additional cases were reading uninitialized values and dereferencing an array out of its bounds. It did provide more actionable messages than just "seg fault." Clang with "-fsanitize=undefined" performed much better in RelWithDebInfo mode over just Debug mode. It caught all types but reading from an uninitialized value and out of bounds pointer. Clang with "-fsanitize=address" was able to identify the array out of bounds error over the undefined option, but didn't detect other use cases. Once the optimizer works, the address sanitizer is not effective at detecting undefined behavior.
 
 Reading from an uninitialized value is a very common mistake for beginners and experts. Compilers sometimes catch it as warnings. Valgrind can detect it, but clang with fsantize can often miss it.
 
 ## 2018/10/14 Changes
 In moving from Ubuntu 16.04 like tools to 18.04 tools, valgrind stopped checking array boundaries. See commit: d13924dde2183abc687c5108825941218e078ebe. There was also a typo on how clang fsanitize handles stack overflow in release with debug info.
+
