@@ -10,7 +10,7 @@ Windows
 [![Build status](https://ci.appveyor.com/api/projects/status/sewu7060d0mn6v8i/branch/master?svg=true)](https://ci.appveyor.com/project/geoffviola/undefined_behavior_study/branch/master)
 
 ## Compiler Study
-
+### Breakdown
 Compiler | Undefined Behavior Type | Warnings | Debug | RelWithDebInfo
 --- | --- | --- | --- | ---
 clang | array out of bounds | ❌ | ❌ | ❌ |
@@ -46,6 +46,22 @@ MSVC | reading uninitialized value printf | ✔️ /W1 | ✔️ | ❌ |
 MSVC | shifting more than width | ✔️ /W1 | ❌ | ❌ |
 MSVC | signed integer overflow | ❌ | ❌ | ❌ |
 MSVC | stack overflow | ✔️ /W1 | ✔️ | ✔️ |
+
+### Overview
+Undefined Behavior Type | Warnings | Debug | RelWithDebInfo
+--- | --- | --- | ---
+array out of bounds | ❌ | MSVC | ❌ |
+dereferencing nullptr | ❌ | clang, gcc, MSVC | gcc, MSVC |
+divide by zero | clang, gcc, MSVC | clang, gcc, MSVC | gcc, MSVC |
+out of bounds pointer | ❌ | ❌ | ❌ |
+reading uninitialized value add | clang, gcc, MSVC | MSVC | ❌ |
+reading uninitialized value cout | clang, gcc, MSVC | MSVC | ❌ |
+reading uninitialized value if | clang, gc, MSVCc | MSVC | ❌ |
+reading uninitialized value printf | clang, gcc, MSVC | MSVC | ❌ |
+shifting more than width | clang, gcc | ❌ | ❌ |
+signed integer overflow | ❌ | ❌ | ❌ |
+stack overflow | clang, MSVC | clang, gcc, MSVC | clang, gcc, MSVC |
+
 
 ## Dynamic Analyzer Study
 
