@@ -67,39 +67,72 @@ stack overflow | clang, MSVC | clang, gcc, MSVC | clang, gcc, MSVC |
 
 Tool | Compiler | Undefined Behavior Type | Debug | RelWithDebInfo
 --- | --- | --- | --- | ---
-clang address sanitizer | clang | array out of bounds | ✔️  | ❌  |
-clang address sanitizer | clang | dereferencing nullptr | ✔️ | ❌  |
-clang address sanitizer | clang | divide by zero | ✔️ | ❌ |
-clang address sanitizer | clang | out of bounds pointer | ❌ |  ❌  |
-clang address sanitizer | clang | reading uninitialized value add | ❌  | ❌  |
-clang address sanitizer | clang | reading uninitialized value cout | ❌  | ❌  |
-clang address sanitizer | clang | reading uninitialized value if | ❌  | ❌ |
-clang address sanitizer | clang | reading uninitialized value printf | ❌  | ❌   |
-clang address sanitizer | clang | shifting more than width | ❌   | ❌ |
-clang address sanitizer | clang | signed integer overflow | ❌  | ❌ |
-clang address sanitizer | clang | stack overflow | ✔️   | ❌ |
-clang undefined sanitizer | clang | array out of bounds | ❌ | ✔️ |
-clang undefined sanitizer | clang | dereferencing nullptr | ✔️ | ✔️ |
-clang undefined sanitizer | clang | divide by zero | ✔️ | ✔️ |
-clang undefined sanitizer | clang | out of bounds pointer | ❌ | ❌  |
-clang undefined sanitizer | clang | reading uninitialized value add | ❌ | ✔️ |
-clang undefined sanitizer | clang | reading uninitialized value cout | ❌ | ❌ |
-clang undefined sanitizer | clang | reading uninitialized value if | ❌ | ❌ |
-clang undefined sanitizer | clang | reading uninitialized value printf | ❌ | ❌ |
-clang undefined sanitizer | clang | shifting more than width | ✔️ | ✔️ |
-clang undefined sanitizer | clang | signed integer overflow | ✔️ | ✔️ |
-clang undefined sanitizer | clang | stack overflow | ✔️ | ❌ |
-valgrind | gcc | array out of bounds | ❌ | ❌ |
-valgrind | gcc | dereferencing nullptr | ✔️ | ✔️ |
-valgrind | gcc | divide by zero | ✔️ | ✔️ |
-valgrind | gcc | out of bounds pointer | ❌ | ❌ |
-valgrind | gcc | reading uninitialized value add | ✔️| ✔️ |
-valgrind | gcc | reading uninitialized value cout | ✔️| ✔️ |
-valgrind | gcc | reading uninitialized value if | ✔️| ✔️ |
-valgrind | gcc | reading uninitialized value printf | ✔️| ✔️ |
-valgrind | gcc | shifting more than width | ❌ | ❌ |
-valgrind | gcc | signed integer overflow | ❌ | ❌ |
-valgrind | gcc | stack overflow | ✔️ | ✔️ |
+clang address sanitizer | clang | array out of bounds | ✔️ | ❌
+clang address sanitizer | clang | dereferencing nullptr | ✔️ | ❌
+clang address sanitizer | clang | divide by zero | ✔️ | ❌
+clang address sanitizer | clang | out of bounds pointer | ❌ | ❌
+clang address sanitizer | clang | reading unitialized value add | ❌ | ❌
+clang address sanitizer | clang | reading unitialized value cout | ❌ | ❌
+clang address sanitizer | clang | reading unitialized value if | ❌ | ❌
+clang address sanitizer | clang | reading unitialized value printf | ❌ | ❌
+clang address sanitizer | clang | shifting more than width | ❌ | ❌
+clang address sanitizer | clang | signed integer overflow | ❌ | ❌
+clang address sanitizer | clang | stack overflow | ✔️ | ❌
+clang address,undefined sanitizer | clang | array out of bounds | ✔️ | ✔️
+clang address,undefined sanitizer | clang | dereferencing nullptr | ✔️ | ✔️
+clang address,undefined sanitizer | clang | divide by zero | ✔️ | ✔️
+clang address,undefined sanitizer | clang | out of bounds pointer | ❌ | ❌
+clang address,undefined sanitizer | clang | reading unitialized value add | ❌ | ✔️
+clang address,undefined sanitizer | clang | reading unitialized value cout | ❌ | ❌
+clang address,undefined sanitizer | clang | reading unitialized value if | ❌ | ❌
+clang address,undefined sanitizer | clang | reading unitialized value printf | ❌ | ❌
+clang address,undefined sanitizer | clang | shifting more than width | ✔️ | ✔️
+clang address,undefined sanitizer | clang | signed integer overflow | ✔️ | ✔️
+clang address,undefined sanitizer | clang | stack overflow | ✔️ | ❌
+clang memory sanitizer | clang | array out of bounds | ❌ | ❌
+clang memory sanitizer | clang | dereferencing nullptr | ✔️ | ❌
+clang memory sanitizer | clang | divide by zero | ❌ | ❌
+clang memory sanitizer | clang | out of bounds pointer | ❌ | ❌
+clang memory sanitizer | clang | reading unitialized value add | ❌ | ❌
+clang memory sanitizer | clang | reading unitialized value cout | ❌ | ❌
+clang memory sanitizer | clang | reading unitialized value if | ✔️ | ❌
+clang memory sanitizer | clang | reading unitialized value printf | ❌ | ❌
+clang memory sanitizer | clang | shifting more than width | ❌ | ❌
+clang memory sanitizer | clang | signed integer overflow | ❌ | ❌
+clang memory sanitizer | clang | stack overflow | ✔️ | ❌
+clang memory,undefined sanitizer | clang | array out of bounds | ❌ | ✔️
+clang memory,undefined sanitizer | clang | dereferencing nullptr | ✔️ | ✔️
+clang memory,undefined sanitizer | clang | divide by zero | ✔️ | ✔️
+clang memory,undefined sanitizer | clang | out of bounds pointer | ❌ | ❌
+clang memory,undefined sanitizer | clang | reading unitialized value add | ❌ | ✔️
+clang memory,undefined sanitizer | clang | reading unitialized value cout | ❌ | ❌
+clang memory,undefined sanitizer | clang | reading unitialized value if | ✔️ | ❌
+clang memory,undefined sanitizer | clang | reading unitialized value printf | ❌ | ❌
+clang memory,undefined sanitizer | clang | shifting more than width | ✔️ | ✔️
+clang memory,undefined sanitizer | clang | signed integer overflow | ✔️ | ✔️
+clang memory,undefined sanitizer | clang | stack overflow | ✔️ | ❌
+clang undefined sanitizer | clang | array out of bounds | ❌ | ✔️
+clang undefined sanitizer | clang | dereferencing nullptr | ✔️ | ✔️
+clang undefined sanitizer | clang | divide by zero | ✔️ | ✔️
+clang undefined sanitizer | clang | out of bounds pointer | ❌ | ❌
+clang undefined sanitizer | clang | reading unitialized value add | ❌ | ✔️
+clang undefined sanitizer | clang | reading unitialized value cout | ❌ | ❌
+clang undefined sanitizer | clang | reading unitialized value if | ❌ | ❌
+clang undefined sanitizer | clang | reading unitialized value printf | ❌ | ❌
+clang undefined sanitizer | clang | shifting more than width | ✔️ | ✔️
+clang undefined sanitizer | clang | signed integer overflow | ✔️ | ✔️
+clang undefined sanitizer | clang | stack overflow | ✔️ | ❌
+valgrind | gcc | array out of bounds | ❌ | ❌
+valgrind | gcc | dereferencing nullptr | ✔️ | ✔️
+valgrind | gcc | divide by zero | ✔️ | ✔️
+valgrind | gcc | out of bounds pointer | ❌ | ❌
+valgrind | gcc | reading unitialized value add | ✔️ | ❌
+valgrind | gcc | reading unitialized value cout | ✔️ | ❌
+valgrind | gcc | reading unitialized value if | ✔️ | ❌
+valgrind | gcc | reading unitialized value printf | ✔️ | ❌
+valgrind | gcc | shifting more than width | ❌ | ❌
+valgrind | gcc | signed integer overflow | ❌ | ❌
+valgrind | gcc | stack overflow | ✔️ | ✔️
 
 ## Versions
 - Linux 6e685b1d7f64 4.4.0-101-generic #124~14.04.1-Ubuntu SMP Fri Nov 10 19:05:36 UTC 2017 x86\_64 x86\_64 x86\_64 GNU/Linux
