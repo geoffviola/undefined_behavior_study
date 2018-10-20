@@ -160,4 +160,5 @@ echo
 echo GCC valgrind rel_with_deb_info
 cat gcc/debug/valgrind_results.txt
 
+export LC_CTYPE=C.UTF-8
 ../print_results.py
