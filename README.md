@@ -197,19 +197,34 @@ valgrind | signed integer overflow | ❌ | ❌
 valgrind | stack overflow | ✔️ | ✔️
 
 ### Summary
-Undefined Behavior Type | asan D | asan,ubsan D | msan D | msan,ubsan D | valgrind D | asan D | asan,ubsan D | msan D | msan,ubsan D | valgrind D
---- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
-array out of bounds | ✔️ | ✔️ | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌ | 
-dereferencing nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ✔️ | 
-divide by zero | ✔️ | ✔️ | ❌ | ✔️ | ✔️ | ✔️ | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ✔️ | 
-out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | 
-reading unitialized value add | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️ | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌ | 
-reading unitialized value cout | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | 
-reading unitialized value if | ❌ | ❌ | ✔️ | ✔️ | ❌ | ✔️ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | 
-reading unitialized value printf | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | 
-shifting more than width | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌ | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌ | 
-signed integer overflow | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌ | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌ | 
-stack overflow | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️ | 
+### Debug
+Undefined Behavior Type | asan D | asan,ubsan D | msan D | msan,ubsan D | ubsan D | valgrind D
+--- | --- | --- | --- | --- | --- | ---
+array out of bounds | ✔️ | ✔️ | ❌ | ❌ | ❌ | ❌
+dereferencing nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+divide by zero | ✔️ | ✔️ | ❌ | ✔️ | ✔️ | ✔️
+out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+reading unitialized value add | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
+reading unitialized value cout | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
+reading unitialized value if | ❌ | ❌ | ✔️ | ✔️ | ❌ | ✔️
+reading unitialized value printf | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
+shifting more than width | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
+signed integer overflow | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
+stack overflow | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+### Release
+Undefined Behavior Type | asan R | asan,ubsan R | msan R | msan,ubsan R | ubsan R | valgrind R
+--- | --- | --- | --- | --- | --- | ---
+array out of bounds | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
+dereferencing nullptr | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ✔️
+divide by zero | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ✔️
+out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+reading unitialized value add | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
+reading unitialized value cout | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+reading unitialized value if | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+reading unitialized value printf | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+shifting more than width | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
+signed integer overflow | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
+stack overflow | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
 
 ## Versions
 - Linux 6e685b1d7f64 4.4.0-101-generic #124~14.04.1-Ubuntu SMP Fri Nov 10 19:05:36 UTC 2017 x86\_64 x86\_64 x86\_64 GNU/Linux
