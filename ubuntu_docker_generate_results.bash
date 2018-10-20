@@ -10,7 +10,7 @@ cat >&3 <<EOL
 #!/usr/bin/env bash
 adduser  --disabled-password --uid $(id -u) --gecos "" $(whoami)
 apt -qq update
-apt -qq install clang cmake curl g++ tar valgrind -y
+apt -qq -o Dpkg::Use-Pty=0 install clang clang-tidy cmake curl g++ python3 tar valgrind -y
 su - $(whoami)
 cd $(pwd)
 ./generate_results.bash
