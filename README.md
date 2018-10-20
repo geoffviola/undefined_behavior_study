@@ -197,7 +197,7 @@ valgrind | signed integer overflow | ❌ | ❌
 valgrind | stack overflow | ✔️ | ✔️
 
 ### Summary
-### Debug
+#### Debug
 Undefined Behavior Type | asan D | asan,ubsan D | msan D | msan,ubsan D | ubsan D | valgrind D
 --- | --- | --- | --- | --- | --- | ---
 array out of bounds | ✔️ | ✔️ | ❌ | ❌ | ❌ | ❌
@@ -211,7 +211,7 @@ reading unitialized value printf | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
 shifting more than width | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 signed integer overflow | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 stack overflow | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-### Release
+#### Release
 Undefined Behavior Type | asan R | asan,ubsan R | msan R | msan,ubsan R | ubsan R | valgrind R
 --- | --- | --- | --- | --- | --- | ---
 array out of bounds | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
@@ -244,7 +244,11 @@ There is only one case of each type. It's expected that slightly different imple
 ## Analysis
 When in debug mode, MSVC halted on the most undefined behavior. Clang and GCC both benefited with the additional "-Wall" flag to catch undefined behavior as warnings. No extra flags made MSVC catch more undefined behavior.
 
-Valgrind caught a few more cases of undefined behavior over running the programs directly. The additional cases were reading uninitialized values and dereferencing an array out of its bounds. It did provide more actionable messages than just "seg fault." Clang with "-fsanitize=undefined" performed much better in RelWithDebInfo mode over just Debug mode. It caught all types but reading from an uninitialized value and out of bounds pointer. Clang with "-fsanitize=address" was able to identify the array out of bounds error over the undefined option, but didn't detect other use cases. Once the optimizer works, the address sanitizer is not effective at detecting undefined behavior.
+Valgrind caught a few more cases of undefined behavior over running the programs directly. The additional cases were reading uninitialized values and dereferencing an array out of its bounds. It did provide more actionable messages than just "seg fault." Clang with "-fsanitize=undefined" performed much better in RelWithDebInfo mode over just Debug mode. It caught all types but reading from an uninitialized value and out of bounds pointer.
+
+asan was able to identify the array out of bounds error over the undefined option, but didn't detect other use cases. Once the optimizer works, the address sanitizer is not effective at detecting undefined behavior. Pairing it with ubsan combined the best of both tools.
+
+msan was similar to asan, except it didn't identify any new cases. It also benefited from pairing up with ubsan, but ubsan by itself was good enough.
 
 Reading from an uninitialized value is a very common mistake for beginners and experts. Compilers sometimes catch it as warnings. Valgrind can detect it, but clang with fsantize can often miss it.
 
