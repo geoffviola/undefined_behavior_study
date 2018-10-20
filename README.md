@@ -110,75 +110,106 @@ MSVC | shifting more than width | ❌ | ❌ |
 MSVC | signed integer overflow | ❌ | ❌ |
 MSVC | stack overflow | ✔️ | ✔️ |
 
-## Dynamic Analyzer Study
-Tool | Compiler | Undefined Behavior Type | Debug | RelWithDebInfo
+### Summary
+Undefined Behavior | clang D | gcc D | clang R | gcc R
 --- | --- | --- | --- | ---
-clang address sanitizer | clang | array out of bounds | ✔️ | ❌
-clang address sanitizer | clang | dereferencing nullptr | ✔️ | ❌
-clang address sanitizer | clang | divide by zero | ✔️ | ❌
-clang address sanitizer | clang | out of bounds pointer | ❌ | ❌
-clang address sanitizer | clang | reading unitialized value add | ❌ | ❌
-clang address sanitizer | clang | reading unitialized value cout | ❌ | ❌
-clang address sanitizer | clang | reading unitialized value if | ❌ | ❌
-clang address sanitizer | clang | reading unitialized value printf | ❌ | ❌
-clang address sanitizer | clang | shifting more than width | ❌ | ❌
-clang address sanitizer | clang | signed integer overflow | ❌ | ❌
-clang address sanitizer | clang | stack overflow | ✔️ | ❌
-clang address,undefined sanitizer | clang | array out of bounds | ✔️ | ✔️
-clang address,undefined sanitizer | clang | dereferencing nullptr | ✔️ | ✔️
-clang address,undefined sanitizer | clang | divide by zero | ✔️ | ✔️
-clang address,undefined sanitizer | clang | out of bounds pointer | ❌ | ❌
-clang address,undefined sanitizer | clang | reading unitialized value add | ❌ | ✔️
-clang address,undefined sanitizer | clang | reading unitialized value cout | ❌ | ❌
-clang address,undefined sanitizer | clang | reading unitialized value if | ❌ | ❌
-clang address,undefined sanitizer | clang | reading unitialized value printf | ❌ | ❌
-clang address,undefined sanitizer | clang | shifting more than width | ✔️ | ✔️
-clang address,undefined sanitizer | clang | signed integer overflow | ✔️ | ✔️
-clang address,undefined sanitizer | clang | stack overflow | ✔️ | ❌
-clang memory sanitizer | clang | array out of bounds | ❌ | ❌
-clang memory sanitizer | clang | dereferencing nullptr | ✔️ | ❌
-clang memory sanitizer | clang | divide by zero | ❌ | ❌
-clang memory sanitizer | clang | out of bounds pointer | ❌ | ❌
-clang memory sanitizer | clang | reading unitialized value add | ❌ | ❌
-clang memory sanitizer | clang | reading unitialized value cout | ❌ | ❌
-clang memory sanitizer | clang | reading unitialized value if | ✔️ | ❌
-clang memory sanitizer | clang | reading unitialized value printf | ❌ | ❌
-clang memory sanitizer | clang | shifting more than width | ❌ | ❌
-clang memory sanitizer | clang | signed integer overflow | ❌ | ❌
-clang memory sanitizer | clang | stack overflow | ✔️ | ❌
-clang memory,undefined sanitizer | clang | array out of bounds | ❌ | ✔️
-clang memory,undefined sanitizer | clang | dereferencing nullptr | ✔️ | ✔️
-clang memory,undefined sanitizer | clang | divide by zero | ✔️ | ✔️
-clang memory,undefined sanitizer | clang | out of bounds pointer | ❌ | ❌
-clang memory,undefined sanitizer | clang | reading unitialized value add | ❌ | ✔️
-clang memory,undefined sanitizer | clang | reading unitialized value cout | ❌ | ❌
-clang memory,undefined sanitizer | clang | reading unitialized value if | ✔️ | ❌
-clang memory,undefined sanitizer | clang | reading unitialized value printf | ❌ | ❌
-clang memory,undefined sanitizer | clang | shifting more than width | ✔️ | ✔️
-clang memory,undefined sanitizer | clang | signed integer overflow | ✔️ | ✔️
-clang memory,undefined sanitizer | clang | stack overflow | ✔️ | ❌
-clang undefined sanitizer | clang | array out of bounds | ❌ | ✔️
-clang undefined sanitizer | clang | dereferencing nullptr | ✔️ | ✔️
-clang undefined sanitizer | clang | divide by zero | ✔️ | ✔️
-clang undefined sanitizer | clang | out of bounds pointer | ❌ | ❌
-clang undefined sanitizer | clang | reading unitialized value add | ❌ | ✔️
-clang undefined sanitizer | clang | reading unitialized value cout | ❌ | ❌
-clang undefined sanitizer | clang | reading unitialized value if | ❌ | ❌
-clang undefined sanitizer | clang | reading unitialized value printf | ❌ | ❌
-clang undefined sanitizer | clang | shifting more than width | ✔️ | ✔️
-clang undefined sanitizer | clang | signed integer overflow | ✔️ | ✔️
-clang undefined sanitizer | clang | stack overflow | ✔️ | ❌
-valgrind | gcc | array out of bounds | ❌ | ❌
-valgrind | gcc | dereferencing nullptr | ✔️ | ✔️
-valgrind | gcc | divide by zero | ✔️ | ✔️
-valgrind | gcc | out of bounds pointer | ❌ | ❌
-valgrind | gcc | reading unitialized value add | ✔️ | ❌
-valgrind | gcc | reading unitialized value cout | ✔️ | ❌
-valgrind | gcc | reading unitialized value if | ✔️ | ❌
-valgrind | gcc | reading unitialized value printf | ✔️ | ❌
-valgrind | gcc | shifting more than width | ❌ | ❌
-valgrind | gcc | signed integer overflow | ❌ | ❌
-valgrind | gcc | stack overflow | ✔️ | ✔️
+array out of bounds | ❌ | ❌ | ❌ | ❌ | 
+dereferencing nullptr | ✔️ | ✔️ | ❌ | ✔️ | 
+divide by zero | ✔️ | ✔️ | ❌ | ✔️ | 
+out of bounds pointer | ❌ | ❌ | ❌ | ❌ | 
+reading unitialized value add | ❌ | ❌ | ❌ | ❌ | 
+reading unitialized value cout | ❌ | ❌ | ❌ | ❌ | 
+reading unitialized value if | ❌ | ❌ | ❌ | ❌ | 
+reading unitialized value printf | ❌ | ❌ | ❌ | ❌ | 
+shifting more than width | ❌ | ❌ | ❌ | ❌ | 
+signed integer overflow | ❌ | ❌ | ❌ | ❌ | 
+stack overflow | ✔️ | ✔️ | ❌ | ✔️ | 
+
+## Dynamic Analyzer Study
+### Breakdown
+Compiler | Undefined Behavior Type | Debug | RelWithDebInfo
+--- | --- | --- | ---
+asan | array out of bounds | ✔️ | ❌
+asan | dereferencing nullptr | ✔️ | ❌
+asan | divide by zero | ✔️ | ❌
+asan | out of bounds pointer | ❌ | ❌
+asan | reading unitialized value add | ❌ | ❌
+asan | reading unitialized value cout | ❌ | ❌
+asan | reading unitialized value if | ❌ | ❌
+asan | reading unitialized value printf | ❌ | ❌
+asan | shifting more than width | ❌ | ❌
+asan | signed integer overflow | ❌ | ❌
+asan | stack overflow | ✔️ | ❌
+asan,ubsan | array out of bounds | ✔️ | ✔️
+asan,ubsan | dereferencing nullptr | ✔️ | ✔️
+asan,ubsan | divide by zero | ✔️ | ✔️
+asan,ubsan | out of bounds pointer | ❌ | ❌
+asan,ubsan | reading unitialized value add | ❌ | ✔️
+asan,ubsan | reading unitialized value cout | ❌ | ❌
+asan,ubsan | reading unitialized value if | ❌ | ❌
+asan,ubsan | reading unitialized value printf | ❌ | ❌
+asan,ubsan | shifting more than width | ✔️ | ✔️
+asan,ubsan | signed integer overflow | ✔️ | ✔️
+asan,ubsan | stack overflow | ✔️ | ❌
+msan | array out of bounds | ❌ | ❌
+msan | dereferencing nullptr | ✔️ | ❌
+msan | divide by zero | ❌ | ❌
+msan | out of bounds pointer | ❌ | ❌
+msan | reading unitialized value add | ❌ | ❌
+msan | reading unitialized value cout | ❌ | ❌
+msan | reading unitialized value if | ✔️ | ❌
+msan | reading unitialized value printf | ❌ | ❌
+msan | shifting more than width | ❌ | ❌
+msan | signed integer overflow | ❌ | ❌
+msan | stack overflow | ✔️ | ❌
+msan,ubsan | array out of bounds | ❌ | ✔️
+msan,ubsan | dereferencing nullptr | ✔️ | ✔️
+msan,ubsan | divide by zero | ✔️ | ✔️
+msan,ubsan | out of bounds pointer | ❌ | ❌
+msan,ubsan | reading unitialized value add | ❌ | ✔️
+msan,ubsan | reading unitialized value cout | ❌ | ❌
+msan,ubsan | reading unitialized value if | ✔️ | ❌
+msan,ubsan | reading unitialized value printf | ❌ | ❌
+msan,ubsan | shifting more than width | ✔️ | ✔️
+msan,ubsan | signed integer overflow | ✔️ | ✔️
+msan,ubsan | stack overflow | ✔️ | ❌
+ubsan | array out of bounds | ❌ | ✔️
+ubsan | dereferencing nullptr | ✔️ | ✔️
+ubsan | divide by zero | ✔️ | ✔️
+ubsan | out of bounds pointer | ❌ | ❌
+ubsan | reading unitialized value add | ❌ | ✔️
+ubsan | reading unitialized value cout | ❌ | ❌
+ubsan | reading unitialized value if | ❌ | ❌
+ubsan | reading unitialized value printf | ❌ | ❌
+ubsan | shifting more than width | ✔️ | ✔️
+ubsan | signed integer overflow | ✔️ | ✔️
+ubsan | stack overflow | ✔️ | ❌
+valgrind | array out of bounds | ❌ | ❌
+valgrind | dereferencing nullptr | ✔️ | ✔️
+valgrind | divide by zero | ✔️ | ✔️
+valgrind | out of bounds pointer | ❌ | ❌
+valgrind | reading unitialized value add | ✔️ | ❌
+valgrind | reading unitialized value cout | ✔️ | ❌
+valgrind | reading unitialized value if | ✔️ | ❌
+valgrind | reading unitialized value printf | ✔️ | ❌
+valgrind | shifting more than width | ❌ | ❌
+valgrind | signed integer overflow | ❌ | ❌
+valgrind | stack overflow | ✔️ | ✔️
+
+### Summary
+Undefined Behavior Type | asan D | asan,ubsan D | msan D | msan,ubsan D | valgrind D | asan D | asan,ubsan D | msan D | msan,ubsan D | valgrind D
+--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+array out of bounds | ✔️ | ✔️ | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌ | 
+dereferencing nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ✔️ | 
+divide by zero | ✔️ | ✔️ | ❌ | ✔️ | ✔️ | ✔️ | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ✔️ | 
+out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | 
+reading unitialized value add | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️ | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌ | 
+reading unitialized value cout | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | 
+reading unitialized value if | ❌ | ❌ | ✔️ | ✔️ | ❌ | ✔️ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | 
+reading unitialized value printf | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | 
+shifting more than width | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌ | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌ | 
+signed integer overflow | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌ | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌ | 
+stack overflow | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️ | 
 
 ## Versions
 - Linux 6e685b1d7f64 4.4.0-101-generic #124~14.04.1-Ubuntu SMP Fri Nov 10 19:05:36 UTC 2017 x86\_64 x86\_64 x86\_64 GNU/Linux
@@ -189,9 +220,11 @@ valgrind | gcc | stack overflow | ✔️ | ✔️
 - valgrind: 3.13.0
 
 ## Notes
-Passing means the process halted. Tests were on intel x86\_64. MSVC was tested on Windows 10 and the rest was tested on Ubuntu 16.04. Debug mode and RelWithDebInfo is in reference to CMake's build types.
+Valgrind was run on GCC compiled binaries. msan, asan, and ubsan are all different flags into clang's "fsanatize" parameter.
 
-There is only one case of each type. It's expected that slightly different implementations of the same types of undefined behavior may yield different results.
+Passing means the process halted with a non zero error code. Tests were on intel x86\_64. MSVC was tested on Windows 10 and the rest was tested on Ubuntu 18.04. Debug mode and RelWithDebInfo is in reference to CMake's build types.
+
+There is only one case of each type. It's expected that slightly different implementations of the same types of undefined behavior may yield different results. Multiple runs were not performed consistently for statistical purposes. 
 
 ## Analysis
 When in debug mode, MSVC halted on the most undefined behavior. Clang and GCC both benefited with the additional "-Wall" flag to catch undefined behavior as warnings. No extra flags made MSVC catch more undefined behavior.
@@ -200,6 +233,6 @@ Valgrind caught a few more cases of undefined behavior over running the programs
 
 Reading from an uninitialized value is a very common mistake for beginners and experts. Compilers sometimes catch it as warnings. Valgrind can detect it, but clang with fsantize can often miss it.
 
-## 2018/10/14 Changes
-In moving from Ubuntu 16.04 like tools to 18.04 tools, valgrind stopped checking array boundaries. See commit: d13924dde2183abc687c5108825941218e078ebe. There was also a typo on how clang fsanitize handles stack overflow in release with debug info.
+## Variablility
+Valgrind seems to have different results over time. This may be due to version upgrades from 3.11 to 1.13 or the very nature of undefined behavior itself. It was observed that array out of bounds was undetected by valgrind during the upgrade. Not detecting unitialized memory in release with debug info went undetected at some point later.
 

@@ -2,8 +2,7 @@
 #include <cstdlib>
 #include <iostream>
 
-int main()
-{
+int main() {
   int32_t a;
   std::cout << a << std::endl;
   return EXIT_SUCCESS;

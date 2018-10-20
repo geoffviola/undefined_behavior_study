@@ -15,23 +15,21 @@ for root, subdirs, files in os.walk('.'):
 cool_x = "❌"
 cool_check = "✔️"
 
-#output_table = defaultdict(lambda : defaultdict(lambda : defaultdict(str)))
 output_table = defaultdict(lambda : defaultdict(lambda : defaultdict(lambda : defaultdict(str))))
 
 for filename, csv in results.items():
   if filename.find("valgrind") != -1:
     analyzer = "valgrind"
   elif filename.find("sanitize") != -1:
-    analyzer = "clang "
+    analyzer=""
     if filename.find("address") != -1:
-      analyzer += "address"
+      analyzer += "asan"
     if filename.find("memory") != -1:
-      analyzer += "memory"
+      analyzer += "msan"
     if filename.find("undefined") != -1:
-      if analyzer[-1] != " ":
+      if len(analyzer) > 0:
         analyzer += ","
-      analyzer += "undefined" 
-    analyzer += " sanitizer"
+      analyzer += "ubsan"
   else:
     analyzer = ""
   if filename.find("gcc") != -1:
@@ -56,14 +54,57 @@ for filename, csv in results.items():
       result = cool_check
     else:
       result = cool_x
-    output_table[first_section][compiler][row[0]][str(debug_mode)] = result
+    output_table[first_section][compiler][row[0].replace("_", " ")][str(debug_mode)] = result
 
-print("Tool | Compiler | Undefined Behavior | Type | Debug | RelWithDebInfo")
+print ("## Runtime Crashes")
+print ("### Breakdown")
+print("Compiler | Undefined Behavior Type | Debug | RelWithDebInfo")
+print("--- | --- | --- | ---")
+no_tool_test_table = defaultdict(lambda : defaultdict(lambda : defaultdict(str)))
 for tool, rest_0 in sorted(output_table.items()):
+  if tool == "":
+    for compiler, rest_1 in sorted(rest_0.items()):
+      for test, rest_2 in sorted(rest_1.items()):
+        no_tool_test_table[test][compiler]["1"] = rest_2["1"]
+        no_tool_test_table[test][compiler]["0"] = rest_2["0"]
+        print(compiler + " | " + test + " | " + rest_2["1"] + " | " + rest_2["0"])
+
+print("")
+print("### Summary")
+print("Undefined Behavior | clang D | gcc D | clang R | gcc R")
+print("--- | --- | --- | --- | ---")
+for test, rest_0 in sorted(no_tool_test_table.items()):
+  line = test + " | "
   for compiler, rest_1 in sorted(rest_0.items()):
-    for test, rest_2 in sorted(rest_1.items()):
-      first_section = ""
-      if tool != "":
-        first_section = tool + " | "
-      print(first_section + compiler + " | " + test.replace("_", " ") + " | " + rest_2["1"] + " | " + rest_2["0"])
+    line += rest_1["1"] + " | "
+  for compiler, rest_1 in sorted(rest_0.items()):
+    line += rest_1["0"] + " | "
+  print(line)
+
+print("")
+print("")
+print ("## Dynamic Analysis")
+print ("### Breakdown")
+print("Compiler | Undefined Behavior Type | Debug | RelWithDebInfo")
+print("--- | --- | --- | ---")
+tool_test_table = defaultdict(lambda : defaultdict(lambda : defaultdict(lambda : defaultdict(str))))
+for tool, rest_0 in sorted(output_table.items()):
+  if tool != "":
+    for compiler, rest_1 in sorted(rest_0.items()):
+      for test, rest_2 in sorted(rest_1.items()):
+        tool_test_table[test][tool]["1"] = rest_2["1"]
+        tool_test_table[test][tool]["0"] = rest_2["0"]
+        print(tool + " | " + test + " | " + rest_2["1"] + " | " + rest_2["0"])
+
+print("")
+print ("### Summary")
+print("Undefined Behavior Type | asan D | asan,ubsan D | msan D | msan,ubsan D | valgrind D | asan D | asan,ubsan D | msan D | msan,ubsan D | valgrind D")
+print("--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---")
+for test, rest_0 in sorted(tool_test_table.items()):
+  line = test + " | "
+  for tool, rest_1 in sorted(rest_0.items()):
+    line += rest_1["1"] + " | "
+  for compiler, rest_1 in sorted(rest_0.items()):
+    line += rest_1["0"] + " | "
+  print(line)
 

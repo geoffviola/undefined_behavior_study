@@ -1,16 +1,12 @@
 #include <cstdint>
-#include <cstdlib>
 #include <cstdio>
+#include <cstdlib>
 
-int main()
-{
+int main() {
   bool b;
-  if (b)
-  {
+  if (b) {
     printf("unitialized value is true\n");
-  }
-  else
-  {
+  } else {
     printf("unitialized value is false\n");
   }
   return EXIT_SUCCESS;
