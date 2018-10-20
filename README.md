@@ -111,19 +111,19 @@ MSVC | signed integer overflow | ❌ | ❌ |
 MSVC | stack overflow | ✔️ | ✔️ |
 
 ### Summary
-Undefined Behavior | clang D | gcc D | clang R | gcc R
---- | --- | --- | --- | ---
-array out of bounds | ❌ | ❌ | ❌ | ❌ | 
-dereferencing nullptr | ✔️ | ✔️ | ❌ | ✔️ | 
-divide by zero | ✔️ | ✔️ | ❌ | ✔️ | 
-out of bounds pointer | ❌ | ❌ | ❌ | ❌ | 
-reading unitialized value add | ❌ | ❌ | ❌ | ❌ | 
-reading unitialized value cout | ❌ | ❌ | ❌ | ❌ | 
-reading unitialized value if | ❌ | ❌ | ❌ | ❌ | 
-reading unitialized value printf | ❌ | ❌ | ❌ | ❌ | 
-shifting more than width | ❌ | ❌ | ❌ | ❌ | 
-signed integer overflow | ❌ | ❌ | ❌ | ❌ | 
-stack overflow | ✔️ | ✔️ | ❌ | ✔️ | 
+Undefined Behavior | clang D | gcc D | MSVC D | clang R | gcc R | MSVC R
+--- | --- | --- | --- | --- | --- | ---
+array out of bounds | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
+dereferencing nullptr | ✔️ | ✔️ | ✔️ | ❌ | ✔️ | ✔️
+divide by zero | ✔️ | ✔️ | ✔️ | ❌ | ✔️ | ✔️
+out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+reading unitialized value add | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
+reading unitialized value cout | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
+reading unitialized value if | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
+reading unitialized value printf | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
+shifting more than width | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+signed integer overflow | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+stack overflow | ✔️ | ✔️ | ✔️ | ❌ | ✔️ | ✔️
 
 ## Dynamic Analyzer Study
 ### Breakdown
