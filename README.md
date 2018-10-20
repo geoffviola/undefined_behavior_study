@@ -73,7 +73,7 @@ shifting more than width | ✔️ | ✔️  | ✔️  | ✔️
 signed integer overflow | ❌ | ❌ | ❌ | ❌
 stack overflow | ✔️ | ✔️  | ❌ | ✔️
 
-## Compiler Crashes
+## Runtime Crashes
 Compiler | Undefined Behavior Type | Debug | RelWithDebInfo
 --- | --- | --- | ---
 clang | array out of bounds | ❌ | ❌
