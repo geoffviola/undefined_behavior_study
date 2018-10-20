@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 
-mkdir -p build/gcc/debug
-cd build/gcc/debug
+mkdir clang-tidy
+cd clang-tidy
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE ..
+clang-tidy -checks=* ../src/*.cp
+cd ..
+
+mkdir -p gcc/debug
+cd gcc/debug
 
 cmake ../../.. -DCMAKE_BUILD_TYPE=Debug
 make -j6
