@@ -3,11 +3,11 @@
 mkdir clang-tidy
 cd clang-tidy
 cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE ..
-clang-tidy -checks=* ../src/*.cp
+clang-tidy -checks=* ../src/*.cpp
 cd ..
 
-mkdir -p gcc/debug
-cd gcc/debug
+mkdir -p build/gcc/debug
+cd build/gcc/debug
 
 cmake ../../.. -DCMAKE_BUILD_TYPE=Debug
 make -j6
