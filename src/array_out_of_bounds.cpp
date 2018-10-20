@@ -1,7 +1,7 @@
-#include <cstdlib>
-#include <cstdint>
 #include <array>
-#include <stdio.h>
+#include <cstdint>
+#include <cstdlib>
+#include <cstdio>
 
 int main()
 {

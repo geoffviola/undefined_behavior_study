@@ -1,6 +1,6 @@
-#include <cstdlib>
-#include <cstdint>
 #include <array>
+#include <cstdint>
+#include <cstdlib>
 
 int main()
 {

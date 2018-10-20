@@ -1,6 +1,6 @@
-#include <cstdlib>
 #include <cstdint>
-#include <stdio.h>
+#include <cstdlib>
+#include <cstdio>
 
 int main()
 {

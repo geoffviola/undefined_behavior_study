@@ -14,6 +14,7 @@ echo MSVC Debug
 type build\Debug\results.txt
 echo MSVC RelWithDebInfo
 type build\RelWithDebInfo\results.txt
+python print_results.py
 GOTO :eof
 
 :subroutine

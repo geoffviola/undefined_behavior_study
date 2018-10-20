@@ -1,6 +1,6 @@
-#include <cstdlib>
 #include <cstdint>
-#include <stdio.h>
+#include <cstdlib>
+#include <cstdio>
 
 uint32_t global = 1;
 

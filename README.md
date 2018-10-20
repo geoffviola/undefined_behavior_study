@@ -9,62 +9,105 @@ Linux
 Windows 
 [![Build status](https://ci.appveyor.com/api/projects/status/sewu7060d0mn6v8i/branch/master?svg=true)](https://ci.appveyor.com/project/geoffviola/undefined_behavior_study/branch/master)
 
-## Compiler Study
+## Static Analysis
 ### Breakdown
-Compiler | Undefined Behavior Type | Warnings | Debug | RelWithDebInfo
+Compiler | Undefined Behavior Type | Warning |
 --- | --- | --- | --- | ---
-clang | array out of bounds | ❌ | ❌ | ❌ |
-clang | dereferencing nullptr | ❌ | ✔️ | ❌ |
-clang | divide by zero | ✔️ | ✔️ | ❌ |
-clang | out of bounds pointer | ❌ | ❌ | ❌ |
-clang | reading uninitialized value add | ✔️ -Wall  | ❌| ❌ |
-clang | reading uninitialized value cout | ✔️ -Wall  | ❌| ❌ |
-clang | reading uninitialized value if | ✔️ -Wall  | ❌| ❌ |
-clang | reading uninitialized value printf | ✔️ -Wall  | ❌| ❌ |
-clang | shifting more than width | ✔️ | ❌ | ❌ |
-clang | signed integer overflow | ❌ | ❌ | ❌ |
-clang | stack overflow | ✔️ -Wall  | ✔️ | ✔️ |
-gcc | array out of bounds | ❌ | ❌ | ❌ |
-gcc | dereferencing nullptr | ❌ | ✔️ | ✔️ |
-gcc | divide by zero | ✔️ | ✔️ | ✔️ |
-gcc | out of bounds pointer | ❌ | ❌ | ❌ |
-gcc | reading uninitialized value add | ✔️ /Wall | ❌| ❌ |
-gcc | reading uninitialized value cout | ✔️ /Wall | ❌| ❌ |
-gcc | reading uninitialized value if | ✔️ /Wall | ❌| ❌ |
-gcc | reading uninitialized value printf | ✔️ /Wall | ❌| ❌ |
-gcc | shifting more than width | ✔️ | ❌ | ❌ |
-gcc | signed integer overflow | ❌ | ❌ | ❌ |
-gcc | stack overflow | ❌ | ✔️ | ✔️ |
-MSVC | array out of bounds | ❌ | ✔️ | ❌ |
-MSVC | dereferencing nullptr | ❌ | ✔️ | ✔️ |
-MSVC | divide by zero | ✔️ /W3 | ✔️ | ✔️ |
-MSVC | out of bounds pointer | ❌ | ❌ | ❌ |
-MSVC | reading uninitialized value add | ✔️ /W1 | ✔️ | ❌ |
-MSVC | reading uninitialized value cout | ✔️ /W1 | ✔️ | ❌ |
-MSVC | reading uninitialized value if | ✔️ /W1 | ✔️ | ❌ |
-MSVC | reading uninitialized value printf | ✔️ /W1 | ✔️ | ❌ |
-MSVC | shifting more than width | ✔️ /W1 | ❌ | ❌ |
-MSVC | signed integer overflow | ❌ | ❌ | ❌ |
-MSVC | stack overflow | ✔️ /W1 | ✔️ | ✔️ |
+clang | array out of bounds | ❌ |
+clang | dereferencing nullptr | ❌ |
+clang | divide by zero | ✔️ |
+clang | out of bounds pointer | ❌ |
+clang | reading uninitialized value add | ✔️ -Wall  |
+clang | reading uninitialized value cout | ✔️ -Wall  |
+clang | reading uninitialized value if | ✔️ -Wall  |
+clang | reading uninitialized value printf | ✔️ -Wall  |
+clang | shifting more than width | ✔️ |
+clang | signed integer overflow | ❌ |
+clang | stack overflow | ✔️ -Wall  |
+clang-tidy | array out of bounds | ✔️ cppcoreguidelines-pro-bounds-constant-array-index |
+clang-tidy | dereferencing nullptr | ✔️ clang-analyzer-core.NullDereference  |
+clang-tidy | divide by zero | ✔️ clang-diagnostic-division-by-zero|
+clang-tidy | out of bounds pointer | ❌ |
+clang-tidy | reading uninitialized value add | ✔️ clang-diagnostic-uninitialized |
+clang-tidy | reading uninitialized value cout | ✔️ clang-analyzer-core.CallAndMessage |
+clang-tidy | reading uninitialized value if | ✔️ clang-analyzer-core.uninitialized.Branch |
+clang-tidy | reading uninitialized value printf | ✔️ clang-analyzer-core.CallAndMessage |
+clang-tidy | shifting more than width | ✔️ clang-analyzer-core.UndefinedBinaryOperatorResult |
+clang-tidy | signed integer overflow | ❌ |
+clang-tidy | stack overflow | ✔️ clang-diagnostic-infinite-recursion |
+gcc | array out of bounds | ❌ |
+gcc | dereferencing nullptr | ❌ |
+gcc | divide by zero | ✔️ |
+gcc | out of bounds pointer | ❌ |
+gcc | reading uninitialized value add | ✔️ /Wall |
+gcc | reading uninitialized value cout | ✔️ /Wall |
+gcc | reading uninitialized value if | ✔️ /Wall |
+gcc | reading uninitialized value printf | ✔️ /Wall |
+gcc | shifting more than width | ✔️ |
+gcc | signed integer overflow | ❌ |
+gcc | stack overflow | ❌ |
+MSVC | array out of bounds | ❌ |
+MSVC | dereferencing nullptr | ❌ |
+MSVC | divide by zero | ✔️ /W3 |
+MSVC | out of bounds pointer | ❌ |
+MSVC | reading uninitialized value add | ✔️ /W1 |
+MSVC | reading uninitialized value cout | ✔️ /W1 |
+MSVC | reading uninitialized value if | ✔️ /W1 |
+MSVC | reading uninitialized value printf | ✔️ /W1 |
+MSVC | shifting more than width | ✔️ /W1 |
+MSVC | signed integer overflow | ❌ |
+MSVC | stack overflow | ✔️ /W1 |
 
-### Overview
-Undefined Behavior Type | Warnings | Debug | RelWithDebInfo
---- | --- | --- | ---
-array out of bounds | ❌ | MSVC | ❌ |
-dereferencing nullptr | ❌ | clang, gcc, MSVC | gcc, MSVC |
-divide by zero | clang, gcc, MSVC | clang, gcc, MSVC | gcc, MSVC |
-out of bounds pointer | ❌ | ❌ | ❌ |
-reading uninitialized value add | clang, gcc, MSVC | MSVC | ❌ |
-reading uninitialized value cout | clang, gcc, MSVC | MSVC | ❌ |
-reading uninitialized value if | clang, gc, MSVCc | MSVC | ❌ |
-reading uninitialized value printf | clang, gcc, MSVC | MSVC | ❌ |
-shifting more than width | clang, gcc | ❌ | ❌ |
-signed integer overflow | ❌ | ❌ | ❌ |
-stack overflow | clang, MSVC | clang, gcc, MSVC | clang, gcc, MSVC |
+### Summary
+Undefined Behavior Type | clang | clang-tidy | gcc | MSVC |
+array out of bounds | ❌ | ✔️  | ❌ | ❌ |
+dereferencing nullptr | ❌ | ✔️ | ❌ |  ❌ |
+divide by zero | ✔️  | ✔️  | ✔️  | ✔️  |
+out of bounds pointer | ❌ | ❌ | ❌ | ❌ |
+reading uninitialized value add | ✔️  | ✔️  | ✔️  | ✔️  |
+reading uninitialized value cout | ✔️ | ✔️  | ✔️  | ✔️  |
+reading uninitialized value if | ✔️  | ✔️  | ✔️  | ✔️  |
+reading uninitialized value printf | ✔️  | ✔️  | ✔️  | ✔️  |
+shifting more than width | ✔️ | ✔️  | ✔️  | ✔️  |
+signed integer overflow | ❌ | ❌ | ❌ | ❌ |
+stack overflow | ✔️ | ✔️  | ❌ | ✔️  |
 
+## Compiler Crashes
+clang | array out of bounds | ❌ | ❌
+clang | dereferencing nullptr | ✔️ | ❌
+clang | divide by zero | ✔️ | ❌
+clang | out of bounds pointer | ❌ | ❌
+clang | reading unitialized value add | ❌ | ❌
+clang | reading unitialized value cout | ❌ | ❌
+clang | reading unitialized value if | ❌ | ❌
+clang | reading unitialized value printf | ❌ | ❌
+clang | shifting more than width | ❌ | ❌
+clang | signed integer overflow | ❌ | ❌
+clang | stack overflow | ✔️ | ❌
+gcc | array out of bounds | ❌ | ❌
+gcc | dereferencing nullptr | ✔️ | ✔️
+gcc | divide by zero | ✔️ | ✔️
+gcc | out of bounds pointer | ❌ | ❌
+gcc | reading unitialized value add | ❌ | ❌
+gcc | reading unitialized value cout | ❌ | ❌
+gcc | reading unitialized value if | ❌ | ❌
+gcc | reading unitialized value printf | ❌ | ❌
+gcc | shifting more than width | ❌ | ❌
+gcc | signed integer overflow | ❌ | ❌
+gcc | stack overflow | ✔️ | ✔️
+MSVC | array out of bounds | ✔️ | ❌ |
+MSVC | dereferencing nullptr | ✔️ | ✔️ |
+MSVC | divide by zero | ✔️ | ✔️ |
+MSVC | out of bounds pointer | ❌ | ❌ |
+MSVC | reading uninitialized value add | ✔️ | ❌ |
+MSVC | reading uninitialized value cout | ✔️ | ❌ |
+MSVC | reading uninitialized value if | ✔️ | ❌ |
+MSVC | reading uninitialized value printf | ✔️ | ❌ |
+MSVC | shifting more than width | ❌ | ❌ |
+MSVC | signed integer overflow | ❌ | ❌ |
+MSVC | stack overflow | ✔️ | ✔️ |
 
 ## Dynamic Analyzer Study
-
 Tool | Compiler | Undefined Behavior Type | Debug | RelWithDebInfo
 --- | --- | --- | --- | ---
 clang address sanitizer | clang | array out of bounds | ✔️ | ❌
@@ -137,6 +180,7 @@ valgrind | gcc | stack overflow | ✔️ | ✔️
 ## Versions
 - Linux 6e685b1d7f64 4.4.0-101-generic #124~14.04.1-Ubuntu SMP Fri Nov 10 19:05:36 UTC 2017 x86\_64 x86\_64 x86\_64 GNU/Linux
 - clang: 6.0.0-1ubuntu2 (tags/RELEASE\_600/final)
+- clang-tidy: 6.0
 - GCC: (Ubuntu 7.3.0-27ubuntu1~18.04) 7.3.0 -std=c++17
 - MSVC: 2015 Version 14.0.25431.01 Update 3
 - valgrind: 3.13.0
