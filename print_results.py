@@ -97,14 +97,23 @@ for tool, rest_0 in sorted(output_table.items()):
         print(tool + " | " + test + " | " + rest_2["1"] + " | " + rest_2["0"])
 
 print("")
-print ("### Summary")
-print("Undefined Behavior Type | asan D | asan,ubsan D | msan D | msan,ubsan D | valgrind D | asan D | asan,ubsan D | msan D | msan,ubsan D | valgrind D")
-print("--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---")
+print("### Summary")
+print("### Debug")
+dynamic_analysis_summary_row = "--- | --- | --- | --- | --- | --- | ---"
+print("Undefined Behavior Type | asan D | asan,ubsan D | msan D | msan,ubsan D | ubsan D | valgrind D"
+)
+print(dynamic_analysis_summary_row)
 for test, rest_0 in sorted(tool_test_table.items()):
   line = test + " | "
-  for tool, rest_1 in sorted(rest_0.items()):
+  for compiler, rest_1 in sorted(rest_0.items()):
     line += rest_1["1"] + " | "
+  print(line[:-3])
+
+print("### Release")
+print("Undefined Behavior Type | asan R | asan,ubsan R | msan R | msan,ubsan R | ubsan R | valgrind R")
+print(dynamic_analysis_summary_row)
+for test, rest_0 in sorted(tool_test_table.items()):
+  line = test + " | "
   for compiler, rest_1 in sorted(rest_0.items()):
     line += rest_1["0"] + " | "
-  print(line)
-
+  print(line[:-3])
