@@ -59,19 +59,19 @@ MSVC | signed integer overflow | ❌
 MSVC | stack overflow | ✔️ /W1
 
 ### Summary
-Undefined Behavior Type | clang | clang-tidy | gcc | MSVC 
---- | --- | --- | --- | ---
-array out of bounds | ❌ | ✔️  | ❌ | ❌
-dereferencing nullptr | ❌ | ✔️ | ❌ |  ❌
-divide by zero | ✔️  | ✔️  | ✔️  | ✔️ 
-out of bounds pointer | ❌ | ❌ | ❌ | ❌
-reading uninitialized value add | ✔️  | ✔️  | ✔️  | ✔️
-reading uninitialized value cout | ✔️ | ✔️  | ✔️  | ✔️
-reading uninitialized value if | ✔️  | ✔️  | ✔️  | ✔️
-reading uninitialized value printf | ✔️  | ✔️  | ✔️  | ✔️
-shifting more than width | ✔️ | ✔️  | ✔️  | ✔️
-signed integer overflow | ❌ | ❌ | ❌ | ❌
-stack overflow | ✔️ | ✔️  | ❌ | ✔️
+Undefined Behavior Type | clang | clang-tidy | cppcheck | gcc | MSVC 
+--- | --- | --- | --- | --- | ---
+array out of bounds | ❌ | ✔️ | ❌ | ❌ | ❌
+dereferencing nullptr | ❌ | ✔️ | ✔️ | ❌ |  ❌
+divide by zero | ✔️  | ✔️ | ✔️ | ✔️  | ✔️ 
+out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌
+reading uninitialized value add | ✔️  | ✔️  | ✔️  | ✔️ | ✔️
+reading uninitialized value cout | ✔️ | ✔️  | ✔️  | ✔️ | ✔️
+reading uninitialized value if | ✔️  | ✔️  | ✔️  | ✔️ | ✔️
+reading uninitialized value printf | ✔️  | ✔️  | ✔️  | ✔️ | ✔️
+shifting more than width | ✔️ | ✔️  | ✔️  | ✔️ | ✔️
+signed integer overflow | ❌ | ❌ | ❌ | ❌ | ❌
+stack overflow | ✔️ | ✔️  | ❌ | ❌ | ✔️
 
 ## Runtime Crashes
 Compiler | Undefined Behavior Type | Debug | RelWithDebInfo
@@ -230,6 +230,7 @@ stack overflow | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
 - Linux 6e685b1d7f64 4.4.0-101-generic #124~14.04.1-Ubuntu SMP Fri Nov 10 19:05:36 UTC 2017 x86\_64 x86\_64 x86\_64 GNU/Linux
 - clang: 6.0.0-1ubuntu2 (tags/RELEASE\_600/final)
 - clang-tidy: 6.0
+- cppcheck 1.82
 - GCC: (Ubuntu 7.3.0-27ubuntu1~18.04) 7.3.0 -std=c++17
 - MSVC: 2015 Version 14.0.25431.01 Update 3
 - valgrind: 3.13.0
