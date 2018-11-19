@@ -1,10 +1,10 @@
-#include <cstdlib>
 #include <cstdio>
+#include <cstdlib>
 
 bool global_var = false;
 
 int main() {
-  char * char_ptr;
+  const char *char_ptr;
   if (global_var) {
     char_ptr = "properly initialized";
   }

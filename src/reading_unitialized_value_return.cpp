@@ -1,8 +1,7 @@
-#include <cstdlib>
 #include <cstdio>
+#include <cstdlib>
 
-char * get_char_ptr() {
-}
+char *get_char_ptr() {}
 
 int main() {
   std::puts(get_char_ptr());
