@@ -17,10 +17,13 @@ set(executables
   reading_unitialized_value_if
   reading_unitialized_value_partial
   reading_unitialized_value_printf
-  reading_unitialized_value_return
   shifting_more_than_width
   signed_integer_overflow
   stack_overflow)
+
+if (NOT MSVC)
+  list(APPEND executables reading_unitialized_value_return)
+endif ()
 
 foreach(executable ${executables})
   add_executable(${executable} src/${executable}.cpp)

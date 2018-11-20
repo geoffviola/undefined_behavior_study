@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <cstdlib>
 
-void maybe_set_char_ptr(char **) {}
+void maybe_set_char_ptr(char ** /*unused*/) {}
 
 int main() {
   char *char_ptr;
