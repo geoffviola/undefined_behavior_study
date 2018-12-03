@@ -36,4 +36,8 @@ GOTO :eof
 
 :subroutine
  %1
- echo %1 %errorlevel% >> results.txt
+ Set ProgramError=%errorlevel%
+ For %%A in ("%1%") do (
+    Set Filename=%%~nA
+ )
+ echo %Filename% %ProgramError% >> results.txt

@@ -50,9 +50,9 @@ def parse_warnings(file_handle, test_names):
             warnings_dict[test_name] += ","
           warnings_dict[test_name] += warning
           break
-        elif warnings_dict[test_name] == "" and "warning" in l.lower() or "error" in l.lower():
+        elif warnings_dict[test_name] == "" and ("warning" in l.lower() or "error" in l.lower()) and not "/errorReport" in l:
           warnings_dict[test_name] = "1"
-  return warnings_dict        
+  return warnings_dict 
 
 def write_file(warnings_dict, out_file):
   for key, value in warnings_dict.items():
