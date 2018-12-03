@@ -62,6 +62,7 @@ def parse_warnings(file_handle, test_names):
 
     # handle the fact that it does not compile
     if msvc:
+        print(warnings_dict)
         del warnings_dict["reading_uninitialized_value_return"]
 
     return warnings_dict
