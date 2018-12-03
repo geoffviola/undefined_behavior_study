@@ -19,19 +19,19 @@ cd ..\..
 echo Compiler warnings
 python associate_warnings.py --cpp_dir=src --out_file="build/Debug/warnings_table.txt" --warnings_file="build/Debug/warnings.txt"
 python associate_warnings.py --cpp_dir=src --out_file="build/RelWithDebInfo/warnings_table.txt" --warnings_file="build/RelWithDebInfo/warnings.txt"
-echo MSVC Debug Start
+echo MSVC Debug Compiler Warnings Start
 type build\Debug\warnings_table.txt
-echo MSVC Debug End
-echo MSVC RelWithDebInfo Start
+echo MSVC Debug Compiler Warnings End
+echo MSVC RelWithDebInfo Compiler Warnings Start
 type build\RelWithDebInfo\warnings_table.txt
-echo MSVC RelWithDebInfo End
+echo MSVC RelWithDebInfo Compiler Warnings End
 echo Runtime Results
 echo MSVC Debug Crashes Start
 type build\Debug\results.txt
 echo MSVC Debug Crashes End
-echo MSVC RelWithDebInfo Start
+echo MSVC RelWithDebInfo Crashes Start
 type build\RelWithDebInfo\results.txt
-echo MSVC RelWithDebInfo End
+echo MSVC RelWithDebInfo Crashes End
 GOTO :eof
 
 :subroutine
