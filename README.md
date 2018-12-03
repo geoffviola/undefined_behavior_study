@@ -292,14 +292,14 @@ clang | divide by zero  | division-by-zero | default
 clang | infinite recursion | infinite-recursion | Most
 clang | most | Most | all
 clang | shift count overflow | shift-count-overflow | default
-clang | unitialized | unitialized | Most
+clang | uninitialized | uninitialized | Most
 clang | return type| return-type  | Most
 gcc | divide by zero | div-by-zero | default
 gcc | shift count overflow | shift-count-overflow | extra
 gcc | return type | return-type | all
-gcc | unitialized | uninitialized | all
+gcc | uninitialized | uninitialized | all
 MSVC | divide by zero | 4723 | W3
-MSVC | unitialized | 4700 | W1
+MSVC | uninitialized | 4700 | W1
 MSVC | stack overflow | 4717 | W1
 MSVC | shift count overflow | 4293 | W1
 
@@ -324,5 +324,5 @@ msan was similar to asan, except it didn't identify any new cases. It also benef
 Reading from an uninitialized value is a very common mistake for beginners and experts. Compilers sometimes catch it as warnings. Valgrind can detect it, but clang with fsantize can often miss it.
 
 ## Variablility
-Valgrind seems to have different results over time. This may be due to version upgrades from 3.11 to 1.13 or the very nature of undefined behavior itself. It was observed that array out of bounds was undetected by valgrind during the upgrade. Not detecting unitialized memory in release with debug info went undetected at some point later.
+Valgrind seems to have different results over time. This may be due to version upgrades from 3.11 to 1.13 or the very nature of undefined behavior itself. It was observed that array out of bounds was undetected by valgrind during the upgrade. Not detecting uninitialized memory in release with debug info went undetected at some point later.
 

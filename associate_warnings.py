@@ -6,7 +6,7 @@ import os
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser = argparse.ArgumentParser(description='Associate tests to warnings.')
     parser.add_argument('--cpp_dir')
     parser.add_argument('--out_file', type=argparse.FileType('w'),
                         default="warnings_table.txt")
@@ -28,6 +28,7 @@ def get_cpp_files(path, extension):
 
 def parse_warnings(file_handle, test_names):
     warnings_dict = {}
+    msvc = False
     for test_name in test_names:
         warnings_dict[test_name] = ""
     for l in file_handle:
@@ -37,6 +38,7 @@ def parse_warnings(file_handle, test_names):
                 msvc_trigger = ": warning C"
                 msvc_triggered = False
                 if msvc_trigger in l:
+                    msvc = True
                     warning = l[l.find(msvc_trigger) +
                                 len(msvc_trigger):].split()[0][:-1]
                     msvc_triggered = True
@@ -56,6 +58,11 @@ def parse_warnings(file_handle, test_names):
                     break
                 elif warnings_dict[test_name] == "" and ("warning" in l.lower() or "error" in l.lower()) and not "/errorReport" in l:
                     warnings_dict[test_name] = "1"
+
+    # handle the fact that it does not compile
+    if msvc:
+        del warnings_dict["reading_unitialized_value_return"]
+
     return warnings_dict
 
 

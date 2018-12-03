@@ -11,18 +11,18 @@ set(executables
   divide_by_zero
   no_undefined_behavior
   out_of_bounds_pointer
-  reading_unitialized_value_add
-  reading_unitialized_value_cout
-  reading_unitialized_value_func_arg
-  reading_unitialized_value_if
-  reading_unitialized_value_partial
-  reading_unitialized_value_printf
+  reading_uninitialized_value_add
+  reading_uninitialized_value_cout
+  reading_uninitialized_value_func_arg
+  reading_uninitialized_value_if
+  reading_uninitialized_value_partial
+  reading_uninitialized_value_printf
   shifting_more_than_width
   signed_integer_overflow
   stack_overflow)
 
 if (NOT MSVC)
-  list(APPEND executables reading_unitialized_value_return)
+  list(APPEND executables reading_uninitialized_value_return)
 endif ()
 
 foreach(executable ${executables})

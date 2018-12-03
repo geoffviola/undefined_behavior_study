@@ -123,6 +123,11 @@ clang_build undefined
 clang_build address,undefined
 clang_build memory,undefined
 
+cd ..
+
+mkdir -p msvc
+cd msvc
+../../download_msvc_files.py
 cd ../..
 
 #print results

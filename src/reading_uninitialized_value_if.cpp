@@ -5,9 +5,9 @@
 int main() {
   bool b;
   if (b) {
-    std::cout << "unitialized value is true" << std::endl;
+    std::cout << "uninitialized value is true" << std::endl;
   } else {
-    std::cout << "unitialized value is false" << std::endl;
+    std::cout << "uninitialized value is false" << std::endl;
   }
   return EXIT_SUCCESS;
 }

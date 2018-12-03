@@ -39,6 +39,8 @@ def process_static_analysis_results(results):
             tool = "gcc"
         elif "cppcheck" in filename:
             tool = "cppcheck"
+        elif "msvc" in filename:
+            tool = "msvc"
 
         debug_mode = -1
         if "debug" in filename:
@@ -59,8 +61,6 @@ def process_static_analysis_results(results):
                 exit(1)
             else:
                 result = ""
-            if tool == "clang" and "return" in row[0]:
-                print(filename, tool, row, result)
             test_name = row[0].replace("_", " ")
             # Clang warnings are different with dynamic analysis
             if len(output_table[tool][test_name][debug_mode]) == 0 or (output_table[tool][test_name][debug_mode] == "1" and len(result) > 0):
@@ -115,7 +115,9 @@ def print_static_analysis_summary(output_table):
     summary_table = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
     tool_line = "Undefined Behavior Type"
     tool_table_line = "---"
+    tools = []
     for tool, rest_0 in sorted(output_table.items()):
+        tools.append(tool)
         tool_line += " | " + tool
         tool_table_line = " | ---"
         for test, rest_1 in sorted(rest_0.items()):
@@ -148,7 +150,13 @@ def print_static_analysis_summary(output_table):
 
     for test, rest_0 in sorted(summary_table.items()):
         output_line = test
+        tool_index = 0
         for tool, rest_1 in sorted(rest_0.items()):
+            while tool != tools[tool_index]:
+                tool_index += 1
+                output_line += " | n/a"
+            tool_index += 1
+
             warning_symbol = ""
             assert(rest_1 >= 0 and rest_1 <= 2)
             if rest_1 == 0:
@@ -158,6 +166,9 @@ def print_static_analysis_summary(output_table):
             elif rest_1 == 2:
                 warning_symbol = cool_check + "*"
             output_line += " | " + warning_symbol
+        while tool_index < len(tools):
+            tool_index += 1
+            output_line += " | n/a"
         print(output_line)
 
     for optimization_dependent_result in optimization_dependent_results:
@@ -182,22 +193,24 @@ def process_runtime_results(runtime_results):
         lambda: defaultdict(lambda: defaultdict(str))))
 
     for filename, csv in runtime_results.items():
-        if filename.find("valgrind") != -1:
+        if "valgrind" in filename:
             analyzer = "valgrind"
-        elif filename.find("sanitize") != -1:
+        elif "sanitize" in filename:
             analyzer = ""
-            if filename.find("address") != -1:
+            if "address" in filename:
                 analyzer += "asan"
-            if filename.find("memory") != -1:
+            if "memory" in filename:
                 analyzer += "msan"
-            if filename.find("undefined") != -1:
+            if "undefined" in filename:
                 if len(analyzer) > 0:
                     analyzer += ","
                 analyzer += "ubsan"
         else:
             analyzer = ""
-        if filename.find("gcc") != -1:
+        if "gcc" in filename:
             compiler = "gcc"
+        elif "msvc" in filename:
+            compiler = "msvc"
         else:
             compiler = "clang"
         if analyzer == "":
@@ -230,9 +243,11 @@ def print_runtime_crashes(output_table):
     print("--- | --- | --- | ---")
     no_tool_test_table = defaultdict(
         lambda: defaultdict(lambda: defaultdict(str)))
+    compilers = []
     for tool, rest_0 in sorted(output_table.items()):
         if tool == "":
             for compiler, rest_1 in sorted(rest_0.items()):
+                compilers.append(compiler)
                 for test, rest_2 in sorted(rest_1.items()):
                     no_tool_test_table[test][compiler]["1"] = rest_2["1"]
                     no_tool_test_table[test][compiler]["0"] = rest_2["0"]
@@ -241,14 +256,33 @@ def print_runtime_crashes(output_table):
 
     print("")
     print("### Summary")
-    print("Undefined Behavior | clang D | gcc D | clang R | gcc R")
-    print("--- | --- | --- | --- | ---")
+    tool_print_line = "Undefined Behavior"
+    tool_delim_print_line = "---"
+    tool_print_line_r = ""
+    for compiler in compilers:
+        tool_print_line += " | " + compiler + " D"
+        tool_print_line_r += " | " + compiler + "R"
+        tool_delim_print_line += " | --- | ---"
+    tool_print_line += tool_print_line_r 
+    print(tool_print_line)
+    print(tool_delim_print_line)
     for test, rest_0 in sorted(no_tool_test_table.items()):
-        line = test + " | "
+        line = test
+        line_r = ""
+        compiler_index = 0
         for compiler, rest_1 in sorted(rest_0.items()):
-            line += rest_1["1"] + " | "
-        for compiler, rest_1 in sorted(rest_0.items()):
-            line += rest_1["0"] + " | "
+            while compiler != compilers[compiler_index]:
+                compiler_index += 1
+                line += " | n/a"
+                line_r += " | n/a"
+            compiler_index += 1
+            line += " | " + rest_1["1"]
+            line_r += " | " +  rest_1["0"]
+        while compiler_index < len(compilers):
+            compiler_index += 1
+            line += " | n/a"
+            line_r += " | n/a"
+        line += line_r
         print(line)
 
 
