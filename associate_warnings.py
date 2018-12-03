@@ -1,0 +1,60 @@
+#!/usr/bin/env python3
+# coding=utf-8
+
+import argparse
+import os
+
+def parse_args():
+  parser = argparse.ArgumentParser(description='Process some integers.')
+  parser.add_argument('--cpp_dir')
+  parser.add_argument('--out_file', type=argparse.FileType('w'),
+                     default="warnings_table.txt")
+  parser.add_argument('--warnings_file', type=argparse.FileType('r'),
+                     default="warnings.txt",
+                     help='warnings files to read')
+  return parser.parse_args()
+
+def get_cpp_files(path, extension):
+  output = []
+  for (dirpath, dirnames, filenames) in os.walk(path):
+    for filename in filenames:
+      if len(filename) > len(extension) and \
+          extension in filename and filename not in output:
+        output.append(dirpath + "/" + filename)
+  return output
+
+def parse_warnings(file_handle, test_names):
+  warnings_dict = {}
+  for test_name in test_names:
+     warnings_dict[test_name] = ""
+  for l in file_handle:
+    for test_name in test_names:
+      if test_name in l:
+        start_bracket = l.rfind("[")
+        end_bracket = l.rfind("]")
+        if start_bracket > 0 and end_bracket > -1 and start_bracket < end_bracket:
+          warning = l[start_bracket+1:end_bracket]
+          if warning in warnings_dict[test_name]:
+            break
+          if warnings_dict[test_name] == "1":
+            warnings_dict[test_name] = ""
+          elif "" != warnings_dict[test_name]:
+            warnings_dict[test_name] += ","
+          warnings_dict[test_name] += warning
+          break
+        elif warnings_dict[test_name] == "" and "warning" in l.lower() or "error" in l.lower():
+          warnings_dict[test_name] = "1"
+  return warnings_dict        
+
+def write_file(warnings_dict, out_file):
+  for key, value in warnings_dict.items():
+    short_name = key[key.rfind("/")+1:key.rfind(".")]
+    out_file.write(short_name + " " + value + "\n")
+
+if __name__ == "__main__":
+  args = parse_args()
+  extension = ".cpp"
+  test_names = get_cpp_files(args.cpp_dir, extension)
+  warnings_dict = parse_warnings(args.warnings_file, test_names)
+  write_file(warnings_dict, args.out_file)
+   
