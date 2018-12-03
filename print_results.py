@@ -171,6 +171,8 @@ def print_static_analysis_summary(output_table):
             output_line += " | n/a"
         print(output_line)
 
+    if len(optimization_dependent_results) > 0:
+        print()
     for optimization_dependent_result in optimization_dependent_results:
         print("\\* " + optimization_dependent_result)
 
@@ -261,7 +263,7 @@ def print_runtime_crashes(output_table):
     tool_print_line_r = ""
     for compiler in compilers:
         tool_print_line += " | " + compiler + " D"
-        tool_print_line_r += " | " + compiler + "R"
+        tool_print_line_r += " | " + compiler + " R"
         tool_delim_print_line += " | --- | ---"
     tool_print_line += tool_print_line_r
     print(tool_print_line)
