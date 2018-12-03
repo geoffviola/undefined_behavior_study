@@ -62,16 +62,16 @@ clang-tidy | array out of bounds | ✔️ | cppcoreguidelines-pro-type-member-in
 clang-tidy | dereferencing nullptr | ✔️ | clang-analyzer-core.NullDereference
 clang-tidy | divide by zero | ✔️ | clang-analyzer-core.DivideZero,clang-diagnostic-division-by-zero
 clang-tidy | out of bounds pointer | ❌ | n/a
-clang-tidy | reading uninitialized value add | ✔️ | clang-analyzer-core.UndefinedBinaryOperatorResult
-clang-tidy | reading uninitialized value cout | ✔️ | clang-analyzer-core.CallAndMessage
+clang-tidy | reading uninitialized value add | ✔️ | clang-diagnostic-uninitialized,clang-analyzer-core.UndefinedBinaryOperatorResult
+clang-tidy | reading uninitialized value cout | ✔️ | clang-analyzer-core.CallAndMessage,clang-diagnostic-uninitialized
 clang-tidy | reading uninitialized value func arg | ✔️ | clang-analyzer-core.CallAndMessage
-clang-tidy | reading uninitialized value if | ✔️ | clang-analyzer-core.uninitialized.Branch
+clang-tidy | reading uninitialized value if | ✔️ | clang-analyzer-core.uninitialized.Branch,clang-diagnostic-uninitialized
 clang-tidy | reading uninitialized value partial | ✔️ | clang-analyzer-core.CallAndMessage
-clang-tidy | reading uninitialized value printf | ✔️ | clang-analyzer-core.CallAndMessage,cppcoreguidelines-pro-type-vararg
+clang-tidy | reading uninitialized value printf | ✔️ | clang-analyzer-core.CallAndMessage,cppcoreguidelines-pro-type-vararg,clang-diagnostic-uninitialized
 clang-tidy | reading uninitialized value return | ✔️ | clang-diagnostic-return-type
 clang-tidy | shifting more than width | ✔️ | hicpp-signed-bitwise,clang-analyzer-core.UndefinedBinaryOperatorResult,clang-diagnostic-shift-count-overflow
 clang-tidy | signed integer overflow | ❌ | n/a
-clang-tidy | stack overflow | ❌ | n/a
+clang-tidy | stack overflow | ✔️ | clang-diagnostic-infinite-recursion
 cppcheck | array out of bounds | ❌ | n/a
 cppcheck | dereferencing nullptr | ✔️ | n/a
 cppcheck | divide by zero | ✔️ | n/a
@@ -103,7 +103,7 @@ reading uninitialized value printf | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value return | ✔️ | ✔️ | ❌ | ✔️ | n/a
 shifting more than width | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 signed integer overflow | ❌ | ❌ | ❌ | ❌ | ❌
-stack overflow | ✔️ | ❌ | ❌ | ❌ | ✔️
+stack overflow | ✔️ | ✔️ | ❌ | ❌ | ✔️
 
 \* gcc "reading uninitialized value func arg" emitted warning only for optimized build
 
