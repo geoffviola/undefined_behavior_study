@@ -29,11 +29,19 @@ def parse_warnings(file_handle, test_names):
      warnings_dict[test_name] = ""
   for l in file_handle:
     for test_name in test_names:
-      if test_name in l:
+      if test_name in l.replace("\\", "/"):
+        warning = ""
+        msvc_trigger = ": warning C"
+        msvc_triggered = False
+        if msvc_trigger in l:
+          warning = l[l.find(msvc_trigger)+len(msvc_trigger):].split()[0][:-1]
+          msvc_triggered = True
         start_bracket = l.rfind("[")
         end_bracket = l.rfind("]")
-        if start_bracket > 0 and end_bracket > -1 and start_bracket < end_bracket:
+        # clang, cppcheck, gcc
+        if start_bracket > 0 and end_bracket > -1 and start_bracket < end_bracket and not msvc_triggered:
           warning = l[start_bracket+1:end_bracket]
+        if len(warning) > 0:
           if warning in warnings_dict[test_name]:
             break
           if warnings_dict[test_name] == "1":
