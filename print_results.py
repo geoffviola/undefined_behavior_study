@@ -94,7 +94,7 @@ def print_compiler_warnings(output_table):
 def print_tool_static_analysis(output_table):
     print("### Static Analyzers")
     print("Tool | Undefined Behavior Type | Warning | Name")
-    print("--- | --- | --- | --- | ---")
+    print("--- | --- | --- | ---")
     for tool, rest_0 in sorted(output_table.items()):
         for test, rest_1 in sorted(rest_0.items()):
             if not -1 in dict(rest_1):
@@ -119,7 +119,7 @@ def print_static_analysis_summary(output_table):
     for tool, rest_0 in sorted(output_table.items()):
         tools.append(tool)
         tool_line += " | " + tool
-        tool_table_line = " | ---"
+        tool_table_line += " | ---"
         for test, rest_1 in sorted(rest_0.items()):
             warning_result = -1
             for optimization, warning in sorted(rest_1.items()):
@@ -172,7 +172,7 @@ def print_static_analysis_summary(output_table):
         print(output_line)
 
     for optimization_dependent_result in optimization_dependent_results:
-        print("* " + optimization_dependent_result)
+        print("\\* " + optimization_dependent_result)
 
 
 def read_runtime_results():
@@ -263,7 +263,7 @@ def print_runtime_crashes(output_table):
         tool_print_line += " | " + compiler + " D"
         tool_print_line_r += " | " + compiler + "R"
         tool_delim_print_line += " | --- | ---"
-    tool_print_line += tool_print_line_r 
+    tool_print_line += tool_print_line_r
     print(tool_print_line)
     print(tool_delim_print_line)
     for test, rest_0 in sorted(no_tool_test_table.items()):
@@ -277,7 +277,7 @@ def print_runtime_crashes(output_table):
                 line_r += " | n/a"
             compiler_index += 1
             line += " | " + rest_1["1"]
-            line_r += " | " +  rest_1["0"]
+            line_r += " | " + rest_1["0"]
         while compiler_index < len(compilers):
             compiler_index += 1
             line += " | n/a"

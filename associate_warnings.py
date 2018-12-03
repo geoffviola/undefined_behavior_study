@@ -6,7 +6,8 @@ import os
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='Associate tests to warnings.')
+    parser = argparse.ArgumentParser(
+        description='Associate tests to warnings.')
     parser.add_argument('--cpp_dir')
     parser.add_argument('--out_file', type=argparse.FileType('w'),
                         default="warnings_table.txt")
@@ -61,7 +62,7 @@ def parse_warnings(file_handle, test_names):
 
     # handle the fact that it does not compile
     if msvc:
-        del warnings_dict["reading_unitialized_value_return"]
+        del warnings_dict["reading_uninitialized_value_return"]
 
     return warnings_dict
 
