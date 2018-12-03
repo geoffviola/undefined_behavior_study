@@ -1,9 +1,9 @@
 #include <cstdint>
-#include <cstdio>
 #include <cstdlib>
+#include <iostream>
 
 int main() {
   int32_t a = 1;
-  printf("%d\n", a / 0);
+  std::cout << a / 0 << std::endl;
   return EXIT_SUCCESS;
 }

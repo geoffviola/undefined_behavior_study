@@ -1,9 +1,9 @@
 #include <cstdint>
-#include <cstdio>
 #include <cstdlib>
+#include <iostream>
 
 int main() {
   uint32_t u = 0U;
-  printf("%u\n", u << 33);
+  std::cout << (u << 33) << std::endl;
   return EXIT_SUCCESS;
 }

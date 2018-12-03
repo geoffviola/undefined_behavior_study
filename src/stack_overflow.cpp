@@ -1,6 +1,6 @@
 #include <cstdint>
-#include <cstdio>
 #include <cstdlib>
+#include <iostream>
 
 uint32_t global = 1;
 
@@ -10,6 +10,6 @@ static uint32_t call_self() {
 }
 
 int main() {
-  printf("%u\n", call_self());
+  std::cout << call_self() << std::endl;
   return EXIT_SUCCESS;
 }

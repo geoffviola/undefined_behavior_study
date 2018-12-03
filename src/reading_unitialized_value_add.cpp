@@ -1,10 +1,10 @@
 #include <cstdint>
 #include <cstdlib>
-#include <stdio.h>
+#include <iostream>
 
 int main() {
   int32_t a;
   int32_t b;
-  printf("%d\n", a + b);
+  std::cout << a + b << std::endl;
   return EXIT_SUCCESS;
 }

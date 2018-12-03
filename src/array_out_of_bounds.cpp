@@ -1,10 +1,10 @@
 #include <array>
 #include <cstdint>
-#include <cstdio>
 #include <cstdlib>
+#include <iostream>
 
 int main() {
   std::array<int32_t, 10> arr;
-  printf("%d\n", arr[arr.size()]);
+  std::cout << arr[arr.size()] << std::endl;
   return EXIT_SUCCESS;
 }

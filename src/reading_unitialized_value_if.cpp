@@ -1,13 +1,13 @@
 #include <cstdint>
-#include <cstdio>
 #include <cstdlib>
+#include <iostream>
 
 int main() {
   bool b;
   if (b) {
-    printf("unitialized value is true\n");
+    std::cout << "unitialized value is true" << std::endl;
   } else {
-    printf("unitialized value is false\n");
+    std::cout << "unitialized value is false" << std::endl;
   }
   return EXIT_SUCCESS;
 }
