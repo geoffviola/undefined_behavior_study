@@ -285,6 +285,24 @@ stack overflow | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
 - MSVC: 2015 Version 14.0.25431.01 Update 3
 - valgrind: 3.13.0
 
+## Reference Warning Classes
+Compiler | Name | Code | Class
+--- | --- | --- | ---
+clang | divide by zero  | division-by-zero | default
+clang | infinite recursion | infinite-recursion | Most
+clang | most | Most | all
+clang | shift count overflow | shift-count-overflow | default
+clang | unitialized | unitialized | Most
+clang | return type| return-type  | Most
+gcc | divide by zero | div-by-zero | default
+gcc | shift count overflow | shift-count-overflow | extra
+gcc | return type | return-type | all
+gcc | unitialized | uninitialized | all
+MSVC | divide by zero | 4723 | W3
+MSVC | unitialized | 4700 | W1
+MSVC | stack overflow | 4717 | W1
+MSVC | shift count overflow | 4293 | W1
+
 ## Notes
 Valgrind was run on GCC compiled binaries. msan, asan, and ubsan are all different flags into clang's "fsanatize" parameter.
 
