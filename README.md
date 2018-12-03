@@ -10,83 +10,103 @@ Windows
 [![Build status](https://ci.appveyor.com/api/projects/status/sewu7060d0mn6v8i/branch/master?svg=true)](https://ci.appveyor.com/project/geoffviola/undefined_behavior_study/branch/master)
 
 ## Static Analysis
-### Breakdown
+### Compiler Warnings
 Compiler | Undefined Behavior Type | Warning | Warning Opt | Name
 --- | --- | --- | --- | ---
 clang | array out of bounds | ❌ | ❌ | n/a
 clang | dereferencing nullptr | ❌ | ❌ | n/a
 clang | divide by zero | ✔️ | ✔️ | -Wdivision-by-zero
 clang | out of bounds pointer | ❌ | ❌ | n/a
-clang | reading uninitialized value add | ✔️ | ✔️ | -Wuninitialized (-WMost) (-Wall)
-clang | reading uninitialized value cout | ✔️ | ✔️ |  -Wuninitialized (-WMost) (-Wall)
+clang | reading uninitialized value add | ✔️ | ✔️ | -Wuninitialized
+clang | reading uninitialized value cout | ✔️ | ✔️ | -Wuninitialized
 clang | reading uninitialized value func arg | ❌ | ❌ | n/a
-clang | reading uninitialized value if | ✔️ | ✔️ | -Wuninitialized (-WMost) (-Wall)
+clang | reading uninitialized value if | ✔️ | ✔️ | -Wuninitialized
 clang | reading uninitialized value partial | ❌ | ❌ | n/a
-clang | reading uninitialized value printf | ✔️ | ✔️ | -Wuninitialized (-WMost) (-Wall)
-clang | reading uninitialized value return | ✔️ | ✔️ | -Wreturn-type (-WMost) (-Wall)
+clang | reading uninitialized value printf | ✔️ | ✔️ | -Wuninitialized
+clang | reading uninitialized value return | ✔️ | ✔️ | -Wreturn-type
 clang | shifting more than width | ✔️ | ✔️ | -Wshift-count-overflow
 clang | signed integer overflow | ❌ | ❌ | n/a
-clang | stack overflow | ✔️ | ✔️ | -Winfinite-recursion (-WMost) (-Wall)
+clang | stack overflow | ✔️ | ✔️ | -Winfinite-recursion
 gcc | array out of bounds | ❌ | ❌ | n/a
 gcc | dereferencing nullptr | ❌ | ❌ | n/a
 gcc | divide by zero | ✔️ | ✔️ | -Wdiv-by-zero
 gcc | out of bounds pointer | ❌ | ❌ | n/a
-gcc | reading uninitialized value add | ✔️ | ✔️ | -Wuninitialized (-Wall)
-gcc | reading uninitialized value cout | ✔️ | ✔️ | -Wuninitialized (-Wall)
-gcc | reading uninitialized value func arg | ❌ | ✔️ | -Wuninitialized (-Wall)
-gcc | reading uninitialized value if | ✔️ | ✔️ | -Wuninitialized (-Wall)
+gcc | reading uninitialized value add | ✔️ | ✔️ | -Wuninitialized
+gcc | reading uninitialized value cout | ✔️ | ✔️ | -Wuninitialized
+gcc | reading uninitialized value func arg | ❌ | ✔️ | -Wuninitialized
+gcc | reading uninitialized value if | ✔️ | ✔️ | -Wuninitialized
 gcc | reading uninitialized value partial | ❌ | ❌ | n/a
-gcc | reading uninitialized value printf | ✔️ | ✔️ | -Wuninitialized (-Wall)
-gcc | reading uninitialized value return | ✔️ | ✔️ | -Wreturn-type (-Wall)
-gcc | shifting more than width | ✔️ | ✔️ | -Wshift-count-overflow (-Wextra)
+gcc | reading uninitialized value printf | ✔️ | ✔️ | -Wuninitialized
+gcc | reading uninitialized value return | ✔️ | ✔️ | -Wreturn-type
+gcc | shifting more than width | ✔️ | ✔️ | -Wshift-count-overflow
 gcc | signed integer overflow | ❌ | ❌ | n/a
 gcc | stack overflow | ❌ | ❌ | n/a
-MSVC | array out of bounds | ❌ | ❌ | n/a
-MSVC | dereferencing nullptr | ❌ | ❌ | n/a
-MSVC | divide by zero | ✔️ | ✔️ | /W3
-MSVC | out of bounds pointer | ❌ | ❌ | n/a
-MSVC | reading uninitialized value add | ✔️ | ✔️ | /W1 
-MSVC | reading uninitialized value cout | ✔️ | ✔️ | /W1
-MSVC | reading uninitialized value if | ✔️ | ✔️ | /W1
-MSVC | reading uninitialized value printf | ✔️ | ✔️ | /W1
-MSVC | shifting more than width | ✔️ | ✔️ | /W1
-MSVC | signed integer overflow | ❌ | ❌ | n/a
-MSVC | stack overflow | ✔️ | ✔️ | /W1
+msvc | array out of bounds | ❌ | ❌ | n/a
+msvc | dereferencing nullptr | ❌ | ❌ | n/a
+msvc | divide by zero | ✔️ | ✔️ | 4723
+msvc | out of bounds pointer | ❌ | ❌ | n/a
+msvc | reading uninitialized value add | ✔️ | ✔️ | 4700
+msvc | reading uninitialized value cout | ✔️ | ✔️ | 4700
+msvc | reading uninitialized value func arg | ❌ | ❌ | n/a
+msvc | reading uninitialized value if | ✔️ | ✔️ | 4700
+msvc | reading uninitialized value partial | ❌ | ❌ | n/a
+msvc | reading uninitialized value printf | ✔️ | ✔️ | 4700
+msvc | shifting more than width | ✔️ | ✔️ | 4293
+msvc | signed integer overflow | ❌ | ❌ | n/a
+msvc | stack overflow | ✔️ | ✔️ | 4717
 
+### Static Analyzers
 Tool | Undefined Behavior Type | Warning | Name
 --- | --- | --- | ---
-clang-tidy | array out of bounds | ✔️ | cppcoreguidelines-pro-bounds-constant-array-index
+clang-tidy | array out of bounds | ✔️ | cppcoreguidelines-pro-type-member-init,cppcoreguidelines-pro-bounds-constant-array-index
 clang-tidy | dereferencing nullptr | ✔️ | clang-analyzer-core.NullDereference
-clang-tidy | divide by zero | ✔️ | clang-diagnostic-division-by-zero
-clang-tidy | out of bounds pointer | ❌ |
-clang-tidy | reading uninitialized value add | ✔️ | clang-diagnostic-uninitialized
+clang-tidy | divide by zero | ✔️ | clang-analyzer-core.DivideZero,clang-diagnostic-division-by-zero
+clang-tidy | out of bounds pointer | ❌ | n/a
+clang-tidy | reading uninitialized value add | ✔️ | clang-analyzer-core.UndefinedBinaryOperatorResult
 clang-tidy | reading uninitialized value cout | ✔️ | clang-analyzer-core.CallAndMessage
-clang-tidy | reading unitialized value func arg | ✔️ | clang-analyzer-core.CallAndMessage
+clang-tidy | reading uninitialized value func arg | ✔️ | clang-analyzer-core.CallAndMessage
 clang-tidy | reading uninitialized value if | ✔️ | clang-analyzer-core.uninitialized.Branch
-clang-tidy | reading unitialized value partial | ✔️ | clang-analyzer-core.CallAndMessage
-clang-tidy | reading uninitialized value printf | ✔️ | clang-analyzer-core.CallAndMessage
+clang-tidy | reading uninitialized value partial | ✔️ | clang-analyzer-core.CallAndMessage
+clang-tidy | reading uninitialized value printf | ✔️ | clang-analyzer-core.CallAndMessage,cppcoreguidelines-pro-type-vararg
 clang-tidy | reading uninitialized value return | ✔️ | clang-diagnostic-return-type
-clang-tidy | shifting more than width | ✔️ | clang-analyzer-core.UndefinedBinaryOperatorResult
-clang-tidy | signed integer overflow | ❌ |
-clang-tidy | stack overflow | ✔️ | clang-diagnostic-infinite-recursion
+clang-tidy | shifting more than width | ✔️ | hicpp-signed-bitwise,clang-analyzer-core.UndefinedBinaryOperatorResult,clang-diagnostic-shift-count-overflow
+clang-tidy | signed integer overflow | ❌ | n/a
+clang-tidy | stack overflow | ❌ | n/a
+cppcheck | array out of bounds | ❌ | n/a
+cppcheck | dereferencing nullptr | ✔️ | n/a
+cppcheck | divide by zero | ✔️ | n/a
+cppcheck | out of bounds pointer | ❌ | n/a
+cppcheck | reading uninitialized value add | ✔️ | n/a
+cppcheck | reading uninitialized value cout | ✔️ | n/a
+cppcheck | reading uninitialized value func arg | ❌ | n/a
+cppcheck | reading uninitialized value if | ✔️ | n/a
+cppcheck | reading uninitialized value partial | ✔️ | n/a
+cppcheck | reading uninitialized value printf | ✔️ | n/a
+cppcheck | reading uninitialized value return | ❌ | n/a
+cppcheck | shifting more than width | ✔️ | n/a
+cppcheck | signed integer overflow | ❌ | n/a
+cppcheck | stack overflow | ❌ | n/a
 
 ### Summary
-Undefined Behavior Type | clang | clang-tidy | cppcheck | gcc | MSVC 
+Undefined Behavior Type | clang | clang-tidy | cppcheck | gcc | msvc
 --- | --- | --- | --- | --- | ---
 array out of bounds | ❌ | ✔️ | ❌ | ❌ | ❌
-dereferencing nullptr | ❌ | ✔️ | ✔️ | ❌ |  ❌
-divide by zero | ✔️  | ✔️ | ✔️ | ✔️  | ✔️ 
+dereferencing nullptr | ❌ | ✔️ | ✔️ | ❌ | ❌
+divide by zero | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌
-reading uninitialized value add | ✔️  | ✔️  | ✔️  | ✔️ | ✔️
-reading uninitialized value cout | ✔️ | ✔️  | ✔️  | ✔️ | ✔️
-reading unitialized value func arg | ❌ | ✔️ | ❌ | ⚠️ | ❌
-reading uninitialized value if | ✔️  | ✔️  | ✔️  | ✔️ | ✔️
-reading unitialized value partial | ❌ | ✔️ | ✔️ | ✔️ | ❌
-reading uninitialized value printf | ✔️  | ✔️  | ✔️  | ✔️ | ✔️
-reading uninitialized value return | ✔️  | ✔️  | ❌  | ❌ | ❌
-shifting more than width | ✔️ | ✔️  | ✔️  | ✔️ | ✔️
+reading uninitialized value add | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+reading uninitialized value cout | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+reading uninitialized value func arg | ❌ | ✔️ | ❌ | ✔️* | ❌
+reading uninitialized value if | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+reading uninitialized value partial | ❌ | ✔️ | ✔️ | ❌ | ❌
+reading uninitialized value printf | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+reading uninitialized value return | ✔️ | ✔️ | ❌ | ✔️ | n/a
+shifting more than width | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 signed integer overflow | ❌ | ❌ | ❌ | ❌ | ❌
-stack overflow | ✔️ | ✔️  | ❌ | ❌ | ✔️
+stack overflow | ✔️ | ❌ | ❌ | ❌ | ✔️
+
+\* gcc "reading uninitialized value func arg" emitted warning only for optimized build
+
 
 ## Runtime Crashes
 ### Breakdown
@@ -96,13 +116,13 @@ clang | array out of bounds | ❌ | ❌
 clang | dereferencing nullptr | ✔️ | ❌
 clang | divide by zero | ✔️ | ❌
 clang | out of bounds pointer | ❌ | ❌
-clang | reading unitialized value add | ❌ | ❌
-clang | reading unitialized value cout | ❌ | ❌
-clang | reading unitialized value func arg | ❌ | ✔️
-clang | reading unitialized value if | ❌ | ❌
-clang | reading unitialized value partial | ❌ | ❌
-clang | reading unitialized value printf | ❌ | ❌
-clang | reading unitialized value return | ✔️ | ❌
+clang | reading uninitialized value add | ❌ | ❌
+clang | reading uninitialized value cout | ❌ | ❌
+clang | reading uninitialized value func arg | ❌ | ✔️
+clang | reading uninitialized value if | ❌ | ❌
+clang | reading uninitialized value partial | ❌ | ❌
+clang | reading uninitialized value printf | ❌ | ❌
+clang | reading uninitialized value return | ✔️ | ❌
 clang | shifting more than width | ❌ | ❌
 clang | signed integer overflow | ❌ | ❌
 clang | stack overflow | ✔️ | ❌
@@ -110,47 +130,49 @@ gcc | array out of bounds | ❌ | ❌
 gcc | dereferencing nullptr | ✔️ | ✔️
 gcc | divide by zero | ✔️ | ✔️
 gcc | out of bounds pointer | ❌ | ❌
-gcc | reading unitialized value add | ❌ | ❌
-gcc | reading unitialized value cout | ❌ | ❌
-gcc | reading unitialized value func arg | ❌ | ✔️
-gcc | reading unitialized value if | ❌ | ❌
-gcc | reading unitialized value partial | ✔️ | ❌
-gcc | reading unitialized value printf | ❌ | ❌
-gcc | reading unitialized value return | ❌ | ✔️
+gcc | reading uninitialized value add | ❌ | ❌
+gcc | reading uninitialized value cout | ❌ | ❌
+gcc | reading uninitialized value func arg | ❌ | ✔️
+gcc | reading uninitialized value if | ❌ | ❌
+gcc | reading uninitialized value partial | ✔️ | ❌
+gcc | reading uninitialized value printf | ❌ | ❌
+gcc | reading uninitialized value return | ❌ | ✔️
 gcc | shifting more than width | ❌ | ❌
 gcc | signed integer overflow | ❌ | ❌
 gcc | stack overflow | ✔️ | ✔️
-MSVC | array out of bounds | ✔️ | ❌
-MSVC | dereferencing nullptr | ✔️ | ✔️
-MSVC | divide by zero | ✔️ | ✔️
-MSVC | out of bounds pointer | ❌ | ❌
-MSVC | reading unitialized value add | ✔️ | ❌
-MSVC | reading unitialized value cout | ✔️ | ❌
-MSVC | reading unitialized value func arg | ✔️ | ❌
-MSVC | reading unitialized value if | ✔️ | ❌
-MSVC | reading unitialized value partial | ✔️ | ✔️
-MSVC | reading unitialized value printf | ✔️ | ❌
-MSVC | reading unitialized value return | n/a | n/a
-MSVC | shifting more than width | ❌ | ❌
-MSVC | signed integer overflow | ❌ | ❌
-MSVC | stack overflow | ✔️ | ✔️
+msvc | array out of bounds | ✔️ | ❌
+msvc | dereferencing nullptr | ✔️ | ✔️
+msvc | divide by zero | ✔️ | ✔️
+msvc | out of bounds pointer | ❌ | ❌
+msvc | reading uninitialized value add | ✔️ | ❌
+msvc | reading uninitialized value cout | ✔️ | ❌
+msvc | reading uninitialized value func arg | ✔️ | ✔️
+msvc | reading uninitialized value if | ✔️ | ❌
+msvc | reading uninitialized value partial | ✔️ | ✔️
+msvc | reading uninitialized value printf | ✔️ | ❌
+msvc | shifting more than width | ❌ | ❌
+msvc | signed integer overflow | ❌ | ❌
+msvc | stack overflow | ✔️ | ✔️
+
 ### Summary
-Undefined Behavior | clang D | gcc D | MSVC D | clang R | gcc R | MSVC R
+Undefined Behavior | clang D | gcc D | msvc D | clang R | gcc R | msvc R
 --- | --- | --- | --- | --- | --- | ---
 array out of bounds | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
 dereferencing nullptr | ✔️ | ✔️ | ✔️ | ❌ | ✔️ | ✔️
 divide by zero | ✔️ | ✔️ | ✔️ | ❌ | ✔️ | ✔️
 out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
-reading unitialized value add | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
-reading unitialized value cout | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
-reading unitialized value func arg | ❌ | ❌ | ✔️ | ✔️ | ✔️ | ❌
-reading unitialized value if | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
-reading unitialized value partial | ❌ | ✔️ | ✔️ | ❌ | ❌ | ✔️
-reading unitialized value printf | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
-reading unitialized value return | ✔️ | ❌ | n/a | ❌ | ✔️ | n/a
+reading uninitialized value add | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
+reading uninitialized value cout | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
+reading uninitialized value func arg | ❌ | ❌ | ✔️ | ✔️ | ✔️ | ✔️
+reading uninitialized value if | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
+reading uninitialized value partial | ❌ | ✔️ | ✔️ | ❌ | ❌ | ✔️
+reading uninitialized value printf | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
+reading uninitialized value return | ✔️ | ❌ | n/a | ❌ | ✔️ | n/a
 shifting more than width | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 signed integer overflow | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 stack overflow | ✔️ | ✔️ | ✔️ | ❌ | ✔️ | ✔️
+
+
 ## Dynamic Analysis
 ### Breakdown
 Compiler | Undefined Behavior Type | Debug | RelWithDebInfo
@@ -159,13 +181,13 @@ asan | array out of bounds | ✔️ | ❌
 asan | dereferencing nullptr | ✔️ | ❌
 asan | divide by zero | ✔️ | ❌
 asan | out of bounds pointer | ❌ | ❌
-asan | reading unitialized value add | ❌ | ❌
-asan | reading unitialized value cout | ❌ | ❌
-asan | reading unitialized value func arg | ✔️ | ✔️
-asan | reading unitialized value if | ❌ | ❌
-asan | reading unitialized value partial | ❌ | ❌
-asan | reading unitialized value printf | ❌ | ❌
-asan | reading unitialized value return | ✔️ | ✔️
+asan | reading uninitialized value add | ❌ | ❌
+asan | reading uninitialized value cout | ❌ | ❌
+asan | reading uninitialized value func arg | ✔️ | ✔️
+asan | reading uninitialized value if | ❌ | ❌
+asan | reading uninitialized value partial | ❌ | ❌
+asan | reading uninitialized value printf | ❌ | ❌
+asan | reading uninitialized value return | ✔️ | ✔️
 asan | shifting more than width | ❌ | ❌
 asan | signed integer overflow | ❌ | ❌
 asan | stack overflow | ✔️ | ❌
@@ -173,13 +195,13 @@ asan,ubsan | array out of bounds | ✔️ | ✔️
 asan,ubsan | dereferencing nullptr | ✔️ | ✔️
 asan,ubsan | divide by zero | ✔️ | ✔️
 asan,ubsan | out of bounds pointer | ❌ | ❌
-asan,ubsan | reading unitialized value add | ❌ | ✔️
-asan,ubsan | reading unitialized value cout | ❌ | ❌
-asan,ubsan | reading unitialized value func arg | ✔️ | ✔️
-asan,ubsan | reading unitialized value if | ❌ | ❌
-asan,ubsan | reading unitialized value partial | ❌ | ❌
-asan,ubsan | reading unitialized value printf | ❌ | ❌
-asan,ubsan | reading unitialized value return | ✔️ | ✔️
+asan,ubsan | reading uninitialized value add | ❌ | ✔️
+asan,ubsan | reading uninitialized value cout | ❌ | ❌
+asan,ubsan | reading uninitialized value func arg | ✔️ | ✔️
+asan,ubsan | reading uninitialized value if | ❌ | ❌
+asan,ubsan | reading uninitialized value partial | ❌ | ❌
+asan,ubsan | reading uninitialized value printf | ❌ | ❌
+asan,ubsan | reading uninitialized value return | ✔️ | ✔️
 asan,ubsan | shifting more than width | ✔️ | ✔️
 asan,ubsan | signed integer overflow | ✔️ | ✔️
 asan,ubsan | stack overflow | ✔️ | ❌
@@ -187,13 +209,13 @@ msan | array out of bounds | ❌ | ❌
 msan | dereferencing nullptr | ✔️ | ❌
 msan | divide by zero | ❌ | ❌
 msan | out of bounds pointer | ❌ | ❌
-msan | reading unitialized value add | ❌ | ❌
-msan | reading unitialized value cout | ❌ | ❌
-msan | reading unitialized value func arg | ❌ | ✔️
-msan | reading unitialized value if | ✔️ | ❌
-msan | reading unitialized value partial | ❌ | ❌
-msan | reading unitialized value printf | ❌ | ❌
-msan | reading unitialized value return | ✔️ | ✔️
+msan | reading uninitialized value add | ❌ | ❌
+msan | reading uninitialized value cout | ❌ | ❌
+msan | reading uninitialized value func arg | ❌ | ✔️
+msan | reading uninitialized value if | ✔️ | ❌
+msan | reading uninitialized value partial | ❌ | ❌
+msan | reading uninitialized value printf | ❌ | ❌
+msan | reading uninitialized value return | ✔️ | ✔️
 msan | shifting more than width | ❌ | ❌
 msan | signed integer overflow | ❌ | ❌
 msan | stack overflow | ✔️ | ❌
@@ -201,13 +223,13 @@ msan,ubsan | array out of bounds | ❌ | ✔️
 msan,ubsan | dereferencing nullptr | ✔️ | ✔️
 msan,ubsan | divide by zero | ✔️ | ✔️
 msan,ubsan | out of bounds pointer | ❌ | ❌
-msan,ubsan | reading unitialized value add | ❌ | ✔️
-msan,ubsan | reading unitialized value cout | ❌ | ❌
-msan,ubsan | reading unitialized value func arg | ❌ | ✔️
-msan,ubsan | reading unitialized value if | ✔️ | ❌
-msan,ubsan | reading unitialized value partial | ❌ | ❌
-msan,ubsan | reading unitialized value printf | ❌ | ❌
-msan,ubsan | reading unitialized value return | ✔️ | ✔️
+msan,ubsan | reading uninitialized value add | ❌ | ✔️
+msan,ubsan | reading uninitialized value cout | ❌ | ❌
+msan,ubsan | reading uninitialized value func arg | ❌ | ✔️
+msan,ubsan | reading uninitialized value if | ✔️ | ❌
+msan,ubsan | reading uninitialized value partial | ❌ | ❌
+msan,ubsan | reading uninitialized value printf | ❌ | ❌
+msan,ubsan | reading uninitialized value return | ✔️ | ✔️
 msan,ubsan | shifting more than width | ✔️ | ✔️
 msan,ubsan | signed integer overflow | ✔️ | ✔️
 msan,ubsan | stack overflow | ✔️ | ❌
@@ -215,13 +237,13 @@ ubsan | array out of bounds | ❌ | ✔️
 ubsan | dereferencing nullptr | ✔️ | ✔️
 ubsan | divide by zero | ✔️ | ✔️
 ubsan | out of bounds pointer | ❌ | ❌
-ubsan | reading unitialized value add | ❌ | ✔️
-ubsan | reading unitialized value cout | ❌ | ❌
-ubsan | reading unitialized value func arg | ❌ | ✔️
-ubsan | reading unitialized value if | ❌ | ❌
-ubsan | reading unitialized value partial | ❌ | ❌
-ubsan | reading unitialized value printf | ❌ | ❌
-ubsan | reading unitialized value return | ✔️ | ✔️
+ubsan | reading uninitialized value add | ❌ | ✔️
+ubsan | reading uninitialized value cout | ❌ | ❌
+ubsan | reading uninitialized value func arg | ❌ | ✔️
+ubsan | reading uninitialized value if | ❌ | ❌
+ubsan | reading uninitialized value partial | ❌ | ❌
+ubsan | reading uninitialized value printf | ❌ | ❌
+ubsan | reading uninitialized value return | ✔️ | ✔️
 ubsan | shifting more than width | ✔️ | ✔️
 ubsan | signed integer overflow | ✔️ | ✔️
 ubsan | stack overflow | ✔️ | ❌
@@ -229,13 +251,13 @@ valgrind | array out of bounds | ❌ | ❌
 valgrind | dereferencing nullptr | ✔️ | ✔️
 valgrind | divide by zero | ✔️ | ✔️
 valgrind | out of bounds pointer | ❌ | ❌
-valgrind | reading unitialized value add | ✔️ | ❌
-valgrind | reading unitialized value cout | ✔️ | ❌
-valgrind | reading unitialized value func arg | ✔️ | ✔️
-valgrind | reading unitialized value if | ✔️ | ❌
-valgrind | reading unitialized value partial | ✔️ | ❌
-valgrind | reading unitialized value printf | ✔️ | ❌
-valgrind | reading unitialized value return | ❌ | ✔️
+valgrind | reading uninitialized value add | ✔️ | ❌
+valgrind | reading uninitialized value cout | ✔️ | ❌
+valgrind | reading uninitialized value func arg | ✔️ | ✔️
+valgrind | reading uninitialized value if | ✔️ | ❌
+valgrind | reading uninitialized value partial | ✔️ | ❌
+valgrind | reading uninitialized value printf | ✔️ | ❌
+valgrind | reading uninitialized value return | ❌ | ✔️
 valgrind | shifting more than width | ❌ | ❌
 valgrind | signed integer overflow | ❌ | ❌
 valgrind | stack overflow | ✔️ | ✔️
@@ -248,13 +270,13 @@ array out of bounds | ✔️ | ✔️ | ❌ | ❌ | ❌ | ❌
 dereferencing nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 divide by zero | ✔️ | ✔️ | ❌ | ✔️ | ✔️ | ✔️
 out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
-reading unitialized value add | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
-reading unitialized value cout | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
-reading unitialized value func arg | ✔️ | ✔️ | ❌ | ❌ | ❌ | ✔️
-reading unitialized value if | ❌ | ❌ | ✔️ | ✔️ | ❌ | ✔️
-reading unitialized value partial | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
-reading unitialized value printf | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
-reading unitialized value return | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ❌
+reading uninitialized value add | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
+reading uninitialized value cout | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
+reading uninitialized value func arg | ✔️ | ✔️ | ❌ | ❌ | ❌ | ✔️
+reading uninitialized value if | ❌ | ❌ | ✔️ | ✔️ | ❌ | ✔️
+reading uninitialized value partial | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
+reading uninitialized value printf | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
+reading uninitialized value return | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ❌
 shifting more than width | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 signed integer overflow | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 stack overflow | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
@@ -265,13 +287,13 @@ array out of bounds | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 dereferencing nullptr | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ✔️
 divide by zero | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ✔️
 out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
-reading unitialized value add | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
-reading unitialized value cout | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
-reading unitialized value func arg | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-reading unitialized value if | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
-reading unitialized value partial | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
-reading unitialized value printf | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
-reading unitialized value return | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+reading uninitialized value add | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
+reading uninitialized value cout | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+reading uninitialized value func arg | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+reading uninitialized value if | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+reading uninitialized value partial | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+reading uninitialized value printf | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+reading uninitialized value return | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 shifting more than width | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 signed integer overflow | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 stack overflow | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
