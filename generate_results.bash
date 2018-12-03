@@ -1,21 +1,37 @@
 #!/usr/bin/env bash
 
+ROOT_DIR=$(pwd)
+PATH=${PATH}:${ROOT_DIR}
+SRC_DIR=${ROOT_DIR}/src
+
+mkdir build
+cd build
+
 mkdir clang-tidy
 cd clang-tidy
-cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE ..
-clang-tidy -checks=* ../src/*.cpp
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE .. > cmake.txt
+clang-tidy -checks=* ${SRC_DIR}/*.cpp 1> warnings.txt
+associate_warnings.py --cpp_dir=${SRC_DIR}
 cd ..
 
-mkdir -p build/gcc/debug
-cd build/gcc/debug
+mkdir cppcheck
+cd cppcheck
+cppcheck ${SRC_DIR}/*.cpp 1> cppcheck.txt 2> warnings.txt
+associate_warnings.py --cpp_dir=${SRC_DIR}
+cd ..
 
-cmake ../../.. -DCMAKE_BUILD_TYPE=Debug
-make -j6
+mkdir -p gcc/debug
+cd gcc/debug
+
+echo "gcc debug"
+cmake ../../.. -DCMAKE_BUILD_TYPE=Debug > cmake.txt
+make -j6 1> make.txt 2> warnings.txt
+associate_warnings.py --cpp_dir=${SRC_DIR}
 for file in `ls -1` ; do
     if [ -x $file ] && [ -f $file ] ; then
-        timeout 1 ./$file
-        echo $file $? >> runtime_results.txt
-        timeout 5 valgrind --error-exitcode=1 ./$file
+        timeout 1 ./${file} > ${file}_output.txt 2>&1
+        echo ${file} $? >> runtime_results.txt
+        timeout 5 valgrind --error-exitcode=1 ./${file} > ${file}_valgrind_output.txt 2>&1
         echo $file $? >> valgrind_results.txt
     fi
 done
@@ -23,13 +39,15 @@ done
 cd ..
 mkdir rel_with_deb_info
 cd rel_with_deb_info
-cmake ../../.. -DCMAKE_BUILD_TYPE=RelWithDebInfo
-make -j6
+echo "gcc rel with deb info"
+cmake ../../.. -DCMAKE_BUILD_TYPE=RelWithDebInfo > cmake.txt
+make -j6 1> make.txt 2> warnings.txt
+associate_warnings.py --cpp_dir=${SRC_DIR}
 for file in `ls -1` ; do
     if [ -x $file ] && [ -f $file ] ; then
-        timeout 1 ./$file
-        echo $file $? >> runtime_results.txt
-        timeout 5 valgrind --error-exitcode=1 ./$file
+        timeout 1 ./${file} > ${file}_output.txt 2>&1
+        echo ${file} $? >> runtime_results.txt
+        timeout 5 valgrind --error-exitcode=1 ./${file} > ${file}_valgrind_output.txt 2>&1
         echo $file $? >> valgrind_results.txt
     fi
 done
@@ -38,11 +56,13 @@ cd ../..
 mkdir -p clang/debug
 cd clang/debug
 export CXX=clang++
-cmake ../../.. -DCMAKE_BUILD_TYPE=Debug
-make -j6
+echo "clang debug"
+cmake ../../.. -DCMAKE_BUILD_TYPE=Debug > cmake.txt
+make -j6 1> make.txt 2> warnings.txt
+associate_warnings.py --cpp_dir=${SRC_DIR}
 for file in `ls -1` ; do
     if [ -x $file ] && [ -f $file ] ; then
-        timeout 1 ./$file
+        timeout 1 ./${file} > ${file}_output.txt 2>&1
         echo $file $? >> runtime_results.txt
     fi
 done
@@ -50,11 +70,13 @@ done
 cd ..
 mkdir rel_with_deb_info
 cd rel_with_deb_info
-cmake ../../.. -DCMAKE_BUILD_TYPE=RelWithDebInfo
-make -j6
+echo "clang rel with deb info"
+cmake ../../.. -DCMAKE_BUILD_TYPE=RelWithDebInfo > cmake.txt
+make -j6 1> make.txt 2> warnings.txt
+associate_warnings.py --cpp_dir=${SRC_DIR}
 for file in `ls -1` ; do
     if [ -x $file ] && [ -f $file ] ; then
-        timeout 1 ./$file
+        timeout 1 ./${file} > ${file}_output.txt 2>&1
         echo $file $? >> runtime_results.txt
     fi
 done
@@ -65,11 +87,13 @@ clang_build() {
 mkdir -p $1/debug
 cd $1/debug
 export CXX=clang++
-cmake ../../../.. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="-fsanitize=$1  -fno-sanitize-recover=$1"
-make -j6
+echo clang $1 debug
+cmake ../../../.. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="-fsanitize=$1  -fno-sanitize-recover=$1" > cmake.txt
+make -j6 1> make.txt 2> warnings.txt
+associate_warnings.py --cpp_dir=${SRC_DIR}
 for file in `ls -1` ; do
     if [ -x $file ] && [ -f $file ] ; then
-        timeout 1 ./$file
+        timeout 1 ./${file} > ${file}_output.txt 2>&1
         echo $file $? >> runtime_results.txt
     fi
 done
@@ -77,11 +101,13 @@ done
 cd ..
 mkdir rel_with_deb_info
 cd rel_with_deb_info
-cmake ../../../.. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_FLAGS="-fsanitize=$1 -fno-sanitize-recover=$1"
-make -j6
+echo clang $1 rel with deb info
+cmake ../../../.. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_FLAGS="-fsanitize=$1 -fno-sanitize-recover=$1" > cmake.txt
+make -j6 1> make.txt 2> warnings.txt
+associate_warnings.py --cpp_dir=${SRC_DIR}
 for file in `ls -1` ; do
     if [ -x $file ] && [ -f $file ] ; then
-        timeout 1 ./$file
+        timeout 1 ./${file} > ${file}_output.txt 2>&1
         echo $file $? >> runtime_results.txt
     fi
 done
@@ -97,7 +123,7 @@ clang_build undefined
 clang_build address,undefined
 clang_build memory,undefined
 
-cd ..
+cd ../..
 
 #print results
 echo
@@ -109,56 +135,8 @@ gcc --version
 valgrind --version
 echo 
 clang++ --version
+
 echo
-echo
-echo DATA
-echo clang debug
-cat clang/debug/runtime_results.txt
-echo
-echo clang rel_with_deb_info
-cat clang/rel_with_deb_info/runtime_results.txt
-echo
-echo GCC debug
-cat gcc/debug/runtime_results.txt
-echo
-echo GCC rel_with_deb_info
-cat gcc/debug/runtime_results.txt
-echo
-echo clang_fsanitize_address debug
-cat clang_fsanitize/address/debug/runtime_results.txt
-echo
-echo clang_fsanitize_address rel_with_deb_info
-cat clang_fsanitize/address/rel_with_deb_info/runtime_results.txt
-echo
-echo clang_fsanitize_address_undefined debug
-cat clang_fsanitize/address,undefined/debug/runtime_results.txt
-echo
-echo clang_fsanitize_address_undefined rel_with_deb_info
-cat clang_fsanitize/address,undefined/rel_with_deb_info/runtime_results.txt
-echo
-echo clang_fsanitize_memory debug
-cat clang_fsanitize/memory/debug/runtime_results.txt
-echo
-echo clang_fsanitize_memory rel_with_deb_info
-cat clang_fsanitize/memory/rel_with_deb_info/runtime_results.txt
-echo
-echo clang_fsanitize_memory_undefined debug
-cat clang_fsanitize/memory,undefined/debug/runtime_results.txt
-echo
-echo clang_fsanitize_memory_undefined rel_with_deb_info
-cat clang_fsanitize/memory,undefined/rel_with_deb_info/runtime_results.txt
-echo
-echo clang_fsanitize_undefined debug
-cat clang_fsanitize/undefined/debug/runtime_results.txt
-echo
-echo clang_fsanitize_undefined rel_with_deb_info
-cat clang_fsanitize/undefined/rel_with_deb_info/runtime_results.txt
-echo
-echo GCC valgrind debug
-cat gcc/debug/valgrind_results.txt
-echo
-echo GCC valgrind rel_with_deb_info
-cat gcc/debug/valgrind_results.txt
 
 export LC_CTYPE=C.UTF-8
-../print_results.py
+print_results.py

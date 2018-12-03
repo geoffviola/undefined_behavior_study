@@ -9,8 +9,8 @@ exec 3>"$tmpfile"
 cat >&3 <<EOL
 #!/usr/bin/env bash
 adduser  --disabled-password --uid $(id -u) --gecos "" $(whoami)
-apt -qq update
-apt -qq -o Dpkg::Use-Pty=0 install clang clang-tidy cmake curl g++ python3 tar valgrind -y
+apt -qq update > /tmp/update.txt
+apt -qq -o Dpkg::Use-Pty=0 install clang clang-tidy cmake cppcheck curl g++ python3 tar valgrind -y > /tmp/install.txt
 su - $(whoami)
 cd $(pwd)
 ./generate_results.bash
