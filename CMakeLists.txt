@@ -6,11 +6,18 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "
 endif ()
 
 set(executables
+  access_after_realloc
   array_out_of_bounds
   dereferencing_nullptr
   divide_by_zero
+  large_double_to_int
+  large_double_to_float
+  mutate_const_value
   no_undefined_behavior
   out_of_bounds_pointer
+  preincrement_plus_postincrement
+  preincrement_plus_value
+  read_from_old_type
   reading_uninitialized_value_add
   reading_uninitialized_value_cout
   reading_uninitialized_value_func_arg

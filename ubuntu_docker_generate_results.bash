@@ -20,6 +20,7 @@ cat "$tmpfile"
 chmod +x "$tmpfile"
 
 docker run \
+  --rm \
   --cap-add SYS_PTRACE \
   --mount type=bind,source=$(pwd),target=$(pwd) \
   ubuntu:bionic-20180821 \
