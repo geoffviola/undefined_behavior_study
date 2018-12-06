@@ -450,6 +450,7 @@ MSVC | divide by zero | 4723 | W3
 MSVC | uninitialized | 4700 | W1
 MSVC | stack overflow | 4717 | W1
 MSVC | shift count overflow | 4293 | W1
+MSVC | truncation of constant value | 4309 | W2
 
 ## Notes
 Valgrind was run on GCC compiled binaries. msan, asan, and ubsan are all different flags into clang's "fsanatize" parameter.
