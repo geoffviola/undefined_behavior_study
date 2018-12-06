@@ -13,10 +13,17 @@ Windows
 ### Compiler Warnings
 Compiler | Undefined Behavior Type | Warning | Warning Opt | Name
 --- | --- | --- | --- | ---
+clang | access after realloc | ❌ | ❌ | n/a
 clang | array out of bounds | ❌ | ❌ | n/a
 clang | dereferencing nullptr | ❌ | ❌ | n/a
 clang | divide by zero | ✔️ | ✔️ | -Wdivision-by-zero
+clang | large double to float | ❌ | ❌ | n/a
+clang | large double to int | ❌ | ❌ | n/a
+clang | mutate const value | ❌ | ❌ | n/a
 clang | out of bounds pointer | ❌ | ❌ | n/a
+clang | preincrement plus postincrement | ✔️ | ✔️ | -Wunsequenced
+clang | preincrement plus value | ✔️ | ✔️ | -Wunsequenced
+clang | read from old type | ❌ | ❌ | n/a
 clang | reading uninitialized value add | ✔️ | ✔️ | -Wuninitialized
 clang | reading uninitialized value cout | ✔️ | ✔️ | -Wuninitialized
 clang | reading uninitialized value func arg | ❌ | ❌ | n/a
@@ -27,10 +34,17 @@ clang | reading uninitialized value return | ✔️ | ✔️ | -Wreturn-type
 clang | shifting more than width | ✔️ | ✔️ | -Wshift-count-overflow
 clang | signed integer overflow | ❌ | ❌ | n/a
 clang | stack overflow | ✔️ | ✔️ | -Winfinite-recursion
+gcc | access after realloc | ❌ | ❌ | n/a
 gcc | array out of bounds | ❌ | ❌ | n/a
 gcc | dereferencing nullptr | ❌ | ❌ | n/a
 gcc | divide by zero | ✔️ | ✔️ | -Wdiv-by-zero
+gcc | large double to float | ❌ | ❌ | n/a
+gcc | large double to int | ❌ | ❌ | n/a
+gcc | mutate const value | ❌ | ❌ | n/a
 gcc | out of bounds pointer | ❌ | ❌ | n/a
+gcc | preincrement plus postincrement | ✔️ | ✔️ | -Wsequence-point
+gcc | preincrement plus value | ✔️ | ✔️ | -Wsequence-point
+gcc | read from old type | ❌ | ❌ | n/a
 gcc | reading uninitialized value add | ✔️ | ✔️ | -Wuninitialized
 gcc | reading uninitialized value cout | ✔️ | ✔️ | -Wuninitialized
 gcc | reading uninitialized value func arg | ❌ | ✔️ | -Wuninitialized
@@ -41,10 +55,17 @@ gcc | reading uninitialized value return | ✔️ | ✔️ | -Wreturn-type
 gcc | shifting more than width | ✔️ | ✔️ | -Wshift-count-overflow
 gcc | signed integer overflow | ❌ | ❌ | n/a
 gcc | stack overflow | ❌ | ❌ | n/a
+msvc | access after realloc | ❌ | ❌ | n/a
 msvc | array out of bounds | ❌ | ❌ | n/a
 msvc | dereferencing nullptr | ❌ | ❌ | n/a
 msvc | divide by zero | ✔️ | ✔️ | 4723
+msvc | large double to float | ❌ | ❌ | n/a
+msvc | large double to int | ✔️ | ✔️ | 4309
+msvc | mutate const value | ❌ | ❌ | n/a
 msvc | out of bounds pointer | ❌ | ❌ | n/a
+msvc | preincrement plus postincrement | ❌ | ❌ | n/a
+msvc | preincrement plus value | ❌ | ❌ | n/a
+msvc | read from old type | ❌ | ❌ | n/a
 msvc | reading uninitialized value add | ✔️ | ✔️ | 4700
 msvc | reading uninitialized value cout | ✔️ | ✔️ | 4700
 msvc | reading uninitialized value func arg | ❌ | ❌ | n/a
@@ -58,10 +79,17 @@ msvc | stack overflow | ✔️ | ✔️ | 4717
 ### Static Analyzers
 Tool | Undefined Behavior Type | Warning | Name
 --- | --- | --- | ---
+clang-tidy | access after realloc | ✔️ | cppcoreguidelines-owning-memory,hicpp-use-auto,cppcoreguidelines-no-malloc,cppcoreguidelines-pro-bounds-pointer-arithmetic,clang-analyzer-unix.Malloc
 clang-tidy | array out of bounds | ✔️ | cppcoreguidelines-pro-type-member-init,cppcoreguidelines-pro-bounds-constant-array-index
 clang-tidy | dereferencing nullptr | ✔️ | clang-analyzer-core.NullDereference
 clang-tidy | divide by zero | ✔️ | clang-analyzer-core.DivideZero,clang-diagnostic-division-by-zero
+clang-tidy | large double to float | ❌ | n/a
+clang-tidy | large double to int | ❌ | n/a
+clang-tidy | mutate const value | ✔️ | cppcoreguidelines-pro-type-const-cast
 clang-tidy | out of bounds pointer | ❌ | n/a
+clang-tidy | preincrement plus postincrement | ✔️ | clang-diagnostic-unsequenced
+clang-tidy | preincrement plus value | ✔️ | clang-diagnostic-unsequenced
+clang-tidy | read from old type | ✔️ | hicpp-use-auto,cppcoreguidelines-pro-type-reinterpret-cast,readability-implicit-bool-conversion
 clang-tidy | reading uninitialized value add | ✔️ | clang-diagnostic-uninitialized,clang-analyzer-core.UndefinedBinaryOperatorResult
 clang-tidy | reading uninitialized value cout | ✔️ | clang-analyzer-core.CallAndMessage,clang-diagnostic-uninitialized
 clang-tidy | reading uninitialized value func arg | ✔️ | clang-analyzer-core.CallAndMessage
@@ -72,10 +100,17 @@ clang-tidy | reading uninitialized value return | ✔️ | clang-diagnostic-retu
 clang-tidy | shifting more than width | ✔️ | hicpp-signed-bitwise,clang-analyzer-core.UndefinedBinaryOperatorResult,clang-diagnostic-shift-count-overflow
 clang-tidy | signed integer overflow | ❌ | n/a
 clang-tidy | stack overflow | ✔️ | clang-diagnostic-infinite-recursion
+cppcheck | access after realloc | ✔️ | n/a
 cppcheck | array out of bounds | ❌ | n/a
 cppcheck | dereferencing nullptr | ✔️ | n/a
 cppcheck | divide by zero | ✔️ | n/a
+cppcheck | large double to float | ❌ | n/a
+cppcheck | large double to int | ❌ | n/a
+cppcheck | mutate const value | ❌ | n/a
 cppcheck | out of bounds pointer | ❌ | n/a
+cppcheck | preincrement plus postincrement | ❌ | n/a
+cppcheck | preincrement plus value | ❌ | n/a
+cppcheck | read from old type | ❌ | n/a
 cppcheck | reading uninitialized value add | ✔️ | n/a
 cppcheck | reading uninitialized value cout | ✔️ | n/a
 cppcheck | reading uninitialized value func arg | ❌ | n/a
@@ -90,10 +125,17 @@ cppcheck | stack overflow | ❌ | n/a
 ### Summary
 Undefined Behavior Type | clang | clang-tidy | cppcheck | gcc | msvc
 --- | --- | --- | --- | --- | ---
+access after realloc | ❌ | ✔️ | ✔️ | ❌ | ❌
 array out of bounds | ❌ | ✔️ | ❌ | ❌ | ❌
 dereferencing nullptr | ❌ | ✔️ | ✔️ | ❌ | ❌
 divide by zero | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+large double to float | ❌ | ❌ | ❌ | ❌ | ❌
+large double to int | ❌ | ❌ | ❌ | ❌ | ✔️
+mutate const value | ❌ | ✔️ | ❌ | ❌ | ❌
 out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌
+preincrement plus postincrement | ✔️ | ✔️ | ❌ | ✔️ | ❌
+preincrement plus value | ✔️ | ✔️ | ❌ | ✔️ | ❌
+read from old type | ❌ | ✔️ | ❌ | ❌ | ❌
 reading uninitialized value add | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value cout | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value func arg | ❌ | ✔️ | ❌ | ✔️* | ❌
@@ -112,10 +154,17 @@ stack overflow | ✔️ | ✔️ | ❌ | ❌ | ✔️
 ### Breakdown
 Compiler | Undefined Behavior Type | Debug | RelWithDebInfo
 --- | --- | --- | ---
+clang | access after realloc | ❌ | ❌
 clang | array out of bounds | ❌ | ❌
 clang | dereferencing nullptr | ✔️ | ❌
 clang | divide by zero | ✔️ | ❌
+clang | large double to float | ❌ | ❌
+clang | large double to int | ❌ | ❌
+clang | mutate const value | ❌ | ❌
 clang | out of bounds pointer | ❌ | ❌
+clang | preincrement plus postincrement | ❌ | ❌
+clang | preincrement plus value | ❌ | ❌
+clang | read from old type | ❌ | ❌
 clang | reading uninitialized value add | ❌ | ❌
 clang | reading uninitialized value cout | ❌ | ❌
 clang | reading uninitialized value func arg | ❌ | ✔️
@@ -126,10 +175,17 @@ clang | reading uninitialized value return | ✔️ | ❌
 clang | shifting more than width | ❌ | ❌
 clang | signed integer overflow | ❌ | ❌
 clang | stack overflow | ✔️ | ❌
+gcc | access after realloc | ❌ | ❌
 gcc | array out of bounds | ❌ | ❌
 gcc | dereferencing nullptr | ✔️ | ✔️
 gcc | divide by zero | ✔️ | ✔️
+gcc | large double to float | ❌ | ❌
+gcc | large double to int | ❌ | ❌
+gcc | mutate const value | ❌ | ❌
 gcc | out of bounds pointer | ❌ | ❌
+gcc | preincrement plus postincrement | ❌ | ❌
+gcc | preincrement plus value | ❌ | ❌
+gcc | read from old type | ❌ | ❌
 gcc | reading uninitialized value add | ❌ | ❌
 gcc | reading uninitialized value cout | ❌ | ❌
 gcc | reading uninitialized value func arg | ❌ | ✔️
@@ -140,10 +196,17 @@ gcc | reading uninitialized value return | ❌ | ✔️
 gcc | shifting more than width | ❌ | ❌
 gcc | signed integer overflow | ❌ | ❌
 gcc | stack overflow | ✔️ | ✔️
+msvc | access after realloc | ❌ | ❌
 msvc | array out of bounds | ✔️ | ❌
 msvc | dereferencing nullptr | ✔️ | ✔️
 msvc | divide by zero | ✔️ | ✔️
+msvc | large double to float | ❌ | ❌
+msvc | large double to int | ❌ | ❌
+msvc | mutate const value | ❌ | ❌
 msvc | out of bounds pointer | ❌ | ❌
+msvc | preincrement plus postincrement | ❌ | ❌
+msvc | preincrement plus value | ❌ | ❌
+msvc | read from old type | ❌ | ❌
 msvc | reading uninitialized value add | ✔️ | ❌
 msvc | reading uninitialized value cout | ✔️ | ❌
 msvc | reading uninitialized value func arg | ✔️ | ✔️
@@ -157,10 +220,17 @@ msvc | stack overflow | ✔️ | ✔️
 ### Summary
 Undefined Behavior | clang D | gcc D | msvc D | clang R | gcc R | msvc R
 --- | --- | --- | --- | --- | --- | ---
+access after realloc | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 array out of bounds | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
 dereferencing nullptr | ✔️ | ✔️ | ✔️ | ❌ | ✔️ | ✔️
 divide by zero | ✔️ | ✔️ | ✔️ | ❌ | ✔️ | ✔️
+large double to float | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+large double to int | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+mutate const value | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+preincrement plus postincrement | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+preincrement plus value | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+read from old type | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 reading uninitialized value add | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
 reading uninitialized value cout | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
 reading uninitialized value func arg | ❌ | ❌ | ✔️ | ✔️ | ✔️ | ✔️
@@ -177,10 +247,17 @@ stack overflow | ✔️ | ✔️ | ✔️ | ❌ | ✔️ | ✔️
 ### Breakdown
 Compiler | Undefined Behavior Type | Debug | RelWithDebInfo
 --- | --- | --- | ---
+asan | access after realloc | ✔️ | ✔️
 asan | array out of bounds | ✔️ | ❌
 asan | dereferencing nullptr | ✔️ | ❌
 asan | divide by zero | ✔️ | ❌
+asan | large double to float | ❌ | ❌
+asan | large double to int | ❌ | ❌
+asan | mutate const value | ❌ | ❌
 asan | out of bounds pointer | ❌ | ❌
+asan | preincrement plus postincrement | ❌ | ❌
+asan | preincrement plus value | ❌ | ❌
+asan | read from old type | ❌ | ❌
 asan | reading uninitialized value add | ❌ | ❌
 asan | reading uninitialized value cout | ❌ | ❌
 asan | reading uninitialized value func arg | ✔️ | ✔️
@@ -191,10 +268,17 @@ asan | reading uninitialized value return | ✔️ | ✔️
 asan | shifting more than width | ❌ | ❌
 asan | signed integer overflow | ❌ | ❌
 asan | stack overflow | ✔️ | ❌
+asan,ubsan | access after realloc | ✔️ | ✔️
 asan,ubsan | array out of bounds | ✔️ | ✔️
 asan,ubsan | dereferencing nullptr | ✔️ | ✔️
 asan,ubsan | divide by zero | ✔️ | ✔️
+asan,ubsan | large double to float | ✔️ | ✔️
+asan,ubsan | large double to int | ✔️ | ✔️
+asan,ubsan | mutate const value | ❌ | ❌
 asan,ubsan | out of bounds pointer | ❌ | ❌
+asan,ubsan | preincrement plus postincrement | ❌ | ❌
+asan,ubsan | preincrement plus value | ❌ | ❌
+asan,ubsan | read from old type | ✔️ | ✔️
 asan,ubsan | reading uninitialized value add | ❌ | ✔️
 asan,ubsan | reading uninitialized value cout | ❌ | ❌
 asan,ubsan | reading uninitialized value func arg | ✔️ | ✔️
@@ -205,10 +289,17 @@ asan,ubsan | reading uninitialized value return | ✔️ | ✔️
 asan,ubsan | shifting more than width | ✔️ | ✔️
 asan,ubsan | signed integer overflow | ✔️ | ✔️
 asan,ubsan | stack overflow | ✔️ | ❌
+msan | access after realloc | ❌ | ❌
 msan | array out of bounds | ❌ | ❌
 msan | dereferencing nullptr | ✔️ | ❌
 msan | divide by zero | ❌ | ❌
+msan | large double to float | ❌ | ❌
+msan | large double to int | ❌ | ❌
+msan | mutate const value | ❌ | ❌
 msan | out of bounds pointer | ❌ | ❌
+msan | preincrement plus postincrement | ❌ | ❌
+msan | preincrement plus value | ❌ | ❌
+msan | read from old type | ❌ | ❌
 msan | reading uninitialized value add | ❌ | ❌
 msan | reading uninitialized value cout | ❌ | ❌
 msan | reading uninitialized value func arg | ❌ | ✔️
@@ -219,10 +310,17 @@ msan | reading uninitialized value return | ✔️ | ✔️
 msan | shifting more than width | ❌ | ❌
 msan | signed integer overflow | ❌ | ❌
 msan | stack overflow | ✔️ | ❌
+msan,ubsan | access after realloc | ❌ | ❌
 msan,ubsan | array out of bounds | ❌ | ✔️
 msan,ubsan | dereferencing nullptr | ✔️ | ✔️
 msan,ubsan | divide by zero | ✔️ | ✔️
+msan,ubsan | large double to float | ✔️ | ✔️
+msan,ubsan | large double to int | ✔️ | ✔️
+msan,ubsan | mutate const value | ❌ | ❌
 msan,ubsan | out of bounds pointer | ❌ | ❌
+msan,ubsan | preincrement plus postincrement | ❌ | ❌
+msan,ubsan | preincrement plus value | ❌ | ❌
+msan,ubsan | read from old type | ✔️ | ✔️
 msan,ubsan | reading uninitialized value add | ❌ | ✔️
 msan,ubsan | reading uninitialized value cout | ❌ | ❌
 msan,ubsan | reading uninitialized value func arg | ❌ | ✔️
@@ -233,10 +331,17 @@ msan,ubsan | reading uninitialized value return | ✔️ | ✔️
 msan,ubsan | shifting more than width | ✔️ | ✔️
 msan,ubsan | signed integer overflow | ✔️ | ✔️
 msan,ubsan | stack overflow | ✔️ | ❌
+ubsan | access after realloc | ❌ | ❌
 ubsan | array out of bounds | ❌ | ✔️
 ubsan | dereferencing nullptr | ✔️ | ✔️
 ubsan | divide by zero | ✔️ | ✔️
+ubsan | large double to float | ✔️ | ✔️
+ubsan | large double to int | ✔️ | ✔️
+ubsan | mutate const value | ❌ | ❌
 ubsan | out of bounds pointer | ❌ | ❌
+ubsan | preincrement plus postincrement | ❌ | ❌
+ubsan | preincrement plus value | ❌ | ❌
+ubsan | read from old type | ✔️ | ✔️
 ubsan | reading uninitialized value add | ❌ | ✔️
 ubsan | reading uninitialized value cout | ❌ | ❌
 ubsan | reading uninitialized value func arg | ❌ | ✔️
@@ -247,10 +352,17 @@ ubsan | reading uninitialized value return | ✔️ | ✔️
 ubsan | shifting more than width | ✔️ | ✔️
 ubsan | signed integer overflow | ✔️ | ✔️
 ubsan | stack overflow | ✔️ | ❌
+valgrind | access after realloc | ✔️ | ✔️
 valgrind | array out of bounds | ❌ | ❌
 valgrind | dereferencing nullptr | ✔️ | ✔️
 valgrind | divide by zero | ✔️ | ✔️
+valgrind | large double to float | ❌ | ❌
+valgrind | large double to int | ❌ | ❌
+valgrind | mutate const value | ❌ | ❌
 valgrind | out of bounds pointer | ❌ | ❌
+valgrind | preincrement plus postincrement | ❌ | ❌
+valgrind | preincrement plus value | ❌ | ❌
+valgrind | read from old type | ❌ | ❌
 valgrind | reading uninitialized value add | ✔️ | ❌
 valgrind | reading uninitialized value cout | ✔️ | ❌
 valgrind | reading uninitialized value func arg | ✔️ | ✔️
@@ -266,10 +378,17 @@ valgrind | stack overflow | ✔️ | ✔️
 ### Debug
 Undefined Behavior Type | asan D | asan,ubsan D | msan D | msan,ubsan D | ubsan D | valgrind D
 --- | --- | --- | --- | --- | --- | ---
+access after realloc | ✔️ | ✔️ | ❌ | ❌ | ❌ | ✔️
 array out of bounds | ✔️ | ✔️ | ❌ | ❌ | ❌ | ❌
 dereferencing nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 divide by zero | ✔️ | ✔️ | ❌ | ✔️ | ✔️ | ✔️
+large double to float | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
+large double to int | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
+mutate const value | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+preincrement plus postincrement | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+preincrement plus value | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+read from old type | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 reading uninitialized value add | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
 reading uninitialized value cout | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
 reading uninitialized value func arg | ✔️ | ✔️ | ❌ | ❌ | ❌ | ✔️
@@ -283,10 +402,17 @@ stack overflow | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 ### Release
 Undefined Behavior Type | asan R | asan,ubsan R | msan R | msan,ubsan R | ubsan R | valgrind R
 --- | --- | --- | --- | --- | --- | ---
+access after realloc | ✔️ | ✔️ | ❌ | ❌ | ❌ | ✔️
 array out of bounds | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 dereferencing nullptr | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ✔️
 divide by zero | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ✔️
+large double to float | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
+large double to int | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
+mutate const value | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+preincrement plus postincrement | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+preincrement plus value | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+read from old type | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 reading uninitialized value add | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 reading uninitialized value cout | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 reading uninitialized value func arg | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
