@@ -1,3 +1,6 @@
+/*
+https://en.cppreference.com/book/uninitialized
+*/
 #include <cstdio>
 #include <cstdlib>
 

@@ -1,2 +1,2 @@
-os: Visual Studio 2015
+os: Visual Studio 2019
 build_script: generate_results.bat
