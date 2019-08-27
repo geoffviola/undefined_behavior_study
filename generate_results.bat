@@ -1,6 +1,6 @@
 md build
 cd build
-cmake .. -G "Visual Studio 16 2019" -A x64
+cmake .. -G "Visual Studio 15 2017" -A x64
 echo Build Debug
 cmake --build . --config Debug 1> warnings.txt
 mv warnings.txt "Debug/warnings.txt"

@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -x
-
 ROOT_DIR=$(pwd)
 PATH=${PATH}:${ROOT_DIR}
 SRC_DIR=${ROOT_DIR}/src
