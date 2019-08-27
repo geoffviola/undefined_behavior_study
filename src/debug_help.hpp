@@ -1,4 +1,4 @@
-#pragam once
+#pragma once
 
 #ifdef _WIN32
 #include <cstdlib>
