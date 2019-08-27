@@ -1,13 +1,13 @@
 md build
 cd build
-cmake .. -G "Visual Studio 15 2017" -A x64
+cmake .. -G "Visual Studio 14 2015" -A x64
 echo Build Debug
 cmake --build . --config Debug 1> warnings.txt
 mv warnings.txt "Debug/warnings.txt"
 cd Debug
 echo Run Debug
 for /r "." %%a in (*.exe) do (
-  echo $$~fa
+  echo %%~fa
   call :subroutine "%%~fa"
 )
 cd ..
