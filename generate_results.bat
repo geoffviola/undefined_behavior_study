@@ -6,7 +6,10 @@ cmake --build . --config Debug 1> warnings.txt
 mv warnings.txt "Debug/warnings.txt"
 cd Debug
 echo Run Debug
-for /r "." %%a in (*.exe) do (call :subroutine "%%~fa")
+for /r "." %%a in (*.exe) do (
+  echo $$~fa
+  call :subroutine "%%~fa"
+)
 cd ..
 echo Build RelWithDebInfo
 cmake --build . --config RelWithDebInfo 1> warnings.txt
