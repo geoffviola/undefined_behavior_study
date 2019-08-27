@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 
+set -x
+
 ROOT_DIR=$(pwd)
 PATH=${PATH}:${ROOT_DIR}
 SRC_DIR=${ROOT_DIR}/src
 
-mkdir build
+mkdir -p build
 cd build
 
-mkdir clang-tidy
+mkdir -p clang-tidy
 cd clang-tidy
 cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE ../.. > cmake.txt
 cp compile_commands.json ../..
@@ -16,7 +18,7 @@ rm ../../compile_commands.json
 associate_warnings.py --cpp_dir=${SRC_DIR}
 cd ..
 
-mkdir cppcheck
+mkdir -p cppcheck
 cd cppcheck
 cppcheck ${SRC_DIR}/*.cpp 1> cppcheck.txt 2> warnings.txt
 associate_warnings.py --cpp_dir=${SRC_DIR}
@@ -27,7 +29,7 @@ cd gcc/debug
 
 echo "gcc debug"
 cmake ../../.. -DCMAKE_BUILD_TYPE=Debug > cmake.txt
-make -j6 1> make.txt 2> warnings.txt
+make -j $(nproc) 1> make.txt 2> warnings.txt
 associate_warnings.py --cpp_dir=${SRC_DIR}
 for file in `ls -1` ; do
     if [ -x $file ] && [ -f $file ] ; then
@@ -39,11 +41,11 @@ for file in `ls -1` ; do
 done
 
 cd ..
-mkdir rel_with_deb_info
+mkdir -p rel_with_deb_info
 cd rel_with_deb_info
 echo "gcc rel with deb info"
 cmake ../../.. -DCMAKE_BUILD_TYPE=RelWithDebInfo > cmake.txt
-make -j6 1> make.txt 2> warnings.txt
+make -j $(nproc) 1> make.txt 2> warnings.txt
 associate_warnings.py --cpp_dir=${SRC_DIR}
 for file in `ls -1` ; do
     if [ -x $file ] && [ -f $file ] ; then
@@ -60,7 +62,7 @@ cd clang/debug
 export CXX=clang++
 echo "clang debug"
 cmake ../../.. -DCMAKE_BUILD_TYPE=Debug > cmake.txt
-make -j6 1> make.txt 2> warnings.txt
+make -j $(nproc) 1> make.txt 2> warnings.txt
 associate_warnings.py --cpp_dir=${SRC_DIR}
 for file in `ls -1` ; do
     if [ -x $file ] && [ -f $file ] ; then
@@ -70,11 +72,11 @@ for file in `ls -1` ; do
 done
 
 cd ..
-mkdir rel_with_deb_info
+mkdir -p rel_with_deb_info
 cd rel_with_deb_info
 echo "clang rel with deb info"
 cmake ../../.. -DCMAKE_BUILD_TYPE=RelWithDebInfo > cmake.txt
-make -j6 1> make.txt 2> warnings.txt
+make -j $(nproc) 1> make.txt 2> warnings.txt
 associate_warnings.py --cpp_dir=${SRC_DIR}
 for file in `ls -1` ; do
     if [ -x $file ] && [ -f $file ] ; then
@@ -91,7 +93,7 @@ cd $1/debug
 export CXX=clang++
 echo clang $1 debug
 cmake ../../../.. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="-fsanitize=$1  -fno-sanitize-recover=$1" > cmake.txt
-make -j6 1> make.txt 2> warnings.txt
+make -j $(nproc) 1> make.txt 2> warnings.txt
 associate_warnings.py --cpp_dir=${SRC_DIR}
 for file in `ls -1` ; do
     if [ -x $file ] && [ -f $file ] ; then
@@ -101,11 +103,11 @@ for file in `ls -1` ; do
 done
 
 cd ..
-mkdir rel_with_deb_info
+mkdir -p rel_with_deb_info
 cd rel_with_deb_info
 echo clang $1 rel with deb info
 cmake ../../../.. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_FLAGS="-fsanitize=$1 -fno-sanitize-recover=$1" > cmake.txt
-make -j6 1> make.txt 2> warnings.txt
+make -j $(nproc) 1> make.txt 2> warnings.txt
 associate_warnings.py --cpp_dir=${SRC_DIR}
 for file in `ls -1` ; do
     if [ -x $file ] && [ -f $file ] ; then
@@ -116,7 +118,7 @@ done
 cd ../..
 }
 
-mkdir clang_fsanitize
+mkdir -p clang_fsanitize
 cd clang_fsanitize
 
 clang_build address

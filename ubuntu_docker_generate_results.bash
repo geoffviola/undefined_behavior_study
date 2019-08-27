@@ -10,7 +10,7 @@ cat >&3 <<EOL
 #!/usr/bin/env bash
 set -x
 set -e
-adduser  --disabled-password --uid $(id -u) --gecos "" $(whoami)
+adduser  --disabled-password --uid $(id -u) --gecos "" $(whoami) > /tmp/add_user.txt 2>&1
 apt -qq update > /tmp/update.txt 2>&1
 apt -qq -o Dpkg::Use-Pty=0 install clang clang-tidy cmake cppcheck curl g++ python3 tar valgrind -y > /tmp/install.txt 2>&1
 su - $(whoami)

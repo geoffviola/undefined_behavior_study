@@ -10,6 +10,7 @@ set(executables
   array_out_of_bounds
   dereferencing_nullptr
   divide_by_zero
+  initialize_std_string_with_nullptr
   large_double_to_int
   large_double_to_float
   mutate_const_value
@@ -26,7 +27,9 @@ set(executables
   reading_uninitialized_value_printf
   shifting_more_than_width
   signed_integer_overflow
-  stack_overflow)
+  stack_overflow
+  std_vector_reserve_set_read
+  strptime_mktime_unitialized)
 
 if (NOT MSVC)
   list(APPEND executables reading_uninitialized_value_return)
