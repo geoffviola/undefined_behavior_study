@@ -1,18 +1,22 @@
-echo "start"
 if (-not (Test-Path build)) {
     md build
 }
 cd build
 cmake .. -G "Visual Studio 16 2019" -A x64
-echo "Build Debug"
-cmake --build . --config Debug 1> warnings.txt
-Get-Content warnings.txt | Set-Content -Encoding utf8 warnings.txt
-if (Test-Path Debug/warnings.txt) {
-  rm Debug/warnings.txt
+
+function Build-And-Run($Config) {
+  echo "Build $Config"
+  cmake --build . --config $Config 1> warnings_enc.txt
+  Get-Content warnings_enc.txt | Set-Content -Encoding utf8 warnings.txt
+  if (Test-Path $Config/warnings.txt) {
+    rm $Config/warnings.txt
+  }
+  mv warnings.txt "$Config/warnings.txt"
+  cd $Config
+  echo "Run $Config"
+  Run-All-Programs
+  cd ..
 }
-mv warnings.txt "Debug/warnings.txt"
-cd Debug
-echo "Run Debug"
 
 function Run-All-Programs() {
   if (Test-Path results.txt) {
@@ -31,20 +35,10 @@ function Run-All-Programs() {
   }
 }
 
-Run-All-Programs
+Build-And-Run -Config Debug
+Build-And-Run -Config RelWithDebInfo
+
 cd ..
-
-echo "Build RelWithDebInfo"
-cmake --build . --config RelWithDebInfo 1> warnings.txt
-if (Test-Path RelWithDebInfo/warnings.txt) {
-  rm RelWithDebInfo/warnings.txt
-}
-mv warnings.txt "RelWithDebInfo/warnings.txt"
-cd RelWithDebInfo
-echo "Run RelWithDebInfo"
-
-Run-All-Programs
-cd ../..
 
 echo "Compiler warnings"
 python associate_warnings.py --cpp_dir=src --out_file="build/Debug/warnings_table.txt" --warnings_file="build/Debug/warnings.txt"
