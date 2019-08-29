@@ -6,6 +6,7 @@ cd build
 cmake .. -G "Visual Studio 16 2019" -A x64
 echo "Build Debug"
 cmake --build . --config Debug 1> warnings.txt
+Get-Content warnings.txt | Set-Content -Encoding utf8 warnings.txt
 if (Test-Path Debug/warnings.txt) {
   rm Debug/warnings.txt
 }
