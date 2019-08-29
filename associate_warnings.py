@@ -63,6 +63,7 @@ def parse_warnings(file_handle, test_names):
     # handle the fact that it does not compile
     if msvc:
         del warnings_dict["src/reading_uninitialized_value_return.cpp"]
+        del warnings_dict["src/strptime_mktime_unitialized.cpp"]
 
     return warnings_dict
 
