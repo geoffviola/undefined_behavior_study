@@ -1,3 +1,4 @@
+echo "start"
 if (-not (Test-Path build)) {
     md build
 }
