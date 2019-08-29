@@ -1,3 +1,7 @@
+/*
+http://eel.is/c++draft/vector.data
+Returns: A pointer such that [data(), data() + size()) is a valid range.
+*/
 #include <cstdlib>
 #include <iostream>
 #include <vector>
