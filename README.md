@@ -17,6 +17,7 @@ clang | access after realloc | ❌ | ❌ | n/a
 clang | array out of bounds | ❌ | ❌ | n/a
 clang | dereferencing nullptr | ❌ | ❌ | n/a
 clang | divide by zero | ✔️ | ✔️ | -Wdivision-by-zero
+clang | initialize std string with nullptr | ❌ | ❌ | n/a
 clang | large double to float | ❌ | ❌ | n/a
 clang | large double to int | ❌ | ❌ | n/a
 clang | mutate const value | ❌ | ❌ | n/a
@@ -34,10 +35,13 @@ clang | reading uninitialized value return | ✔️ | ✔️ | -Wreturn-type
 clang | shifting more than width | ✔️ | ✔️ | -Wshift-count-overflow
 clang | signed integer overflow | ❌ | ❌ | n/a
 clang | stack overflow | ✔️ | ✔️ | -Winfinite-recursion
+clang | std vector reserve set read | ❌ | ❌ | n/a
+clang | strptime mktime unitialized | ❌ | ❌ | n/a
 gcc | access after realloc | ❌ | ❌ | n/a
 gcc | array out of bounds | ❌ | ❌ | n/a
 gcc | dereferencing nullptr | ❌ | ❌ | n/a
 gcc | divide by zero | ✔️ | ✔️ | -Wdiv-by-zero
+gcc | initialize std string with nullptr | ❌ | ❌ | n/a
 gcc | large double to float | ❌ | ❌ | n/a
 gcc | large double to int | ❌ | ❌ | n/a
 gcc | mutate const value | ❌ | ❌ | n/a
@@ -55,10 +59,13 @@ gcc | reading uninitialized value return | ✔️ | ✔️ | -Wreturn-type
 gcc | shifting more than width | ✔️ | ✔️ | -Wshift-count-overflow
 gcc | signed integer overflow | ❌ | ❌ | n/a
 gcc | stack overflow | ❌ | ❌ | n/a
+gcc | std vector reserve set read | ❌ | ❌ | n/a
+gcc | strptime mktime unitialized | ❌ | ❌ | n/a
 msvc | access after realloc | ❌ | ❌ | n/a
 msvc | array out of bounds | ❌ | ❌ | n/a
 msvc | dereferencing nullptr | ❌ | ❌ | n/a
 msvc | divide by zero | ✔️ | ✔️ | 4723
+msvc | initialize std string with nullptr | ❌ | ❌ | n/a
 msvc | large double to float | ❌ | ❌ | n/a
 msvc | large double to int | ✔️ | ✔️ | 4309
 msvc | mutate const value | ❌ | ❌ | n/a
@@ -75,6 +82,7 @@ msvc | reading uninitialized value printf | ✔️ | ✔️ | 4700
 msvc | shifting more than width | ✔️ | ✔️ | 4293
 msvc | signed integer overflow | ❌ | ❌ | n/a
 msvc | stack overflow | ✔️ | ✔️ | 4717
+msvc | std vector reserve set read | ❌ | ❌ | n/a
 
 ### Static Analyzers
 Tool | Undefined Behavior Type | Warning | Name
@@ -83,6 +91,7 @@ clang-tidy | access after realloc | ✔️ | cppcoreguidelines-owning-memory,hic
 clang-tidy | array out of bounds | ✔️ | cppcoreguidelines-pro-type-member-init,cppcoreguidelines-pro-bounds-constant-array-index
 clang-tidy | dereferencing nullptr | ✔️ | clang-analyzer-core.NullDereference
 clang-tidy | divide by zero | ✔️ | clang-analyzer-core.DivideZero,clang-diagnostic-division-by-zero
+clang-tidy | initialize std string with nullptr | ❌ | n/a
 clang-tidy | large double to float | ❌ | n/a
 clang-tidy | large double to int | ❌ | n/a
 clang-tidy | mutate const value | ✔️ | cppcoreguidelines-pro-type-const-cast
@@ -100,10 +109,13 @@ clang-tidy | reading uninitialized value return | ✔️ | clang-diagnostic-retu
 clang-tidy | shifting more than width | ✔️ | hicpp-signed-bitwise,clang-analyzer-core.UndefinedBinaryOperatorResult,clang-diagnostic-shift-count-overflow
 clang-tidy | signed integer overflow | ❌ | n/a
 clang-tidy | stack overflow | ✔️ | clang-diagnostic-infinite-recursion
+clang-tidy | std vector reserve set read | ❌ | n/a
+clang-tidy | strptime mktime unitialized | ✔️ | cppcoreguidelines-pro-type-member-init
 cppcheck | access after realloc | ✔️ | n/a
 cppcheck | array out of bounds | ❌ | n/a
 cppcheck | dereferencing nullptr | ✔️ | n/a
 cppcheck | divide by zero | ✔️ | n/a
+cppcheck | initialize std string with nullptr | ✔️ | n/a
 cppcheck | large double to float | ❌ | n/a
 cppcheck | large double to int | ❌ | n/a
 cppcheck | mutate const value | ❌ | n/a
@@ -121,6 +133,8 @@ cppcheck | reading uninitialized value return | ❌ | n/a
 cppcheck | shifting more than width | ✔️ | n/a
 cppcheck | signed integer overflow | ❌ | n/a
 cppcheck | stack overflow | ❌ | n/a
+cppcheck | std vector reserve set read | ❌ | n/a
+cppcheck | strptime mktime unitialized | ❌ | n/a
 
 ### Summary
 Undefined Behavior Type | clang | clang-tidy | cppcheck | gcc | msvc
@@ -129,6 +143,7 @@ access after realloc | ❌ | ✔️ | ✔️ | ❌ | ❌
 array out of bounds | ❌ | ✔️ | ❌ | ❌ | ❌
 dereferencing nullptr | ❌ | ✔️ | ✔️ | ❌ | ❌
 divide by zero | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+initialize std string with nullptr | ❌ | ❌ | ✔️ | ❌ | ❌
 large double to float | ❌ | ❌ | ❌ | ❌ | ❌
 large double to int | ❌ | ❌ | ❌ | ❌ | ✔️
 mutate const value | ❌ | ✔️ | ❌ | ❌ | ❌
@@ -146,6 +161,8 @@ reading uninitialized value return | ✔️ | ✔️ | ❌ | ✔️ | n/a
 shifting more than width | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 signed integer overflow | ❌ | ❌ | ❌ | ❌ | ❌
 stack overflow | ✔️ | ✔️ | ❌ | ❌ | ✔️
+std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌
+strptime mktime unitialized | ❌ | ✔️ | ❌ | ❌ | n/a
 
 \* gcc "reading uninitialized value func arg" emitted warning only for optimized build
 
@@ -158,6 +175,7 @@ clang | access after realloc | ❌ | ❌
 clang | array out of bounds | ❌ | ❌
 clang | dereferencing nullptr | ✔️ | ❌
 clang | divide by zero | ✔️ | ❌
+clang | initialize std string with nullptr | ✔️ | ✔️
 clang | large double to float | ❌ | ❌
 clang | large double to int | ❌ | ❌
 clang | mutate const value | ❌ | ❌
@@ -175,10 +193,13 @@ clang | reading uninitialized value return | ✔️ | ❌
 clang | shifting more than width | ❌ | ❌
 clang | signed integer overflow | ❌ | ❌
 clang | stack overflow | ✔️ | ❌
+clang | std vector reserve set read | ❌ | ❌
+clang | strptime mktime unitialized | ❌ | ❌
 gcc | access after realloc | ❌ | ❌
 gcc | array out of bounds | ❌ | ❌
 gcc | dereferencing nullptr | ✔️ | ✔️
 gcc | divide by zero | ✔️ | ✔️
+gcc | initialize std string with nullptr | ✔️ | ✔️
 gcc | large double to float | ❌ | ❌
 gcc | large double to int | ❌ | ❌
 gcc | mutate const value | ❌ | ❌
@@ -196,10 +217,13 @@ gcc | reading uninitialized value return | ❌ | ✔️
 gcc | shifting more than width | ❌ | ❌
 gcc | signed integer overflow | ❌ | ❌
 gcc | stack overflow | ✔️ | ✔️
+gcc | std vector reserve set read | ❌ | ❌
+gcc | strptime mktime unitialized | ❌ | ❌
 msvc | access after realloc | ❌ | ❌
 msvc | array out of bounds | ✔️ | ❌
 msvc | dereferencing nullptr | ✔️ | ✔️
 msvc | divide by zero | ✔️ | ✔️
+msvc | initialize std string with nullptr | ✔️ | ✔️
 msvc | large double to float | ❌ | ❌
 msvc | large double to int | ❌ | ❌
 msvc | mutate const value | ❌ | ❌
@@ -216,6 +240,7 @@ msvc | reading uninitialized value printf | ✔️ | ❌
 msvc | shifting more than width | ❌ | ❌
 msvc | signed integer overflow | ❌ | ❌
 msvc | stack overflow | ✔️ | ✔️
+msvc | std vector reserve set read | ✔️ | ❌
 
 ### Summary
 Undefined Behavior | clang D | gcc D | msvc D | clang R | gcc R | msvc R
@@ -224,6 +249,7 @@ access after realloc | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 array out of bounds | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
 dereferencing nullptr | ✔️ | ✔️ | ✔️ | ❌ | ✔️ | ✔️
 divide by zero | ✔️ | ✔️ | ✔️ | ❌ | ✔️ | ✔️
+initialize std string with nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 large double to float | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 large double to int | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 mutate const value | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
@@ -241,6 +267,8 @@ reading uninitialized value return | ✔️ | ❌ | n/a | ❌ | ✔️ | n/a
 shifting more than width | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 signed integer overflow | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 stack overflow | ✔️ | ✔️ | ✔️ | ❌ | ✔️ | ✔️
+std vector reserve set read | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
+strptime mktime unitialized | ❌ | ❌ | n/a | ❌ | ❌ | n/a
 
 
 ## Dynamic Analysis
@@ -251,6 +279,7 @@ asan | access after realloc | ✔️ | ✔️
 asan | array out of bounds | ✔️ | ❌
 asan | dereferencing nullptr | ✔️ | ❌
 asan | divide by zero | ✔️ | ❌
+asan | initialize std string with nullptr | ✔️ | ✔️
 asan | large double to float | ❌ | ❌
 asan | large double to int | ❌ | ❌
 asan | mutate const value | ❌ | ❌
@@ -268,10 +297,13 @@ asan | reading uninitialized value return | ✔️ | ✔️
 asan | shifting more than width | ❌ | ❌
 asan | signed integer overflow | ❌ | ❌
 asan | stack overflow | ✔️ | ❌
+asan | std vector reserve set read | ❌ | ❌
+asan | strptime mktime unitialized | ❌ | ❌
 asan,ubsan | access after realloc | ✔️ | ✔️
 asan,ubsan | array out of bounds | ✔️ | ✔️
 asan,ubsan | dereferencing nullptr | ✔️ | ✔️
 asan,ubsan | divide by zero | ✔️ | ✔️
+asan,ubsan | initialize std string with nullptr | ✔️ | ✔️
 asan,ubsan | large double to float | ✔️ | ✔️
 asan,ubsan | large double to int | ✔️ | ✔️
 asan,ubsan | mutate const value | ❌ | ❌
@@ -289,10 +321,13 @@ asan,ubsan | reading uninitialized value return | ✔️ | ✔️
 asan,ubsan | shifting more than width | ✔️ | ✔️
 asan,ubsan | signed integer overflow | ✔️ | ✔️
 asan,ubsan | stack overflow | ✔️ | ❌
+asan,ubsan | std vector reserve set read | ❌ | ❌
+asan,ubsan | strptime mktime unitialized | ❌ | ❌
 msan | access after realloc | ❌ | ❌
 msan | array out of bounds | ❌ | ❌
 msan | dereferencing nullptr | ✔️ | ❌
 msan | divide by zero | ❌ | ❌
+msan | initialize std string with nullptr | ✔️ | ✔️
 msan | large double to float | ❌ | ❌
 msan | large double to int | ❌ | ❌
 msan | mutate const value | ❌ | ❌
@@ -310,10 +345,13 @@ msan | reading uninitialized value return | ✔️ | ✔️
 msan | shifting more than width | ❌ | ❌
 msan | signed integer overflow | ❌ | ❌
 msan | stack overflow | ✔️ | ❌
+msan | std vector reserve set read | ❌ | ❌
+msan | strptime mktime unitialized | ❌ | ❌
 msan,ubsan | access after realloc | ❌ | ❌
 msan,ubsan | array out of bounds | ❌ | ✔️
 msan,ubsan | dereferencing nullptr | ✔️ | ✔️
 msan,ubsan | divide by zero | ✔️ | ✔️
+msan,ubsan | initialize std string with nullptr | ✔️ | ✔️
 msan,ubsan | large double to float | ✔️ | ✔️
 msan,ubsan | large double to int | ✔️ | ✔️
 msan,ubsan | mutate const value | ❌ | ❌
@@ -331,10 +369,13 @@ msan,ubsan | reading uninitialized value return | ✔️ | ✔️
 msan,ubsan | shifting more than width | ✔️ | ✔️
 msan,ubsan | signed integer overflow | ✔️ | ✔️
 msan,ubsan | stack overflow | ✔️ | ❌
+msan,ubsan | std vector reserve set read | ❌ | ❌
+msan,ubsan | strptime mktime unitialized | ❌ | ❌
 ubsan | access after realloc | ❌ | ❌
 ubsan | array out of bounds | ❌ | ✔️
 ubsan | dereferencing nullptr | ✔️ | ✔️
 ubsan | divide by zero | ✔️ | ✔️
+ubsan | initialize std string with nullptr | ✔️ | ✔️
 ubsan | large double to float | ✔️ | ✔️
 ubsan | large double to int | ✔️ | ✔️
 ubsan | mutate const value | ❌ | ❌
@@ -352,10 +393,13 @@ ubsan | reading uninitialized value return | ✔️ | ✔️
 ubsan | shifting more than width | ✔️ | ✔️
 ubsan | signed integer overflow | ✔️ | ✔️
 ubsan | stack overflow | ✔️ | ❌
+ubsan | std vector reserve set read | ❌ | ❌
+ubsan | strptime mktime unitialized | ❌ | ❌
 valgrind | access after realloc | ✔️ | ✔️
 valgrind | array out of bounds | ❌ | ❌
 valgrind | dereferencing nullptr | ✔️ | ✔️
 valgrind | divide by zero | ✔️ | ✔️
+valgrind | initialize std string with nullptr | ✔️ | ✔️
 valgrind | large double to float | ❌ | ❌
 valgrind | large double to int | ❌ | ❌
 valgrind | mutate const value | ❌ | ❌
@@ -373,6 +417,8 @@ valgrind | reading uninitialized value return | ❌ | ✔️
 valgrind | shifting more than width | ❌ | ❌
 valgrind | signed integer overflow | ❌ | ❌
 valgrind | stack overflow | ✔️ | ✔️
+valgrind | std vector reserve set read | ❌ | ❌
+valgrind | strptime mktime unitialized | ✔️ | ✔️
 
 ### Summary
 ### Debug
@@ -382,6 +428,7 @@ access after realloc | ✔️ | ✔️ | ❌ | ❌ | ❌ | ✔️
 array out of bounds | ✔️ | ✔️ | ❌ | ❌ | ❌ | ❌
 dereferencing nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 divide by zero | ✔️ | ✔️ | ❌ | ✔️ | ✔️ | ✔️
+initialize std string with nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 large double to float | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 large double to int | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 mutate const value | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
@@ -399,6 +446,8 @@ reading uninitialized value return | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ 
 shifting more than width | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 signed integer overflow | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 stack overflow | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+strptime mktime unitialized | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
 ### Release
 Undefined Behavior Type | asan R | asan,ubsan R | msan R | msan,ubsan R | ubsan R | valgrind R
 --- | --- | --- | --- | --- | --- | ---
@@ -406,6 +455,7 @@ access after realloc | ✔️ | ✔️ | ❌ | ❌ | ❌ | ✔️
 array out of bounds | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 dereferencing nullptr | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ✔️
 divide by zero | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ✔️
+initialize std string with nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 large double to float | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 large double to int | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 mutate const value | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
@@ -423,14 +473,17 @@ reading uninitialized value return | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ 
 shifting more than width | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 signed integer overflow | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 stack overflow | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
+std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+strptime mktime unitialized | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
 
 ## Versions
-- Linux 6e685b1d7f64 4.4.0-101-generic #124~14.04.1-Ubuntu SMP Fri Nov 10 19:05:36 UTC 2017 x86\_64 x86\_64 x86\_64 GNU/Linux
+- Linux 057709d713c0 4.9.184-linuxkit #1 SMP Tue Jul 2 22:58:16 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
 - clang: 6.0.0-1ubuntu2 (tags/RELEASE\_600/final)
 - clang-tidy: 6.0
 - cppcheck 1.82
-- GCC: (Ubuntu 7.3.0-27ubuntu1~18.04) 7.3.0 -std=c++17
-- MSVC: 2015 Version 14.0.25431.01 Update 3
+- gcc (Ubuntu 7.4.0-1ubuntu1~18.04.1) 7.4.0 -std=c++17
+- MSVC: 2019 Version 14.22.27905
+- Windows SDK version 10.0.18362.0 to target Windows 10.0.17763
 - valgrind: 3.13.0
 
 ## Reference Warning Classes

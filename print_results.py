@@ -78,7 +78,11 @@ def print_compiler_warnings(output_table):
             rest_1_dict = dict(rest_1)
             if -1 in rest_1_dict:
                 continue
+            if 0 not in rest_1_dict:
+                print('error 0 not in rest_1_dict', rest_1_dict)
             warning_opt = cool_check if len(rest_1_dict[0]) > 0 else cool_x
+            if 1 not in rest_1_dict:
+                print('error 1 not in rest_1_dict', rest_1_dict)
             warning_unopt = cool_check if len(rest_1_dict[1]) > 0 else cool_x
             warning_name = ""
             if len(rest_1_dict[0]) > 0:

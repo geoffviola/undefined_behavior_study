@@ -11,7 +11,7 @@ mkdir -p clang-tidy
 cd clang-tidy
 cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE ../.. > cmake.txt
 cp compile_commands.json ../..
-clang-tidy -checks=* ${SRC_DIR}/*.cpp 1> warnings.txt
+clang-tidy -checks=*,-fuchsia-default-arguments ${SRC_DIR}/*.cpp 1> warnings.txt
 rm ../../compile_commands.json
 associate_warnings.py --cpp_dir=${SRC_DIR}
 cd ..
