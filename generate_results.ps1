@@ -29,7 +29,7 @@ function Run-All-Programs() {
     $p = New-Object System.Diagnostics.Process
     $p.StartInfo = $pinfo
     $p.Start() | Out-Null
-    $wait_status=$p.WaitForExit(500)
+    $wait_status=$p.WaitForExit(1000)
     if ($wait_status -ne "True") {echo $p.kill()}
     Add-Content -path results.txt -Value "$([io.path]::GetFileNameWithoutExtension($_.FullName)) $($p.ExitCode)"
   }
