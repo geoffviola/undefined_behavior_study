@@ -115,7 +115,7 @@ cppcheck | access after realloc | ✔️ | n/a
 cppcheck | array out of bounds | ❌ | n/a
 cppcheck | dereferencing nullptr | ✔️ | n/a
 cppcheck | divide by zero | ✔️ | n/a
-cppcheck | initialize std string with nullptr | ✔️ | n/a
+cppcheck | initialize std string with nullptr | ❌ | n/a
 cppcheck | large double to float | ❌ | n/a
 cppcheck | large double to int | ❌ | n/a
 cppcheck | mutate const value | ❌ | n/a
@@ -143,7 +143,7 @@ access after realloc | ❌ | ✔️ | ✔️ | ❌ | ❌
 array out of bounds | ❌ | ✔️ | ❌ | ❌ | ❌
 dereferencing nullptr | ❌ | ✔️ | ✔️ | ❌ | ❌
 divide by zero | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-initialize std string with nullptr | ❌ | ❌ | ✔️ | ❌ | ❌
+initialize std string with nullptr | ❌ | ❌ | ❌ | ❌ | ❌
 large double to float | ❌ | ❌ | ❌ | ❌ | ❌
 large double to int | ❌ | ❌ | ❌ | ❌ | ✔️
 mutate const value | ❌ | ✔️ | ❌ | ❌ | ❌
