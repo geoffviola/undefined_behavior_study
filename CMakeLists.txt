@@ -25,6 +25,7 @@ set(executables
   reading_uninitialized_value_if
   reading_uninitialized_value_partial
   reading_uninitialized_value_printf
+  reference_out_of_scope
   shifting_more_than_width
   signed_integer_overflow
   stack_overflow
