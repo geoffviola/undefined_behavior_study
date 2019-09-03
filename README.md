@@ -32,6 +32,7 @@ clang | reading uninitialized value if | ✔️ | ✔️ | -Wuninitialized
 clang | reading uninitialized value partial | ❌ | ❌ | n/a
 clang | reading uninitialized value printf | ✔️ | ✔️ | -Wuninitialized
 clang | reading uninitialized value return | ✔️ | ✔️ | -Wreturn-type
+clang | reference out of scope | ✔️ | ✔️ | -Wreturn-stack-address
 clang | shifting more than width | ✔️ | ✔️ | -Wshift-count-overflow
 clang | signed integer overflow | ❌ | ❌ | n/a
 clang | stack overflow | ✔️ | ✔️ | -Winfinite-recursion
@@ -56,6 +57,7 @@ gcc | reading uninitialized value if | ✔️ | ✔️ | -Wuninitialized
 gcc | reading uninitialized value partial | ❌ | ❌ | n/a
 gcc | reading uninitialized value printf | ✔️ | ✔️ | -Wuninitialized
 gcc | reading uninitialized value return | ✔️ | ✔️ | -Wreturn-type
+gcc | reference out of scope | ✔️ | ✔️ | -Wreturn-local-addr
 gcc | shifting more than width | ✔️ | ✔️ | -Wshift-count-overflow
 gcc | signed integer overflow | ❌ | ❌ | n/a
 gcc | stack overflow | ❌ | ❌ | n/a
@@ -79,6 +81,7 @@ msvc | reading uninitialized value func arg | ❌ | ❌ | n/a
 msvc | reading uninitialized value if | ✔️ | ✔️ | 4700
 msvc | reading uninitialized value partial | ❌ | ❌ | n/a
 msvc | reading uninitialized value printf | ✔️ | ✔️ | 4700
+msvc | reference out of scope | ✔️ | ✔️ | 4172
 msvc | shifting more than width | ✔️ | ✔️ | 4293
 msvc | signed integer overflow | ❌ | ❌ | n/a
 msvc | stack overflow | ✔️ | ✔️ | 4717
@@ -106,6 +109,7 @@ clang-tidy | reading uninitialized value if | ✔️ | clang-analyzer-core.unini
 clang-tidy | reading uninitialized value partial | ✔️ | clang-analyzer-core.CallAndMessage
 clang-tidy | reading uninitialized value printf | ✔️ | clang-analyzer-core.CallAndMessage,cppcoreguidelines-pro-type-vararg,clang-diagnostic-uninitialized
 clang-tidy | reading uninitialized value return | ✔️ | clang-diagnostic-return-type
+clang-tidy | reference out of scope | ✔️ | clang-analyzer-core.StackAddressEscape,clang-diagnostic-return-stack-address
 clang-tidy | shifting more than width | ✔️ | hicpp-signed-bitwise,clang-analyzer-core.UndefinedBinaryOperatorResult,clang-diagnostic-shift-count-overflow
 clang-tidy | signed integer overflow | ❌ | n/a
 clang-tidy | stack overflow | ✔️ | clang-diagnostic-infinite-recursion
@@ -130,6 +134,7 @@ cppcheck | reading uninitialized value if | ✔️ | n/a
 cppcheck | reading uninitialized value partial | ✔️ | n/a
 cppcheck | reading uninitialized value printf | ✔️ | n/a
 cppcheck | reading uninitialized value return | ❌ | n/a
+cppcheck | reference out of scope | ✔️ | n/a
 cppcheck | shifting more than width | ✔️ | n/a
 cppcheck | signed integer overflow | ❌ | n/a
 cppcheck | stack overflow | ❌ | n/a
@@ -158,6 +163,7 @@ reading uninitialized value if | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value partial | ❌ | ✔️ | ✔️ | ❌ | ❌
 reading uninitialized value printf | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value return | ✔️ | ✔️ | ❌ | ✔️ | n/a
+reference out of scope | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 shifting more than width | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 signed integer overflow | ❌ | ❌ | ❌ | ❌ | ❌
 stack overflow | ✔️ | ✔️ | ❌ | ❌ | ✔️
@@ -190,6 +196,7 @@ clang | reading uninitialized value if | ❌ | ❌
 clang | reading uninitialized value partial | ❌ | ❌
 clang | reading uninitialized value printf | ❌ | ❌
 clang | reading uninitialized value return | ✔️ | ❌
+clang | reference out of scope | ❌ | ❌
 clang | shifting more than width | ❌ | ❌
 clang | signed integer overflow | ❌ | ❌
 clang | stack overflow | ✔️ | ❌
@@ -214,6 +221,7 @@ gcc | reading uninitialized value if | ❌ | ❌
 gcc | reading uninitialized value partial | ✔️ | ❌
 gcc | reading uninitialized value printf | ❌ | ❌
 gcc | reading uninitialized value return | ❌ | ✔️
+gcc | reference out of scope | ✔️ | ✔️
 gcc | shifting more than width | ❌ | ❌
 gcc | signed integer overflow | ❌ | ❌
 gcc | stack overflow | ✔️ | ✔️
@@ -237,6 +245,7 @@ msvc | reading uninitialized value func arg | ✔️ | ✔️
 msvc | reading uninitialized value if | ✔️ | ❌
 msvc | reading uninitialized value partial | ✔️ | ✔️
 msvc | reading uninitialized value printf | ✔️ | ❌
+msvc | reference out of scope | ❌ | ❌
 msvc | shifting more than width | ❌ | ❌
 msvc | signed integer overflow | ❌ | ❌
 msvc | stack overflow | ✔️ | ✔️
@@ -264,6 +273,7 @@ reading uninitialized value if | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
 reading uninitialized value partial | ❌ | ✔️ | ✔️ | ❌ | ❌ | ✔️
 reading uninitialized value printf | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
 reading uninitialized value return | ✔️ | ❌ | n/a | ❌ | ✔️ | n/a
+reference out of scope | ❌ | ✔️ | ❌ | ❌ | ✔️ | ❌
 shifting more than width | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 signed integer overflow | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 stack overflow | ✔️ | ✔️ | ✔️ | ❌ | ✔️ | ✔️
@@ -294,6 +304,7 @@ asan | reading uninitialized value if | ❌ | ❌
 asan | reading uninitialized value partial | ❌ | ❌
 asan | reading uninitialized value printf | ❌ | ❌
 asan | reading uninitialized value return | ✔️ | ✔️
+asan | reference out of scope | ❌ | ❌
 asan | shifting more than width | ❌ | ❌
 asan | signed integer overflow | ❌ | ❌
 asan | stack overflow | ✔️ | ❌
@@ -318,6 +329,7 @@ asan,ubsan | reading uninitialized value if | ❌ | ❌
 asan,ubsan | reading uninitialized value partial | ❌ | ❌
 asan,ubsan | reading uninitialized value printf | ❌ | ❌
 asan,ubsan | reading uninitialized value return | ✔️ | ✔️
+asan,ubsan | reference out of scope | ❌ | ❌
 asan,ubsan | shifting more than width | ✔️ | ✔️
 asan,ubsan | signed integer overflow | ✔️ | ✔️
 asan,ubsan | stack overflow | ✔️ | ❌
@@ -342,6 +354,7 @@ msan | reading uninitialized value if | ✔️ | ❌
 msan | reading uninitialized value partial | ❌ | ❌
 msan | reading uninitialized value printf | ❌ | ❌
 msan | reading uninitialized value return | ✔️ | ✔️
+msan | reference out of scope | ❌ | ❌
 msan | shifting more than width | ❌ | ❌
 msan | signed integer overflow | ❌ | ❌
 msan | stack overflow | ✔️ | ❌
@@ -366,6 +379,7 @@ msan,ubsan | reading uninitialized value if | ✔️ | ❌
 msan,ubsan | reading uninitialized value partial | ❌ | ❌
 msan,ubsan | reading uninitialized value printf | ❌ | ❌
 msan,ubsan | reading uninitialized value return | ✔️ | ✔️
+msan,ubsan | reference out of scope | ❌ | ❌
 msan,ubsan | shifting more than width | ✔️ | ✔️
 msan,ubsan | signed integer overflow | ✔️ | ✔️
 msan,ubsan | stack overflow | ✔️ | ❌
@@ -390,6 +404,7 @@ ubsan | reading uninitialized value if | ❌ | ❌
 ubsan | reading uninitialized value partial | ❌ | ❌
 ubsan | reading uninitialized value printf | ❌ | ❌
 ubsan | reading uninitialized value return | ✔️ | ✔️
+ubsan | reference out of scope | ❌ | ❌
 ubsan | shifting more than width | ✔️ | ✔️
 ubsan | signed integer overflow | ✔️ | ✔️
 ubsan | stack overflow | ✔️ | ❌
@@ -414,6 +429,7 @@ valgrind | reading uninitialized value if | ✔️ | ❌
 valgrind | reading uninitialized value partial | ✔️ | ❌
 valgrind | reading uninitialized value printf | ✔️ | ❌
 valgrind | reading uninitialized value return | ❌ | ✔️
+valgrind | reference out of scope | ✔️ | ✔️
 valgrind | shifting more than width | ❌ | ❌
 valgrind | signed integer overflow | ❌ | ❌
 valgrind | stack overflow | ✔️ | ✔️
@@ -443,6 +459,7 @@ reading uninitialized value if | ❌ | ❌ | ✔️ | ✔️ | ❌ | ✔️
 reading uninitialized value partial | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
 reading uninitialized value printf | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
 reading uninitialized value return | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ❌
+reference out of scope | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
 shifting more than width | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 signed integer overflow | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 stack overflow | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
@@ -470,6 +487,7 @@ reading uninitialized value if | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 reading uninitialized value partial | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 reading uninitialized value printf | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 reading uninitialized value return | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+reference out of scope | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
 shifting more than width | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 signed integer overflow | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 stack overflow | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
