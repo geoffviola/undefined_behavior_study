@@ -454,7 +454,7 @@ valgrind | stack overflow | 139 | 139
 valgrind | std vector reserve set read | 0 | 0
 valgrind | strptime mktime unitialized | 1 | 1
 
-### 3.2.1.Dynamic Analysis Summary Debug
+### 3.2.1.Dynamic Analysis Summary
 Debug (unoptimized) / RelWithDebInfo (optimized)
 
 Undefined Behavior Type | asan | asan,ubsan | msan | msan,ubsan | ubsan | valgrind
@@ -485,6 +485,37 @@ signed integer overflow | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 stack overflow | ✔️/❌ | ✔️/❌ | ✔️/❌ | ✔️/❌ | ✔️/❌ | ✔️
 std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 strptime mktime unitialized | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
+
+
+### 4.Overall Summary
+Undefined Behavior Type | Compiler Warning | Standalone Static Analysis | Runtime Crash | Extra Dynamic Analsyis
+--- | --- | --- | --- | ---
+access after realloc | ❌ | ✔️ | ❌ | ✔️
+array out of bounds | ❌ | ✔️ | ✔️ | ✔️
+dereferencing nullptr | ❌ | ✔️ | ✔️ | ✔️
+divide by zero | ✔️ | ✔️ | ✔️ | ✔️
+initialize std string with nullptr | ❌ | ❌ | ✔️ | ✔️
+large double to float | ❌ | ❌ | ❌ | ✔️
+large double to int | ✔️ | ❌ | ❌ | ✔️
+mutate const value | ❌ | ✔️ | ❌ | ❌
+out of bounds pointer | ❌ | ❌ | ❌ | ❌
+preincrement plus postincrement | ✔️ | ✔️ | ❌ | ❌
+preincrement plus value | ✔️ | ✔️ | ❌ | ❌
+read from old type | ❌ | ✔️ | ❌ | ✔️
+reading uninitialized value add | ✔️ | ✔️ | ✔️ | ✔️
+reading uninitialized value cout | ✔️ | ✔️ | ✔️ | ✔️
+reading uninitialized value func arg | ✔️ | ✔️ | ✔️ | ✔️
+reading uninitialized value if | ✔️ | ✔️ | ✔️ | ✔️
+reading uninitialized value lib call ptr | ❌ | ✔️ | ❌ | ✔️
+reading uninitialized value partial | ❌ | ✔️ | ✔️ | ✔️
+reading uninitialized value printf | ✔️ | ✔️ | ✔️ | ✔️
+reading uninitialized value return | ✔️ | ✔️ | ✔️ | ✔️
+reference out of scope | ✔️ | ✔️ | ✔️ | ✔️
+shifting more than width | ✔️ | ✔️ | ❌ | ✔️
+signed integer overflow | ❌ | ❌ | ❌ | ✔️
+stack overflow | ✔️ | ✔️ | ✔️ | ✔️
+std vector reserve set read | ❌ | ❌ | ✔️ | ❌
+strptime mktime unitialized | ❌ | ✔️ | ❌ | ✔️
 
 
 ## Versions

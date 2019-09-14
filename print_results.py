@@ -4,9 +4,17 @@
 import csv
 import os
 from collections import defaultdict
+from enum import IntEnum
 
 cool_x = "❌"
 cool_check = "✔️"
+
+
+class DetectionType(IntEnum):
+    COMPILER_WARNING = 1
+    STANDALONE_STATIC_ANALYSIS = 2
+    RUNTIME_CRASH = 3
+    EXTRA_DYNAMIC_ANALYSIS = 4
 
 
 def print_debug_release_legend():
@@ -309,7 +317,7 @@ def print_dynamic_analysis(output_table):
                           str(rest_2["1"]) + " | " + str(rest_2["0"]))
 
     print("")
-    print("### 3.2.1.Dynamic Analysis Summary Debug")
+    print("### 3.2.1.Dynamic Analysis Summary")
     print_debug_release_legend()
     dynamic_analysis_summary_row = "--- | --- | --- | --- | --- | --- | ---"
     print("Undefined Behavior Type | asan | asan,ubsan | msan | msan,ubsan | ubsan | valgrind"
@@ -329,6 +337,7 @@ def print_runtime_results():
     print("")
     print("")
     print_dynamic_analysis(output_table)
+    return output_table
 
 
 def print_static_analysis_results():
@@ -340,10 +349,47 @@ def print_static_analysis_results():
     print_tool_static_analysis(output_table)
     print("")
     print_static_analysis_summary(output_table)
+    return output_table
+
+
+def print_overall_results(static_analysis, runtime_analysis):
+    print("### 4.Overall Summary")
+    print("Undefined Behavior Type | Compiler Warning | Standalone Static Analysis | Runtime Crash | Extra Dynamic Analsyis")
+    print("--- | --- | --- | --- | ---")
+    table = defaultdict(lambda: defaultdict(bool))
+
+    for tool, rest_0 in static_analysis.items():
+        for test, rest_1 in rest_0.items():
+            for optimization, result in rest_1.items():
+                if tool == "clang" or tool == "gcc" or tool == "msvc":
+                    detection_type = DetectionType.COMPILER_WARNING
+                else:
+                    detection_type = DetectionType.STANDALONE_STATIC_ANALYSIS
+                table[test][detection_type] = table[test][detection_type] or len(
+                    result) > 0
+
+    for tool, rest_0 in dynamic_analysis.items():
+        for compiler, rest_1 in rest_0.items():
+            for test, rest_2 in rest_1.items():
+                for optimization, result in rest_2.items():
+                    if len(tool) == 0:
+                        detection_type = DetectionType.RUNTIME_CRASH
+                    else:
+                        detection_type = DetectionType.EXTRA_DYNAMIC_ANALYSIS
+                    table[test][detection_type] = 0 != result or table[test][detection_type]
+
+    for test, rest_0 in sorted(table.items()):
+        line = test
+        for detection_type, result in sorted(rest_0.items()):
+            line += ' | ' + detection_to_str(result)
+        print(line)
 
 
 if __name__ == "__main__":
-    print_static_analysis_results()
+    static_analysis = print_static_analysis_results()
     print("")
     print("")
-    print_runtime_results()
+    dynamic_analysis = print_runtime_results()
+    print("")
+    print("")
+    print_overall_results(static_analysis, dynamic_analysis)
