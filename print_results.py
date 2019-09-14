@@ -238,18 +238,31 @@ def process_runtime_results(runtime_results):
                     print(filename, "broken")
                     exit(1)
                 continue
-            if row[1] != "0":
-                result = cool_check
-            else:
-                result = cool_x
             output_table[first_section][compiler][row[0].replace(
-                "_", " ")][str(debug_mode)] = result
+                "_", " ")][str(debug_mode)] = int(row[1])
     return output_table
 
 
+def return_code_to_pass_fail(return_code):
+    if 0 == return_code:
+        return cool_check
+    else:
+        return cool_x
+
+
+def return_codes_to_str(return_code_d, return_code_r):
+    if return_code_d == 0 and return_code_r == 0:
+        return cool_check
+    elif return_code_d != 0 and return_code_r != 0:
+        return cool_x
+    else:
+        l = return_code_to_pass_fail(return_code_d)
+        r = return_code_to_pass_fail(return_code_r)
+        return l + '/' + r
+
 def print_runtime_crashes(output_table):
     print("## 2.Runtime Crashes")
-    print("### 2.1.Runtime Crashes Breakdown")
+    print("### 2.1.Runtime Crashes Return Codes")
     print("Compiler | Undefined Behavior Type | Debug | RelWithDebInfo")
     print("--- | --- | --- | ---")
     no_tool_test_table = defaultdict(
@@ -263,7 +276,7 @@ def print_runtime_crashes(output_table):
                     no_tool_test_table[test][compiler]["1"] = rest_2["1"]
                     no_tool_test_table[test][compiler]["0"] = rest_2["0"]
                     print(compiler + " | " + test + " | " +
-                          rest_2["1"] + " | " + rest_2["0"])
+                          str(rest_2["1"]) + " | " + str(rest_2["0"]))
 
     print("")
     print("### 2.2.Runtime Crashes Summary")
@@ -271,10 +284,8 @@ def print_runtime_crashes(output_table):
     tool_delim_print_line = "---"
     tool_print_line_r = ""
     for compiler in compilers:
-        tool_print_line += " | " + compiler + " D"
-        tool_print_line_r += " | " + compiler + " R"
+        tool_print_line += " | " + compiler + " D/R"
         tool_delim_print_line += " | --- | ---"
-    tool_print_line += tool_print_line_r
     print(tool_print_line)
     print(tool_delim_print_line)
     for test, rest_0 in sorted(no_tool_test_table.items()):
@@ -287,19 +298,17 @@ def print_runtime_crashes(output_table):
                 line += " | n/a"
                 line_r += " | n/a"
             compiler_index += 1
-            line += " | " + rest_1["1"]
-            line_r += " | " + rest_1["0"]
+            line += ' | '
+            line += return_codes_to_str(rest_1["1"], rest_1["0"])
         while compiler_index < len(compilers):
             compiler_index += 1
             line += " | n/a"
-            line_r += " | n/a"
-        line += line_r
         print(line)
 
 
 def print_dynamic_analysis(output_table):
     print("## 3.Dynamic Analysis")
-    print("### 3.1.Dynamic Analysis Breakdown")
+    print("### 3.1.Dynamic Analysis Return Codes")
     print("Compiler | Undefined Behavior Type | Debug | RelWithDebInfo")
     print("--- | --- | --- | ---")
     tool_test_table = defaultdict(lambda: defaultdict(
@@ -311,27 +320,18 @@ def print_dynamic_analysis(output_table):
                     tool_test_table[test][tool]["1"] = rest_2["1"]
                     tool_test_table[test][tool]["0"] = rest_2["0"]
                     print(tool + " | " + test + " | " +
-                          rest_2["1"] + " | " + rest_2["0"])
+                          str(rest_2["1"]) + " | " + str(rest_2["0"]))
 
     print("")
     print("### 3.2.1.Dynamic Analysis Summary Debug")
     dynamic_analysis_summary_row = "--- | --- | --- | --- | --- | --- | ---"
-    print("Undefined Behavior Type | asan D | asan,ubsan D | msan D | msan,ubsan D | ubsan D | valgrind D"
+    print("Undefined Behavior Type | asan | asan,ubsan | msan | msan,ubsan | ubsan | valgrind"
           )
     print(dynamic_analysis_summary_row)
     for test, rest_0 in sorted(tool_test_table.items()):
         line = test + " | "
         for compiler, rest_1 in sorted(rest_0.items()):
-            line += rest_1["1"] + " | "
-        print(line[:-3])
-
-    print("### 3.2.2.Dynamic Analysis Summary Release")
-    print("Undefined Behavior Type | asan R | asan,ubsan R | msan R | msan,ubsan R | ubsan R | valgrind R")
-    print(dynamic_analysis_summary_row)
-    for test, rest_0 in sorted(tool_test_table.items()):
-        line = test + " | "
-        for compiler, rest_1 in sorted(rest_0.items()):
-            line += rest_1["0"] + " | "
+            line += return_codes_to_str(rest_1["1"], rest_1["0"]) + " | "
         print(line[:-3])
 
 
