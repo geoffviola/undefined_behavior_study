@@ -285,7 +285,7 @@ def print_runtime_crashes(output_table):
     tool_print_line_r = ""
     for compiler in compilers:
         tool_print_line += " | " + compiler + " D/R"
-        tool_delim_print_line += " | --- | ---"
+        tool_delim_print_line += " | ---"
     print(tool_print_line)
     print(tool_delim_print_line)
     for test, rest_0 in sorted(no_tool_test_table.items()):

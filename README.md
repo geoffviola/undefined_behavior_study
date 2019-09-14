@@ -262,7 +262,7 @@ msvc | std vector reserve set read | -1 | 0
 
 ### 2.2.Runtime Crashes Summary
 Undefined Behavior | clang D/R | gcc D/R | msvc D/R
---- | --- | --- | --- | --- | --- | ---
+--- | --- | --- | ---
 access after realloc | ✔️ | ✔️ | ✔️
 array out of bounds | ✔️ | ✔️ | ❌/✔️
 dereferencing nullptr | ❌/✔️ | ❌ | ❌
