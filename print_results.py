@@ -251,9 +251,9 @@ def return_code_to_pass_fail(return_code):
 
 
 def return_codes_to_str(return_code_d, return_code_r):
-    if return_code_d == 0 and return_code_r == 0:
+    if return_code_d != 0 and return_code_r != 0:
         return cool_check
-    elif return_code_d != 0 and return_code_r != 0:
+    elif return_code_d == 0 and return_code_r == 0:
         return cool_x
     else:
         l = return_code_to_pass_fail(return_code_d)
