@@ -9,6 +9,10 @@ cool_x = "❌"
 cool_check = "✔️"
 
 
+def print_debug_release_legend():
+    print("Debug (unoptimized) / RelWithDebInfo (optimized)\n")
+
+
 def read_static_analysis():
     results = {}
 
@@ -67,7 +71,8 @@ def process_static_analysis_results(results):
                 result = ""
             test_name = row[0].replace("_", " ")
             # Clang warnings are different with dynamic analysis
-            if len(output_table[tool][test_name][debug_mode]) == 0 or (output_table[tool][test_name][debug_mode] == "1" and len(result) > 0):
+            if len(output_table[tool][test_name][debug_mode]) == 0 or (
+                    output_table[tool][test_name][debug_mode] == "1" and len(result) > 0):
                 output_table[tool][test_name][debug_mode] = result
 
     return output_table
@@ -105,7 +110,7 @@ def print_tool_static_analysis(output_table):
     print("--- | --- | --- | ---")
     for tool, rest_0 in sorted(output_table.items()):
         for test, rest_1 in sorted(rest_0.items()):
-            if not -1 in dict(rest_1):
+            if -1 not in dict(rest_1):
                 continue
             warning = rest_1[-1]
             result = cool_check if len(warning) > 0 else cool_x
@@ -119,8 +124,11 @@ def print_tool_static_analysis(output_table):
 
 def print_static_analysis_summary(output_table):
     print("### 1.3.Static Analysis Summary")
-    optimization_dependent_results = []
-    summary_table = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
+    print_debug_release_legend()
+    summary_table = defaultdict(
+        lambda: defaultdict(
+            lambda: defaultdict(
+                lambda: defaultdict(bool))))
     tool_line = "Undefined Behavior Type"
     tool_table_line = "---"
     tools = []
@@ -131,27 +139,7 @@ def print_static_analysis_summary(output_table):
         for test, rest_1 in sorted(rest_0.items()):
             warning_result = -1
             for optimization, warning in sorted(rest_1.items()):
-                if len(warning) > 0:
-                    other_optimization = False
-                    if warning_result == -1 or warning_result == 1:
-                        warning_result = 1
-                    else:
-                        warning_result = 2
-                else:
-                    if warning_result == -1 or warning_result == 0:
-                        warning_result = 0
-                    else:
-                        warning_result = 2
-                        other_optimization = True
-
-                if warning_result == 2:
-                    optimization_name = "unoptimized" if not other_optimization and optimization == 1 else "optimized"
-                    optimization_dependent_result = tool + " \"" + test + "\""
-                    optimization_dependent_result += " emitted warning only for "
-                    optimization_dependent_result += optimization_name + " build"
-                    optimization_dependent_results.append(
-                        optimization_dependent_result)
-            summary_table[test][tool] = warning_result
+                summary_table[test][tool][optimization] = len(warning) > 0
 
     print(tool_line)
     print(tool_table_line)
@@ -164,25 +152,17 @@ def print_static_analysis_summary(output_table):
                 tool_index += 1
                 output_line += " | n/a"
             tool_index += 1
-
-            warning_symbol = ""
-            assert(rest_1 >= 0 and rest_1 <= 2)
-            if rest_1 == 0:
-                warning_symbol = cool_x
-            elif rest_1 == 1:
-                warning_symbol = cool_check
-            elif rest_1 == 2:
-                warning_symbol = cool_check + "*"
-            output_line += " | " + warning_symbol
+            output_line += " | "
+            if -1 in rest_1:
+                output_line += detection_to_str(rest_1[-1])
+            else:
+                assert(0 in rest_1)
+                assert(1 in rest_1)
+                output_line += detections_to_str(rest_1[1], rest_1[0])
         while tool_index < len(tools):
             tool_index += 1
             output_line += " | n/a"
         print(output_line)
-
-    if len(optimization_dependent_results) > 0:
-        print()
-    for optimization_dependent_result in optimization_dependent_results:
-        print("\\* " + optimization_dependent_result)
 
 
 def read_runtime_results():
@@ -243,22 +223,27 @@ def process_runtime_results(runtime_results):
     return output_table
 
 
-def return_code_to_pass_fail(return_code):
-    if 0 != return_code:
+def detection_to_str(detection):
+    if detection:
         return cool_check
     else:
         return cool_x
+
+
+def detections_to_str(d, r):
+    if d and r:
+        return cool_check
+    elif not d and not r:
+        return cool_x
+    else:
+        left = detection_to_str(d)
+        right = detection_to_str(r)
+        return left + '/' + right
 
 
 def return_codes_to_str(return_code_d, return_code_r):
-    if return_code_d != 0 and return_code_r != 0:
-        return cool_check
-    elif return_code_d == 0 and return_code_r == 0:
-        return cool_x
-    else:
-        l = return_code_to_pass_fail(return_code_d)
-        r = return_code_to_pass_fail(return_code_r)
-        return l + '/' + r
+    return detections_to_str(return_code_d != 0, return_code_r != 0)
+
 
 def print_runtime_crashes(output_table):
     print("## 2.Runtime Crashes")
@@ -280,11 +265,12 @@ def print_runtime_crashes(output_table):
 
     print("")
     print("### 2.2.Runtime Crashes Summary")
+    print_debug_release_legend()
     tool_print_line = "Undefined Behavior"
     tool_delim_print_line = "---"
     tool_print_line_r = ""
     for compiler in compilers:
-        tool_print_line += " | " + compiler + " D/R"
+        tool_print_line += " | " + compiler
         tool_delim_print_line += " | ---"
     print(tool_print_line)
     print(tool_delim_print_line)
@@ -324,6 +310,7 @@ def print_dynamic_analysis(output_table):
 
     print("")
     print("### 3.2.1.Dynamic Analysis Summary Debug")
+    print_debug_release_legend()
     dynamic_analysis_summary_row = "--- | --- | --- | --- | --- | --- | ---"
     print("Undefined Behavior Type | asan | asan,ubsan | msan | msan,ubsan | ubsan | valgrind"
           )

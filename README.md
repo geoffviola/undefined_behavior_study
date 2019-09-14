@@ -147,6 +147,8 @@ cppcheck | std vector reserve set read | ❌ | n/a
 cppcheck | strptime mktime unitialized | ❌ | n/a
 
 ### 1.3.Static Analysis Summary
+Debug (unoptimized) / RelWithDebInfo (optimized)
+
 Undefined Behavior Type | clang | clang-tidy | cppcheck | gcc | msvc
 --- | --- | --- | --- | --- | ---
 access after realloc | ❌ | ✔️ | ✔️ | ❌ | ❌
@@ -163,7 +165,7 @@ preincrement plus value | ✔️ | ✔️ | ❌ | ✔️ | ❌
 read from old type | ❌ | ✔️ | ❌ | ❌ | ❌
 reading uninitialized value add | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value cout | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-reading uninitialized value func arg | ❌ | ✔️ | ❌ | ✔️* | ❌
+reading uninitialized value func arg | ❌ | ✔️ | ❌ | ❌/✔️ | ❌
 reading uninitialized value if | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value lib call ptr | ❌ | ❌ | ✔️ | ❌ | ❌
 reading uninitialized value partial | ❌ | ✔️ | ✔️ | ❌ | ❌
@@ -175,8 +177,6 @@ signed integer overflow | ❌ | ❌ | ❌ | ❌ | ❌
 stack overflow | ✔️ | ✔️ | ❌ | ❌ | ✔️
 std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌
 strptime mktime unitialized | ❌ | ✔️ | ❌ | ❌ | n/a
-
-\* gcc "reading uninitialized value func arg" emitted warning only for optimized build
 
 
 ## 2.Runtime Crashes
@@ -261,7 +261,9 @@ msvc | stack overflow | -1073741571 | -1073741571
 msvc | std vector reserve set read | -1 | 0
 
 ### 2.2.Runtime Crashes Summary
-Undefined Behavior | clang D/R | gcc D/R | msvc D/R
+Debug (unoptimized) / RelWithDebInfo (optimized)
+
+Undefined Behavior | clang | gcc | msvc
 --- | --- | --- | ---
 access after realloc | ❌ | ❌ | ❌
 array out of bounds | ❌ | ❌ | ✔️/❌
@@ -453,6 +455,8 @@ valgrind | std vector reserve set read | 0 | 0
 valgrind | strptime mktime unitialized | 1 | 1
 
 ### 3.2.1.Dynamic Analysis Summary Debug
+Debug (unoptimized) / RelWithDebInfo (optimized)
+
 Undefined Behavior Type | asan | asan,ubsan | msan | msan,ubsan | ubsan | valgrind
 --- | --- | --- | --- | --- | --- | ---
 access after realloc | ✔️ | ✔️ | ❌ | ❌ | ❌ | ✔️
