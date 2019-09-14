@@ -49,7 +49,8 @@ def process_static_analysis_results(results):
             debug_mode = 0
 
         for row in csv:
-            if row[0] == "no_undefined_behavior":
+            if row[0] == "no_undefined_behavior" or \
+               row[0] == "reading_uninitialized_value_lib":
                 if len(row) > 0 and row[1] != "":
                     print("static analysis is broken in", filename, row)
                     exit(1)
@@ -70,7 +71,7 @@ def process_static_analysis_results(results):
 
 
 def print_compiler_warnings(output_table):
-    print("### Compiler Warnings")
+    print("### 1.1.Compiler Warnings")
     print("Compiler | Undefined Behavior Type | Warning | Warning Opt | Name")
     print("--- | --- | --- | --- | ---")
     for compiler, rest_0 in sorted(output_table.items()):
@@ -96,7 +97,7 @@ def print_compiler_warnings(output_table):
 
 
 def print_tool_static_analysis(output_table):
-    print("### Static Analyzers")
+    print("### 1.2.Static Analyzers")
     print("Tool | Undefined Behavior Type | Warning | Name")
     print("--- | --- | --- | ---")
     for tool, rest_0 in sorted(output_table.items()):
@@ -114,7 +115,7 @@ def print_tool_static_analysis(output_table):
 
 
 def print_static_analysis_summary(output_table):
-    print("### Summary")
+    print("### 1.3.Static Analysis Summary")
     optimization_dependent_results = []
     summary_table = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
     tool_line = "Undefined Behavior Type"
@@ -228,7 +229,8 @@ def process_runtime_results(runtime_results):
         else:
             debug_mode = 0
         for row in csv:
-            if row[0] == "no_undefined_behavior":
+            if row[0] == "no_undefined_behavior" or \
+               row[0] == "reading_uninitialized_value_lib":
                 if row[1] != "0":
                     print(filename, "broken")
                     exit(1)
@@ -243,8 +245,8 @@ def process_runtime_results(runtime_results):
 
 
 def print_runtime_crashes(output_table):
-    print("## Runtime Crashes")
-    print("### Breakdown")
+    print("## 2.Runtime Crashes")
+    print("### 2.1.Runtime Crashes Breakdown")
     print("Compiler | Undefined Behavior Type | Debug | RelWithDebInfo")
     print("--- | --- | --- | ---")
     no_tool_test_table = defaultdict(
@@ -261,7 +263,7 @@ def print_runtime_crashes(output_table):
                           rest_2["1"] + " | " + rest_2["0"])
 
     print("")
-    print("### Summary")
+    print("### 2.2.Runtime Crashes Summary")
     tool_print_line = "Undefined Behavior"
     tool_delim_print_line = "---"
     tool_print_line_r = ""
@@ -293,8 +295,8 @@ def print_runtime_crashes(output_table):
 
 
 def print_dynamic_analysis(output_table):
-    print("## Dynamic Analysis")
-    print("### Breakdown")
+    print("## 3.Dynamic Analysis")
+    print("### 3.1.Dynamic Analysis Breakdown")
     print("Compiler | Undefined Behavior Type | Debug | RelWithDebInfo")
     print("--- | --- | --- | ---")
     tool_test_table = defaultdict(lambda: defaultdict(
@@ -309,8 +311,7 @@ def print_dynamic_analysis(output_table):
                           rest_2["1"] + " | " + rest_2["0"])
 
     print("")
-    print("### Summary")
-    print("### Debug")
+    print("### 3.2.1.Dynamic Analysis Summary Debug")
     dynamic_analysis_summary_row = "--- | --- | --- | --- | --- | --- | ---"
     print("Undefined Behavior Type | asan D | asan,ubsan D | msan D | msan,ubsan D | ubsan D | valgrind D"
           )
@@ -321,7 +322,8 @@ def print_dynamic_analysis(output_table):
             line += rest_1["1"] + " | "
         print(line[:-3])
 
-    print("### Release")
+    print("### 3.2.2.Dynamic Analysis Summary Release")
+    dynamic_analysis_summary_row = "--- | --- | --- | --- | --- | --- | ---"
     print("Undefined Behavior Type | asan R | asan,ubsan R | msan R | msan,ubsan R | ubsan R | valgrind R")
     print(dynamic_analysis_summary_row)
     for test, rest_0 in sorted(tool_test_table.items()):
@@ -343,7 +345,7 @@ def print_runtime_results():
 def print_static_analysis_results():
     static_analysis_results = read_static_analysis()
     output_table = process_static_analysis_results(static_analysis_results)
-    print("## Static Analysis")
+    print("## 1.Static Analysis")
     print_compiler_warnings(output_table)
     print("")
     print_tool_static_analysis(output_table)
