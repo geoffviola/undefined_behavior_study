@@ -244,7 +244,7 @@ def process_runtime_results(runtime_results):
 
 
 def return_code_to_pass_fail(return_code):
-    if 0 == return_code:
+    if 0 != return_code:
         return cool_check
     else:
         return cool_x
