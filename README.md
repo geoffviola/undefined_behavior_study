@@ -251,6 +251,7 @@ msvc | reading uninitialized value add | ✔️ | ❌
 msvc | reading uninitialized value cout | ✔️ | ❌
 msvc | reading uninitialized value func arg | ✔️ | ✔️
 msvc | reading uninitialized value if | ✔️ | ❌
+msvc | reading uninitialized value lib call ptr | ❌ | ❌
 msvc | reading uninitialized value partial | ✔️ | ✔️
 msvc | reading uninitialized value printf | ✔️ | ❌
 msvc | reference out of scope | ❌ | ❌
@@ -278,7 +279,7 @@ reading uninitialized value add | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
 reading uninitialized value cout | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
 reading uninitialized value func arg | ❌ | ❌ | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value if | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
-reading uninitialized value lib call ptr | ❌ | ❌ | n/a | ❌ | ❌ | n/a
+reading uninitialized value lib call ptr | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 reading uninitialized value partial | ❌ | ✔️ | ✔️ | ❌ | ❌ | ✔️
 reading uninitialized value printf | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
 reading uninitialized value return | ✔️ | ❌ | n/a | ❌ | ✔️ | n/a

@@ -41,6 +41,9 @@ def process_static_analysis_results(results):
             tool = "cppcheck"
         elif "msvc" in filename:
             tool = "msvc"
+        else:
+            print("couldn't find tool for", filename)
+            exit(1)
 
         debug_mode = -1
         if "debug" in filename:
@@ -323,7 +326,6 @@ def print_dynamic_analysis(output_table):
         print(line[:-3])
 
     print("### 3.2.2.Dynamic Analysis Summary Release")
-    dynamic_analysis_summary_row = "--- | --- | --- | --- | --- | --- | ---"
     print("Undefined Behavior Type | asan R | asan,ubsan R | msan R | msan,ubsan R | ubsan R | valgrind R")
     print(dynamic_analysis_summary_row)
     for test, rest_0 in sorted(tool_test_table.items()):
