@@ -9,8 +9,8 @@ Linux
 Windows 
 [![Build status](https://ci.appveyor.com/api/projects/status/sewu7060d0mn6v8i/branch/master?svg=true)](https://ci.appveyor.com/project/geoffviola/undefined_behavior_study/branch/master)
 
-## Static Analysis
-### Compiler Warnings
+## 1.Static Analysis
+### 1.1.Compiler Warnings
 Compiler | Undefined Behavior Type | Warning | Warning Opt | Name
 --- | --- | --- | --- | ---
 clang | access after realloc | ❌ | ❌ | n/a
@@ -29,6 +29,7 @@ clang | reading uninitialized value add | ✔️ | ✔️ | -Wuninitialized
 clang | reading uninitialized value cout | ✔️ | ✔️ | -Wuninitialized
 clang | reading uninitialized value func arg | ❌ | ❌ | n/a
 clang | reading uninitialized value if | ✔️ | ✔️ | -Wuninitialized
+clang | reading uninitialized value lib call ptr | ❌ | ❌ | n/a
 clang | reading uninitialized value partial | ❌ | ❌ | n/a
 clang | reading uninitialized value printf | ✔️ | ✔️ | -Wuninitialized
 clang | reading uninitialized value return | ✔️ | ✔️ | -Wreturn-type
@@ -54,6 +55,7 @@ gcc | reading uninitialized value add | ✔️ | ✔️ | -Wuninitialized
 gcc | reading uninitialized value cout | ✔️ | ✔️ | -Wuninitialized
 gcc | reading uninitialized value func arg | ❌ | ✔️ | -Wuninitialized
 gcc | reading uninitialized value if | ✔️ | ✔️ | -Wuninitialized
+gcc | reading uninitialized value lib call ptr | ❌ | ❌ | n/a
 gcc | reading uninitialized value partial | ❌ | ❌ | n/a
 gcc | reading uninitialized value printf | ✔️ | ✔️ | -Wuninitialized
 gcc | reading uninitialized value return | ✔️ | ✔️ | -Wreturn-type
@@ -79,6 +81,7 @@ msvc | reading uninitialized value add | ✔️ | ✔️ | 4700
 msvc | reading uninitialized value cout | ✔️ | ✔️ | 4700
 msvc | reading uninitialized value func arg | ❌ | ❌ | n/a
 msvc | reading uninitialized value if | ✔️ | ✔️ | 4700
+msvc | reading uninitialized value lib call ptr | ❌ | ❌ | n/a
 msvc | reading uninitialized value partial | ❌ | ❌ | n/a
 msvc | reading uninitialized value printf | ✔️ | ✔️ | 4700
 msvc | reference out of scope | ✔️ | ✔️ | 4172
@@ -87,7 +90,7 @@ msvc | signed integer overflow | ❌ | ❌ | n/a
 msvc | stack overflow | ✔️ | ✔️ | 4717
 msvc | std vector reserve set read | ❌ | ❌ | n/a
 
-### Static Analyzers
+### 1.2.Static Analyzers
 Tool | Undefined Behavior Type | Warning | Name
 --- | --- | --- | ---
 clang-tidy | access after realloc | ✔️ | cppcoreguidelines-owning-memory,hicpp-use-auto,cppcoreguidelines-no-malloc,cppcoreguidelines-pro-bounds-pointer-arithmetic,clang-analyzer-unix.Malloc
@@ -106,6 +109,7 @@ clang-tidy | reading uninitialized value add | ✔️ | clang-diagnostic-uniniti
 clang-tidy | reading uninitialized value cout | ✔️ | clang-analyzer-core.CallAndMessage,clang-diagnostic-uninitialized
 clang-tidy | reading uninitialized value func arg | ✔️ | clang-analyzer-core.CallAndMessage
 clang-tidy | reading uninitialized value if | ✔️ | clang-analyzer-core.uninitialized.Branch,clang-diagnostic-uninitialized
+clang-tidy | reading uninitialized value lib call ptr | ❌ | n/a
 clang-tidy | reading uninitialized value partial | ✔️ | clang-analyzer-core.CallAndMessage
 clang-tidy | reading uninitialized value printf | ✔️ | clang-analyzer-core.CallAndMessage,cppcoreguidelines-pro-type-vararg,clang-diagnostic-uninitialized
 clang-tidy | reading uninitialized value return | ✔️ | clang-diagnostic-return-type
@@ -131,6 +135,7 @@ cppcheck | reading uninitialized value add | ✔️ | n/a
 cppcheck | reading uninitialized value cout | ✔️ | n/a
 cppcheck | reading uninitialized value func arg | ❌ | n/a
 cppcheck | reading uninitialized value if | ✔️ | n/a
+cppcheck | reading uninitialized value lib call ptr | ✔️ | n/a
 cppcheck | reading uninitialized value partial | ✔️ | n/a
 cppcheck | reading uninitialized value printf | ✔️ | n/a
 cppcheck | reading uninitialized value return | ❌ | n/a
@@ -141,7 +146,7 @@ cppcheck | stack overflow | ❌ | n/a
 cppcheck | std vector reserve set read | ❌ | n/a
 cppcheck | strptime mktime unitialized | ❌ | n/a
 
-### Summary
+### 1.3.Static Analysis Summary
 Undefined Behavior Type | clang | clang-tidy | cppcheck | gcc | msvc
 --- | --- | --- | --- | --- | ---
 access after realloc | ❌ | ✔️ | ✔️ | ❌ | ❌
@@ -160,6 +165,7 @@ reading uninitialized value add | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value cout | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value func arg | ❌ | ✔️ | ❌ | ✔️* | ❌
 reading uninitialized value if | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+reading uninitialized value lib call ptr | ❌ | ❌ | ✔️ | ❌ | ❌
 reading uninitialized value partial | ❌ | ✔️ | ✔️ | ❌ | ❌
 reading uninitialized value printf | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value return | ✔️ | ✔️ | ❌ | ✔️ | n/a
@@ -173,8 +179,8 @@ strptime mktime unitialized | ❌ | ✔️ | ❌ | ❌ | n/a
 \* gcc "reading uninitialized value func arg" emitted warning only for optimized build
 
 
-## Runtime Crashes
-### Breakdown
+## 2.Runtime Crashes
+### 2.1.Runtime Crashes Breakdown
 Compiler | Undefined Behavior Type | Debug | RelWithDebInfo
 --- | --- | --- | ---
 clang | access after realloc | ❌ | ❌
@@ -193,6 +199,7 @@ clang | reading uninitialized value add | ❌ | ❌
 clang | reading uninitialized value cout | ❌ | ❌
 clang | reading uninitialized value func arg | ❌ | ✔️
 clang | reading uninitialized value if | ❌ | ❌
+clang | reading uninitialized value lib call ptr | ❌ | ❌
 clang | reading uninitialized value partial | ❌ | ❌
 clang | reading uninitialized value printf | ❌ | ❌
 clang | reading uninitialized value return | ✔️ | ❌
@@ -218,6 +225,7 @@ gcc | reading uninitialized value add | ❌ | ❌
 gcc | reading uninitialized value cout | ❌ | ❌
 gcc | reading uninitialized value func arg | ❌ | ✔️
 gcc | reading uninitialized value if | ❌ | ❌
+gcc | reading uninitialized value lib call ptr | ❌ | ❌
 gcc | reading uninitialized value partial | ✔️ | ❌
 gcc | reading uninitialized value printf | ❌ | ❌
 gcc | reading uninitialized value return | ❌ | ✔️
@@ -251,7 +259,7 @@ msvc | signed integer overflow | ❌ | ❌
 msvc | stack overflow | ✔️ | ✔️
 msvc | std vector reserve set read | ✔️ | ❌
 
-### Summary
+### 2.2.Runtime Crashes Summary
 Undefined Behavior | clang D | gcc D | msvc D | clang R | gcc R | msvc R
 --- | --- | --- | --- | --- | --- | ---
 access after realloc | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
@@ -270,6 +278,7 @@ reading uninitialized value add | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
 reading uninitialized value cout | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
 reading uninitialized value func arg | ❌ | ❌ | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value if | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
+reading uninitialized value lib call ptr | ❌ | ❌ | n/a | ❌ | ❌ | n/a
 reading uninitialized value partial | ❌ | ✔️ | ✔️ | ❌ | ❌ | ✔️
 reading uninitialized value printf | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
 reading uninitialized value return | ✔️ | ❌ | n/a | ❌ | ✔️ | n/a
@@ -281,8 +290,8 @@ std vector reserve set read | ❌ | ❌ | ✔️ | ❌ | ❌ | ❌
 strptime mktime unitialized | ❌ | ❌ | n/a | ❌ | ❌ | n/a
 
 
-## Dynamic Analysis
-### Breakdown
+## 3.Dynamic Analysis
+### 3.1.Dynamic Analysis Breakdown
 Compiler | Undefined Behavior Type | Debug | RelWithDebInfo
 --- | --- | --- | ---
 asan | access after realloc | ✔️ | ✔️
@@ -301,6 +310,7 @@ asan | reading uninitialized value add | ❌ | ❌
 asan | reading uninitialized value cout | ❌ | ❌
 asan | reading uninitialized value func arg | ✔️ | ✔️
 asan | reading uninitialized value if | ❌ | ❌
+asan | reading uninitialized value lib call ptr | ❌ | ❌
 asan | reading uninitialized value partial | ❌ | ❌
 asan | reading uninitialized value printf | ❌ | ❌
 asan | reading uninitialized value return | ✔️ | ✔️
@@ -326,6 +336,7 @@ asan,ubsan | reading uninitialized value add | ❌ | ✔️
 asan,ubsan | reading uninitialized value cout | ❌ | ❌
 asan,ubsan | reading uninitialized value func arg | ✔️ | ✔️
 asan,ubsan | reading uninitialized value if | ❌ | ❌
+asan,ubsan | reading uninitialized value lib call ptr | ❌ | ❌
 asan,ubsan | reading uninitialized value partial | ❌ | ❌
 asan,ubsan | reading uninitialized value printf | ❌ | ❌
 asan,ubsan | reading uninitialized value return | ✔️ | ✔️
@@ -351,6 +362,7 @@ msan | reading uninitialized value add | ❌ | ❌
 msan | reading uninitialized value cout | ❌ | ❌
 msan | reading uninitialized value func arg | ❌ | ✔️
 msan | reading uninitialized value if | ✔️ | ❌
+msan | reading uninitialized value lib call ptr | ❌ | ❌
 msan | reading uninitialized value partial | ❌ | ❌
 msan | reading uninitialized value printf | ❌ | ❌
 msan | reading uninitialized value return | ✔️ | ✔️
@@ -376,6 +388,7 @@ msan,ubsan | reading uninitialized value add | ❌ | ✔️
 msan,ubsan | reading uninitialized value cout | ❌ | ❌
 msan,ubsan | reading uninitialized value func arg | ❌ | ✔️
 msan,ubsan | reading uninitialized value if | ✔️ | ❌
+msan,ubsan | reading uninitialized value lib call ptr | ❌ | ❌
 msan,ubsan | reading uninitialized value partial | ❌ | ❌
 msan,ubsan | reading uninitialized value printf | ❌ | ❌
 msan,ubsan | reading uninitialized value return | ✔️ | ✔️
@@ -401,6 +414,7 @@ ubsan | reading uninitialized value add | ❌ | ✔️
 ubsan | reading uninitialized value cout | ❌ | ❌
 ubsan | reading uninitialized value func arg | ❌ | ✔️
 ubsan | reading uninitialized value if | ❌ | ❌
+ubsan | reading uninitialized value lib call ptr | ❌ | ❌
 ubsan | reading uninitialized value partial | ❌ | ❌
 ubsan | reading uninitialized value printf | ❌ | ❌
 ubsan | reading uninitialized value return | ✔️ | ✔️
@@ -426,6 +440,7 @@ valgrind | reading uninitialized value add | ✔️ | ❌
 valgrind | reading uninitialized value cout | ✔️ | ❌
 valgrind | reading uninitialized value func arg | ✔️ | ✔️
 valgrind | reading uninitialized value if | ✔️ | ❌
+valgrind | reading uninitialized value lib call ptr | ✔️ | ✔️
 valgrind | reading uninitialized value partial | ✔️ | ❌
 valgrind | reading uninitialized value printf | ✔️ | ❌
 valgrind | reading uninitialized value return | ❌ | ✔️
@@ -436,8 +451,7 @@ valgrind | stack overflow | ✔️ | ✔️
 valgrind | std vector reserve set read | ❌ | ❌
 valgrind | strptime mktime unitialized | ✔️ | ✔️
 
-### Summary
-### Debug
+### 3.2.1.Dynamic Analysis Summary Debug
 Undefined Behavior Type | asan D | asan,ubsan D | msan D | msan,ubsan D | ubsan D | valgrind D
 --- | --- | --- | --- | --- | --- | ---
 access after realloc | ✔️ | ✔️ | ❌ | ❌ | ❌ | ✔️
@@ -456,6 +470,7 @@ reading uninitialized value add | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
 reading uninitialized value cout | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
 reading uninitialized value func arg | ✔️ | ✔️ | ❌ | ❌ | ❌ | ✔️
 reading uninitialized value if | ❌ | ❌ | ✔️ | ✔️ | ❌ | ✔️
+reading uninitialized value lib call ptr | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
 reading uninitialized value partial | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
 reading uninitialized value printf | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
 reading uninitialized value return | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ❌
@@ -465,7 +480,7 @@ signed integer overflow | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 stack overflow | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 strptime mktime unitialized | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
-### Release
+### 3.2.2.Dynamic Analysis Summary Release
 Undefined Behavior Type | asan R | asan,ubsan R | msan R | msan,ubsan R | ubsan R | valgrind R
 --- | --- | --- | --- | --- | --- | ---
 access after realloc | ✔️ | ✔️ | ❌ | ❌ | ❌ | ✔️
@@ -484,6 +499,7 @@ reading uninitialized value add | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌
 reading uninitialized value cout | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 reading uninitialized value func arg | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value if | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
+reading uninitialized value lib call ptr | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
 reading uninitialized value partial | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 reading uninitialized value printf | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
 reading uninitialized value return | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️

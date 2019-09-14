@@ -17,7 +17,7 @@ def parse_args():
     parser.add_argument('--output_runtime_relwithdebinfo', type=str,
                         default="rel_with_deb_info/results.txt")
     parser.add_argument('--text_url', type=str,
-                        default="https://ci.appveyor.com/api/buildjobs/hqpbdi5ounu6phce/log",
+                        default="https://ci.appveyor.com/api/buildjobs/h7i03o3rrv064nr8/log",
                         help='msvc text file')
     return parser.parse_args()
 
