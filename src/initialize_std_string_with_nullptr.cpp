@@ -9,12 +9,10 @@ If s is a null pointer, ... it causes undefined behavior.
 #include <iostream>
 #include <string>
 
-const char * get_c_str() {
-  return nullptr;
-}
+const char *get_c_str() { return nullptr; }
 
 int main() {
-  const char* const c_str = get_c_str();
+  const char *const c_str = get_c_str();
   const std::string s(c_str);
   std::cout << s << '\n';
   return EXIT_SUCCESS;

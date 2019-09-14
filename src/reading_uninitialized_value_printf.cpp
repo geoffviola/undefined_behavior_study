@@ -10,4 +10,3 @@ int main() {
   printf("%d\n", a);
   return EXIT_SUCCESS;
 }
-

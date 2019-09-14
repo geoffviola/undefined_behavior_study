@@ -23,6 +23,7 @@ set(executables
   reading_uninitialized_value_cout
   reading_uninitialized_value_func_arg
   reading_uninitialized_value_if
+  reading_uninitialized_value_lib_call_ptr
   reading_uninitialized_value_partial
   reading_uninitialized_value_printf
   reference_out_of_scope
@@ -38,4 +39,9 @@ endif ()
 foreach(executable ${executables})
   add_executable(${executable} src/${executable}.cpp)
 endforeach()
+
+add_library(reading_uninitialized_value_lib src/reading_uninitialized_value_lib.cpp)
+
+target_link_libraries(reading_uninitialized_value_lib_call_ptr
+  PRIVATE reading_uninitialized_value_lib)
 
