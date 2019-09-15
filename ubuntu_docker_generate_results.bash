@@ -15,17 +15,25 @@ apt -qq update > /tmp/update.txt 2>&1
 apt -qq -o Dpkg::Use-Pty=0 install clang clang-tidy cmake cppcheck curl g++ python3 tar valgrind -y > /tmp/install.txt 2>&1
 su - $(whoami)
 cd $(pwd)
-./generate_results.bash
+if [[ \$* != *--interactive* ]]; then
+  ./generate_results.bash
+fi
 EOL
 
 cat "$tmpfile"
 chmod +x "$tmpfile"
 
+if [[ $* == *--interactive* ]]; then
+  INNER_FLAG=--interactive
+  DOCKER_FLAG=-it
+fi
+
 docker run \
+  $DOCKER_FLAG \
   --rm \
   --cap-add SYS_PTRACE \
   --mount type=bind,source=$(pwd),target=$(pwd) \
   ubuntu:bionic-20180821 \
-  /bin/bash -x $(pwd)/"$tmpfile"
+  /bin/bash -x $(pwd)/"$tmpfile" $INNER_FLAG
 rm "$tmpfile"
 

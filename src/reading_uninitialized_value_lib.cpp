@@ -2,4 +2,4 @@
 
 #include "reading_uninitialized_value_lib.h"
 
-void read_from_ptr(int const *const ptr) { std::cout << *ptr << std::endl; }
+void read_from_cref(int const &cref) { std::cout << cref << std::endl; }

@@ -4,6 +4,6 @@
 
 int main() {
   int i;
-  read_from_ptr(&i);
+  read_from_cref(i);
   return EXIT_SUCCESS;
 }

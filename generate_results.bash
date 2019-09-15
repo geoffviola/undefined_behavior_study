@@ -85,12 +85,16 @@ done
 
 cd ../..
 
-clang_build() {
-mkdir -p $1/debug
-cd $1/debug
-export CXX=clang++
-echo clang $1 debug
-cmake ../../../.. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="-fsanitize=$1  -fno-sanitize-recover=$1" > cmake.txt
+fsanitize_build() {
+mkdir -p $2/debug
+cd $2/debug
+if [ "$1" -eq "gcc" ]; then
+  export CXX=g++
+else
+  export CXX=$1++
+fi
+echo $1 $2 debug
+cmake ../../../.. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="-fsanitize=$2  -fno-sanitize-recover=$2" > cmake.txt
 make -j $(nproc) 1> make.txt 2> warnings.txt
 associate_warnings.py --cpp_dir=${SRC_DIR}
 for file in `ls -1` ; do
@@ -103,8 +107,8 @@ done
 cd ..
 mkdir -p rel_with_deb_info
 cd rel_with_deb_info
-echo clang $1 rel with deb info
-cmake ../../../.. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_FLAGS="-fsanitize=$1 -fno-sanitize-recover=$1" > cmake.txt
+echo $1 $2 rel with deb info
+cmake ../../../.. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_FLAGS="-fsanitize=$2 -fno-sanitize-recover=$2" > cmake.txt
 make -j $(nproc) 1> make.txt 2> warnings.txt
 associate_warnings.py --cpp_dir=${SRC_DIR}
 for file in `ls -1` ; do
@@ -119,11 +123,21 @@ cd ../..
 mkdir -p clang_fsanitize
 cd clang_fsanitize
 
-clang_build address
-clang_build memory
-clang_build undefined
-clang_build address,undefined
-clang_build memory,undefined
+fsanitize_build clang address
+fsanitize_build clang memory
+fsanitize_build clang undefined
+fsanitize_build clang address,undefined
+fsanitize_build clang memory,undefined
+
+cd ..
+
+mkdir -p gcc_fsanitize
+cd gcc_fsanitize
+
+fsanitize_build gcc address
+fsanitize_build gcc leak
+fsanitize_build gcc undefined
+fsanitize_build gcc address,leak,undefined
 
 cd ..
 

@@ -23,7 +23,7 @@ set(executables
   reading_uninitialized_value_cout
   reading_uninitialized_value_func_arg
   reading_uninitialized_value_if
-  reading_uninitialized_value_lib_call_ptr
+  reading_uninitialized_value_lib_call_cref
   reading_uninitialized_value_partial
   reading_uninitialized_value_printf
   reference_out_of_scope
