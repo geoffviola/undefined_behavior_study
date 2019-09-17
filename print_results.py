@@ -303,7 +303,7 @@ def print_dynamic_analysis(output_table):
     print("## 3.Extra Dynamic Analysis")
     print("### 3.1.Extra Dynamic Analysis Return Codes")
     print("Compiler | Tool | Undefined Behavior Type | Debug | RelWithDebInfo")
-    print("--- | --- | --- | ---")
+    print("--- | --- | --- | --- | ---")
     tool_test_table = defaultdict(lambda: defaultdict(
         lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(str)))))
     clang_tools = []

@@ -296,7 +296,7 @@ strptime mktime unitialized | ❌ | ❌ | n/a
 ## 3.Extra Dynamic Analysis
 ### 3.1.Extra Dynamic Analysis Return Codes
 Compiler | Tool | Undefined Behavior Type | Debug | RelWithDebInfo
---- | --- | --- | ---
+--- | --- | --- | --- | ---
 clang | asan | access after realloc | 1 | 1
 clang | asan | array out of bounds | 1 | 0
 clang | asan | dereferencing nullptr | 1 | 0
