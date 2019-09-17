@@ -257,7 +257,7 @@ msvc | reading uninitialized value printf | -1 | 0
 msvc | reference out of scope | 0 | 0
 msvc | shifting more than width | 0 | 0
 msvc | signed integer overflow | 0 | 0
-msvc | stack overflow | -1073741571 | -1
+msvc | stack overflow | -1073741571 | -1073741571
 msvc | std vector reserve set read | -1 | 0
 
 ### 2.2.Runtime Crashes Summary
@@ -297,188 +297,188 @@ strptime mktime unitialized | ❌ | ❌ | n/a
 ### 3.1.Extra Dynamic Analysis Return Codes
 Compiler | Tool | Undefined Behavior Type | Debug | RelWithDebInfo
 --- | --- | --- | --- | ---
-clang | asan | access after realloc | 1 | 1
-clang | asan | array out of bounds | 1 | 0
-clang | asan | dereferencing nullptr | 1 | 0
-clang | asan | divide by zero | 1 | 0
-clang | asan | initialize std string with nullptr | 134 | 134
-clang | asan | large double to float | 0 | 0
-clang | asan | large double to int | 0 | 0
-clang | asan | mutate const value | 0 | 0
-clang | asan | out of bounds pointer | 0 | 0
-clang | asan | preincrement plus postincrement | 0 | 0
-clang | asan | preincrement plus value | 0 | 0
-clang | asan | read from old type | 0 | 0
-clang | asan | reading uninitialized value add | 0 | 0
-clang | asan | reading uninitialized value cout | 0 | 0
-clang | asan | reading uninitialized value func arg | 1 | 1
-clang | asan | reading uninitialized value if | 0 | 0
-clang | asan | reading uninitialized value lib call cref | 0 | 0
-clang | asan | reading uninitialized value partial | 0 | 0
-clang | asan | reading uninitialized value printf | 0 | 0
-clang | asan | reading uninitialized value return | 132 | 240
-clang | asan | reference out of scope | 0 | 0
-clang | asan | shifting more than width | 0 | 0
-clang | asan | signed integer overflow | 0 | 0
-clang | asan | stack overflow | 1 | 0
-clang | asan | std vector reserve set read | 0 | 0
-clang | asan | strptime mktime unitialized | 0 | 0
-clang | asan,ubsan | access after realloc | 1 | 1
-clang | asan,ubsan | array out of bounds | 1 | 1
-clang | asan,ubsan | dereferencing nullptr | 1 | 1
-clang | asan,ubsan | divide by zero | 1 | 1
-clang | asan,ubsan | initialize std string with nullptr | 134 | 134
-clang | asan,ubsan | large double to float | 1 | 1
-clang | asan,ubsan | large double to int | 1 | 1
-clang | asan,ubsan | mutate const value | 0 | 0
-clang | asan,ubsan | out of bounds pointer | 0 | 0
-clang | asan,ubsan | preincrement plus postincrement | 0 | 0
-clang | asan,ubsan | preincrement plus value | 0 | 0
-clang | asan,ubsan | read from old type | 1 | 1
-clang | asan,ubsan | reading uninitialized value add | 0 | 1
-clang | asan,ubsan | reading uninitialized value cout | 0 | 0
-clang | asan,ubsan | reading uninitialized value func arg | 1 | 1
-clang | asan,ubsan | reading uninitialized value if | 0 | 0
-clang | asan,ubsan | reading uninitialized value lib call cref | 0 | 0
-clang | asan,ubsan | reading uninitialized value partial | 0 | 0
-clang | asan,ubsan | reading uninitialized value printf | 0 | 0
-clang | asan,ubsan | reading uninitialized value return | 1 | 1
-clang | asan,ubsan | reference out of scope | 0 | 0
-clang | asan,ubsan | shifting more than width | 1 | 1
-clang | asan,ubsan | signed integer overflow | 1 | 1
-clang | asan,ubsan | stack overflow | 1 | 0
-clang | asan,ubsan | std vector reserve set read | 0 | 0
-clang | asan,ubsan | strptime mktime unitialized | 0 | 0
-clang | msan | access after realloc | 0 | 0
-clang | msan | array out of bounds | 0 | 0
-clang | msan | dereferencing nullptr | 77 | 0
-clang | msan | divide by zero | 0 | 0
-clang | msan | initialize std string with nullptr | 134 | 134
-clang | msan | large double to float | 0 | 0
-clang | msan | large double to int | 0 | 0
-clang | msan | mutate const value | 0 | 0
-clang | msan | out of bounds pointer | 0 | 0
-clang | msan | preincrement plus postincrement | 0 | 0
-clang | msan | preincrement plus value | 0 | 0
-clang | msan | read from old type | 0 | 0
-clang | msan | reading uninitialized value add | 0 | 0
-clang | msan | reading uninitialized value cout | 0 | 0
-clang | msan | reading uninitialized value func arg | 0 | 77
-clang | msan | reading uninitialized value if | 77 | 0
-clang | msan | reading uninitialized value lib call cref | 0 | 0
-clang | msan | reading uninitialized value partial | 0 | 0
-clang | msan | reading uninitialized value printf | 0 | 0
-clang | msan | reading uninitialized value return | 132 | 80
-clang | msan | reference out of scope | 0 | 0
-clang | msan | shifting more than width | 0 | 0
-clang | msan | signed integer overflow | 0 | 0
-clang | msan | stack overflow | 77 | 0
-clang | msan | std vector reserve set read | 0 | 0
-clang | msan | strptime mktime unitialized | 0 | 0
-clang | msan,ubsan | access after realloc | 0 | 0
-clang | msan,ubsan | array out of bounds | 0 | 77
-clang | msan,ubsan | dereferencing nullptr | 77 | 77
-clang | msan,ubsan | divide by zero | 77 | 77
-clang | msan,ubsan | initialize std string with nullptr | 134 | 134
-clang | msan,ubsan | large double to float | 77 | 77
-clang | msan,ubsan | large double to int | 77 | 77
-clang | msan,ubsan | mutate const value | 0 | 0
-clang | msan,ubsan | out of bounds pointer | 0 | 0
-clang | msan,ubsan | preincrement plus postincrement | 0 | 0
-clang | msan,ubsan | preincrement plus value | 0 | 0
-clang | msan,ubsan | read from old type | 77 | 77
-clang | msan,ubsan | reading uninitialized value add | 0 | 77
-clang | msan,ubsan | reading uninitialized value cout | 0 | 0
-clang | msan,ubsan | reading uninitialized value func arg | 0 | 77
-clang | msan,ubsan | reading uninitialized value if | 77 | 0
-clang | msan,ubsan | reading uninitialized value lib call cref | 0 | 0
-clang | msan,ubsan | reading uninitialized value partial | 0 | 0
-clang | msan,ubsan | reading uninitialized value printf | 0 | 0
-clang | msan,ubsan | reading uninitialized value return | 77 | 77
-clang | msan,ubsan | reference out of scope | 0 | 0
-clang | msan,ubsan | shifting more than width | 77 | 77
-clang | msan,ubsan | signed integer overflow | 77 | 77
-clang | msan,ubsan | stack overflow | 77 | 0
-clang | msan,ubsan | std vector reserve set read | 0 | 0
-clang | msan,ubsan | strptime mktime unitialized | 0 | 0
-clang | ubsan | access after realloc | 0 | 0
-clang | ubsan | array out of bounds | 0 | 1
-clang | ubsan | dereferencing nullptr | 1 | 1
-clang | ubsan | divide by zero | 1 | 1
-clang | ubsan | initialize std string with nullptr | 134 | 134
-clang | ubsan | large double to float | 1 | 1
-clang | ubsan | large double to int | 1 | 1
-clang | ubsan | mutate const value | 0 | 0
-clang | ubsan | out of bounds pointer | 0 | 0
-clang | ubsan | preincrement plus postincrement | 0 | 0
-clang | ubsan | preincrement plus value | 0 | 0
-clang | ubsan | read from old type | 1 | 1
-clang | ubsan | reading uninitialized value add | 0 | 1
-clang | ubsan | reading uninitialized value cout | 0 | 0
-clang | ubsan | reading uninitialized value func arg | 0 | 1
-clang | ubsan | reading uninitialized value if | 0 | 0
-clang | ubsan | reading uninitialized value lib call cref | 0 | 0
-clang | ubsan | reading uninitialized value partial | 0 | 0
-clang | ubsan | reading uninitialized value printf | 0 | 0
-clang | ubsan | reading uninitialized value return | 1 | 1
-clang | ubsan | reference out of scope | 0 | 0
-clang | ubsan | shifting more than width | 1 | 1
-clang | ubsan | signed integer overflow | 1 | 1
-clang | ubsan | stack overflow | 1 | 0
-clang | ubsan | std vector reserve set read | 0 | 0
-clang | ubsan | strptime mktime unitialized | 0 | 0
-gcc | asan | access after realloc | 1 | 1
-gcc | asan | array out of bounds | 1 | 1
-gcc | asan | dereferencing nullptr | 1 | 1
-gcc | asan | divide by zero | 1 | 132
-gcc | asan | initialize std string with nullptr | 134 | 134
-gcc | asan | large double to float | 0 | 0
-gcc | asan | large double to int | 0 | 0
-gcc | asan | mutate const value | 0 | 0
-gcc | asan | out of bounds pointer | 0 | 0
-gcc | asan | preincrement plus postincrement | 0 | 0
-gcc | asan | preincrement plus value | 0 | 0
-gcc | asan | read from old type | 0 | 0
-gcc | asan | reading uninitialized value add | 0 | 0
-gcc | asan | reading uninitialized value cout | 0 | 0
-gcc | asan | reading uninitialized value func arg | 0 | 1
-gcc | asan | reading uninitialized value if | 0 | 0
-gcc | asan | reading uninitialized value lib call cref | 0 | 0
-gcc | asan | reading uninitialized value partial | 1 | 0
-gcc | asan | reading uninitialized value printf | 0 | 0
-gcc | asan | reading uninitialized value return | 0 | 1
-gcc | asan | reference out of scope | 1 | 1
-gcc | asan | shifting more than width | 0 | 0
-gcc | asan | signed integer overflow | 0 | 0
-gcc | asan | stack overflow | 1 | 1
-gcc | asan | std vector reserve set read | 0 | 0
-gcc | asan | strptime mktime unitialized | 0 | 0
-gcc | asan,ubsanleak | access after realloc | 1 | 1
-gcc | asan,ubsanleak | array out of bounds | 1 | 1
-gcc | asan,ubsanleak | dereferencing nullptr | 1 | 1
-gcc | asan,ubsanleak | divide by zero | 1 | 1
-gcc | asan,ubsanleak | initialize std string with nullptr | 134 | 134
-gcc | asan,ubsanleak | large double to float | 0 | 0
-gcc | asan,ubsanleak | large double to int | 0 | 0
-gcc | asan,ubsanleak | mutate const value | 0 | 0
-gcc | asan,ubsanleak | out of bounds pointer | 0 | 0
-gcc | asan,ubsanleak | preincrement plus postincrement | 0 | 0
-gcc | asan,ubsanleak | preincrement plus value | 0 | 0
-gcc | asan,ubsanleak | read from old type | 1 | 1
-gcc | asan,ubsanleak | reading uninitialized value add | 0 | 0
-gcc | asan,ubsanleak | reading uninitialized value cout | 0 | 0
-gcc | asan,ubsanleak | reading uninitialized value func arg | 0 | 1
-gcc | asan,ubsanleak | reading uninitialized value if | 0 | 0
-gcc | asan,ubsanleak | reading uninitialized value lib call cref | 0 | 0
-gcc | asan,ubsanleak | reading uninitialized value partial | 0 | 0
-gcc | asan,ubsanleak | reading uninitialized value printf | 0 | 0
-gcc | asan,ubsanleak | reading uninitialized value return | 1 | 1
-gcc | asan,ubsanleak | reference out of scope | 1 | 1
-gcc | asan,ubsanleak | shifting more than width | 1 | 1
-gcc | asan,ubsanleak | signed integer overflow | 1 | 0
-gcc | asan,ubsanleak | stack overflow | 1 | 1
-gcc | asan,ubsanleak | std vector reserve set read | 0 | 0
-gcc | asan,ubsanleak | strptime mktime unitialized | 0 | 0
+clang | address | access after realloc | 1 | 1
+clang | address | array out of bounds | 1 | 0
+clang | address | dereferencing nullptr | 1 | 0
+clang | address | divide by zero | 1 | 0
+clang | address | initialize std string with nullptr | 134 | 134
+clang | address | large double to float | 0 | 0
+clang | address | large double to int | 0 | 0
+clang | address | mutate const value | 0 | 0
+clang | address | out of bounds pointer | 0 | 0
+clang | address | preincrement plus postincrement | 0 | 0
+clang | address | preincrement plus value | 0 | 0
+clang | address | read from old type | 0 | 0
+clang | address | reading uninitialized value add | 0 | 0
+clang | address | reading uninitialized value cout | 0 | 0
+clang | address | reading uninitialized value func arg | 1 | 1
+clang | address | reading uninitialized value if | 0 | 0
+clang | address | reading uninitialized value lib call cref | 0 | 0
+clang | address | reading uninitialized value partial | 0 | 0
+clang | address | reading uninitialized value printf | 0 | 0
+clang | address | reading uninitialized value return | 132 | 240
+clang | address | reference out of scope | 0 | 0
+clang | address | shifting more than width | 0 | 0
+clang | address | signed integer overflow | 0 | 0
+clang | address | stack overflow | 1 | 0
+clang | address | std vector reserve set read | 0 | 0
+clang | address | strptime mktime unitialized | 0 | 0
+clang | address,undefined | access after realloc | 1 | 1
+clang | address,undefined | array out of bounds | 1 | 1
+clang | address,undefined | dereferencing nullptr | 1 | 1
+clang | address,undefined | divide by zero | 1 | 1
+clang | address,undefined | initialize std string with nullptr | 134 | 134
+clang | address,undefined | large double to float | 1 | 1
+clang | address,undefined | large double to int | 1 | 1
+clang | address,undefined | mutate const value | 0 | 0
+clang | address,undefined | out of bounds pointer | 0 | 0
+clang | address,undefined | preincrement plus postincrement | 0 | 0
+clang | address,undefined | preincrement plus value | 0 | 0
+clang | address,undefined | read from old type | 1 | 1
+clang | address,undefined | reading uninitialized value add | 0 | 1
+clang | address,undefined | reading uninitialized value cout | 0 | 0
+clang | address,undefined | reading uninitialized value func arg | 1 | 1
+clang | address,undefined | reading uninitialized value if | 0 | 0
+clang | address,undefined | reading uninitialized value lib call cref | 0 | 0
+clang | address,undefined | reading uninitialized value partial | 0 | 0
+clang | address,undefined | reading uninitialized value printf | 0 | 0
+clang | address,undefined | reading uninitialized value return | 1 | 1
+clang | address,undefined | reference out of scope | 0 | 0
+clang | address,undefined | shifting more than width | 1 | 1
+clang | address,undefined | signed integer overflow | 1 | 1
+clang | address,undefined | stack overflow | 1 | 0
+clang | address,undefined | std vector reserve set read | 0 | 0
+clang | address,undefined | strptime mktime unitialized | 0 | 0
+clang | memory | access after realloc | 0 | 0
+clang | memory | array out of bounds | 0 | 0
+clang | memory | dereferencing nullptr | 77 | 0
+clang | memory | divide by zero | 0 | 0
+clang | memory | initialize std string with nullptr | 134 | 134
+clang | memory | large double to float | 0 | 0
+clang | memory | large double to int | 0 | 0
+clang | memory | mutate const value | 0 | 0
+clang | memory | out of bounds pointer | 0 | 0
+clang | memory | preincrement plus postincrement | 0 | 0
+clang | memory | preincrement plus value | 0 | 0
+clang | memory | read from old type | 0 | 0
+clang | memory | reading uninitialized value add | 0 | 0
+clang | memory | reading uninitialized value cout | 0 | 0
+clang | memory | reading uninitialized value func arg | 0 | 77
+clang | memory | reading uninitialized value if | 77 | 0
+clang | memory | reading uninitialized value lib call cref | 0 | 0
+clang | memory | reading uninitialized value partial | 0 | 0
+clang | memory | reading uninitialized value printf | 0 | 0
+clang | memory | reading uninitialized value return | 132 | 80
+clang | memory | reference out of scope | 0 | 0
+clang | memory | shifting more than width | 0 | 0
+clang | memory | signed integer overflow | 0 | 0
+clang | memory | stack overflow | 77 | 0
+clang | memory | std vector reserve set read | 0 | 0
+clang | memory | strptime mktime unitialized | 0 | 0
+clang | memory,undefined | access after realloc | 0 | 0
+clang | memory,undefined | array out of bounds | 0 | 77
+clang | memory,undefined | dereferencing nullptr | 77 | 77
+clang | memory,undefined | divide by zero | 77 | 77
+clang | memory,undefined | initialize std string with nullptr | 134 | 134
+clang | memory,undefined | large double to float | 77 | 77
+clang | memory,undefined | large double to int | 77 | 77
+clang | memory,undefined | mutate const value | 0 | 0
+clang | memory,undefined | out of bounds pointer | 0 | 0
+clang | memory,undefined | preincrement plus postincrement | 0 | 0
+clang | memory,undefined | preincrement plus value | 0 | 0
+clang | memory,undefined | read from old type | 77 | 77
+clang | memory,undefined | reading uninitialized value add | 0 | 77
+clang | memory,undefined | reading uninitialized value cout | 0 | 0
+clang | memory,undefined | reading uninitialized value func arg | 0 | 77
+clang | memory,undefined | reading uninitialized value if | 77 | 0
+clang | memory,undefined | reading uninitialized value lib call cref | 0 | 0
+clang | memory,undefined | reading uninitialized value partial | 0 | 0
+clang | memory,undefined | reading uninitialized value printf | 0 | 0
+clang | memory,undefined | reading uninitialized value return | 77 | 77
+clang | memory,undefined | reference out of scope | 0 | 0
+clang | memory,undefined | shifting more than width | 77 | 77
+clang | memory,undefined | signed integer overflow | 77 | 77
+clang | memory,undefined | stack overflow | 77 | 0
+clang | memory,undefined | std vector reserve set read | 0 | 0
+clang | memory,undefined | strptime mktime unitialized | 0 | 0
+clang | undefined | access after realloc | 0 | 0
+clang | undefined | array out of bounds | 0 | 1
+clang | undefined | dereferencing nullptr | 1 | 1
+clang | undefined | divide by zero | 1 | 1
+clang | undefined | initialize std string with nullptr | 134 | 134
+clang | undefined | large double to float | 1 | 1
+clang | undefined | large double to int | 1 | 1
+clang | undefined | mutate const value | 0 | 0
+clang | undefined | out of bounds pointer | 0 | 0
+clang | undefined | preincrement plus postincrement | 0 | 0
+clang | undefined | preincrement plus value | 0 | 0
+clang | undefined | read from old type | 1 | 1
+clang | undefined | reading uninitialized value add | 0 | 1
+clang | undefined | reading uninitialized value cout | 0 | 0
+clang | undefined | reading uninitialized value func arg | 0 | 1
+clang | undefined | reading uninitialized value if | 0 | 0
+clang | undefined | reading uninitialized value lib call cref | 0 | 0
+clang | undefined | reading uninitialized value partial | 0 | 0
+clang | undefined | reading uninitialized value printf | 0 | 0
+clang | undefined | reading uninitialized value return | 1 | 1
+clang | undefined | reference out of scope | 0 | 0
+clang | undefined | shifting more than width | 1 | 1
+clang | undefined | signed integer overflow | 1 | 1
+clang | undefined | stack overflow | 1 | 0
+clang | undefined | std vector reserve set read | 0 | 0
+clang | undefined | strptime mktime unitialized | 0 | 0
+gcc | address | access after realloc | 1 | 1
+gcc | address | array out of bounds | 1 | 1
+gcc | address | dereferencing nullptr | 1 | 1
+gcc | address | divide by zero | 1 | 132
+gcc | address | initialize std string with nullptr | 134 | 134
+gcc | address | large double to float | 0 | 0
+gcc | address | large double to int | 0 | 0
+gcc | address | mutate const value | 0 | 0
+gcc | address | out of bounds pointer | 0 | 0
+gcc | address | preincrement plus postincrement | 0 | 0
+gcc | address | preincrement plus value | 0 | 0
+gcc | address | read from old type | 0 | 0
+gcc | address | reading uninitialized value add | 0 | 0
+gcc | address | reading uninitialized value cout | 0 | 0
+gcc | address | reading uninitialized value func arg | 0 | 1
+gcc | address | reading uninitialized value if | 0 | 0
+gcc | address | reading uninitialized value lib call cref | 0 | 0
+gcc | address | reading uninitialized value partial | 1 | 0
+gcc | address | reading uninitialized value printf | 0 | 0
+gcc | address | reading uninitialized value return | 0 | 1
+gcc | address | reference out of scope | 1 | 1
+gcc | address | shifting more than width | 0 | 0
+gcc | address | signed integer overflow | 0 | 0
+gcc | address | stack overflow | 1 | 1
+gcc | address | std vector reserve set read | 0 | 0
+gcc | address | strptime mktime unitialized | 0 | 0
+gcc | address,leak,undefined | access after realloc | 1 | 1
+gcc | address,leak,undefined | array out of bounds | 1 | 1
+gcc | address,leak,undefined | dereferencing nullptr | 1 | 1
+gcc | address,leak,undefined | divide by zero | 1 | 1
+gcc | address,leak,undefined | initialize std string with nullptr | 134 | 134
+gcc | address,leak,undefined | large double to float | 0 | 0
+gcc | address,leak,undefined | large double to int | 0 | 0
+gcc | address,leak,undefined | mutate const value | 0 | 0
+gcc | address,leak,undefined | out of bounds pointer | 0 | 0
+gcc | address,leak,undefined | preincrement plus postincrement | 0 | 0
+gcc | address,leak,undefined | preincrement plus value | 0 | 0
+gcc | address,leak,undefined | read from old type | 1 | 1
+gcc | address,leak,undefined | reading uninitialized value add | 0 | 0
+gcc | address,leak,undefined | reading uninitialized value cout | 0 | 0
+gcc | address,leak,undefined | reading uninitialized value func arg | 0 | 1
+gcc | address,leak,undefined | reading uninitialized value if | 0 | 0
+gcc | address,leak,undefined | reading uninitialized value lib call cref | 0 | 0
+gcc | address,leak,undefined | reading uninitialized value partial | 0 | 0
+gcc | address,leak,undefined | reading uninitialized value printf | 0 | 0
+gcc | address,leak,undefined | reading uninitialized value return | 1 | 1
+gcc | address,leak,undefined | reference out of scope | 1 | 1
+gcc | address,leak,undefined | shifting more than width | 1 | 1
+gcc | address,leak,undefined | signed integer overflow | 1 | 0
+gcc | address,leak,undefined | stack overflow | 1 | 1
+gcc | address,leak,undefined | std vector reserve set read | 0 | 0
+gcc | address,leak,undefined | strptime mktime unitialized | 0 | 0
 gcc | leak | access after realloc | 23 | 23
 gcc | leak | array out of bounds | 0 | 0
 gcc | leak | dereferencing nullptr | 23 | 23
@@ -505,32 +505,32 @@ gcc | leak | signed integer overflow | 0 | 0
 gcc | leak | stack overflow | 23 | 23
 gcc | leak | std vector reserve set read | 0 | 0
 gcc | leak | strptime mktime unitialized | 0 | 0
-gcc | ubsan | access after realloc | 0 | 0
-gcc | ubsan | array out of bounds | 0 | 1
-gcc | ubsan | dereferencing nullptr | 1 | 1
-gcc | ubsan | divide by zero | 1 | 1
-gcc | ubsan | initialize std string with nullptr | 134 | 134
-gcc | ubsan | large double to float | 0 | 0
-gcc | ubsan | large double to int | 0 | 0
-gcc | ubsan | mutate const value | 0 | 0
-gcc | ubsan | out of bounds pointer | 0 | 0
-gcc | ubsan | preincrement plus postincrement | 0 | 0
-gcc | ubsan | preincrement plus value | 0 | 0
-gcc | ubsan | read from old type | 1 | 1
-gcc | ubsan | reading uninitialized value add | 0 | 0
-gcc | ubsan | reading uninitialized value cout | 0 | 0
-gcc | ubsan | reading uninitialized value func arg | 0 | 1
-gcc | ubsan | reading uninitialized value if | 0 | 0
-gcc | ubsan | reading uninitialized value lib call cref | 0 | 0
-gcc | ubsan | reading uninitialized value partial | 1 | 0
-gcc | ubsan | reading uninitialized value printf | 0 | 0
-gcc | ubsan | reading uninitialized value return | 1 | 1
-gcc | ubsan | reference out of scope | 1 | 1
-gcc | ubsan | shifting more than width | 1 | 1
-gcc | ubsan | signed integer overflow | 1 | 0
-gcc | ubsan | stack overflow | 139 | 139
-gcc | ubsan | std vector reserve set read | 0 | 0
-gcc | ubsan | strptime mktime unitialized | 0 | 0
+gcc | undefined | access after realloc | 0 | 0
+gcc | undefined | array out of bounds | 0 | 1
+gcc | undefined | dereferencing nullptr | 1 | 1
+gcc | undefined | divide by zero | 1 | 1
+gcc | undefined | initialize std string with nullptr | 134 | 134
+gcc | undefined | large double to float | 0 | 0
+gcc | undefined | large double to int | 0 | 0
+gcc | undefined | mutate const value | 0 | 0
+gcc | undefined | out of bounds pointer | 0 | 0
+gcc | undefined | preincrement plus postincrement | 0 | 0
+gcc | undefined | preincrement plus value | 0 | 0
+gcc | undefined | read from old type | 1 | 1
+gcc | undefined | reading uninitialized value add | 0 | 0
+gcc | undefined | reading uninitialized value cout | 0 | 0
+gcc | undefined | reading uninitialized value func arg | 0 | 1
+gcc | undefined | reading uninitialized value if | 0 | 0
+gcc | undefined | reading uninitialized value lib call cref | 0 | 0
+gcc | undefined | reading uninitialized value partial | 1 | 0
+gcc | undefined | reading uninitialized value printf | 0 | 0
+gcc | undefined | reading uninitialized value return | 1 | 1
+gcc | undefined | reference out of scope | 1 | 1
+gcc | undefined | shifting more than width | 1 | 1
+gcc | undefined | signed integer overflow | 1 | 0
+gcc | undefined | stack overflow | 139 | 139
+gcc | undefined | std vector reserve set read | 0 | 0
+gcc | undefined | strptime mktime unitialized | 0 | 0
 gcc | valgrind | access after realloc | 1 | 1
 gcc | valgrind | array out of bounds | 0 | 0
 gcc | valgrind | dereferencing nullptr | 139 | 139
@@ -561,7 +561,7 @@ gcc | valgrind | strptime mktime unitialized | 1 | 1
 ### 3.2.1.Extra Dynamic Analysis Summary Clang
 Debug (unoptimized) / RelWithDebInfo (optimized)
 
-Undefined Behavior Type | asan | asan,ubsan | msan | msan,ubsan | ubsan
+Undefined Behavior Type | address | address,undefined | memory | memory,undefined | undefined
 --- |--- |--- |--- |--- | ---
 access after realloc | ✔️ | ✔️ | ❌ | ❌ | ❌ | ✔️ | ✔️ | ✔️ | ❌ | ✔️
 array out of bounds | ✔️/❌ | ✔️ | ❌ | ❌/✔️ | ❌/✔️ | ✔️ | ✔️ | ❌ | ❌/✔️ | ❌
@@ -593,7 +593,7 @@ strptime mktime unitialized | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | �
 ### 3.2.2.Extra Dynamic Analysis Summary Gcc
 Debug (unoptimized) / RelWithDebInfo (optimized)
 
-Undefined Behavior Type | asan | asan,ubsanleak | leak | ubsan | valgrind
+Undefined Behavior Type | address | address,leak,undefined | leak | undefined | valgrind
 --- |--- |--- |--- |--- | ---
 access after realloc | ✔️ | ✔️ | ❌ | ❌ | ❌ | ✔️ | ✔️ | ✔️ | ❌ | ✔️
 array out of bounds | ✔️/❌ | ✔️ | ❌ | ❌/✔️ | ❌/✔️ | ✔️ | ✔️ | ❌ | ❌/✔️ | ❌

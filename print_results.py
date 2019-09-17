@@ -195,16 +195,12 @@ def process_runtime_results(runtime_results):
             analyzer = "valgrind"
         elif "sanitize" in filename:
             analyzer = ""
-            if "address" in filename:
-                analyzer += "asan"
-            if "memory" in filename:
-                analyzer += "msan"
-            if "undefined" in filename:
-                if len(analyzer) > 0:
-                    analyzer += ","
-                analyzer += "ubsan"
-            if "leak" in filename:
-                analyzer += "leak"
+            known_analyzers = ['address', 'leak', 'memory', 'undefined']
+            for known_analyzer in known_analyzers:
+                if known_analyzer in filename:
+                    if len(analyzer) > 0:
+                        analyzer += ','
+                    analyzer += known_analyzer
         else:
             analyzer = ""
         if "gcc" in filename:
