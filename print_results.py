@@ -203,6 +203,8 @@ def process_runtime_results(runtime_results):
                 if len(analyzer) > 0:
                     analyzer += ","
                 analyzer += "ubsan"
+            if "leak" in filename:
+                analyzer += "leak"
         else:
             analyzer = ""
         if "gcc" in filename:
@@ -211,10 +213,6 @@ def process_runtime_results(runtime_results):
             compiler = "msvc"
         else:
             compiler = "clang"
-        if analyzer == "":
-            first_section = ""
-        else:
-            first_section = analyzer
         if filename.find("debug") != -1:
             debug_mode = 1
         else:
@@ -226,7 +224,7 @@ def process_runtime_results(runtime_results):
                     print(filename, "broken")
                     exit(1)
                 continue
-            output_table[first_section][compiler][row[0].replace(
+            output_table[compiler][analyzer][row[0].replace(
                 "_", " ")][str(debug_mode)] = int(row[1])
     return output_table
 
@@ -261,15 +259,16 @@ def print_runtime_crashes(output_table):
     no_tool_test_table = defaultdict(
         lambda: defaultdict(lambda: defaultdict(str)))
     compilers = []
-    for tool, rest_0 in sorted(output_table.items()):
-        if tool == "":
-            for compiler, rest_1 in sorted(rest_0.items()):
-                compilers.append(compiler)
-                for test, rest_2 in sorted(rest_1.items()):
-                    no_tool_test_table[test][compiler]["1"] = rest_2["1"]
-                    no_tool_test_table[test][compiler]["0"] = rest_2["0"]
-                    print(compiler + " | " + test + " | " +
-                          str(rest_2["1"]) + " | " + str(rest_2["0"]))
+    for compiler, rest_0 in sorted(output_table.items()):
+        for tool, rest_1 in sorted(rest_0.items()):
+            if tool != "":
+                continue
+            compilers.append(compiler)
+            for test, rest_2 in sorted(rest_1.items()):
+                no_tool_test_table[test][compiler]["1"] = rest_2["1"]
+                no_tool_test_table[test][compiler]["0"] = rest_2["0"]
+                print(compiler + " | " + test + " | " +
+                      str(rest_2["1"]) + " | " + str(rest_2["0"]))
 
     print("")
     print("### 2.2.Runtime Crashes Summary")
@@ -301,33 +300,52 @@ def print_runtime_crashes(output_table):
 
 
 def print_dynamic_analysis(output_table):
-    print("## 3.Dynamic Analysis")
-    print("### 3.1.Dynamic Analysis Return Codes")
-    print("Compiler | Undefined Behavior Type | Debug | RelWithDebInfo")
+    print("## 3.Extra Dynamic Analysis")
+    print("### 3.1.Extra Dynamic Analysis Return Codes")
+    print("Compiler | Tool | Undefined Behavior Type | Debug | RelWithDebInfo")
     print("--- | --- | --- | ---")
     tool_test_table = defaultdict(lambda: defaultdict(
-        lambda: defaultdict(lambda: defaultdict(str))))
-    for tool, rest_0 in sorted(output_table.items()):
-        if tool != "":
-            for compiler, rest_1 in sorted(rest_0.items()):
+        lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(str)))))
+    clang_tools = []
+    gcc_tools = []
+    for compiler, rest_0 in sorted(output_table.items()):
+        for tool, rest_1 in sorted(rest_0.items()):
+            if tool != "":
+                if compiler == "clang":
+                    clang_tools.append(tool)
+                else:
+                    gcc_tools.append(tool)
                 for test, rest_2 in sorted(rest_1.items()):
-                    tool_test_table[test][tool]["1"] = rest_2["1"]
-                    tool_test_table[test][tool]["0"] = rest_2["0"]
-                    print(tool + " | " + test + " | " +
+                    tool_test_table[test][compiler][tool]["1"] = rest_2["1"]
+                    tool_test_table[test][compiler][tool]["0"] = rest_2["0"]
+                    print(compiler + " | " + tool + " | " + test + " | " +
                           str(rest_2["1"]) + " | " + str(rest_2["0"]))
 
-    print("")
-    print("### 3.2.1.Dynamic Analysis Summary")
-    print_debug_release_legend()
-    dynamic_analysis_summary_row = "--- | --- | --- | --- | --- | --- | ---"
-    print("Undefined Behavior Type | asan | asan,ubsan | msan | msan,ubsan | ubsan | valgrind"
-          )
-    print(dynamic_analysis_summary_row)
-    for test, rest_0 in sorted(tool_test_table.items()):
-        line = test + " | "
-        for compiler, rest_1 in sorted(rest_0.items()):
-            line += return_codes_to_str(rest_1["1"], rest_1["0"]) + " | "
-        print(line[:-3])
+    def print_extra_dynamic_analysis_by_compiler(compiler, header_str, tools):
+        print("")
+        maybe_valgrind = ""
+        print(
+            "### " +
+            header_str +
+            "Extra Dynamic Analysis Summary " +
+            compiler.capitalize())
+        print_debug_release_legend()
+        dynamic_analysis_summary_row = "--- |" * len(tools) + " ---"
+        print("Undefined Behavior Type" +
+              ''.join([' | ' + str(x) for x in tools]))
+        print(dynamic_analysis_summary_row)
+        for test, rest_0 in sorted(tool_test_table.items()):
+            line = test + " | "
+            for compiler, rest_1 in sorted(rest_0.items()):
+                if compiler != compiler:
+                    continue
+                for tool, rest_2 in sorted(rest_1.items()):
+                    line += return_codes_to_str(rest_2["1"],
+                                                rest_2["0"]) + " | "
+            print(line[:-3])
+
+    print_extra_dynamic_analysis_by_compiler("clang", "3.2.1.", clang_tools)
+    print_extra_dynamic_analysis_by_compiler("gcc", "3.2.2.", gcc_tools)
 
 
 def print_runtime_results():
@@ -368,8 +386,8 @@ def print_overall_results(static_analysis, runtime_analysis):
                 table[test][detection_type] = table[test][detection_type] or len(
                     result) > 0
 
-    for tool, rest_0 in dynamic_analysis.items():
-        for compiler, rest_1 in rest_0.items():
+    for compiler, rest_0 in dynamic_analysis.items():
+        for tool, rest_1 in rest_0.items():
             for test, rest_2 in rest_1.items():
                 for optimization, result in rest_2.items():
                     if len(tool) == 0:

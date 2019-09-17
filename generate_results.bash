@@ -88,8 +88,8 @@ cd ../..
 fsanitize_build() {
 mkdir -p $2/debug
 cd $2/debug
-if [ "$1" -eq "gcc" ]; then
-  export CXX=g++
+if [ "$1" == "gcc" ]; then
+  export CXX='g++'
 else
   export CXX=$1++
 fi

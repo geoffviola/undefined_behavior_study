@@ -42,6 +42,6 @@ endforeach()
 
 add_library(reading_uninitialized_value_lib src/reading_uninitialized_value_lib.cpp)
 
-target_link_libraries(reading_uninitialized_value_lib_call_ptr
+target_link_libraries(reading_uninitialized_value_lib_call_cref
   PRIVATE reading_uninitialized_value_lib)
 
