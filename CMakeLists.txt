@@ -30,7 +30,8 @@ set(executables
   shifting_more_than_width
   signed_integer_overflow
   stack_overflow
-  std_vector_reserve_set_read)
+  std_vector_reserve_set_read
+  virtual_call_in_destructor)
 
 if (NOT MSVC)
   list(APPEND executables reading_uninitialized_value_return strptime_mktime_unitialized)
