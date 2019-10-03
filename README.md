@@ -39,6 +39,10 @@ clang | signed integer overflow | ❌ | ❌ | n/a
 clang | stack overflow | ✔️ | ✔️ | -Winfinite-recursion
 clang | std vector reserve set read | ❌ | ❌ | n/a
 clang | strptime mktime unitialized | ❌ | ❌ | n/a
+clang | virtual call in destructor | ✔️ | ✔️ | 1
+clang | virtual call in destructor helper | ❌ | ❌ | n/a
+clang | virtual call in destructor lib | ❌ | ❌ | n/a
+clang | virtual call in destructor link | ❌ | ❌ | n/a
 gcc | access after realloc | ❌ | ❌ | n/a
 gcc | array out of bounds | ❌ | ✔️ | -Wuninitialized
 gcc | dereferencing nullptr | ❌ | ❌ | n/a
@@ -65,6 +69,10 @@ gcc | signed integer overflow | ❌ | ❌ | n/a
 gcc | stack overflow | ❌ | ❌ | n/a
 gcc | std vector reserve set read | ❌ | ❌ | n/a
 gcc | strptime mktime unitialized | ❌ | ❌ | n/a
+gcc | virtual call in destructor | ❌ | ❌ | n/a
+gcc | virtual call in destructor helper | ❌ | ❌ | n/a
+gcc | virtual call in destructor lib | ❌ | ❌ | n/a
+gcc | virtual call in destructor link | ❌ | ❌ | n/a
 msvc | access after realloc | ❌ | ❌ | n/a
 msvc | array out of bounds | ❌ | ❌ | n/a
 msvc | dereferencing nullptr | ❌ | ❌ | n/a
@@ -89,6 +97,10 @@ msvc | shifting more than width | ✔️ | ✔️ | 4293
 msvc | signed integer overflow | ❌ | ❌ | n/a
 msvc | stack overflow | ✔️ | ✔️ | 4717
 msvc | std vector reserve set read | ❌ | ❌ | n/a
+msvc | virtual call in destructor | ❌ | ❌ | n/a
+msvc | virtual call in destructor helper | ❌ | ❌ | n/a
+msvc | virtual call in destructor lib | ❌ | ❌ | n/a
+msvc | virtual call in destructor link | ❌ | ❌ | n/a
 
 ### 1.2.Static Analyzers
 Tool | Undefined Behavior Type | Warning | Name
@@ -119,6 +131,10 @@ clang-tidy | signed integer overflow | ❌ | n/a
 clang-tidy | stack overflow | ✔️ | clang-diagnostic-infinite-recursion
 clang-tidy | std vector reserve set read | ❌ | n/a
 clang-tidy | strptime mktime unitialized | ✔️ | cppcoreguidelines-pro-type-member-init
+clang-tidy | virtual call in destructor | ✔️ | clang-analyzer-optin.cplusplus.VirtualCall,clang-diagnostic-warning
+clang-tidy | virtual call in destructor helper | ✔️ | clang-analyzer-optin.cplusplus.VirtualCall
+clang-tidy | virtual call in destructor lib | ✔️ | clang-analyzer-optin.cplusplus.VirtualCall
+clang-tidy | virtual call in destructor link | ❌ | n/a
 cppcheck | access after realloc | ✔️ | n/a
 cppcheck | array out of bounds | ❌ | n/a
 cppcheck | dereferencing nullptr | ✔️ | n/a
@@ -145,6 +161,10 @@ cppcheck | signed integer overflow | ❌ | n/a
 cppcheck | stack overflow | ❌ | n/a
 cppcheck | std vector reserve set read | ❌ | n/a
 cppcheck | strptime mktime unitialized | ❌ | n/a
+cppcheck | virtual call in destructor | ❌ | n/a
+cppcheck | virtual call in destructor helper | ❌ | n/a
+cppcheck | virtual call in destructor lib | ❌ | n/a
+cppcheck | virtual call in destructor link | ❌ | n/a
 
 ### 1.3.Static Analysis Summary
 Debug (unoptimized) / RelWithDebInfo (optimized)
@@ -177,6 +197,10 @@ signed integer overflow | ❌ | ❌ | ❌ | ❌ | ❌
 stack overflow | ✔️ | ✔️ | ❌ | ❌ | ✔️
 std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌
 strptime mktime unitialized | ❌ | ✔️ | ❌ | ❌ | n/a
+virtual call in destructor | ✔️ | ✔️ | ❌ | ❌ | ❌
+virtual call in destructor helper | ❌ | ✔️ | ❌ | ❌ | ❌
+virtual call in destructor lib | ❌ | ✔️ | ❌ | ❌ | ❌
+virtual call in destructor link | ❌ | ❌ | ❌ | ❌ | ❌
 
 
 ## 2.Runtime Crashes
@@ -209,6 +233,9 @@ clang | signed integer overflow | 0 | 0
 clang | stack overflow | 139 | 0
 clang | std vector reserve set read | 0 | 0
 clang | strptime mktime unitialized | 0 | 0
+clang | virtual call in destructor | 134 | 134
+clang | virtual call in destructor helper | 134 | 134
+clang | virtual call in destructor link | 134 | 134
 gcc | access after realloc | 0 | 0
 gcc | array out of bounds | 0 | 0
 gcc | dereferencing nullptr | 139 | 139
@@ -235,6 +262,8 @@ gcc | signed integer overflow | 0 | 0
 gcc | stack overflow | 139 | 139
 gcc | std vector reserve set read | 0 | 0
 gcc | strptime mktime unitialized | 0 | 0
+gcc | virtual call in destructor helper | 134 | 134
+gcc | virtual call in destructor link | 134 | 134
 msvc | access after realloc | 0 | 0
 msvc | array out of bounds | -1 | 0
 msvc | dereferencing nullptr | -1073741819 | -1073741819
@@ -259,6 +288,8 @@ msvc | shifting more than width | 0 | 0
 msvc | signed integer overflow | 0 | 0
 msvc | stack overflow | -1073741571 | -1073741571
 msvc | std vector reserve set read | -1 | 0
+msvc | virtual call in destructor helper | -1 | -1073740791
+msvc | virtual call in destructor link | -1 | -1073740791
 
 ### 2.2.Runtime Crashes Summary
 Debug (unoptimized) / RelWithDebInfo (optimized)
@@ -291,6 +322,9 @@ signed integer overflow | ❌ | ❌ | ❌
 stack overflow | ✔️/❌ | ✔️ | ✔️
 std vector reserve set read | ❌ | ❌ | ✔️/❌
 strptime mktime unitialized | ❌ | ❌ | n/a
+virtual call in destructor | ✔️ | n/a | n/a
+virtual call in destructor helper | ✔️ | ✔️ | ✔️
+virtual call in destructor link | ✔️ | ✔️ | ✔️
 
 
 ## 3.Extra Dynamic Analysis
@@ -323,6 +357,9 @@ clang | address | signed integer overflow | 0 | 0
 clang | address | stack overflow | 1 | 0
 clang | address | std vector reserve set read | 0 | 0
 clang | address | strptime mktime unitialized | 0 | 0
+clang | address | virtual call in destructor | 134 | 134
+clang | address | virtual call in destructor helper | 134 | 134
+clang | address | virtual call in destructor link | 134 | 134
 clang | address,undefined | access after realloc | 1 | 1
 clang | address,undefined | array out of bounds | 1 | 1
 clang | address,undefined | dereferencing nullptr | 1 | 1
@@ -349,6 +386,9 @@ clang | address,undefined | signed integer overflow | 1 | 1
 clang | address,undefined | stack overflow | 1 | 0
 clang | address,undefined | std vector reserve set read | 0 | 0
 clang | address,undefined | strptime mktime unitialized | 0 | 0
+clang | address,undefined | virtual call in destructor | 134 | 134
+clang | address,undefined | virtual call in destructor helper | 134 | 134
+clang | address,undefined | virtual call in destructor link | 134 | 134
 clang | memory | access after realloc | 0 | 0
 clang | memory | array out of bounds | 0 | 0
 clang | memory | dereferencing nullptr | 77 | 0
@@ -375,6 +415,9 @@ clang | memory | signed integer overflow | 0 | 0
 clang | memory | stack overflow | 77 | 0
 clang | memory | std vector reserve set read | 0 | 0
 clang | memory | strptime mktime unitialized | 0 | 0
+clang | memory | virtual call in destructor | 134 | 134
+clang | memory | virtual call in destructor helper | 134 | 134
+clang | memory | virtual call in destructor link | 134 | 134
 clang | memory,undefined | access after realloc | 0 | 0
 clang | memory,undefined | array out of bounds | 0 | 77
 clang | memory,undefined | dereferencing nullptr | 77 | 77
@@ -401,6 +444,9 @@ clang | memory,undefined | signed integer overflow | 77 | 77
 clang | memory,undefined | stack overflow | 77 | 0
 clang | memory,undefined | std vector reserve set read | 0 | 0
 clang | memory,undefined | strptime mktime unitialized | 0 | 0
+clang | memory,undefined | virtual call in destructor | 134 | 134
+clang | memory,undefined | virtual call in destructor helper | 134 | 134
+clang | memory,undefined | virtual call in destructor link | 134 | 134
 clang | undefined | access after realloc | 0 | 0
 clang | undefined | array out of bounds | 0 | 1
 clang | undefined | dereferencing nullptr | 1 | 1
@@ -427,6 +473,9 @@ clang | undefined | signed integer overflow | 1 | 1
 clang | undefined | stack overflow | 1 | 0
 clang | undefined | std vector reserve set read | 0 | 0
 clang | undefined | strptime mktime unitialized | 0 | 0
+clang | undefined | virtual call in destructor | 134 | 134
+clang | undefined | virtual call in destructor helper | 134 | 134
+clang | undefined | virtual call in destructor link | 134 | 134
 gcc | address | access after realloc | 1 | 1
 gcc | address | array out of bounds | 1 | 1
 gcc | address | dereferencing nullptr | 1 | 1
@@ -453,6 +502,8 @@ gcc | address | signed integer overflow | 0 | 0
 gcc | address | stack overflow | 1 | 1
 gcc | address | std vector reserve set read | 0 | 0
 gcc | address | strptime mktime unitialized | 0 | 0
+gcc | address | virtual call in destructor helper | 134 | 134
+gcc | address | virtual call in destructor link | 134 | 134
 gcc | address,leak,undefined | access after realloc | 1 | 1
 gcc | address,leak,undefined | array out of bounds | 1 | 1
 gcc | address,leak,undefined | dereferencing nullptr | 1 | 1
@@ -479,6 +530,8 @@ gcc | address,leak,undefined | signed integer overflow | 1 | 0
 gcc | address,leak,undefined | stack overflow | 1 | 1
 gcc | address,leak,undefined | std vector reserve set read | 0 | 0
 gcc | address,leak,undefined | strptime mktime unitialized | 0 | 0
+gcc | address,leak,undefined | virtual call in destructor helper | 134 | 134
+gcc | address,leak,undefined | virtual call in destructor link | 134 | 134
 gcc | leak | access after realloc | 23 | 23
 gcc | leak | array out of bounds | 0 | 0
 gcc | leak | dereferencing nullptr | 23 | 23
@@ -505,6 +558,8 @@ gcc | leak | signed integer overflow | 0 | 0
 gcc | leak | stack overflow | 23 | 23
 gcc | leak | std vector reserve set read | 0 | 0
 gcc | leak | strptime mktime unitialized | 0 | 0
+gcc | leak | virtual call in destructor helper | 134 | 134
+gcc | leak | virtual call in destructor link | 134 | 134
 gcc | undefined | access after realloc | 0 | 0
 gcc | undefined | array out of bounds | 0 | 1
 gcc | undefined | dereferencing nullptr | 1 | 1
@@ -531,6 +586,8 @@ gcc | undefined | signed integer overflow | 1 | 0
 gcc | undefined | stack overflow | 139 | 139
 gcc | undefined | std vector reserve set read | 0 | 0
 gcc | undefined | strptime mktime unitialized | 0 | 0
+gcc | undefined | virtual call in destructor helper | 134 | 134
+gcc | undefined | virtual call in destructor link | 134 | 134
 gcc | valgrind | access after realloc | 1 | 1
 gcc | valgrind | array out of bounds | 0 | 0
 gcc | valgrind | dereferencing nullptr | 139 | 139
@@ -557,70 +614,78 @@ gcc | valgrind | signed integer overflow | 0 | 0
 gcc | valgrind | stack overflow | 139 | 139
 gcc | valgrind | std vector reserve set read | 0 | 0
 gcc | valgrind | strptime mktime unitialized | 1 | 1
+gcc | valgrind | virtual call in destructor helper | 134 | 134
+gcc | valgrind | virtual call in destructor link | 134 | 134
 
 ### 3.2.1.Extra Dynamic Analysis Summary Clang
 Debug (unoptimized) / RelWithDebInfo (optimized)
 
 Undefined Behavior Type | address | address,undefined | memory | memory,undefined | undefined
 --- |--- |--- |--- |--- | ---
-access after realloc | ✔️ | ✔️ | ❌ | ❌ | ❌ | ✔️ | ✔️ | ✔️ | ❌ | ✔️
-array out of bounds | ✔️/❌ | ✔️ | ❌ | ❌/✔️ | ❌/✔️ | ✔️ | ✔️ | ❌ | ❌/✔️ | ❌
-dereferencing nullptr | ✔️/❌ | ✔️ | ✔️/❌ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-divide by zero | ✔️/❌ | ✔️ | ❌ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-initialize std string with nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-large double to float | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌ | ❌ | ❌ | ❌ | ❌
-large double to int | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌ | ❌ | ❌ | ❌ | ❌
-mutate const value | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
-out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
-preincrement plus postincrement | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
-preincrement plus value | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
-read from old type | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌ | ✔️ | ❌ | ✔️ | ❌
-reading uninitialized value add | ❌ | ❌/✔️ | ❌ | ❌/✔️ | ❌/✔️ | ❌ | ❌ | ❌ | ❌ | ✔️/❌
-reading uninitialized value cout | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️/❌
-reading uninitialized value func arg | ✔️ | ✔️ | ❌/✔️ | ❌/✔️ | ❌/✔️ | ❌/✔️ | ❌/✔️ | ❌/✔️ | ❌/✔️ | ✔️
-reading uninitialized value if | ❌ | ❌ | ✔️/❌ | ✔️/❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️/❌
-reading uninitialized value lib call cref | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
-reading uninitialized value partial | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️/❌ | ❌ | ✔️/❌ | ✔️/❌ | ✔️/❌
-reading uninitialized value printf | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️/❌
-reading uninitialized value return | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ❌/✔️ | ✔️ | ❌/✔️ | ✔️ | ❌/✔️
-reference out of scope | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-shifting more than width | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌ | ✔️ | ❌ | ✔️ | ❌
-signed integer overflow | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌ | ✔️/❌ | ❌ | ✔️/❌ | ❌
-stack overflow | ✔️/❌ | ✔️/❌ | ✔️/❌ | ✔️/❌ | ✔️/❌ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
-strptime mktime unitialized | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
+access after realloc | ✔️ | ✔️ | ❌ | ❌ | ❌
+array out of bounds | ✔️/❌ | ✔️ | ❌ | ❌/✔️ | ❌/✔️
+dereferencing nullptr | ✔️/❌ | ✔️ | ✔️/❌ | ✔️ | ✔️
+divide by zero | ✔️/❌ | ✔️ | ❌ | ✔️ | ✔️
+initialize std string with nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+large double to float | ❌ | ✔️ | ❌ | ✔️ | ✔️
+large double to int | ❌ | ✔️ | ❌ | ✔️ | ✔️
+mutate const value | ❌ | ❌ | ❌ | ❌ | ❌
+out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌
+preincrement plus postincrement | ❌ | ❌ | ❌ | ❌ | ❌
+preincrement plus value | ❌ | ❌ | ❌ | ❌ | ❌
+read from old type | ❌ | ✔️ | ❌ | ✔️ | ✔️
+reading uninitialized value add | ❌ | ❌/✔️ | ❌ | ❌/✔️ | ❌/✔️
+reading uninitialized value cout | ❌ | ❌ | ❌ | ❌ | ❌
+reading uninitialized value func arg | ✔️ | ✔️ | ❌/✔️ | ❌/✔️ | ❌/✔️
+reading uninitialized value if | ❌ | ❌ | ✔️/❌ | ✔️/❌ | ❌
+reading uninitialized value lib call cref | ❌ | ❌ | ❌ | ❌ | ❌
+reading uninitialized value partial | ❌ | ❌ | ❌ | ❌ | ❌
+reading uninitialized value printf | ❌ | ❌ | ❌ | ❌ | ❌
+reading uninitialized value return | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+reference out of scope | ❌ | ❌ | ❌ | ❌ | ❌
+shifting more than width | ❌ | ✔️ | ❌ | ✔️ | ✔️
+signed integer overflow | ❌ | ✔️ | ❌ | ✔️ | ✔️
+stack overflow | ✔️/❌ | ✔️/❌ | ✔️/❌ | ✔️/❌ | ✔️/❌
+std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌
+strptime mktime unitialized | ❌ | ❌ | ❌ | ❌ | ❌
+virtual call in destructor | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+virtual call in destructor helper | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+virtual call in destructor link | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 
 ### 3.2.2.Extra Dynamic Analysis Summary Gcc
 Debug (unoptimized) / RelWithDebInfo (optimized)
 
 Undefined Behavior Type | address | address,leak,undefined | leak | undefined | valgrind
 --- |--- |--- |--- |--- | ---
-access after realloc | ✔️ | ✔️ | ❌ | ❌ | ❌ | ✔️ | ✔️ | ✔️ | ❌ | ✔️
-array out of bounds | ✔️/❌ | ✔️ | ❌ | ❌/✔️ | ❌/✔️ | ✔️ | ✔️ | ❌ | ❌/✔️ | ❌
-dereferencing nullptr | ✔️/❌ | ✔️ | ✔️/❌ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-divide by zero | ✔️/❌ | ✔️ | ❌ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-initialize std string with nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-large double to float | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌ | ❌ | ❌ | ❌ | ❌
-large double to int | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌ | ❌ | ❌ | ❌ | ❌
-mutate const value | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
-out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
-preincrement plus postincrement | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
-preincrement plus value | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
-read from old type | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌ | ✔️ | ❌ | ✔️ | ❌
-reading uninitialized value add | ❌ | ❌/✔️ | ❌ | ❌/✔️ | ❌/✔️ | ❌ | ❌ | ❌ | ❌ | ✔️/❌
-reading uninitialized value cout | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️/❌
-reading uninitialized value func arg | ✔️ | ✔️ | ❌/✔️ | ❌/✔️ | ❌/✔️ | ❌/✔️ | ❌/✔️ | ❌/✔️ | ❌/✔️ | ✔️
-reading uninitialized value if | ❌ | ❌ | ✔️/❌ | ✔️/❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️/❌
-reading uninitialized value lib call cref | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
-reading uninitialized value partial | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️/❌ | ❌ | ✔️/❌ | ✔️/❌ | ✔️/❌
-reading uninitialized value printf | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️/❌
-reading uninitialized value return | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ❌/✔️ | ✔️ | ❌/✔️ | ✔️ | ❌/✔️
-reference out of scope | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-shifting more than width | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌ | ✔️ | ❌ | ✔️ | ❌
-signed integer overflow | ❌ | ✔️ | ❌ | ✔️ | ✔️ | ❌ | ✔️/❌ | ❌ | ✔️/❌ | ❌
-stack overflow | ✔️/❌ | ✔️/❌ | ✔️/❌ | ✔️/❌ | ✔️/❌ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌
-strptime mktime unitialized | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️
+access after realloc | ✔️ | ✔️ | ✔️ | ❌ | ✔️
+array out of bounds | ✔️ | ✔️ | ❌ | ❌/✔️ | ❌
+dereferencing nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+divide by zero | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+initialize std string with nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+large double to float | ❌ | ❌ | ❌ | ❌ | ❌
+large double to int | ❌ | ❌ | ❌ | ❌ | ❌
+mutate const value | ❌ | ❌ | ❌ | ❌ | ❌
+out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌
+preincrement plus postincrement | ❌ | ❌ | ❌ | ❌ | ❌
+preincrement plus value | ❌ | ❌ | ❌ | ❌ | ❌
+read from old type | ❌ | ✔️ | ❌ | ✔️ | ❌
+reading uninitialized value add | ❌ | ❌ | ❌ | ❌ | ✔️/❌
+reading uninitialized value cout | ❌ | ❌ | ❌ | ❌ | ✔️/❌
+reading uninitialized value func arg | ❌/✔️ | ❌/✔️ | ❌/✔️ | ❌/✔️ | ✔️
+reading uninitialized value if | ❌ | ❌ | ❌ | ❌ | ✔️/❌
+reading uninitialized value lib call cref | ❌ | ❌ | ❌ | ❌ | ✔️
+reading uninitialized value partial | ✔️/❌ | ❌ | ✔️/❌ | ✔️/❌ | ✔️/❌
+reading uninitialized value printf | ❌ | ❌ | ❌ | ❌ | ✔️/❌
+reading uninitialized value return | ❌/✔️ | ✔️ | ❌/✔️ | ✔️ | ❌/✔️
+reference out of scope | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+shifting more than width | ❌ | ✔️ | ❌ | ✔️ | ❌
+signed integer overflow | ❌ | ✔️/❌ | ❌ | ✔️/❌ | ❌
+stack overflow | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌
+strptime mktime unitialized | ❌ | ❌ | ❌ | ❌ | ✔️
+virtual call in destructor
+virtual call in destructor helper | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+virtual call in destructor link | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 
 
 ### 4.Overall Summary
@@ -652,6 +717,10 @@ signed integer overflow | ❌ | ❌ | ❌ | ✔️
 stack overflow | ✔️ | ✔️ | ✔️ | ✔️
 std vector reserve set read | ❌ | ❌ | ✔️ | ❌
 strptime mktime unitialized | ❌ | ✔️ | ❌ | ✔️
+virtual call in destructor | ✔️ | ✔️ | ✔️ | ✔️
+virtual call in destructor helper | ❌ | ✔️ | ✔️ | ✔️
+virtual call in destructor lib | ❌ | ✔️
+virtual call in destructor link | ❌ | ❌ | ✔️ | ✔️
 
 
 ## Versions

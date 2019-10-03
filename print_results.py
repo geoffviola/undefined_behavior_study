@@ -319,28 +319,29 @@ def print_dynamic_analysis(output_table):
                     print(compiler + " | " + tool + " | " + test + " | " +
                           str(rest_2["1"]) + " | " + str(rest_2["0"]))
 
-    def print_extra_dynamic_analysis_by_compiler(compiler, header_str, tools):
+    def print_extra_dynamic_analysis_by_compiler(
+            target_compiler, header_str, tools):
         print("")
         maybe_valgrind = ""
         print(
             "### " +
             header_str +
             "Extra Dynamic Analysis Summary " +
-            compiler.capitalize())
+            target_compiler.capitalize())
         print_debug_release_legend()
         dynamic_analysis_summary_row = "--- |" * len(tools) + " ---"
         print("Undefined Behavior Type" +
               ''.join([' | ' + str(x) for x in tools]))
         print(dynamic_analysis_summary_row)
         for test, rest_0 in sorted(tool_test_table.items()):
-            line = test + " | "
+            line = test
             for compiler, rest_1 in sorted(rest_0.items()):
-                if compiler != compiler:
+                if target_compiler != compiler:
                     continue
                 for tool, rest_2 in sorted(rest_1.items()):
-                    line += return_codes_to_str(rest_2["1"],
-                                                rest_2["0"]) + " | "
-            print(line[:-3])
+                    line += " | " + return_codes_to_str(rest_2["1"],
+                                                        rest_2["0"])
+            print(line)
 
     print_extra_dynamic_analysis_by_compiler("clang", "3.2.1.", clang_tools)
     print_extra_dynamic_analysis_by_compiler("gcc", "3.2.2.", gcc_tools)
