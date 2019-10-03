@@ -9,6 +9,7 @@ cd build
 
 mkdir -p clang-tidy
 cd clang-tidy
+export CXX=clang++
 cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE ../.. > cmake.txt
 cp compile_commands.json ../..
 clang-tidy -checks=*,-fuchsia-default-arguments ${SRC_DIR}/*.cpp 1> warnings.txt
@@ -26,6 +27,7 @@ mkdir -p gcc/debug
 cd gcc/debug
 
 echo "gcc debug"
+export CXX='g++'
 cmake ../../.. -DCMAKE_BUILD_TYPE=Debug > cmake.txt
 make -j $(nproc) 1> make.txt 2> warnings.txt
 associate_warnings.py --cpp_dir=${SRC_DIR}
