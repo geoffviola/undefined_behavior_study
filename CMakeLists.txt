@@ -31,6 +31,8 @@ set(executables
   signed_integer_overflow
   stack_overflow
   std_vector_reserve_set_read
+  virtual_call_in_constructor_helper
+  virtual_call_in_constructor_link
   virtual_call_in_destructor_helper
   virtual_call_in_destructor_link
 )
@@ -40,6 +42,7 @@ if (NOT MSVC)
 endif ()
 if (NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   list(APPEND executables virtual_call_in_destructor)
+  list(APPEND executables virtual_call_in_constructor)
 endif ()
 
 foreach(executable ${executables})
@@ -48,9 +51,12 @@ endforeach()
 
 add_library(reading_uninitialized_value_lib src/reading_uninitialized_value_lib.cpp)
 add_library(virtual_call_in_destructor_lib src/virtual_call_in_destructor_lib.cpp)
+add_library(virtual_call_in_constructor_lib src/virtual_call_in_constructor_lib.cpp)
 
 target_link_libraries(reading_uninitialized_value_lib_call_cref
   PRIVATE reading_uninitialized_value_lib)
 target_link_libraries(virtual_call_in_destructor_link
   PRIVATE virtual_call_in_destructor_lib)
+target_link_libraries(virtual_call_in_constructor_link
+  PRIVATE virtual_call_in_constructor_lib)
 
