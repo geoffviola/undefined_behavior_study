@@ -8,6 +8,7 @@ public:
   Parent() = default;
   virtual ~Parent();
   Parent(const Parent&) = default;
+  Parent& operator=(const Parent&) = default;
   Parent(Parent &&) = default;
   Parent& operator=(Parent &&) = default;
 

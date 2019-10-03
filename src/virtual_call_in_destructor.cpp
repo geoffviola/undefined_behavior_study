@@ -6,6 +6,7 @@ public:
   Parent() = default;
   virtual inline ~Parent() { Foo(); }
   Parent(const Parent&) = default;
+  Parent& operator=(const Parent&) = default;
   Parent(Parent &&) = default;
   Parent& operator=(Parent &&) = default;
 
