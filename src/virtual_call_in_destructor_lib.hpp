@@ -16,4 +16,3 @@ class Child : public Parent {
 public:
   void Foo() override;
 };
-

@@ -3,18 +3,14 @@
 
 class Parent {
 public:
-  virtual inline ~Parent() {
-    Foo();
-  }
+  virtual inline ~Parent() { Foo(); }
 
   virtual void Foo() = 0;
 };
 
 class Child : public Parent {
 public:
-  inline void Foo() override {
-    std::cout << "here\n";
-  }
+  inline void Foo() override { std::cout << "here\n"; }
 };
 
 int main() {

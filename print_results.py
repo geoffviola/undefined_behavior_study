@@ -9,6 +9,10 @@ from enum import IntEnum
 cool_x = "❌"
 cool_check = "✔️"
 
+ignore_targets = [
+    'no_undefined_behavior',
+    'reading_uninitialized_value_lib']
+
 
 class DetectionType(IntEnum):
     COMPILER_WARNING = 1
@@ -64,8 +68,7 @@ def process_static_analysis_results(results):
             debug_mode = 0
 
         for row in csv:
-            if row[0] == "no_undefined_behavior" or \
-               row[0] == "reading_uninitialized_value_lib":
+            if row[0] in ignore_targets:
                 if len(row) > 0 and row[1] != "":
                     print("static analysis is broken in", filename, row)
                     exit(1)
@@ -214,8 +217,7 @@ def process_runtime_results(runtime_results):
         else:
             debug_mode = 0
         for row in csv:
-            if row[0] == "no_undefined_behavior" or \
-               row[0] == "reading_uninitialized_value_lib":
+            if row[0] in ignore_targets:
                 if row[1] != "0":
                     print(filename, "broken")
                     exit(1)

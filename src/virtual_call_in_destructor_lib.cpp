@@ -1,14 +1,7 @@
 #include "virtual_call_in_destructor_lib.hpp"
 
-Parent::Parent() {
-  Helper();
-}
+Parent::Parent() { Helper(); }
 
-void Parent::Helper() {
-  Foo();
-}
+void Parent::Helper() { Foo(); }
 
-void Child::Foo() {
-  std::cout << "here\n";
-}
-
+void Child::Foo() { std::cout << "here\n"; }
