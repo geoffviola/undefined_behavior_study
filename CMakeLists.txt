@@ -31,13 +31,15 @@ set(executables
   signed_integer_overflow
   stack_overflow
   std_vector_reserve_set_read
-  virtual_call_in_destructor
   virtual_call_in_destructor_helper
   virtual_call_in_destructor_link
 )
 
 if (NOT MSVC)
   list(APPEND executables reading_uninitialized_value_return strptime_mktime_unitialized)
+endif ()
+if (NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+  list(APPEND executables virtual_call_in_destructor)
 endif ()
 
 foreach(executable ${executables})

@@ -5,7 +5,12 @@
 
 class Parent {
 public:
+  Parent() = default;
   virtual ~Parent();
+  Parent(const Parent&) = default;
+  Parent(Parent &&) = default;
+  Parent& operator=(Parent &&) = default;
+
   virtual void Foo() = 0;
 
 private:

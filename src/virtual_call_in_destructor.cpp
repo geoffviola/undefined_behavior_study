@@ -3,7 +3,11 @@
 
 class Parent {
 public:
+  Parent() = default;
   virtual inline ~Parent() { Foo(); }
+  Parent(const Parent&) = default;
+  Parent(Parent &&) = default;
+  Parent& operator=(Parent &&) = default;
 
   virtual void Foo() = 0;
 };
