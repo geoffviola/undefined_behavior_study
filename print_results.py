@@ -335,12 +335,14 @@ def print_dynamic_analysis(output_table):
         print(dynamic_analysis_summary_row)
         for test, rest_0 in sorted(tool_test_table.items()):
             line = test
-            for compiler, rest_1 in sorted(rest_0.items()):
-                if target_compiler != compiler:
-                    continue
-                for tool, rest_2 in sorted(rest_1.items()):
-                    line += " | " + return_codes_to_str(rest_2["1"],
-                                                        rest_2["0"])
+            for tool in tools:
+                line += " | "
+                if target_compiler in rest_0 and tool in rest_0[target_compiler]:
+                    line += return_codes_to_str(
+                        rest_0[target_compiler][tool]["1"],
+                        rest_0[target_compiler][tool]["0"])
+                else:
+                    line += "n/a"
             print(line)
 
     print_extra_dynamic_analysis_by_compiler("clang", "3.2.1.", clang_tools)

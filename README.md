@@ -683,7 +683,7 @@ signed integer overflow | ❌ | ✔️/❌ | ❌ | ✔️/❌ | ❌
 stack overflow | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌
 strptime mktime unitialized | ❌ | ❌ | ❌ | ❌ | ✔️
-virtual call in destructor
+virtual call in destructor | n/a | n/a | n/a | n/a | n/a
 virtual call in destructor helper | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 virtual call in destructor link | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 
