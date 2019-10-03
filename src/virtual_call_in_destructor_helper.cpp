@@ -4,10 +4,15 @@
 class Parent {
 public:
   virtual inline ~Parent() {
-    Foo();
+    Helper();
   }
 
   virtual void Foo() = 0;
+
+private:
+  inline void Helper() {
+    Foo();
+  }
 };
 
 class Child : public Parent {
