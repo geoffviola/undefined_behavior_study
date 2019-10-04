@@ -39,6 +39,10 @@ clang | signed integer overflow | ❌ | ❌ | n/a
 clang | stack overflow | ✔️ | ✔️ | -Winfinite-recursion
 clang | std vector reserve set read | ❌ | ❌ | n/a
 clang | strptime mktime unitialized | ❌ | ❌ | n/a
+clang | virtual call in constructor | ✔️ | ✔️ | 1
+clang | virtual call in constructor helper | ❌ | ❌ | n/a
+clang | virtual call in constructor lib | ❌ | ❌ | n/a
+clang | virtual call in constructor link | ❌ | ❌ | n/a
 clang | virtual call in destructor | ✔️ | ✔️ | 1
 clang | virtual call in destructor helper | ❌ | ❌ | n/a
 clang | virtual call in destructor lib | ❌ | ❌ | n/a
@@ -69,6 +73,10 @@ gcc | signed integer overflow | ❌ | ❌ | n/a
 gcc | stack overflow | ❌ | ❌ | n/a
 gcc | std vector reserve set read | ❌ | ❌ | n/a
 gcc | strptime mktime unitialized | ❌ | ❌ | n/a
+gcc | virtual call in constructor | ❌ | ❌ | n/a
+gcc | virtual call in constructor helper | ❌ | ❌ | n/a
+gcc | virtual call in constructor lib | ❌ | ❌ | n/a
+gcc | virtual call in constructor link | ❌ | ❌ | n/a
 gcc | virtual call in destructor | ❌ | ❌ | n/a
 gcc | virtual call in destructor helper | ❌ | ❌ | n/a
 gcc | virtual call in destructor lib | ❌ | ❌ | n/a
@@ -97,6 +105,10 @@ msvc | shifting more than width | ✔️ | ✔️ | 4293
 msvc | signed integer overflow | ❌ | ❌ | n/a
 msvc | stack overflow | ✔️ | ✔️ | 4717
 msvc | std vector reserve set read | ❌ | ❌ | n/a
+msvc | virtual call in constructor | ❌ | ❌ | n/a
+msvc | virtual call in constructor helper | ❌ | ❌ | n/a
+msvc | virtual call in constructor lib | ❌ | ❌ | n/a
+msvc | virtual call in constructor link | ❌ | ❌ | n/a
 msvc | virtual call in destructor | ❌ | ❌ | n/a
 msvc | virtual call in destructor helper | ❌ | ❌ | n/a
 msvc | virtual call in destructor lib | ❌ | ❌ | n/a
@@ -131,6 +143,10 @@ clang-tidy | signed integer overflow | ❌ | n/a
 clang-tidy | stack overflow | ✔️ | clang-diagnostic-infinite-recursion
 clang-tidy | std vector reserve set read | ❌ | n/a
 clang-tidy | strptime mktime unitialized | ✔️ | cppcoreguidelines-pro-type-member-init
+clang-tidy | virtual call in constructor | ✔️ | clang-analyzer-optin.cplusplus.VirtualCall,clang-diagnostic-warning
+clang-tidy | virtual call in constructor helper | ✔️ | clang-analyzer-optin.cplusplus.VirtualCall
+clang-tidy | virtual call in constructor lib | ✔️ | clang-analyzer-optin.cplusplus.VirtualCall
+clang-tidy | virtual call in constructor link | ❌ | n/a
 clang-tidy | virtual call in destructor | ✔️ | clang-analyzer-optin.cplusplus.VirtualCall,clang-diagnostic-warning
 clang-tidy | virtual call in destructor helper | ✔️ | clang-analyzer-optin.cplusplus.VirtualCall
 clang-tidy | virtual call in destructor lib | ✔️ | clang-analyzer-optin.cplusplus.VirtualCall
@@ -161,6 +177,10 @@ cppcheck | signed integer overflow | ❌ | n/a
 cppcheck | stack overflow | ❌ | n/a
 cppcheck | std vector reserve set read | ❌ | n/a
 cppcheck | strptime mktime unitialized | ❌ | n/a
+cppcheck | virtual call in constructor | ❌ | n/a
+cppcheck | virtual call in constructor helper | ❌ | n/a
+cppcheck | virtual call in constructor lib | ❌ | n/a
+cppcheck | virtual call in constructor link | ❌ | n/a
 cppcheck | virtual call in destructor | ❌ | n/a
 cppcheck | virtual call in destructor helper | ❌ | n/a
 cppcheck | virtual call in destructor lib | ❌ | n/a
@@ -197,6 +217,10 @@ signed integer overflow | ❌ | ❌ | ❌ | ❌ | ❌
 stack overflow | ✔️ | ✔️ | ❌ | ❌ | ✔️
 std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌
 strptime mktime unitialized | ❌ | ✔️ | ❌ | ❌ | n/a
+virtual call in constructor | ✔️ | ✔️ | ❌ | ❌ | ❌
+virtual call in constructor helper | ❌ | ✔️ | ❌ | ❌ | ❌
+virtual call in constructor lib | ❌ | ✔️ | ❌ | ❌ | ❌
+virtual call in constructor link | ❌ | ❌ | ❌ | ❌ | ❌
 virtual call in destructor | ✔️ | ✔️ | ❌ | ❌ | ❌
 virtual call in destructor helper | ❌ | ✔️ | ❌ | ❌ | ❌
 virtual call in destructor lib | ❌ | ✔️ | ❌ | ❌ | ❌
@@ -233,6 +257,9 @@ clang | signed integer overflow | 0 | 0
 clang | stack overflow | 139 | 0
 clang | std vector reserve set read | 0 | 0
 clang | strptime mktime unitialized | 0 | 0
+clang | virtual call in constructor | 134 | 134
+clang | virtual call in constructor helper | 134 | 134
+clang | virtual call in constructor link | 134 | 134
 clang | virtual call in destructor | 134 | 134
 clang | virtual call in destructor helper | 134 | 134
 clang | virtual call in destructor link | 134 | 134
@@ -262,6 +289,8 @@ gcc | signed integer overflow | 0 | 0
 gcc | stack overflow | 139 | 139
 gcc | std vector reserve set read | 0 | 0
 gcc | strptime mktime unitialized | 0 | 0
+gcc | virtual call in constructor helper | 134 | 134
+gcc | virtual call in constructor link | 134 | 134
 gcc | virtual call in destructor helper | 134 | 134
 gcc | virtual call in destructor link | 134 | 134
 msvc | access after realloc | 0 | 0
@@ -288,6 +317,8 @@ msvc | shifting more than width | 0 | 0
 msvc | signed integer overflow | 0 | 0
 msvc | stack overflow | -1073741571 | -1073741571
 msvc | std vector reserve set read | -1 | 0
+msvc | virtual call in constructor helper | -1 | -1073740791
+msvc | virtual call in constructor link | -1 | -1073740791
 msvc | virtual call in destructor helper | -1 | -1073740791
 msvc | virtual call in destructor link | -1 | -1073740791
 
@@ -322,6 +353,9 @@ signed integer overflow | ❌ | ❌ | ❌
 stack overflow | ✔️/❌ | ✔️ | ✔️
 std vector reserve set read | ❌ | ❌ | ✔️/❌
 strptime mktime unitialized | ❌ | ❌ | n/a
+virtual call in constructor | ✔️ | n/a | n/a
+virtual call in constructor helper | ✔️ | ✔️ | ✔️
+virtual call in constructor link | ✔️ | ✔️ | ✔️
 virtual call in destructor | ✔️ | n/a | n/a
 virtual call in destructor helper | ✔️ | ✔️ | ✔️
 virtual call in destructor link | ✔️ | ✔️ | ✔️
@@ -357,6 +391,9 @@ clang | address | signed integer overflow | 0 | 0
 clang | address | stack overflow | 1 | 0
 clang | address | std vector reserve set read | 0 | 0
 clang | address | strptime mktime unitialized | 0 | 0
+clang | address | virtual call in constructor | 134 | 134
+clang | address | virtual call in constructor helper | 134 | 134
+clang | address | virtual call in constructor link | 134 | 134
 clang | address | virtual call in destructor | 134 | 134
 clang | address | virtual call in destructor helper | 134 | 134
 clang | address | virtual call in destructor link | 134 | 134
@@ -386,6 +423,9 @@ clang | address,undefined | signed integer overflow | 1 | 1
 clang | address,undefined | stack overflow | 1 | 0
 clang | address,undefined | std vector reserve set read | 0 | 0
 clang | address,undefined | strptime mktime unitialized | 0 | 0
+clang | address,undefined | virtual call in constructor | 134 | 134
+clang | address,undefined | virtual call in constructor helper | 134 | 134
+clang | address,undefined | virtual call in constructor link | 134 | 134
 clang | address,undefined | virtual call in destructor | 134 | 134
 clang | address,undefined | virtual call in destructor helper | 134 | 134
 clang | address,undefined | virtual call in destructor link | 134 | 134
@@ -415,6 +455,9 @@ clang | memory | signed integer overflow | 0 | 0
 clang | memory | stack overflow | 77 | 0
 clang | memory | std vector reserve set read | 0 | 0
 clang | memory | strptime mktime unitialized | 0 | 0
+clang | memory | virtual call in constructor | 134 | 134
+clang | memory | virtual call in constructor helper | 134 | 134
+clang | memory | virtual call in constructor link | 134 | 134
 clang | memory | virtual call in destructor | 134 | 134
 clang | memory | virtual call in destructor helper | 134 | 134
 clang | memory | virtual call in destructor link | 134 | 134
@@ -444,6 +487,9 @@ clang | memory,undefined | signed integer overflow | 77 | 77
 clang | memory,undefined | stack overflow | 77 | 0
 clang | memory,undefined | std vector reserve set read | 0 | 0
 clang | memory,undefined | strptime mktime unitialized | 0 | 0
+clang | memory,undefined | virtual call in constructor | 134 | 134
+clang | memory,undefined | virtual call in constructor helper | 134 | 134
+clang | memory,undefined | virtual call in constructor link | 134 | 134
 clang | memory,undefined | virtual call in destructor | 134 | 134
 clang | memory,undefined | virtual call in destructor helper | 134 | 134
 clang | memory,undefined | virtual call in destructor link | 134 | 134
@@ -473,6 +519,9 @@ clang | undefined | signed integer overflow | 1 | 1
 clang | undefined | stack overflow | 1 | 0
 clang | undefined | std vector reserve set read | 0 | 0
 clang | undefined | strptime mktime unitialized | 0 | 0
+clang | undefined | virtual call in constructor | 134 | 134
+clang | undefined | virtual call in constructor helper | 134 | 134
+clang | undefined | virtual call in constructor link | 134 | 134
 clang | undefined | virtual call in destructor | 134 | 134
 clang | undefined | virtual call in destructor helper | 134 | 134
 clang | undefined | virtual call in destructor link | 134 | 134
@@ -502,6 +551,8 @@ gcc | address | signed integer overflow | 0 | 0
 gcc | address | stack overflow | 1 | 1
 gcc | address | std vector reserve set read | 0 | 0
 gcc | address | strptime mktime unitialized | 0 | 0
+gcc | address | virtual call in constructor helper | 134 | 134
+gcc | address | virtual call in constructor link | 134 | 134
 gcc | address | virtual call in destructor helper | 134 | 134
 gcc | address | virtual call in destructor link | 134 | 134
 gcc | address,leak,undefined | access after realloc | 1 | 1
@@ -530,6 +581,8 @@ gcc | address,leak,undefined | signed integer overflow | 1 | 0
 gcc | address,leak,undefined | stack overflow | 1 | 1
 gcc | address,leak,undefined | std vector reserve set read | 0 | 0
 gcc | address,leak,undefined | strptime mktime unitialized | 0 | 0
+gcc | address,leak,undefined | virtual call in constructor helper | 134 | 134
+gcc | address,leak,undefined | virtual call in constructor link | 134 | 134
 gcc | address,leak,undefined | virtual call in destructor helper | 134 | 134
 gcc | address,leak,undefined | virtual call in destructor link | 134 | 134
 gcc | leak | access after realloc | 23 | 23
@@ -558,6 +611,8 @@ gcc | leak | signed integer overflow | 0 | 0
 gcc | leak | stack overflow | 23 | 23
 gcc | leak | std vector reserve set read | 0 | 0
 gcc | leak | strptime mktime unitialized | 0 | 0
+gcc | leak | virtual call in constructor helper | 134 | 134
+gcc | leak | virtual call in constructor link | 134 | 134
 gcc | leak | virtual call in destructor helper | 134 | 134
 gcc | leak | virtual call in destructor link | 134 | 134
 gcc | undefined | access after realloc | 0 | 0
@@ -586,6 +641,8 @@ gcc | undefined | signed integer overflow | 1 | 0
 gcc | undefined | stack overflow | 139 | 139
 gcc | undefined | std vector reserve set read | 0 | 0
 gcc | undefined | strptime mktime unitialized | 0 | 0
+gcc | undefined | virtual call in constructor helper | 134 | 134
+gcc | undefined | virtual call in constructor link | 134 | 134
 gcc | undefined | virtual call in destructor helper | 134 | 134
 gcc | undefined | virtual call in destructor link | 134 | 134
 gcc | valgrind | access after realloc | 1 | 1
@@ -614,6 +671,8 @@ gcc | valgrind | signed integer overflow | 0 | 0
 gcc | valgrind | stack overflow | 139 | 139
 gcc | valgrind | std vector reserve set read | 0 | 0
 gcc | valgrind | strptime mktime unitialized | 1 | 1
+gcc | valgrind | virtual call in constructor helper | 134 | 134
+gcc | valgrind | virtual call in constructor link | 134 | 134
 gcc | valgrind | virtual call in destructor helper | 134 | 134
 gcc | valgrind | virtual call in destructor link | 134 | 134
 
@@ -648,6 +707,9 @@ signed integer overflow | ❌ | ✔️ | ❌ | ✔️ | ✔️
 stack overflow | ✔️/❌ | ✔️/❌ | ✔️/❌ | ✔️/❌ | ✔️/❌
 std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌
 strptime mktime unitialized | ❌ | ❌ | ❌ | ❌ | ❌
+virtual call in constructor | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+virtual call in constructor helper | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+virtual call in constructor link | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 virtual call in destructor | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 virtual call in destructor helper | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 virtual call in destructor link | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
@@ -683,6 +745,9 @@ signed integer overflow | ❌ | ✔️/❌ | ❌ | ✔️/❌ | ❌
 stack overflow | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌
 strptime mktime unitialized | ❌ | ❌ | ❌ | ❌ | ✔️
+virtual call in constructor | n/a | n/a | n/a | n/a | n/a
+virtual call in constructor helper | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+virtual call in constructor link | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 virtual call in destructor | n/a | n/a | n/a | n/a | n/a
 virtual call in destructor helper | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 virtual call in destructor link | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
@@ -717,6 +782,10 @@ signed integer overflow | ❌ | ❌ | ❌ | ✔️
 stack overflow | ✔️ | ✔️ | ✔️ | ✔️
 std vector reserve set read | ❌ | ❌ | ✔️ | ❌
 strptime mktime unitialized | ❌ | ✔️ | ❌ | ✔️
+virtual call in constructor | ✔️ | ✔️ | ✔️ | ✔️
+virtual call in constructor helper | ❌ | ✔️ | ✔️ | ✔️
+virtual call in constructor lib | ❌ | ✔️
+virtual call in constructor link | ❌ | ❌ | ✔️ | ✔️
 virtual call in destructor | ✔️ | ✔️ | ✔️ | ✔️
 virtual call in destructor helper | ❌ | ✔️ | ✔️ | ✔️
 virtual call in destructor lib | ❌ | ✔️
