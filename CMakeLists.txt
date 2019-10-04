@@ -37,6 +37,7 @@ set(executables
   virtual_call_in_destructor_link
 )
 
+# Only build these files on compilers that will successfully compile them
 if (NOT MSVC)
   list(APPEND executables reading_uninitialized_value_return strptime_mktime_unitialized)
 endif ()
