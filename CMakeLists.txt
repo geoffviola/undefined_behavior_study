@@ -40,7 +40,7 @@ set(executables
 if (NOT MSVC)
   list(APPEND executables reading_uninitialized_value_return strptime_mktime_unitialized)
 endif ()
-if (NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   list(APPEND executables virtual_call_in_destructor)
   list(APPEND executables virtual_call_in_constructor)
 endif ()
