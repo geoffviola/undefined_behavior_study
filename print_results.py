@@ -399,8 +399,12 @@ def print_overall_results(static_analysis, runtime_analysis):
 
     for test, rest_0 in sorted(table.items()):
         line = test
-        for detection_type, result in sorted(rest_0.items()):
-            line += ' | ' + detection_to_str(result)
+        for detection_type in DetectionType:
+            line += ' | '
+            if detection_type in rest_0:
+                line += detection_to_str(rest_0[detection_type])
+            else:
+                line += 'n/a'
         print(line)
 
 

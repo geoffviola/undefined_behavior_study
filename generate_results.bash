@@ -26,19 +26,60 @@ cd ..
 mkdir -p gcc/debug
 cd gcc/debug
 
+function run_executable {
+    $(timeout 1 ./${1} > intermediate_results/${1}_output.txt 2>&1)
+    echo ${1} $? > intermediate_results/${1}_result.txt
+}
+export -f run_executable
+
+function run_executable_with_valgrind {
+    $(timeout 5 valgrind --error-exitcode=1 ./${1} > intermediate_results/${1}_valgrind_output.txt 2>&1)
+    echo ${1} $? > intermediate_results/${1}_valgrind_result.txt
+}
+export -f run_executable_with_valgrind
+
+function run_folder {
+    with_valgrind=${1}
+    declare -a executable_files
+    executables_count=0
+    for file in `ls -1` ; do
+        if [ -x $file ] && [ -f $file ] ; then
+            executable_files[executables_count]=$file
+            let "executables_count++"
+        fi
+    done
+    mkdir -p intermediate_results
+    [[ "$with_valgrind" = true ]] && multiplier=2 || multiplier=1
+    num_jobs=$(($executables_count*$multiplier))
+    for (( i=0; i<=$(( $executables_count -1 )); i++ ))
+    do
+       echo -ne "kicking off $(($i*$multiplier+1))/$num_jobs\r"
+       sem -j+0 run_executable ${executable_files[$i]}
+       if [ "$with_valgrind" = true ] ; then
+           echo -ne "kicking off $(($i*$multiplier+2))/$num_jobs\r"
+           sem -j+0 run_executable_with_valgrind ${executable_files[$i]}
+       fi
+    done
+    echo -ne '\n'
+    sem --wait
+    rm -f runtime_results.txt
+    if [ "$with_valgrind" = true ] ; then
+        rm -f valgrind_results.txt
+    fi
+    for file in "${executable_files[@]}" ; do
+        cat intermediate_results/${file}_result.txt >> runtime_results.txt
+        if [ "$with_valgrind" = true ] ; then
+            cat intermediate_results/${file}_valgrind_result.txt >> valgrind_results.txt
+        fi
+    done
+}
+
 echo "gcc debug"
 export CXX='g++'
 cmake ../../.. -DCMAKE_BUILD_TYPE=Debug > cmake.txt
 make -j $(nproc) 1> make.txt 2> warnings.txt
 associate_warnings.py --cpp_dir=${SRC_DIR}
-for file in `ls -1` ; do
-    if [ -x $file ] && [ -f $file ] ; then
-        timeout 1 ./${file} > ${file}_output.txt 2>&1
-        echo ${file} $? >> runtime_results.txt
-        timeout 5 valgrind --error-exitcode=1 ./${file} > ${file}_valgrind_output.txt 2>&1
-        echo $file $? >> valgrind_results.txt
-    fi
-done
+run_folder true
 
 cd ..
 mkdir -p rel_with_deb_info
@@ -47,14 +88,7 @@ echo "gcc rel with deb info"
 cmake ../../.. -DCMAKE_BUILD_TYPE=RelWithDebInfo > cmake.txt
 make -j $(nproc) 1> make.txt 2> warnings.txt
 associate_warnings.py --cpp_dir=${SRC_DIR}
-for file in `ls -1` ; do
-    if [ -x $file ] && [ -f $file ] ; then
-        timeout 1 ./${file} > ${file}_output.txt 2>&1
-        echo ${file} $? >> runtime_results.txt
-        timeout 5 valgrind --error-exitcode=1 ./${file} > ${file}_valgrind_output.txt 2>&1
-        echo $file $? >> valgrind_results.txt
-    fi
-done
+run_folder true
 
 cd ../..
 mkdir -p clang/debug
@@ -64,12 +98,7 @@ echo "clang debug"
 cmake ../../.. -DCMAKE_BUILD_TYPE=Debug > cmake.txt
 make -j $(nproc) 1> make.txt 2> warnings.txt
 associate_warnings.py --cpp_dir=${SRC_DIR}
-for file in `ls -1` ; do
-    if [ -x $file ] && [ -f $file ] ; then
-        timeout 1 ./${file} > ${file}_output.txt 2>&1
-        echo $file $? >> runtime_results.txt
-    fi
-done
+run_folder false
 
 cd ..
 mkdir -p rel_with_deb_info
@@ -78,12 +107,7 @@ echo "clang rel with deb info"
 cmake ../../.. -DCMAKE_BUILD_TYPE=RelWithDebInfo > cmake.txt
 make -j $(nproc) 1> make.txt 2> warnings.txt
 associate_warnings.py --cpp_dir=${SRC_DIR}
-for file in `ls -1` ; do
-    if [ -x $file ] && [ -f $file ] ; then
-        timeout 1 ./${file} > ${file}_output.txt 2>&1
-        echo $file $? >> runtime_results.txt
-    fi
-done
+run_folder false
 
 cd ../..
 
@@ -99,12 +123,7 @@ echo $1 $2 debug
 cmake ../../../.. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="-fsanitize=$2  -fno-sanitize-recover=$2" > cmake.txt
 make -j $(nproc) 1> make.txt 2> warnings.txt
 associate_warnings.py --cpp_dir=${SRC_DIR}
-for file in `ls -1` ; do
-    if [ -x $file ] && [ -f $file ] ; then
-        timeout 1 ./${file} > ${file}_output.txt 2>&1
-        echo $file $? >> runtime_results.txt
-    fi
-done
+run_folder false
 
 cd ..
 mkdir -p rel_with_deb_info
@@ -113,12 +132,7 @@ echo $1 $2 rel with deb info
 cmake ../../../.. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_FLAGS="-fsanitize=$2 -fno-sanitize-recover=$2" > cmake.txt
 make -j $(nproc) 1> make.txt 2> warnings.txt
 associate_warnings.py --cpp_dir=${SRC_DIR}
-for file in `ls -1` ; do
-    if [ -x $file ] && [ -f $file ] ; then
-        timeout 1 ./${file} > ${file}_output.txt 2>&1
-        echo $file $? >> runtime_results.txt
-    fi
-done
+run_folder false
 cd ../..
 }
 
@@ -158,6 +172,11 @@ gcc --version
 valgrind --version
 echo 
 clang++ --version
+clang-tidy --version
+cppcheck --version
+parallel --version
+bash --version
+python --version
 
 echo
 

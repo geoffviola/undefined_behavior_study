@@ -8,6 +8,7 @@ endif ()
 set(executables
   access_after_realloc
   array_out_of_bounds
+  automatic_variable_over_stack
   dereferencing_nullptr
   divide_by_zero
   initialize_std_string_with_nullptr
