@@ -15,6 +15,7 @@ Compiler | Undefined Behavior Type | Warning | Warning Opt | Name
 --- | --- | --- | --- | ---
 clang | access after realloc | ❌ | ❌ | n/a
 clang | array out of bounds | ❌ | ❌ | n/a
+clang | automatic variable over stack | ❌ | ❌ | n/a
 clang | dereferencing nullptr | ❌ | ❌ | n/a
 clang | divide by zero | ✔️ | ✔️ | -Wdivision-by-zero
 clang | initialize std string with nullptr | ❌ | ❌ | n/a
@@ -49,6 +50,7 @@ clang | virtual call in destructor lib | ❌ | ❌ | n/a
 clang | virtual call in destructor link | ❌ | ❌ | n/a
 gcc | access after realloc | ❌ | ❌ | n/a
 gcc | array out of bounds | ❌ | ✔️ | -Wuninitialized
+gcc | automatic variable over stack | ❌ | ❌ | n/a
 gcc | dereferencing nullptr | ❌ | ❌ | n/a
 gcc | divide by zero | ✔️ | ✔️ | -Wdiv-by-zero
 gcc | initialize std string with nullptr | ❌ | ❌ | n/a
@@ -83,6 +85,7 @@ gcc | virtual call in destructor lib | ❌ | ❌ | n/a
 gcc | virtual call in destructor link | ❌ | ❌ | n/a
 msvc | access after realloc | ❌ | ❌ | n/a
 msvc | array out of bounds | ❌ | ❌ | n/a
+msvc | automatic variable over stack | ❌ | ❌ | n/a
 msvc | dereferencing nullptr | ❌ | ❌ | n/a
 msvc | divide by zero | ✔️ | ✔️ | 4723
 msvc | initialize std string with nullptr | ❌ | ❌ | n/a
@@ -119,6 +122,7 @@ Tool | Undefined Behavior Type | Warning | Name
 --- | --- | --- | ---
 clang-tidy | access after realloc | ✔️ | cppcoreguidelines-owning-memory,hicpp-use-auto,cppcoreguidelines-no-malloc,cppcoreguidelines-pro-bounds-pointer-arithmetic,clang-analyzer-unix.Malloc
 clang-tidy | array out of bounds | ✔️ | cppcoreguidelines-pro-type-member-init,cppcoreguidelines-pro-bounds-constant-array-index
+clang-tidy | automatic variable over stack | ❌ | n/a
 clang-tidy | dereferencing nullptr | ✔️ | clang-analyzer-core.NullDereference
 clang-tidy | divide by zero | ✔️ | clang-analyzer-core.DivideZero,clang-diagnostic-division-by-zero
 clang-tidy | initialize std string with nullptr | ❌ | n/a
@@ -153,6 +157,7 @@ clang-tidy | virtual call in destructor lib | ✔️ | clang-analyzer-optin.cplu
 clang-tidy | virtual call in destructor link | ❌ | n/a
 cppcheck | access after realloc | ✔️ | n/a
 cppcheck | array out of bounds | ❌ | n/a
+cppcheck | automatic variable over stack | ❌ | n/a
 cppcheck | dereferencing nullptr | ✔️ | n/a
 cppcheck | divide by zero | ✔️ | n/a
 cppcheck | initialize std string with nullptr | ❌ | n/a
@@ -193,6 +198,7 @@ Undefined Behavior Type | clang | clang-tidy | cppcheck | gcc | msvc
 --- | --- | --- | --- | --- | ---
 access after realloc | ❌ | ✔️ | ✔️ | ❌ | ❌
 array out of bounds | ❌ | ✔️ | ❌ | ❌/✔️ | ❌
+automatic variable over stack | ❌ | ❌ | ❌ | ❌ | ❌
 dereferencing nullptr | ❌ | ✔️ | ✔️ | ❌ | ❌
 divide by zero | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 initialize std string with nullptr | ❌ | ❌ | ❌ | ❌ | ❌
@@ -233,6 +239,7 @@ Compiler | Undefined Behavior Type | Debug | RelWithDebInfo
 --- | --- | --- | ---
 clang | access after realloc | 0 | 0
 clang | array out of bounds | 0 | 0
+clang | automatic variable over stack | 139 | 0
 clang | dereferencing nullptr | 139 | 0
 clang | divide by zero | 136 | 0
 clang | initialize std string with nullptr | 134 | 134
@@ -265,6 +272,7 @@ clang | virtual call in destructor helper | 134 | 134
 clang | virtual call in destructor link | 134 | 134
 gcc | access after realloc | 0 | 0
 gcc | array out of bounds | 0 | 0
+gcc | automatic variable over stack | 139 | 0
 gcc | dereferencing nullptr | 139 | 139
 gcc | divide by zero | 136 | 132
 gcc | initialize std string with nullptr | 134 | 134
@@ -295,6 +303,7 @@ gcc | virtual call in destructor helper | 134 | 134
 gcc | virtual call in destructor link | 134 | 134
 msvc | access after realloc | 0 | 0
 msvc | array out of bounds | -1 | 0
+msvc | automatic variable over stack | -1 | 0
 msvc | dereferencing nullptr | -1073741819 | -1073741819
 msvc | divide by zero | -1073741676 | -1073741676
 msvc | initialize std string with nullptr | -1073741819 | -1073741819
@@ -315,7 +324,7 @@ msvc | reading uninitialized value printf | -1 | 0
 msvc | reference out of scope | 0 | 0
 msvc | shifting more than width | 0 | 0
 msvc | signed integer overflow | 0 | 0
-msvc | stack overflow | -1073741571 | -1073741571
+msvc | stack overflow | -1073741571 | -1
 msvc | std vector reserve set read | -1 | 0
 msvc | virtual call in constructor helper | -1 | -1073740791
 msvc | virtual call in constructor link | -1 | -1073740791
@@ -329,6 +338,7 @@ Undefined Behavior | clang | gcc | msvc
 --- | --- | --- | ---
 access after realloc | ❌ | ❌ | ❌
 array out of bounds | ❌ | ❌ | ✔️/❌
+automatic variable over stack | ✔️/❌ | ✔️/❌ | ✔️/❌
 dereferencing nullptr | ✔️/❌ | ✔️ | ✔️
 divide by zero | ✔️/❌ | ✔️ | ✔️
 initialize std string with nullptr | ✔️ | ✔️ | ✔️
@@ -367,6 +377,7 @@ Compiler | Tool | Undefined Behavior Type | Debug | RelWithDebInfo
 --- | --- | --- | --- | ---
 clang | address | access after realloc | 1 | 1
 clang | address | array out of bounds | 1 | 0
+clang | address | automatic variable over stack | 1 | 0
 clang | address | dereferencing nullptr | 1 | 0
 clang | address | divide by zero | 1 | 0
 clang | address | initialize std string with nullptr | 134 | 134
@@ -399,6 +410,7 @@ clang | address | virtual call in destructor helper | 134 | 134
 clang | address | virtual call in destructor link | 134 | 134
 clang | address,undefined | access after realloc | 1 | 1
 clang | address,undefined | array out of bounds | 1 | 1
+clang | address,undefined | automatic variable over stack | 1 | 1
 clang | address,undefined | dereferencing nullptr | 1 | 1
 clang | address,undefined | divide by zero | 1 | 1
 clang | address,undefined | initialize std string with nullptr | 134 | 134
@@ -431,6 +443,7 @@ clang | address,undefined | virtual call in destructor helper | 134 | 134
 clang | address,undefined | virtual call in destructor link | 134 | 134
 clang | memory | access after realloc | 0 | 0
 clang | memory | array out of bounds | 0 | 0
+clang | memory | automatic variable over stack | 77 | 0
 clang | memory | dereferencing nullptr | 77 | 0
 clang | memory | divide by zero | 0 | 0
 clang | memory | initialize std string with nullptr | 134 | 134
@@ -463,6 +476,7 @@ clang | memory | virtual call in destructor helper | 134 | 134
 clang | memory | virtual call in destructor link | 134 | 134
 clang | memory,undefined | access after realloc | 0 | 0
 clang | memory,undefined | array out of bounds | 0 | 77
+clang | memory,undefined | automatic variable over stack | 77 | 77
 clang | memory,undefined | dereferencing nullptr | 77 | 77
 clang | memory,undefined | divide by zero | 77 | 77
 clang | memory,undefined | initialize std string with nullptr | 134 | 134
@@ -495,6 +509,7 @@ clang | memory,undefined | virtual call in destructor helper | 134 | 134
 clang | memory,undefined | virtual call in destructor link | 134 | 134
 clang | undefined | access after realloc | 0 | 0
 clang | undefined | array out of bounds | 0 | 1
+clang | undefined | automatic variable over stack | 1 | 1
 clang | undefined | dereferencing nullptr | 1 | 1
 clang | undefined | divide by zero | 1 | 1
 clang | undefined | initialize std string with nullptr | 134 | 134
@@ -527,6 +542,7 @@ clang | undefined | virtual call in destructor helper | 134 | 134
 clang | undefined | virtual call in destructor link | 134 | 134
 gcc | address | access after realloc | 1 | 1
 gcc | address | array out of bounds | 1 | 1
+gcc | address | automatic variable over stack | 1 | 1
 gcc | address | dereferencing nullptr | 1 | 1
 gcc | address | divide by zero | 1 | 132
 gcc | address | initialize std string with nullptr | 134 | 134
@@ -557,6 +573,7 @@ gcc | address | virtual call in destructor helper | 134 | 134
 gcc | address | virtual call in destructor link | 134 | 134
 gcc | address,leak,undefined | access after realloc | 1 | 1
 gcc | address,leak,undefined | array out of bounds | 1 | 1
+gcc | address,leak,undefined | automatic variable over stack | 1 | 1
 gcc | address,leak,undefined | dereferencing nullptr | 1 | 1
 gcc | address,leak,undefined | divide by zero | 1 | 1
 gcc | address,leak,undefined | initialize std string with nullptr | 134 | 134
@@ -587,6 +604,7 @@ gcc | address,leak,undefined | virtual call in destructor helper | 134 | 134
 gcc | address,leak,undefined | virtual call in destructor link | 134 | 134
 gcc | leak | access after realloc | 23 | 23
 gcc | leak | array out of bounds | 0 | 0
+gcc | leak | automatic variable over stack | 23 | 0
 gcc | leak | dereferencing nullptr | 23 | 23
 gcc | leak | divide by zero | 23 | 132
 gcc | leak | initialize std string with nullptr | 134 | 134
@@ -617,6 +635,7 @@ gcc | leak | virtual call in destructor helper | 134 | 134
 gcc | leak | virtual call in destructor link | 134 | 134
 gcc | undefined | access after realloc | 0 | 0
 gcc | undefined | array out of bounds | 0 | 1
+gcc | undefined | automatic variable over stack | 139 | 139
 gcc | undefined | dereferencing nullptr | 1 | 1
 gcc | undefined | divide by zero | 1 | 1
 gcc | undefined | initialize std string with nullptr | 134 | 134
@@ -647,6 +666,7 @@ gcc | undefined | virtual call in destructor helper | 134 | 134
 gcc | undefined | virtual call in destructor link | 134 | 134
 gcc | valgrind | access after realloc | 1 | 1
 gcc | valgrind | array out of bounds | 0 | 0
+gcc | valgrind | automatic variable over stack | 139 | 0
 gcc | valgrind | dereferencing nullptr | 139 | 139
 gcc | valgrind | divide by zero | 136 | 132
 gcc | valgrind | initialize std string with nullptr | 134 | 134
@@ -683,6 +703,7 @@ Undefined Behavior Type | address | address,undefined | memory | memory,undefine
 --- |--- |--- |--- |--- | ---
 access after realloc | ✔️ | ✔️ | ❌ | ❌ | ❌
 array out of bounds | ✔️/❌ | ✔️ | ❌ | ❌/✔️ | ❌/✔️
+automatic variable over stack | ✔️/❌ | ✔️ | ✔️/❌ | ✔️ | ✔️
 dereferencing nullptr | ✔️/❌ | ✔️ | ✔️/❌ | ✔️ | ✔️
 divide by zero | ✔️/❌ | ✔️ | ❌ | ✔️ | ✔️
 initialize std string with nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
@@ -721,6 +742,7 @@ Undefined Behavior Type | address | address,leak,undefined | leak | undefined | 
 --- |--- |--- |--- |--- | ---
 access after realloc | ✔️ | ✔️ | ✔️ | ❌ | ✔️
 array out of bounds | ✔️ | ✔️ | ❌ | ❌/✔️ | ❌
+automatic variable over stack | ✔️ | ✔️ | ✔️/❌ | ✔️ | ✔️/❌
 dereferencing nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 divide by zero | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 initialize std string with nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
@@ -758,6 +780,7 @@ Undefined Behavior Type | Compiler Warning | Standalone Static Analysis | Runtim
 --- | --- | --- | --- | ---
 access after realloc | ❌ | ✔️ | ❌ | ✔️
 array out of bounds | ✔️ | ✔️ | ✔️ | ✔️
+automatic variable over stack | ❌ | ❌ | ✔️ | ✔️
 dereferencing nullptr | ❌ | ✔️ | ✔️ | ✔️
 divide by zero | ✔️ | ✔️ | ✔️ | ✔️
 initialize std string with nullptr | ❌ | ❌ | ✔️ | ✔️
@@ -784,11 +807,11 @@ std vector reserve set read | ❌ | ❌ | ✔️ | ❌
 strptime mktime unitialized | ❌ | ✔️ | ❌ | ✔️
 virtual call in constructor | ✔️ | ✔️ | ✔️ | ✔️
 virtual call in constructor helper | ❌ | ✔️ | ✔️ | ✔️
-virtual call in constructor lib | ❌ | ✔️
+virtual call in constructor lib | ❌ | ✔️ | n/a | n/a
 virtual call in constructor link | ❌ | ❌ | ✔️ | ✔️
 virtual call in destructor | ✔️ | ✔️ | ✔️ | ✔️
 virtual call in destructor helper | ❌ | ✔️ | ✔️ | ✔️
-virtual call in destructor lib | ❌ | ✔️
+virtual call in destructor lib | ❌ | ✔️ | n/a | n/a
 virtual call in destructor link | ❌ | ❌ | ✔️ | ✔️
 
 
@@ -798,6 +821,7 @@ virtual call in destructor link | ❌ | ❌ | ✔️ | ✔️
 - clang-tidy: 6.0
 - cppcheck 1.82
 - gcc (Ubuntu 7.4.0-1ubuntu1~18.04.1) 7.4.0 -std=c++17
+- GNU parallel 20161222
 - MSVC: 2019 Version 14.22.27905
 - Windows SDK version 10.0.18362.0 to target Windows 10.0.17763
 - valgrind: 3.13.0

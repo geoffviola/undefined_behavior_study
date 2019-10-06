@@ -176,7 +176,7 @@ clang-tidy --version
 cppcheck --version
 parallel --version
 bash --version
-python --version
+python3 --version
 
 echo
 
