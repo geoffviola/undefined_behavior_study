@@ -821,10 +821,12 @@ virtual call in destructor link | ❌ | ❌ | ✔️ | ✔️
 - clang-tidy: 6.0
 - cppcheck 1.82
 - gcc (Ubuntu 7.4.0-1ubuntu1~18.04.1) 7.4.0 -std=c++17
+- GNU bash, version 4.4.19(1)-release (x86_64-pc-linux-gnu)
 - GNU parallel 20161222
 - MSVC: 2019 Version 14.22.27905
-- Windows SDK version 10.0.18362.0 to target Windows 10.0.17763
+- Python 3.6.8
 - valgrind: 3.13.0
+- Windows SDK version 10.0.18362.0 to target Windows 10.0.17763
 
 ## Reference Warning Classes
 Compiler | Name | Code | Class
