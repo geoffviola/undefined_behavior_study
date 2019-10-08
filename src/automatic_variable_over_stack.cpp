@@ -10,4 +10,3 @@ int main() {
   std::cout << large_var[0] << large_var[kArraySize - 1] << '\n';
   return EXIT_SUCCESS;
 }
-

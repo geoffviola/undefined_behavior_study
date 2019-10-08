@@ -5,10 +5,10 @@ class Parent {
 public:
   Parent() = default;
   virtual inline ~Parent() { Helper(); }
-  Parent(const Parent&) = default;
-  Parent& operator=(const Parent&) = default;
+  Parent(const Parent &) = default;
+  Parent &operator=(const Parent &) = default;
   Parent(Parent &&) = default;
-  Parent& operator=(Parent &&) = default;
+  Parent &operator=(Parent &&) = default;
 
   virtual void Foo() = 0;
 

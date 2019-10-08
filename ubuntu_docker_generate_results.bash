@@ -19,6 +19,8 @@ if [[ \$* == *--interactive* ]]; then
 fi
 mkdir /home/$(whoami)/.parallel
 touch /home/$(whoami)/.parallel/will-cite
+mkdir /home/$(whoami)/.parallel/semaphores
+chown -R $(whoami):$(whoami) /home/$(whoami)/.parallel
 su - $(whoami)
 cd $(pwd)
 if [[ \$* != *--interactive* ]]; then
