@@ -7,6 +7,7 @@ https://en.cppreference.com/book/uninitialized
 
 int main() {
   int32_t a;
+  // NOLINTENEXTLINE(cppcoreguidelines-pro-type-vararg)
   printf("%d\n", a);
   return EXIT_SUCCESS;
 }

@@ -7,8 +7,12 @@ Access to pointer passed to realloc
 #include <iostream>
 
 int main() {
-  int *p = static_cast<int *>(std::malloc(sizeof(int)));
-  static_cast<void>(static_cast<int *>(std::realloc(p, sizeof(int))) + 1);
-  std::cout << *p << std::endl;
+  // NOLINTNEXTLINE(cppcoreguidelines-no-malloc, hicpp-no-malloc)
+  auto *p1 = static_cast<int *>(std::malloc(sizeof(int)));
+  // NOLINTNEXTLINE(cppcoreguidelines-no-malloc, hicpp-no-malloc)
+  auto *p2 = static_cast<int *>(std::realloc(p1, sizeof(int)));
+  std::cout << *p1 << *p2 << '\n';
+  // NOLINTNEXTLINE(cppcoreguidelines-no-malloc, hicpp-no-malloc)
+  free(p2);
   return EXIT_SUCCESS;
 }
