@@ -15,6 +15,7 @@ set(executables
     initialize_std_string_with_nullptr
     large_double_to_int
     large_double_to_float
+    malloc_reinterpret_cast_pod_struct
     mutate_const_value
     no_undefined_behavior
     odr_violation_function
