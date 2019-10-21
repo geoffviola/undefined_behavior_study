@@ -21,6 +21,7 @@ clang | divide by zero | ✔️ | ✔️ | -Wdivision-by-zero
 clang | initialize std string with nullptr | ❌ | ❌ | n/a
 clang | large double to float | ❌ | ❌ | n/a
 clang | large double to int | ❌ | ❌ | n/a
+clang | malloc reinterpret cast pod struct | ❌ | ❌ | n/a
 clang | mutate const value | ❌ | ❌ | n/a
 clang | odr violation function | ❌ | ❌ | n/a
 clang | odr violation function lib | ❌ | ❌ | n/a
@@ -60,6 +61,7 @@ gcc | divide by zero | ✔️ | ✔️ | -Wdiv-by-zero
 gcc | initialize std string with nullptr | ❌ | ❌ | n/a
 gcc | large double to float | ❌ | ❌ | n/a
 gcc | large double to int | ❌ | ❌ | n/a
+gcc | malloc reinterpret cast pod struct | ❌ | ❌ | n/a
 gcc | mutate const value | ❌ | ❌ | n/a
 gcc | odr violation function | ❌ | ❌ | n/a
 gcc | odr violation function lib | ❌ | ❌ | n/a
@@ -99,6 +101,7 @@ msvc | divide by zero | ✔️ | ✔️ | 4723
 msvc | initialize std string with nullptr | ❌ | ❌ | n/a
 msvc | large double to float | ❌ | ❌ | n/a
 msvc | large double to int | ✔️ | ✔️ | 4309
+msvc | malloc reinterpret cast pod struct | ❌ | ❌ | n/a
 msvc | mutate const value | ❌ | ❌ | n/a
 msvc | odr violation function | ❌ | ❌ | n/a
 msvc | odr violation function lib | ❌ | ❌ | n/a
@@ -132,7 +135,7 @@ msvc | virtual call in destructor link | ❌ | ❌ | n/a
 ### 1.2.Static Analyzers
 Tool | Undefined Behavior Type | Warning | Name
 --- | --- | --- | ---
-clang-tidy | access after realloc | ✔️ | cppcoreguidelines-owning-memory,hicpp-use-auto,cppcoreguidelines-no-malloc,cppcoreguidelines-pro-bounds-pointer-arithmetic,clang-analyzer-unix.Malloc
+clang-tidy | access after realloc | ✔️ | clang-analyzer-unix.Malloc
 clang-tidy | array out of bounds | ✔️ | cppcoreguidelines-pro-type-member-init,cppcoreguidelines-pro-bounds-constant-array-index
 clang-tidy | automatic variable over stack | ❌ | n/a
 clang-tidy | dereferencing nullptr | ✔️ | clang-analyzer-core.NullDereference
@@ -140,6 +143,7 @@ clang-tidy | divide by zero | ✔️ | clang-analyzer-core.DivideZero,clang-diag
 clang-tidy | initialize std string with nullptr | ❌ | n/a
 clang-tidy | large double to float | ❌ | n/a
 clang-tidy | large double to int | ❌ | n/a
+clang-tidy | malloc reinterpret cast pod struct | ✔️ | cppcoreguidelines-pro-type-reinterpret-cast
 clang-tidy | mutate const value | ✔️ | cppcoreguidelines-pro-type-const-cast
 clang-tidy | odr violation function | ❌ | n/a
 clang-tidy | odr violation function lib | ❌ | n/a
@@ -148,7 +152,7 @@ clang-tidy | odr violation struct ret lib | ❌ | n/a
 clang-tidy | out of bounds pointer | ❌ | n/a
 clang-tidy | preincrement plus postincrement | ✔️ | clang-diagnostic-unsequenced
 clang-tidy | preincrement plus value | ✔️ | clang-diagnostic-unsequenced
-clang-tidy | read from old type | ✔️ | hicpp-use-auto,cppcoreguidelines-pro-type-reinterpret-cast,readability-implicit-bool-conversion
+clang-tidy | read from old type | ❌ | n/a
 clang-tidy | reading uninitialized value add | ✔️ | clang-diagnostic-uninitialized,clang-analyzer-core.UndefinedBinaryOperatorResult
 clang-tidy | reading uninitialized value cout | ✔️ | clang-analyzer-core.CallAndMessage,clang-diagnostic-uninitialized
 clang-tidy | reading uninitialized value func arg | ✔️ | clang-analyzer-core.CallAndMessage
@@ -179,6 +183,7 @@ cppcheck | divide by zero | ✔️ | n/a
 cppcheck | initialize std string with nullptr | ❌ | n/a
 cppcheck | large double to float | ❌ | n/a
 cppcheck | large double to int | ❌ | n/a
+cppcheck | malloc reinterpret cast pod struct | ❌ | n/a
 cppcheck | mutate const value | ❌ | n/a
 cppcheck | odr violation function | ❌ | n/a
 cppcheck | odr violation function lib | ❌ | n/a
@@ -224,6 +229,7 @@ divide by zero | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 initialize std string with nullptr | ❌ | ❌ | ❌ | ❌ | ❌
 large double to float | ❌ | ❌ | ❌ | ❌ | ❌
 large double to int | ❌ | ❌ | ❌ | ❌ | ✔️
+malloc reinterpret cast pod struct | ❌ | ✔️ | ❌ | ❌ | ❌
 mutate const value | ❌ | ✔️ | ❌ | ❌ | ❌
 odr violation function | ❌ | ❌ | ❌ | ❌ | ❌
 odr violation function lib | ❌ | ❌ | ❌ | ❌ | ❌
@@ -232,7 +238,7 @@ odr violation struct ret lib | ❌ | ❌ | ❌ | ❌ | ❌
 out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌
 preincrement plus postincrement | ✔️ | ✔️ | ❌ | ✔️ | ❌
 preincrement plus value | ✔️ | ✔️ | ❌ | ✔️ | ❌
-read from old type | ❌ | ✔️ | ❌ | ❌ | ❌
+read from old type | ❌ | ❌ | ❌ | ❌ | ❌
 reading uninitialized value add | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value cout | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value func arg | ❌ | ✔️ | ❌ | ❌/✔️ | ❌
@@ -269,6 +275,7 @@ clang | divide by zero | 136 | 0
 clang | initialize std string with nullptr | 134 | 134
 clang | large double to float | 0 | 0
 clang | large double to int | 0 | 0
+clang | malloc reinterpret cast pod struct | 0 | 0
 clang | mutate const value | 0 | 0
 clang | odr violation function | 0 | 0
 clang | odr violation struct ret | 0 | 0
@@ -304,6 +311,7 @@ gcc | divide by zero | 136 | 132
 gcc | initialize std string with nullptr | 134 | 134
 gcc | large double to float | 0 | 0
 gcc | large double to int | 0 | 0
+gcc | malloc reinterpret cast pod struct | 0 | 0
 gcc | mutate const value | 0 | 0
 gcc | odr violation function | 0 | 0
 gcc | odr violation struct ret | 0 | 0
@@ -331,12 +339,13 @@ gcc | virtual call in destructor helper | 134 | 134
 gcc | virtual call in destructor link | 134 | 134
 msvc | access after realloc | 0 | 0
 msvc | array out of bounds | -1 | 0
-msvc | automatic variable over stack | -1 | 0
+msvc | automatic variable over stack | -1073741571 | 0
 msvc | dereferencing nullptr | -1073741819 | -1073741819
 msvc | divide by zero | -1073741676 | -1073741676
 msvc | initialize std string with nullptr | -1073741819 | -1073741819
 msvc | large double to float | 0 | 0
 msvc | large double to int | 0 | 0
+msvc | malloc reinterpret cast pod struct | 0 | 0
 msvc | mutate const value | 0 | 0
 msvc | odr violation function | 0 | 0
 msvc | odr violation struct ret | 0 | 0
@@ -354,7 +363,7 @@ msvc | reading uninitialized value printf | -1 | 0
 msvc | reference out of scope | 0 | 0
 msvc | shifting more than width | 0 | 0
 msvc | signed integer overflow | 0 | 0
-msvc | stack overflow | -1073741571 | -1
+msvc | stack overflow | -1073741571 | -1073741571
 msvc | std vector reserve set read | -1 | 0
 msvc | virtual call in constructor helper | -1 | -1073740791
 msvc | virtual call in constructor link | -1 | -1073740791
@@ -374,6 +383,7 @@ divide by zero | ✔️/❌ | ✔️ | ✔️
 initialize std string with nullptr | ✔️ | ✔️ | ✔️
 large double to float | ❌ | ❌ | ❌
 large double to int | ❌ | ❌ | ❌
+malloc reinterpret cast pod struct | ❌ | ❌ | ❌
 mutate const value | ❌ | ❌ | ❌
 odr violation function | ❌ | ❌ | ❌
 odr violation struct ret | ❌ | ❌ | ❌
@@ -415,6 +425,7 @@ clang | address | divide by zero | 1 | 0
 clang | address | initialize std string with nullptr | 134 | 134
 clang | address | large double to float | 0 | 0
 clang | address | large double to int | 0 | 0
+clang | address | malloc reinterpret cast pod struct | 0 | 0
 clang | address | mutate const value | 0 | 0
 clang | address | odr violation function | 0 | 0
 clang | address | odr violation struct ret | 0 | 0
@@ -450,6 +461,7 @@ clang | address,undefined | divide by zero | 1 | 1
 clang | address,undefined | initialize std string with nullptr | 134 | 134
 clang | address,undefined | large double to float | 1 | 1
 clang | address,undefined | large double to int | 1 | 1
+clang | address,undefined | malloc reinterpret cast pod struct | 0 | 0
 clang | address,undefined | mutate const value | 0 | 0
 clang | address,undefined | odr violation function | 0 | 0
 clang | address,undefined | odr violation struct ret | 0 | 0
@@ -485,6 +497,7 @@ clang | memory | divide by zero | 0 | 0
 clang | memory | initialize std string with nullptr | 134 | 134
 clang | memory | large double to float | 0 | 0
 clang | memory | large double to int | 0 | 0
+clang | memory | malloc reinterpret cast pod struct | 0 | 0
 clang | memory | mutate const value | 0 | 0
 clang | memory | odr violation function | 0 | 0
 clang | memory | odr violation struct ret | 0 | 0
@@ -520,6 +533,7 @@ clang | memory,undefined | divide by zero | 77 | 77
 clang | memory,undefined | initialize std string with nullptr | 134 | 134
 clang | memory,undefined | large double to float | 77 | 77
 clang | memory,undefined | large double to int | 77 | 77
+clang | memory,undefined | malloc reinterpret cast pod struct | 0 | 0
 clang | memory,undefined | mutate const value | 0 | 0
 clang | memory,undefined | odr violation function | 0 | 0
 clang | memory,undefined | odr violation struct ret | 0 | 0
@@ -555,6 +569,7 @@ clang | undefined | divide by zero | 1 | 1
 clang | undefined | initialize std string with nullptr | 134 | 134
 clang | undefined | large double to float | 1 | 1
 clang | undefined | large double to int | 1 | 1
+clang | undefined | malloc reinterpret cast pod struct | 0 | 0
 clang | undefined | mutate const value | 0 | 0
 clang | undefined | odr violation function | 0 | 0
 clang | undefined | odr violation struct ret | 0 | 0
@@ -590,6 +605,7 @@ gcc | address | divide by zero | 1 | 132
 gcc | address | initialize std string with nullptr | 134 | 134
 gcc | address | large double to float | 0 | 0
 gcc | address | large double to int | 0 | 0
+gcc | address | malloc reinterpret cast pod struct | 0 | 0
 gcc | address | mutate const value | 0 | 0
 gcc | address | odr violation function | 0 | 0
 gcc | address | odr violation struct ret | 0 | 0
@@ -623,6 +639,7 @@ gcc | address,leak,undefined | divide by zero | 1 | 1
 gcc | address,leak,undefined | initialize std string with nullptr | 134 | 134
 gcc | address,leak,undefined | large double to float | 0 | 0
 gcc | address,leak,undefined | large double to int | 0 | 0
+gcc | address,leak,undefined | malloc reinterpret cast pod struct | 0 | 0
 gcc | address,leak,undefined | mutate const value | 0 | 0
 gcc | address,leak,undefined | odr violation function | 0 | 0
 gcc | address,leak,undefined | odr violation struct ret | 0 | 0
@@ -648,7 +665,7 @@ gcc | address,leak,undefined | virtual call in constructor helper | 134 | 134
 gcc | address,leak,undefined | virtual call in constructor link | 134 | 134
 gcc | address,leak,undefined | virtual call in destructor helper | 134 | 134
 gcc | address,leak,undefined | virtual call in destructor link | 134 | 134
-gcc | leak | access after realloc | 23 | 23
+gcc | leak | access after realloc | 0 | 0
 gcc | leak | array out of bounds | 0 | 0
 gcc | leak | automatic variable over stack | 23 | 0
 gcc | leak | dereferencing nullptr | 23 | 23
@@ -656,6 +673,7 @@ gcc | leak | divide by zero | 23 | 132
 gcc | leak | initialize std string with nullptr | 134 | 134
 gcc | leak | large double to float | 0 | 0
 gcc | leak | large double to int | 0 | 0
+gcc | leak | malloc reinterpret cast pod struct | 0 | 0
 gcc | leak | mutate const value | 0 | 0
 gcc | leak | odr violation function | 0 | 0
 gcc | leak | odr violation struct ret | 0 | 0
@@ -689,6 +707,7 @@ gcc | undefined | divide by zero | 1 | 1
 gcc | undefined | initialize std string with nullptr | 134 | 134
 gcc | undefined | large double to float | 0 | 0
 gcc | undefined | large double to int | 0 | 0
+gcc | undefined | malloc reinterpret cast pod struct | 0 | 0
 gcc | undefined | mutate const value | 0 | 0
 gcc | undefined | odr violation function | 0 | 0
 gcc | undefined | odr violation struct ret | 0 | 0
@@ -722,6 +741,7 @@ gcc | valgrind | divide by zero | 136 | 132
 gcc | valgrind | initialize std string with nullptr | 134 | 134
 gcc | valgrind | large double to float | 0 | 0
 gcc | valgrind | large double to int | 0 | 0
+gcc | valgrind | malloc reinterpret cast pod struct | 0 | 0
 gcc | valgrind | mutate const value | 0 | 0
 gcc | valgrind | odr violation function | 0 | 0
 gcc | valgrind | odr violation struct ret | 0 | 0
@@ -761,6 +781,7 @@ divide by zero | ✔️/❌ | ✔️ | ❌ | ✔️ | ✔️
 initialize std string with nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 large double to float | ❌ | ✔️ | ❌ | ✔️ | ✔️
 large double to int | ❌ | ✔️ | ❌ | ✔️ | ✔️
+malloc reinterpret cast pod struct | ❌ | ❌ | ❌ | ❌ | ❌
 mutate const value | ❌ | ❌ | ❌ | ❌ | ❌
 odr violation function | ❌ | ❌ | ❌ | ❌ | ❌
 odr violation struct ret | ❌ | ❌ | ❌ | ❌ | ❌
@@ -794,7 +815,7 @@ Debug (unoptimized) / RelWithDebInfo (optimized)
 
 Undefined Behavior Type | address | address,leak,undefined | leak | undefined | valgrind
 --- |--- |--- |--- |--- | ---
-access after realloc | ✔️ | ✔️ | ✔️ | ❌ | ✔️
+access after realloc | ✔️ | ✔️ | ❌ | ❌ | ✔️
 array out of bounds | ✔️ | ✔️ | ❌ | ❌/✔️ | ❌
 automatic variable over stack | ✔️ | ✔️ | ✔️/❌ | ✔️ | ✔️/❌
 dereferencing nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
@@ -802,6 +823,7 @@ divide by zero | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 initialize std string with nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 large double to float | ❌ | ❌ | ❌ | ❌ | ❌
 large double to int | ❌ | ❌ | ❌ | ❌ | ❌
+malloc reinterpret cast pod struct | ❌ | ❌ | ❌ | ❌ | ❌
 mutate const value | ❌ | ❌ | ❌ | ❌ | ❌
 odr violation function | ❌ | ❌ | ❌ | ❌ | ❌
 odr violation struct ret | ❌ | ❌ | ❌ | ❌ | ❌
@@ -842,6 +864,7 @@ divide by zero | ✔️ | ✔️ | ✔️ | ✔️
 initialize std string with nullptr | ❌ | ❌ | ✔️ | ✔️
 large double to float | ❌ | ❌ | ❌ | ✔️
 large double to int | ✔️ | ❌ | ❌ | ✔️
+malloc reinterpret cast pod struct | ❌ | ✔️ | ❌ | ❌
 mutate const value | ❌ | ✔️ | ❌ | ❌
 odr violation function | ❌ | ❌ | ❌ | ❌
 odr violation function lib | ❌ | ❌ | n/a | n/a
@@ -850,7 +873,7 @@ odr violation struct ret lib | ❌ | ❌ | n/a | n/a
 out of bounds pointer | ❌ | ❌ | ❌ | ❌
 preincrement plus postincrement | ✔️ | ✔️ | ❌ | ❌
 preincrement plus value | ✔️ | ✔️ | ❌ | ❌
-read from old type | ❌ | ✔️ | ❌ | ✔️
+read from old type | ❌ | ❌ | ❌ | ✔️
 reading uninitialized value add | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value cout | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value func arg | ✔️ | ✔️ | ✔️ | ✔️

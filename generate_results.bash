@@ -12,7 +12,7 @@ cd clang-tidy
 export CXX=clang++
 cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE ../.. > cmake.txt
 cp compile_commands.json ../..
-clang-tidy -checks=*,-fuchsia-default-arguments ${SRC_DIR}/*.cpp 1> warnings.txt
+clang-tidy --quiet -checks=*,-fuchsia-default-arguments,-cppcoreguidelines-owning-memory ${SRC_DIR}/*.cpp 1> warnings.txt
 rm ../../compile_commands.json
 associate_warnings.py --cpp_dir=${SRC_DIR}
 cd ..
