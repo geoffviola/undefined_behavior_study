@@ -16,7 +16,7 @@ struct MyPod {
 int main() {
   // NOLINTNEXTLINE(cppcoreguidelines-no-malloc, hicpp-no-malloc)
   void *raw_ptr = malloc(sizeof(MyPod));
-  auto *const my_pod = reinterpret_cast<MyPod *>(raw_ptr);
+  auto *const my_pod = static_cast<MyPod *>(raw_ptr);
   my_pod->x = 1;
   std::cout << my_pod->x << '\n';
   // NOLINTNEXTLINE(cppcoreguidelines-no-malloc, hicpp-no-malloc)

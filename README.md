@@ -143,7 +143,7 @@ clang-tidy | divide by zero | ✔️ | clang-analyzer-core.DivideZero,clang-diag
 clang-tidy | initialize std string with nullptr | ❌ | n/a
 clang-tidy | large double to float | ❌ | n/a
 clang-tidy | large double to int | ❌ | n/a
-clang-tidy | malloc reinterpret cast pod struct | ✔️ | cppcoreguidelines-pro-type-reinterpret-cast
+clang-tidy | malloc reinterpret cast pod struct | ❌ | n/a
 clang-tidy | mutate const value | ✔️ | cppcoreguidelines-pro-type-const-cast
 clang-tidy | odr violation function | ❌ | n/a
 clang-tidy | odr violation function lib | ❌ | n/a
@@ -229,7 +229,7 @@ divide by zero | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 initialize std string with nullptr | ❌ | ❌ | ❌ | ❌ | ❌
 large double to float | ❌ | ❌ | ❌ | ❌ | ❌
 large double to int | ❌ | ❌ | ❌ | ❌ | ✔️
-malloc reinterpret cast pod struct | ❌ | ✔️ | ❌ | ❌ | ❌
+malloc reinterpret cast pod struct | ❌ | ❌ | ❌ | ❌ | ❌
 mutate const value | ❌ | ✔️ | ❌ | ❌ | ❌
 odr violation function | ❌ | ❌ | ❌ | ❌ | ❌
 odr violation function lib | ❌ | ❌ | ❌ | ❌ | ❌
@@ -864,7 +864,7 @@ divide by zero | ✔️ | ✔️ | ✔️ | ✔️
 initialize std string with nullptr | ❌ | ❌ | ✔️ | ✔️
 large double to float | ❌ | ❌ | ❌ | ✔️
 large double to int | ✔️ | ❌ | ❌ | ✔️
-malloc reinterpret cast pod struct | ❌ | ✔️ | ❌ | ❌
+malloc reinterpret cast pod struct | ❌ | ❌ | ❌ | ❌
 mutate const value | ❌ | ✔️ | ❌ | ❌
 odr violation function | ❌ | ❌ | ❌ | ❌
 odr violation function lib | ❌ | ❌ | n/a | n/a
