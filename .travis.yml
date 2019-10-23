@@ -1,2 +1,30 @@
-script: ./ubuntu_docker_generate_results.bash
+env:
+  global:
+  # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+  #   via the "travis encrypt" command using the project repo's public key
+  - secure: "j4tpQeR/hDH8vPhactBIQxhTTlRdL6hVEn3n4LsYP+QRnhYGK994DTiJm8PEfKdM3YXUSdHnfIU7uO7DxWtuc1qdBDCf7alSHqI6rEyGAt8LAWI4eoDAy5E1VLbDIEFNEgxtJHCl/Y44woTfZgfi+zx+FJO5LPuZRNHfz3S14tEvnfwy4cmVvBd01Dqf6/LFWGyfEnOJzh0aqE86HOquqBem0IPXXVIz0AkiQiLd3oyCqVNxXD9t0gtLJguOTgCGEDQy2XT2qu+AiWwCZhyCrkt01wJcp1iiFsZAGo0AZ4WF48gIZIfMr9Fxrdv0D8P9sF6W7f7NTTbWj81S/rKXrod2GTxJdcH2h1E4wAyP+thL8Rtt95naEoYdaslajx4yipQ4X+rxgFNckI2SQbvijG9vBgmbWhETKZSrNhix5yGKO0iG0P8bRqzWttVcgU7BWX61x5ZrQlZxYw+7J2J4xYb61DgqvlTFWQ3aeor/y3fcE0Zj4I4/dbDG52q2ohaWpquR8k5iUR55zjLDpr5gDOi6kK/QfEClNEzyRFl4yO25m+yiATfQvjDnEpty90hJNpt+3i5hC19gdCszBdlfdcsM2cTNcd82Fill0VMVgSqSIZf/YIQPBLCVen32YdRFOC4xetYiNnCBoZW1LQc5KAmmBwzTS0xMt0q1U1OJg2Y="
+addons:
+  coverity_scan:
+    project:
+      name: "geoffviola/undefined_behavior_study"
+    build_command_prepend:
+    - mkdir build
+    - cd build
+    - cmake ..
+    build_command: make -j$(nproc)
+    branch_pattern: coverity_test
+
 os: linux
+before_install:
+- echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+
+jobs:
+  include:
+    - stage: coverity
+      script:
+      - mkdir build
+      - cd build
+      - cmake ..
+      - make -j$(nproc)
+    - stage: main
+      script: ./ubuntu_docker_generate_results.bash

@@ -9,6 +9,11 @@ Linux
 Windows 
 [![Build status](https://ci.appveyor.com/api/projects/status/sewu7060d0mn6v8i/branch/master?svg=true)](https://ci.appveyor.com/project/geoffviola/undefined_behavior_study/branch/master)
 
+<a href="https://scan.coverity.com/projects/geoffviola-undefined_behavior_study">
+  <img alt="Coverity Scan Build Status"
+       src="https://scan.coverity.com/projects/19484/badge.svg"/>
+</a>
+
 ## 1.Static Analysis
 ### 1.1.Compiler Warnings
 Compiler | Undefined Behavior Type | Warning | Warning Opt | Name
