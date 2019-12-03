@@ -32,12 +32,12 @@ def parse_warnings(file_handle, test_names):
     msvc = False
     for test_name in test_names:
         warnings_dict[test_name] = ""
+    msvc_triggered = False
     for l in file_handle:
         for test_name in test_names:
             if test_name in l.replace("\\", "/"):
                 warning = ""
                 msvc_trigger = ": warning C"
-                msvc_triggered = False
                 if msvc_trigger in l:
                     msvc = True
                     warning = l[l.find(msvc_trigger) +
