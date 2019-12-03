@@ -10,6 +10,8 @@ set(executables
     access_after_realloc
     array_out_of_bounds
     automatic_variable_over_stack
+    bad_aliasing
+    delete_incomplete_type
     dereferencing_nullptr
     divide_by_zero
     initialize_std_string_with_nullptr
@@ -55,6 +57,7 @@ foreach(executable ${executables})
   add_executable(${executable} src/${executable}.cpp)
 endforeach()
 
+add_library(non_trivial_destructor_and_global src/non_trivial_destructor_and_global.cpp)
 add_library(odr_violation_function_lib src/odr_violation_function_lib.cpp)
 add_library(odr_violation_struct_ret_lib src/odr_violation_struct_ret_lib.cpp)
 add_library(reading_uninitialized_value_lib
@@ -64,6 +67,7 @@ add_library(virtual_call_in_destructor_lib
 add_library(virtual_call_in_constructor_lib
             src/virtual_call_in_constructor_lib.cpp)
 
+target_link_libraries(delete_incomplete_type PRIVATE non_trivial_destructor_and_global_lib)
 target_link_libraries(odr_violation_function PRIVATE odr_violation_function_lib)
 target_link_libraries(odr_violation_struct_ret
                       PRIVATE odr_violation_struct_ret_lib)
