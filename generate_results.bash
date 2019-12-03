@@ -7,6 +7,17 @@ SRC_DIR=${ROOT_DIR}/src
 mkdir -p build
 cd build
 
+function my_time {
+  echo -n "$1 "
+  # BSD date doesn't provide sub second measurements
+  before=$(python3 -c "import time; print(time.time())")
+  $@
+  if [ "$?" -ne "0" ]
+  then
+    python3 -c "import time; print(str(time.time() - ${before}) + 's')"
+  fi
+}
+
 mkdir -p clang-tidy
 cd clang-tidy
 export CXX=clang++

@@ -2,3 +2,5 @@
 build
 native_build
 *swp
+src/a.out
+ub-docker-script.*
