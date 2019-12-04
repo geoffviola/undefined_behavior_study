@@ -16,6 +16,8 @@ Compiler | Undefined Behavior Type | Warning | Warning Opt | Name
 clang | access after realloc | ❌ | ❌ | n/a
 clang | array out of bounds | ❌ | ❌ | n/a
 clang | automatic variable over stack | ❌ | ❌ | n/a
+clang | bad alignment | ❌ | ❌ | n/a
+clang | delete incomplete type | ✔️ | ✔️ | -Wdelete-incomplete
 clang | dereferencing nullptr | ❌ | ❌ | n/a
 clang | divide by zero | ✔️ | ✔️ | -Wdivision-by-zero
 clang | initialize std string with nullptr | ❌ | ❌ | n/a
@@ -23,6 +25,7 @@ clang | large double to float | ❌ | ❌ | n/a
 clang | large double to int | ❌ | ❌ | n/a
 clang | malloc cast pod struct | ❌ | ❌ | n/a
 clang | mutate const value | ❌ | ❌ | n/a
+clang | non trivial destructor and global | ❌ | ❌ | n/a
 clang | odr violation function | ❌ | ❌ | n/a
 clang | odr violation function lib | ❌ | ❌ | n/a
 clang | odr violation struct ret | ❌ | ❌ | n/a
@@ -56,6 +59,8 @@ clang | virtual call in destructor link | ❌ | ❌ | n/a
 gcc | access after realloc | ❌ | ❌ | n/a
 gcc | array out of bounds | ❌ | ✔️ | -Wuninitialized
 gcc | automatic variable over stack | ❌ | ❌ | n/a
+gcc | bad alignment | ❌ | ❌ | n/a
+gcc | delete incomplete type | ✔️ | ✔️ | -Wdelete-incomplete
 gcc | dereferencing nullptr | ❌ | ❌ | n/a
 gcc | divide by zero | ✔️ | ✔️ | -Wdiv-by-zero
 gcc | initialize std string with nullptr | ❌ | ❌ | n/a
@@ -63,6 +68,7 @@ gcc | large double to float | ❌ | ❌ | n/a
 gcc | large double to int | ❌ | ❌ | n/a
 gcc | malloc cast pod struct | ❌ | ❌ | n/a
 gcc | mutate const value | ❌ | ❌ | n/a
+gcc | non trivial destructor and global | ❌ | ❌ | n/a
 gcc | odr violation function | ❌ | ❌ | n/a
 gcc | odr violation function lib | ❌ | ❌ | n/a
 gcc | odr violation struct ret | ❌ | ❌ | n/a
@@ -96,6 +102,8 @@ gcc | virtual call in destructor link | ❌ | ❌ | n/a
 msvc | access after realloc | ❌ | ❌ | n/a
 msvc | array out of bounds | ❌ | ❌ | n/a
 msvc | automatic variable over stack | ❌ | ❌ | n/a
+msvc | bad alignment | ❌ | ❌ | n/a
+msvc | delete incomplete type | ✔️ | ✔️ | 4150
 msvc | dereferencing nullptr | ❌ | ❌ | n/a
 msvc | divide by zero | ✔️ | ✔️ | 4723
 msvc | initialize std string with nullptr | ❌ | ❌ | n/a
@@ -103,6 +111,7 @@ msvc | large double to float | ❌ | ❌ | n/a
 msvc | large double to int | ✔️ | ✔️ | 4309
 msvc | malloc cast pod struct | ❌ | ❌ | n/a
 msvc | mutate const value | ❌ | ❌ | n/a
+msvc | non trivial destructor and global | ❌ | ❌ | n/a
 msvc | odr violation function | ❌ | ❌ | n/a
 msvc | odr violation function lib | ❌ | ❌ | n/a
 msvc | odr violation struct ret | ❌ | ❌ | n/a
@@ -138,6 +147,8 @@ Tool | Undefined Behavior Type | Warning | Name
 clang-tidy | access after realloc | ✔️ | clang-analyzer-unix.Malloc
 clang-tidy | array out of bounds | ✔️ | cppcoreguidelines-pro-type-member-init,cppcoreguidelines-pro-bounds-constant-array-index
 clang-tidy | automatic variable over stack | ❌ | n/a
+clang-tidy | bad alignment | ❌ | n/a
+clang-tidy | delete incomplete type | ✔️ | clang-diagnostic-delete-incomplete
 clang-tidy | dereferencing nullptr | ✔️ | clang-analyzer-core.NullDereference
 clang-tidy | divide by zero | ✔️ | clang-analyzer-core.DivideZero,clang-diagnostic-division-by-zero
 clang-tidy | initialize std string with nullptr | ❌ | n/a
@@ -145,6 +156,7 @@ clang-tidy | large double to float | ❌ | n/a
 clang-tidy | large double to int | ❌ | n/a
 clang-tidy | malloc cast pod struct | ❌ | n/a
 clang-tidy | mutate const value | ✔️ | cppcoreguidelines-pro-type-const-cast
+clang-tidy | non trivial destructor and global | ❌ | n/a
 clang-tidy | odr violation function | ❌ | n/a
 clang-tidy | odr violation function lib | ❌ | n/a
 clang-tidy | odr violation struct ret | ❌ | n/a
@@ -178,6 +190,8 @@ clang-tidy | virtual call in destructor link | ❌ | n/a
 cppcheck | access after realloc | ✔️ | n/a
 cppcheck | array out of bounds | ❌ | n/a
 cppcheck | automatic variable over stack | ❌ | n/a
+cppcheck | bad alignment | ❌ | n/a
+cppcheck | delete incomplete type | ❌ | n/a
 cppcheck | dereferencing nullptr | ✔️ | n/a
 cppcheck | divide by zero | ✔️ | n/a
 cppcheck | initialize std string with nullptr | ❌ | n/a
@@ -185,6 +199,7 @@ cppcheck | large double to float | ❌ | n/a
 cppcheck | large double to int | ❌ | n/a
 cppcheck | malloc cast pod struct | ❌ | n/a
 cppcheck | mutate const value | ❌ | n/a
+cppcheck | non trivial destructor and global | ❌ | n/a
 cppcheck | odr violation function | ❌ | n/a
 cppcheck | odr violation function lib | ❌ | n/a
 cppcheck | odr violation struct ret | ❌ | n/a
@@ -224,6 +239,8 @@ Undefined Behavior Type | clang | clang-tidy | cppcheck | gcc | msvc
 access after realloc | ❌ | ✔️ | ✔️ | ❌ | ❌
 array out of bounds | ❌ | ✔️ | ❌ | ❌/✔️ | ❌
 automatic variable over stack | ❌ | ❌ | ❌ | ❌ | ❌
+bad alignment | ❌ | ❌ | ❌ | ❌ | ❌
+delete incomplete type | ✔️ | ✔️ | ❌ | ✔️ | ✔️
 dereferencing nullptr | ❌ | ✔️ | ✔️ | ❌ | ❌
 divide by zero | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 initialize std string with nullptr | ❌ | ❌ | ❌ | ❌ | ❌
@@ -231,6 +248,7 @@ large double to float | ❌ | ❌ | ❌ | ❌ | ❌
 large double to int | ❌ | ❌ | ❌ | ❌ | ✔️
 malloc cast pod struct | ❌ | ❌ | ❌ | ❌ | ❌
 mutate const value | ❌ | ✔️ | ❌ | ❌ | ❌
+non trivial destructor and global | ❌ | ❌ | ❌ | ❌ | ❌
 odr violation function | ❌ | ❌ | ❌ | ❌ | ❌
 odr violation function lib | ❌ | ❌ | ❌ | ❌ | ❌
 odr violation struct ret | ❌ | ❌ | ❌ | ❌ | ❌
@@ -270,6 +288,8 @@ Compiler | Undefined Behavior Type | Debug | RelWithDebInfo
 clang | access after realloc | 0 | 0
 clang | array out of bounds | 0 | 0
 clang | automatic variable over stack | 139 | 0
+clang | bad alignment | 0 | 0
+clang | delete incomplete type | 0 | 0
 clang | dereferencing nullptr | 139 | 0
 clang | divide by zero | 136 | 0
 clang | initialize std string with nullptr | 134 | 134
@@ -306,6 +326,8 @@ clang | virtual call in destructor link | 134 | 134
 gcc | access after realloc | 0 | 0
 gcc | array out of bounds | 0 | 0
 gcc | automatic variable over stack | 139 | 0
+gcc | bad alignment | 0 | 0
+gcc | delete incomplete type | 0 | 0
 gcc | dereferencing nullptr | 139 | 139
 gcc | divide by zero | 136 | 132
 gcc | initialize std string with nullptr | 134 | 134
@@ -340,6 +362,8 @@ gcc | virtual call in destructor link | 134 | 134
 msvc | access after realloc | 0 | 0
 msvc | array out of bounds | -1 | 0
 msvc | automatic variable over stack | -1073741571 | 0
+msvc | bad alignment | 0 | 0
+msvc | delete incomplete type | 0 | 0
 msvc | dereferencing nullptr | -1073741819 | -1073741819
 msvc | divide by zero | -1073741676 | -1073741676
 msvc | initialize std string with nullptr | -1073741819 | -1073741819
@@ -378,6 +402,8 @@ Undefined Behavior | clang | gcc | msvc
 access after realloc | ❌ | ❌ | ❌
 array out of bounds | ❌ | ❌ | ✔️/❌
 automatic variable over stack | ✔️/❌ | ✔️/❌ | ✔️/❌
+bad alignment | ❌ | ❌ | ❌
+delete incomplete type | ❌ | ❌ | ❌
 dereferencing nullptr | ✔️/❌ | ✔️ | ✔️
 divide by zero | ✔️/❌ | ✔️ | ✔️
 initialize std string with nullptr | ✔️ | ✔️ | ✔️
@@ -420,6 +446,8 @@ Compiler | Tool | Undefined Behavior Type | Debug | RelWithDebInfo
 clang | address | access after realloc | 1 | 1
 clang | address | array out of bounds | 1 | 0
 clang | address | automatic variable over stack | 1 | 0
+clang | address | bad alignment | 0 | 0
+clang | address | delete incomplete type | 0 | 0
 clang | address | dereferencing nullptr | 1 | 0
 clang | address | divide by zero | 1 | 0
 clang | address | initialize std string with nullptr | 134 | 134
@@ -456,6 +484,8 @@ clang | address | virtual call in destructor link | 134 | 134
 clang | address,undefined | access after realloc | 1 | 1
 clang | address,undefined | array out of bounds | 1 | 1
 clang | address,undefined | automatic variable over stack | 1 | 1
+clang | address,undefined | bad alignment | 0 | 0
+clang | address,undefined | delete incomplete type | 0 | 0
 clang | address,undefined | dereferencing nullptr | 1 | 1
 clang | address,undefined | divide by zero | 1 | 1
 clang | address,undefined | initialize std string with nullptr | 134 | 134
@@ -492,6 +522,8 @@ clang | address,undefined | virtual call in destructor link | 134 | 134
 clang | memory | access after realloc | 0 | 0
 clang | memory | array out of bounds | 0 | 0
 clang | memory | automatic variable over stack | 77 | 0
+clang | memory | bad alignment | 0 | 0
+clang | memory | delete incomplete type | 0 | 0
 clang | memory | dereferencing nullptr | 77 | 0
 clang | memory | divide by zero | 0 | 0
 clang | memory | initialize std string with nullptr | 134 | 134
@@ -528,6 +560,8 @@ clang | memory | virtual call in destructor link | 134 | 134
 clang | memory,undefined | access after realloc | 0 | 0
 clang | memory,undefined | array out of bounds | 0 | 77
 clang | memory,undefined | automatic variable over stack | 77 | 77
+clang | memory,undefined | bad alignment | 0 | 0
+clang | memory,undefined | delete incomplete type | 0 | 0
 clang | memory,undefined | dereferencing nullptr | 77 | 77
 clang | memory,undefined | divide by zero | 77 | 77
 clang | memory,undefined | initialize std string with nullptr | 134 | 134
@@ -564,6 +598,8 @@ clang | memory,undefined | virtual call in destructor link | 134 | 134
 clang | undefined | access after realloc | 0 | 0
 clang | undefined | array out of bounds | 0 | 1
 clang | undefined | automatic variable over stack | 1 | 1
+clang | undefined | bad alignment | 0 | 0
+clang | undefined | delete incomplete type | 0 | 0
 clang | undefined | dereferencing nullptr | 1 | 1
 clang | undefined | divide by zero | 1 | 1
 clang | undefined | initialize std string with nullptr | 134 | 134
@@ -600,6 +636,8 @@ clang | undefined | virtual call in destructor link | 134 | 134
 gcc | address | access after realloc | 1 | 1
 gcc | address | array out of bounds | 1 | 1
 gcc | address | automatic variable over stack | 1 | 1
+gcc | address | bad alignment | 0 | 0
+gcc | address | delete incomplete type | 0 | 0
 gcc | address | dereferencing nullptr | 1 | 1
 gcc | address | divide by zero | 1 | 132
 gcc | address | initialize std string with nullptr | 134 | 134
@@ -634,6 +672,8 @@ gcc | address | virtual call in destructor link | 134 | 134
 gcc | address,leak,undefined | access after realloc | 1 | 1
 gcc | address,leak,undefined | array out of bounds | 1 | 1
 gcc | address,leak,undefined | automatic variable over stack | 1 | 1
+gcc | address,leak,undefined | bad alignment | 1 | 1
+gcc | address,leak,undefined | delete incomplete type | 0 | 0
 gcc | address,leak,undefined | dereferencing nullptr | 1 | 1
 gcc | address,leak,undefined | divide by zero | 1 | 1
 gcc | address,leak,undefined | initialize std string with nullptr | 134 | 134
@@ -668,6 +708,8 @@ gcc | address,leak,undefined | virtual call in destructor link | 134 | 134
 gcc | leak | access after realloc | 0 | 0
 gcc | leak | array out of bounds | 0 | 0
 gcc | leak | automatic variable over stack | 23 | 0
+gcc | leak | bad alignment | 0 | 0
+gcc | leak | delete incomplete type | 0 | 0
 gcc | leak | dereferencing nullptr | 23 | 23
 gcc | leak | divide by zero | 23 | 132
 gcc | leak | initialize std string with nullptr | 134 | 134
@@ -702,6 +744,8 @@ gcc | leak | virtual call in destructor link | 134 | 134
 gcc | undefined | access after realloc | 0 | 0
 gcc | undefined | array out of bounds | 0 | 1
 gcc | undefined | automatic variable over stack | 139 | 139
+gcc | undefined | bad alignment | 0 | 0
+gcc | undefined | delete incomplete type | 0 | 0
 gcc | undefined | dereferencing nullptr | 1 | 1
 gcc | undefined | divide by zero | 1 | 1
 gcc | undefined | initialize std string with nullptr | 134 | 134
@@ -736,6 +780,8 @@ gcc | undefined | virtual call in destructor link | 134 | 134
 gcc | valgrind | access after realloc | 1 | 1
 gcc | valgrind | array out of bounds | 0 | 0
 gcc | valgrind | automatic variable over stack | 139 | 0
+gcc | valgrind | bad alignment | 0 | 0
+gcc | valgrind | delete incomplete type | 0 | 0
 gcc | valgrind | dereferencing nullptr | 139 | 139
 gcc | valgrind | divide by zero | 136 | 132
 gcc | valgrind | initialize std string with nullptr | 134 | 134
@@ -776,6 +822,8 @@ Undefined Behavior Type | address | address,undefined | memory | memory,undefine
 access after realloc | ✔️ | ✔️ | ❌ | ❌ | ❌
 array out of bounds | ✔️/❌ | ✔️ | ❌ | ❌/✔️ | ❌/✔️
 automatic variable over stack | ✔️/❌ | ✔️ | ✔️/❌ | ✔️ | ✔️
+bad alignment | ❌ | ❌ | ❌ | ❌ | ❌
+delete incomplete type | ❌ | ❌ | ❌ | ❌ | ❌
 dereferencing nullptr | ✔️/❌ | ✔️ | ✔️/❌ | ✔️ | ✔️
 divide by zero | ✔️/❌ | ✔️ | ❌ | ✔️ | ✔️
 initialize std string with nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
@@ -818,6 +866,8 @@ Undefined Behavior Type | address | address,leak,undefined | leak | undefined | 
 access after realloc | ✔️ | ✔️ | ❌ | ❌ | ✔️
 array out of bounds | ✔️ | ✔️ | ❌ | ❌/✔️ | ❌
 automatic variable over stack | ✔️ | ✔️ | ✔️/❌ | ✔️ | ✔️/❌
+bad alignment | ❌ | ✔️ | ❌ | ❌ | ❌
+delete incomplete type | ❌ | ❌ | ❌ | ❌ | ❌
 dereferencing nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 divide by zero | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 initialize std string with nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
@@ -859,6 +909,8 @@ Undefined Behavior Type | Compiler Warning | Standalone Static Analysis | Runtim
 access after realloc | ❌ | ✔️ | ❌ | ✔️
 array out of bounds | ✔️ | ✔️ | ✔️ | ✔️
 automatic variable over stack | ❌ | ❌ | ✔️ | ✔️
+bad alignment | ❌ | ❌ | ❌ | ✔️
+delete incomplete type | ✔️ | ✔️ | ❌ | ❌
 dereferencing nullptr | ❌ | ✔️ | ✔️ | ✔️
 divide by zero | ✔️ | ✔️ | ✔️ | ✔️
 initialize std string with nullptr | ❌ | ❌ | ✔️ | ✔️
@@ -866,6 +918,7 @@ large double to float | ❌ | ❌ | ❌ | ✔️
 large double to int | ✔️ | ❌ | ❌ | ✔️
 malloc cast pod struct | ❌ | ❌ | ❌ | ❌
 mutate const value | ❌ | ✔️ | ❌ | ❌
+non trivial destructor and global | ❌ | ❌ | n/a | n/a
 odr violation function | ❌ | ❌ | ❌ | ❌
 odr violation function lib | ❌ | ❌ | n/a | n/a
 odr violation struct ret | ❌ | ❌ | ❌ | ❌

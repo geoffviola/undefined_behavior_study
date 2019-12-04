@@ -16,7 +16,7 @@ struct SomeChars {
 int main() {
   SomeChars some_chars = {};
   some_chars.four_chars[0] = '1';
-  // NOLINENEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+  // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
   const int32_t a = *reinterpret_cast<const int32_t *>(some_chars.four_chars);
   std::cout << a << '\n';
   return EXIT_SUCCESS;
