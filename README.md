@@ -48,6 +48,8 @@ clang | signed integer overflow | ❌ | ❌ | n/a
 clang | stack overflow | ✔️ | ✔️ | -Winfinite-recursion
 clang | std vector reserve set read | ❌ | ❌ | n/a
 clang | strptime mktime unitialized | ❌ | ❌ | n/a
+clang | type pun cast same line | ❌ | ❌ | n/a
+clang | type pun cast two lines | ❌ | ❌ | n/a
 clang | virtual call in constructor | ✔️ | ✔️ | 1
 clang | virtual call in constructor helper | ❌ | ❌ | n/a
 clang | virtual call in constructor lib | ❌ | ❌ | n/a
@@ -91,6 +93,8 @@ gcc | signed integer overflow | ❌ | ❌ | n/a
 gcc | stack overflow | ❌ | ❌ | n/a
 gcc | std vector reserve set read | ❌ | ❌ | n/a
 gcc | strptime mktime unitialized | ❌ | ❌ | n/a
+gcc | type pun cast same line | ❌ | ✔️ | -Wstrict-aliasing
+gcc | type pun cast two lines | ❌ | ❌ | n/a
 gcc | virtual call in constructor | ❌ | ❌ | n/a
 gcc | virtual call in constructor helper | ❌ | ❌ | n/a
 gcc | virtual call in constructor lib | ❌ | ❌ | n/a
@@ -108,7 +112,7 @@ msvc | dereferencing nullptr | ❌ | ❌ | n/a
 msvc | divide by zero | ✔️ | ✔️ | 4723
 msvc | initialize std string with nullptr | ❌ | ❌ | n/a
 msvc | large double to float | ❌ | ❌ | n/a
-msvc | large double to int | ✔️ | ✔️ | 4309
+msvc | large double to int | ❌ | ❌ | n/a
 msvc | malloc cast pod struct | ❌ | ❌ | n/a
 msvc | mutate const value | ❌ | ❌ | n/a
 msvc | non trivial destructor and global | ❌ | ❌ | n/a
@@ -132,6 +136,8 @@ msvc | shifting more than width | ✔️ | ✔️ | 4293
 msvc | signed integer overflow | ❌ | ❌ | n/a
 msvc | stack overflow | ✔️ | ✔️ | 4717
 msvc | std vector reserve set read | ❌ | ❌ | n/a
+msvc | type pun cast same line | ❌ | ❌ | n/a
+msvc | type pun cast two lines | ❌ | ❌ | n/a
 msvc | virtual call in constructor | ❌ | ❌ | n/a
 msvc | virtual call in constructor helper | ❌ | ❌ | n/a
 msvc | virtual call in constructor lib | ❌ | ❌ | n/a
@@ -179,6 +185,8 @@ clang-tidy | signed integer overflow | ❌ | n/a
 clang-tidy | stack overflow | ✔️ | clang-diagnostic-infinite-recursion
 clang-tidy | std vector reserve set read | ❌ | n/a
 clang-tidy | strptime mktime unitialized | ✔️ | cppcoreguidelines-pro-type-member-init
+clang-tidy | type pun cast same line | ❌ | n/a
+clang-tidy | type pun cast two lines | ❌ | n/a
 clang-tidy | virtual call in constructor | ✔️ | clang-analyzer-optin.cplusplus.VirtualCall,clang-diagnostic-warning
 clang-tidy | virtual call in constructor helper | ✔️ | clang-analyzer-optin.cplusplus.VirtualCall
 clang-tidy | virtual call in constructor lib | ✔️ | clang-analyzer-optin.cplusplus.VirtualCall
@@ -222,6 +230,8 @@ cppcheck | signed integer overflow | ❌ | n/a
 cppcheck | stack overflow | ❌ | n/a
 cppcheck | std vector reserve set read | ❌ | n/a
 cppcheck | strptime mktime unitialized | ❌ | n/a
+cppcheck | type pun cast same line | ❌ | n/a
+cppcheck | type pun cast two lines | ❌ | n/a
 cppcheck | virtual call in constructor | ❌ | n/a
 cppcheck | virtual call in constructor helper | ❌ | n/a
 cppcheck | virtual call in constructor lib | ❌ | n/a
@@ -245,7 +255,7 @@ dereferencing nullptr | ❌ | ✔️ | ✔️ | ❌ | ❌
 divide by zero | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 initialize std string with nullptr | ❌ | ❌ | ❌ | ❌ | ❌
 large double to float | ❌ | ❌ | ❌ | ❌ | ❌
-large double to int | ❌ | ❌ | ❌ | ❌ | ✔️
+large double to int | ❌ | ❌ | ❌ | ❌ | ❌
 malloc cast pod struct | ❌ | ❌ | ❌ | ❌ | ❌
 mutate const value | ❌ | ✔️ | ❌ | ❌ | ❌
 non trivial destructor and global | ❌ | ❌ | ❌ | ❌ | ❌
@@ -271,6 +281,8 @@ signed integer overflow | ❌ | ❌ | ❌ | ❌ | ❌
 stack overflow | ✔️ | ✔️ | ❌ | ❌ | ✔️
 std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌
 strptime mktime unitialized | ❌ | ✔️ | ❌ | ❌ | n/a
+type pun cast same line | ❌ | ❌ | ❌ | ❌/✔️ | ❌
+type pun cast two lines | ❌ | ❌ | ❌ | ❌ | ❌
 virtual call in constructor | ✔️ | ✔️ | ❌ | ❌ | ❌
 virtual call in constructor helper | ❌ | ✔️ | ❌ | ❌ | ❌
 virtual call in constructor lib | ❌ | ✔️ | ❌ | ❌ | ❌
@@ -317,6 +329,8 @@ clang | signed integer overflow | 0 | 0
 clang | stack overflow | 139 | 0
 clang | std vector reserve set read | 0 | 0
 clang | strptime mktime unitialized | 0 | 0
+clang | type pun cast same line | 0 | 0
+clang | type pun cast two lines | 0 | 0
 clang | virtual call in constructor | 134 | 134
 clang | virtual call in constructor helper | 134 | 134
 clang | virtual call in constructor link | 134 | 134
@@ -355,6 +369,8 @@ gcc | signed integer overflow | 0 | 0
 gcc | stack overflow | 139 | 139
 gcc | std vector reserve set read | 0 | 0
 gcc | strptime mktime unitialized | 0 | 0
+gcc | type pun cast same line | 0 | 0
+gcc | type pun cast two lines | 0 | 0
 gcc | virtual call in constructor helper | 134 | 134
 gcc | virtual call in constructor link | 134 | 134
 gcc | virtual call in destructor helper | 134 | 134
@@ -389,6 +405,8 @@ msvc | shifting more than width | 0 | 0
 msvc | signed integer overflow | 0 | 0
 msvc | stack overflow | -1073741571 | -1073741571
 msvc | std vector reserve set read | -1 | 0
+msvc | type pun cast same line | 0 | 0
+msvc | type pun cast two lines | 0 | 0
 msvc | virtual call in constructor helper | -1 | -1073740791
 msvc | virtual call in constructor link | -1 | -1073740791
 msvc | virtual call in destructor helper | -1 | -1073740791
@@ -431,6 +449,8 @@ signed integer overflow | ❌ | ❌ | ❌
 stack overflow | ✔️/❌ | ✔️ | ✔️
 std vector reserve set read | ❌ | ❌ | ✔️/❌
 strptime mktime unitialized | ❌ | ❌ | n/a
+type pun cast same line | ❌ | ❌ | ❌
+type pun cast two lines | ❌ | ❌ | ❌
 virtual call in constructor | ✔️ | n/a | n/a
 virtual call in constructor helper | ✔️ | ✔️ | ✔️
 virtual call in constructor link | ✔️ | ✔️ | ✔️
@@ -463,7 +483,7 @@ clang | address | preincrement plus value | 0 | 0
 clang | address | read from old type | 0 | 0
 clang | address | reading uninitialized value add | 0 | 0
 clang | address | reading uninitialized value cout | 0 | 0
-clang | address | reading uninitialized value func arg | 1 | 1
+clang | address | reading uninitialized value func arg | 0 | 1
 clang | address | reading uninitialized value if | 0 | 0
 clang | address | reading uninitialized value lib call cref | 0 | 0
 clang | address | reading uninitialized value partial | 0 | 0
@@ -475,6 +495,8 @@ clang | address | signed integer overflow | 0 | 0
 clang | address | stack overflow | 1 | 0
 clang | address | std vector reserve set read | 0 | 0
 clang | address | strptime mktime unitialized | 0 | 0
+clang | address | type pun cast same line | 0 | 0
+clang | address | type pun cast two lines | 0 | 0
 clang | address | virtual call in constructor | 134 | 134
 clang | address | virtual call in constructor helper | 134 | 134
 clang | address | virtual call in constructor link | 134 | 134
@@ -501,7 +523,7 @@ clang | address,undefined | preincrement plus value | 0 | 0
 clang | address,undefined | read from old type | 1 | 1
 clang | address,undefined | reading uninitialized value add | 0 | 1
 clang | address,undefined | reading uninitialized value cout | 0 | 0
-clang | address,undefined | reading uninitialized value func arg | 1 | 1
+clang | address,undefined | reading uninitialized value func arg | 0 | 1
 clang | address,undefined | reading uninitialized value if | 0 | 0
 clang | address,undefined | reading uninitialized value lib call cref | 0 | 0
 clang | address,undefined | reading uninitialized value partial | 0 | 0
@@ -513,6 +535,8 @@ clang | address,undefined | signed integer overflow | 1 | 1
 clang | address,undefined | stack overflow | 1 | 0
 clang | address,undefined | std vector reserve set read | 0 | 0
 clang | address,undefined | strptime mktime unitialized | 0 | 0
+clang | address,undefined | type pun cast same line | 0 | 0
+clang | address,undefined | type pun cast two lines | 0 | 0
 clang | address,undefined | virtual call in constructor | 134 | 134
 clang | address,undefined | virtual call in constructor helper | 134 | 134
 clang | address,undefined | virtual call in constructor link | 134 | 134
@@ -551,6 +575,8 @@ clang | memory | signed integer overflow | 0 | 0
 clang | memory | stack overflow | 77 | 0
 clang | memory | std vector reserve set read | 0 | 0
 clang | memory | strptime mktime unitialized | 0 | 0
+clang | memory | type pun cast same line | 0 | 0
+clang | memory | type pun cast two lines | 0 | 0
 clang | memory | virtual call in constructor | 134 | 134
 clang | memory | virtual call in constructor helper | 134 | 134
 clang | memory | virtual call in constructor link | 134 | 134
@@ -589,6 +615,8 @@ clang | memory,undefined | signed integer overflow | 77 | 77
 clang | memory,undefined | stack overflow | 77 | 0
 clang | memory,undefined | std vector reserve set read | 0 | 0
 clang | memory,undefined | strptime mktime unitialized | 0 | 0
+clang | memory,undefined | type pun cast same line | 0 | 0
+clang | memory,undefined | type pun cast two lines | 0 | 0
 clang | memory,undefined | virtual call in constructor | 134 | 134
 clang | memory,undefined | virtual call in constructor helper | 134 | 134
 clang | memory,undefined | virtual call in constructor link | 134 | 134
@@ -627,6 +655,8 @@ clang | undefined | signed integer overflow | 1 | 1
 clang | undefined | stack overflow | 1 | 0
 clang | undefined | std vector reserve set read | 0 | 0
 clang | undefined | strptime mktime unitialized | 0 | 0
+clang | undefined | type pun cast same line | 0 | 0
+clang | undefined | type pun cast two lines | 0 | 0
 clang | undefined | virtual call in constructor | 134 | 134
 clang | undefined | virtual call in constructor helper | 134 | 134
 clang | undefined | virtual call in constructor link | 134 | 134
@@ -665,6 +695,8 @@ gcc | address | signed integer overflow | 0 | 0
 gcc | address | stack overflow | 1 | 1
 gcc | address | std vector reserve set read | 0 | 0
 gcc | address | strptime mktime unitialized | 0 | 0
+gcc | address | type pun cast same line | 0 | 0
+gcc | address | type pun cast two lines | 0 | 0
 gcc | address | virtual call in constructor helper | 134 | 134
 gcc | address | virtual call in constructor link | 134 | 134
 gcc | address | virtual call in destructor helper | 134 | 134
@@ -701,6 +733,8 @@ gcc | address,leak,undefined | signed integer overflow | 1 | 0
 gcc | address,leak,undefined | stack overflow | 1 | 1
 gcc | address,leak,undefined | std vector reserve set read | 0 | 0
 gcc | address,leak,undefined | strptime mktime unitialized | 0 | 0
+gcc | address,leak,undefined | type pun cast same line | 0 | 0
+gcc | address,leak,undefined | type pun cast two lines | 0 | 0
 gcc | address,leak,undefined | virtual call in constructor helper | 134 | 134
 gcc | address,leak,undefined | virtual call in constructor link | 134 | 134
 gcc | address,leak,undefined | virtual call in destructor helper | 134 | 134
@@ -737,6 +771,8 @@ gcc | leak | signed integer overflow | 0 | 0
 gcc | leak | stack overflow | 23 | 23
 gcc | leak | std vector reserve set read | 0 | 0
 gcc | leak | strptime mktime unitialized | 0 | 0
+gcc | leak | type pun cast same line | 0 | 0
+gcc | leak | type pun cast two lines | 0 | 0
 gcc | leak | virtual call in constructor helper | 134 | 134
 gcc | leak | virtual call in constructor link | 134 | 134
 gcc | leak | virtual call in destructor helper | 134 | 134
@@ -773,6 +809,8 @@ gcc | undefined | signed integer overflow | 1 | 0
 gcc | undefined | stack overflow | 139 | 139
 gcc | undefined | std vector reserve set read | 0 | 0
 gcc | undefined | strptime mktime unitialized | 0 | 0
+gcc | undefined | type pun cast same line | 0 | 0
+gcc | undefined | type pun cast two lines | 0 | 0
 gcc | undefined | virtual call in constructor helper | 134 | 134
 gcc | undefined | virtual call in constructor link | 134 | 134
 gcc | undefined | virtual call in destructor helper | 134 | 134
@@ -809,6 +847,8 @@ gcc | valgrind | signed integer overflow | 0 | 0
 gcc | valgrind | stack overflow | 139 | 139
 gcc | valgrind | std vector reserve set read | 0 | 0
 gcc | valgrind | strptime mktime unitialized | 1 | 1
+gcc | valgrind | type pun cast same line | 0 | 0
+gcc | valgrind | type pun cast two lines | 0 | 0
 gcc | valgrind | virtual call in constructor helper | 134 | 134
 gcc | valgrind | virtual call in constructor link | 134 | 134
 gcc | valgrind | virtual call in destructor helper | 134 | 134
@@ -839,7 +879,7 @@ preincrement plus value | ❌ | ❌ | ❌ | ❌ | ❌
 read from old type | ❌ | ✔️ | ❌ | ✔️ | ✔️
 reading uninitialized value add | ❌ | ❌/✔️ | ❌ | ❌/✔️ | ❌/✔️
 reading uninitialized value cout | ❌ | ❌ | ❌ | ❌ | ❌
-reading uninitialized value func arg | ✔️ | ✔️ | ❌/✔️ | ❌/✔️ | ❌/✔️
+reading uninitialized value func arg | ❌/✔️ | ❌/✔️ | ❌/✔️ | ❌/✔️ | ❌/✔️
 reading uninitialized value if | ❌ | ❌ | ✔️/❌ | ✔️/❌ | ❌
 reading uninitialized value lib call cref | ❌ | ❌ | ❌ | ❌ | ❌
 reading uninitialized value partial | ❌ | ❌ | ❌ | ❌ | ❌
@@ -851,6 +891,8 @@ signed integer overflow | ❌ | ✔️ | ❌ | ✔️ | ✔️
 stack overflow | ✔️/❌ | ✔️/❌ | ✔️/❌ | ✔️/❌ | ✔️/❌
 std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌
 strptime mktime unitialized | ❌ | ❌ | ❌ | ❌ | ❌
+type pun cast same line | ❌ | ❌ | ❌ | ❌ | ❌
+type pun cast two lines | ❌ | ❌ | ❌ | ❌ | ❌
 virtual call in constructor | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 virtual call in constructor helper | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 virtual call in constructor link | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
@@ -895,6 +937,8 @@ signed integer overflow | ❌ | ✔️/❌ | ❌ | ✔️/❌ | ❌
 stack overflow | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌
 strptime mktime unitialized | ❌ | ❌ | ❌ | ❌ | ✔️
+type pun cast same line | ❌ | ❌ | ❌ | ❌ | ❌
+type pun cast two lines | ❌ | ❌ | ❌ | ❌ | ❌
 virtual call in constructor | n/a | n/a | n/a | n/a | n/a
 virtual call in constructor helper | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 virtual call in constructor link | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
@@ -915,7 +959,7 @@ dereferencing nullptr | ❌ | ✔️ | ✔️ | ✔️
 divide by zero | ✔️ | ✔️ | ✔️ | ✔️
 initialize std string with nullptr | ❌ | ❌ | ✔️ | ✔️
 large double to float | ❌ | ❌ | ❌ | ✔️
-large double to int | ✔️ | ❌ | ❌ | ✔️
+large double to int | ❌ | ❌ | ❌ | ✔️
 malloc cast pod struct | ❌ | ❌ | ❌ | ❌
 mutate const value | ❌ | ✔️ | ❌ | ❌
 non trivial destructor and global | ❌ | ❌ | n/a | n/a
@@ -941,6 +985,8 @@ signed integer overflow | ❌ | ❌ | ❌ | ✔️
 stack overflow | ✔️ | ✔️ | ✔️ | ✔️
 std vector reserve set read | ❌ | ❌ | ✔️ | ❌
 strptime mktime unitialized | ❌ | ✔️ | ❌ | ✔️
+type pun cast same line | ✔️ | ❌ | ❌ | ❌
+type pun cast two lines | ❌ | ❌ | ❌ | ❌
 virtual call in constructor | ✔️ | ✔️ | ✔️ | ✔️
 virtual call in constructor helper | ❌ | ✔️ | ✔️ | ✔️
 virtual call in constructor lib | ❌ | ✔️ | n/a | n/a
