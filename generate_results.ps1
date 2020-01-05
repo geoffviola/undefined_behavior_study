@@ -43,6 +43,7 @@ cd ..
 echo "Compiler warnings"
 python associate_warnings.py --cpp_dir=src --out_file="build/Debug/warnings_table.txt" --warnings_file="build/Debug/warnings.txt"
 python associate_warnings.py --cpp_dir=src --out_file="build/RelWithDebInfo/warnings_table.txt" --warnings_file="build/RelWithDebInfo/warnings.txt"
+type build\warnings_enc.txt
 echo "MSVC Debug Compiler Warnings Start"
 type build\Debug\warnings_table.txt
 echo "MSVC Debug Compiler Warnings End"
