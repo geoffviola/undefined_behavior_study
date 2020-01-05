@@ -973,8 +973,10 @@ clang | most | Most | all
 clang | shift count overflow | shift-count-overflow | default
 clang | uninitialized | uninitialized | Most
 clang | return type| return-type  | Most
+gcc | delete incomplete | delete-incomplete | default
 gcc | divide by zero | div-by-zero | default
 gcc | shift count overflow | shift-count-overflow | extra
+gcc | strict aliasing | strict-aliasing | Wall
 gcc | return type | return-type | all
 gcc | uninitialized | uninitialized | all
 MSVC | divide by zero | 4723 | W3

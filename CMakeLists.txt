@@ -38,6 +38,8 @@ set(executables
     signed_integer_overflow
     stack_overflow
     std_vector_reserve_set_read
+    type_pun_cast_two_lines
+    type_pun_cast_same_line
     virtual_call_in_constructor_helper
     virtual_call_in_constructor_link
     virtual_call_in_destructor_helper

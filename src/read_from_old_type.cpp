@@ -8,7 +8,6 @@ Invalid scalar
 
 int main() {
   bool boolean = true;
-  // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
   auto *const p_boolean = reinterpret_cast<unsigned char *>(&boolean);
   *p_boolean = 10;
   // reading from b is now UB
