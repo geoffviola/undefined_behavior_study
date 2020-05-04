@@ -6,8 +6,11 @@ struct Point {
 };
 
 Point foo() {
+  static constexpr float kDefaultX = 1.0F;
+  static constexpr float kDefaultY = 2.0F;
+
   Point p{};
-  p.x = 1.0f;
-  p.y = 2.0f;
+  p.x = kDefaultX;
+  p.y = kDefaultY;
   return p;
 }

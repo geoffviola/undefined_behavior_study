@@ -4,8 +4,8 @@
 #include <iostream>
 
 int main() {
-  std::array<int32_t, 10> arr;
-  arr.fill(0);
+  static constexpr int kArraySize = 10;
+  std::array<int32_t, kArraySize> arr{};
   std::cout << arr[arr.size()] << std::endl;
   return EXIT_SUCCESS;
 }

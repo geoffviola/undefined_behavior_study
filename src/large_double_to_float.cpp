@@ -9,6 +9,7 @@ values. Otherwise, the behavior is undefined.
 #include <iostream>
 
 int main() {
-  std::cout << static_cast<float>(1e100) << std::endl;
+  static constexpr double kLargeDouble = 1e100;
+  std::cout << static_cast<float>(kLargeDouble) << std::endl;
   return 0;
 }

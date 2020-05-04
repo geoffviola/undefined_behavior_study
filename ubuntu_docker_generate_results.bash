@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 # Setup bionic with proper tools
 
-docker pull ubuntu:eoan-20190813
-
 tmpfile=$(mktemp ub-docker-script.XXXXXX)
 exec 3>"$tmpfile"
 
@@ -41,7 +39,7 @@ docker run \
   --rm \
   --cap-add SYS_PTRACE \
   --mount type=bind,source=$(pwd),target=$(pwd) \
-  ubuntu:bionic-20180821 \
+  ubuntu:focal-20200423 \
   /bin/bash -x $(pwd)/"$tmpfile" $INNER_FLAG
 rm "$tmpfile"
 

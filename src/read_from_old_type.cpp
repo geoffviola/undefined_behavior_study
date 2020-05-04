@@ -9,7 +9,8 @@ Invalid scalar
 int main() {
   bool boolean = true;
   auto *const p_boolean = reinterpret_cast<unsigned char *>(&boolean);
-  *p_boolean = 10;
+  static constexpr unsigned char kModifiedValue = 10;
+  *p_boolean = kModifiedValue;
   // reading from b is now UB
   const bool out_bool = boolean;
   std::cout << out_bool << std::endl;

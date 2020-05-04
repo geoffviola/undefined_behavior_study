@@ -17,6 +17,7 @@ clang | access after realloc | ❌ | ❌ | n/a
 clang | array out of bounds | ❌ | ❌ | n/a
 clang | automatic variable over stack | ❌ | ❌ | n/a
 clang | bad alignment | ❌ | ❌ | n/a
+clang | bad identifier name | ❌ | ❌ | n/a
 clang | delete incomplete type | ✔️ | ✔️ | -Wdelete-incomplete
 clang | dereferencing nullptr | ❌ | ❌ | n/a
 clang | divide by zero | ✔️ | ✔️ | -Wdivision-by-zero
@@ -50,18 +51,19 @@ clang | std vector reserve set read | ❌ | ❌ | n/a
 clang | strptime mktime unitialized | ❌ | ❌ | n/a
 clang | type pun cast same line | ❌ | ❌ | n/a
 clang | type pun cast two lines | ❌ | ❌ | n/a
-clang | virtual call in constructor | ✔️ | ✔️ | 1
+clang | virtual call in constructor | ✔️ | ✔️ | -Wcall-to-pure-virtual-from-ctor-dtor
 clang | virtual call in constructor helper | ❌ | ❌ | n/a
 clang | virtual call in constructor lib | ❌ | ❌ | n/a
 clang | virtual call in constructor link | ❌ | ❌ | n/a
-clang | virtual call in destructor | ✔️ | ✔️ | 1
+clang | virtual call in destructor | ✔️ | ✔️ | -Wcall-to-pure-virtual-from-ctor-dtor
 clang | virtual call in destructor helper | ❌ | ❌ | n/a
 clang | virtual call in destructor lib | ❌ | ❌ | n/a
 clang | virtual call in destructor link | ❌ | ❌ | n/a
 gcc | access after realloc | ❌ | ❌ | n/a
-gcc | array out of bounds | ❌ | ✔️ | -Wuninitialized
+gcc | array out of bounds | ❌ | ❌ | n/a
 gcc | automatic variable over stack | ❌ | ❌ | n/a
 gcc | bad alignment | ❌ | ❌ | n/a
+gcc | bad identifier name | ❌ | ❌ | n/a
 gcc | delete incomplete type | ✔️ | ✔️ | -Wdelete-incomplete
 gcc | dereferencing nullptr | ❌ | ❌ | n/a
 gcc | divide by zero | ✔️ | ✔️ | -Wdiv-by-zero
@@ -107,6 +109,7 @@ msvc | access after realloc | ❌ | ❌ | n/a
 msvc | array out of bounds | ❌ | ❌ | n/a
 msvc | automatic variable over stack | ❌ | ❌ | n/a
 msvc | bad alignment | ❌ | ❌ | n/a
+msvc | bad identifier name | ❌ | ❌ | n/a
 msvc | delete incomplete type | ✔️ | ✔️ | 4150
 msvc | dereferencing nullptr | ❌ | ❌ | n/a
 msvc | divide by zero | ✔️ | ✔️ | 4723
@@ -151,9 +154,10 @@ msvc | virtual call in destructor link | ❌ | ❌ | n/a
 Tool | Undefined Behavior Type | Warning | Name
 --- | --- | --- | ---
 clang-tidy | access after realloc | ✔️ | clang-analyzer-unix.Malloc
-clang-tidy | array out of bounds | ✔️ | cppcoreguidelines-pro-type-member-init,cppcoreguidelines-pro-bounds-constant-array-index
+clang-tidy | array out of bounds | ✔️ | cppcoreguidelines-pro-bounds-constant-array-index
 clang-tidy | automatic variable over stack | ❌ | n/a
 clang-tidy | bad alignment | ❌ | n/a
+clang-tidy | bad identifier name | ❌ | n/a
 clang-tidy | delete incomplete type | ✔️ | clang-diagnostic-delete-incomplete
 clang-tidy | dereferencing nullptr | ✔️ | clang-analyzer-core.NullDereference
 clang-tidy | divide by zero | ✔️ | clang-analyzer-core.DivideZero,clang-diagnostic-division-by-zero
@@ -171,38 +175,39 @@ clang-tidy | out of bounds pointer | ❌ | n/a
 clang-tidy | preincrement plus postincrement | ✔️ | clang-diagnostic-unsequenced
 clang-tidy | preincrement plus value | ✔️ | clang-diagnostic-unsequenced
 clang-tidy | read from old type | ❌ | n/a
-clang-tidy | reading uninitialized value add | ✔️ | clang-diagnostic-uninitialized,clang-analyzer-core.UndefinedBinaryOperatorResult
-clang-tidy | reading uninitialized value cout | ✔️ | clang-analyzer-core.CallAndMessage,clang-diagnostic-uninitialized
-clang-tidy | reading uninitialized value func arg | ✔️ | clang-analyzer-core.CallAndMessage
-clang-tidy | reading uninitialized value if | ✔️ | clang-analyzer-core.uninitialized.Branch,clang-diagnostic-uninitialized
-clang-tidy | reading uninitialized value lib call cref | ❌ | n/a
-clang-tidy | reading uninitialized value partial | ✔️ | clang-analyzer-core.CallAndMessage
-clang-tidy | reading uninitialized value printf | ✔️ | clang-analyzer-core.CallAndMessage,cppcoreguidelines-pro-type-vararg,clang-diagnostic-uninitialized
+clang-tidy | reading uninitialized value add | ✔️ | cppcoreguidelines-init-variables,clang-diagnostic-uninitialized,clang-analyzer-core.UndefinedBinaryOperatorResult
+clang-tidy | reading uninitialized value cout | ✔️ | cppcoreguidelines-init-variables,clang-analyzer-core.CallAndMessage,clang-diagnostic-uninitialized
+clang-tidy | reading uninitialized value func arg | ✔️ | cppcoreguidelines-init-variables,clang-analyzer-core.CallAndMessage
+clang-tidy | reading uninitialized value if | ✔️ | cppcoreguidelines-init-variables,clang-analyzer-core.uninitialized.Branch,clang-diagnostic-uninitialized
+clang-tidy | reading uninitialized value lib call cref | ✔️ | cppcoreguidelines-init-variables
+clang-tidy | reading uninitialized value partial | ✔️ | cppcoreguidelines-init-variables,clang-analyzer-core.CallAndMessage
+clang-tidy | reading uninitialized value printf | ✔️ | cppcoreguidelines-init-variables,clang-analyzer-core.CallAndMessage,cppcoreguidelines-pro-type-vararg,hicpp-vararg,clang-diagnostic-uninitialized
 clang-tidy | reading uninitialized value return | ✔️ | clang-diagnostic-return-type
-clang-tidy | reference out of scope | ✔️ | clang-analyzer-core.StackAddressEscape,clang-diagnostic-return-stack-address
+clang-tidy | reference out of scope | ✔️ | clang-analyzer-core.StackAddrEscapeBase,clang-diagnostic-return-stack-address
 clang-tidy | shifting more than width | ✔️ | hicpp-signed-bitwise,clang-analyzer-core.UndefinedBinaryOperatorResult,clang-diagnostic-shift-count-overflow
 clang-tidy | signed integer overflow | ❌ | n/a
 clang-tidy | stack overflow | ✔️ | clang-diagnostic-infinite-recursion
 clang-tidy | std vector reserve set read | ❌ | n/a
-clang-tidy | strptime mktime unitialized | ✔️ | cppcoreguidelines-pro-type-member-init
+clang-tidy | strptime mktime unitialized | ✔️ | cppcoreguidelines-pro-type-member-init,hicpp-member-init
 clang-tidy | type pun cast same line | ❌ | n/a
 clang-tidy | type pun cast two lines | ❌ | n/a
-clang-tidy | virtual call in constructor | ✔️ | clang-analyzer-optin.cplusplus.VirtualCall,clang-diagnostic-warning
-clang-tidy | virtual call in constructor helper | ✔️ | clang-analyzer-optin.cplusplus.VirtualCall
-clang-tidy | virtual call in constructor lib | ✔️ | clang-analyzer-optin.cplusplus.VirtualCall
+clang-tidy | virtual call in constructor | ✔️ | clang-analyzer-cplusplus.PureVirtualCall,clang-diagnostic-call-to-pure-virtual-from-ctor-dtor
+clang-tidy | virtual call in constructor helper | ✔️ | clang-analyzer-cplusplus.PureVirtualCall
+clang-tidy | virtual call in constructor lib | ✔️ | clang-analyzer-cplusplus.PureVirtualCall
 clang-tidy | virtual call in constructor link | ❌ | n/a
-clang-tidy | virtual call in destructor | ✔️ | clang-analyzer-optin.cplusplus.VirtualCall,clang-diagnostic-warning
-clang-tidy | virtual call in destructor helper | ✔️ | clang-analyzer-optin.cplusplus.VirtualCall
-clang-tidy | virtual call in destructor lib | ✔️ | clang-analyzer-optin.cplusplus.VirtualCall
+clang-tidy | virtual call in destructor | ✔️ | clang-analyzer-cplusplus.PureVirtualCall,clang-diagnostic-call-to-pure-virtual-from-ctor-dtor
+clang-tidy | virtual call in destructor helper | ✔️ | clang-analyzer-cplusplus.PureVirtualCall
+clang-tidy | virtual call in destructor lib | ✔️ | clang-analyzer-cplusplus.PureVirtualCall
 clang-tidy | virtual call in destructor link | ❌ | n/a
-cppcheck | access after realloc | ✔️ | n/a
-cppcheck | array out of bounds | ❌ | n/a
+cppcheck | access after realloc | ❌ | n/a
+cppcheck | array out of bounds | ✔️ | containerOutOfBoundsIndexExpression
 cppcheck | automatic variable over stack | ❌ | n/a
 cppcheck | bad alignment | ❌ | n/a
+cppcheck | bad identifier name | ❌ | n/a
 cppcheck | delete incomplete type | ❌ | n/a
-cppcheck | dereferencing nullptr | ✔️ | n/a
-cppcheck | divide by zero | ✔️ | n/a
-cppcheck | initialize std string with nullptr | ❌ | n/a
+cppcheck | dereferencing nullptr | ✔️ | nullPointer
+cppcheck | divide by zero | ✔️ | zerodiv
+cppcheck | initialize std string with nullptr | ✔️ | nullPointer
 cppcheck | large double to float | ❌ | n/a
 cppcheck | large double to int | ❌ | n/a
 cppcheck | malloc cast pod struct | ❌ | n/a
@@ -216,16 +221,16 @@ cppcheck | out of bounds pointer | ❌ | n/a
 cppcheck | preincrement plus postincrement | ❌ | n/a
 cppcheck | preincrement plus value | ❌ | n/a
 cppcheck | read from old type | ❌ | n/a
-cppcheck | reading uninitialized value add | ✔️ | n/a
-cppcheck | reading uninitialized value cout | ✔️ | n/a
+cppcheck | reading uninitialized value add | ✔️ | uninitvar
+cppcheck | reading uninitialized value cout | ✔️ | uninitvar
 cppcheck | reading uninitialized value func arg | ❌ | n/a
-cppcheck | reading uninitialized value if | ✔️ | n/a
-cppcheck | reading uninitialized value lib call cref | ✔️ | n/a
-cppcheck | reading uninitialized value partial | ✔️ | n/a
-cppcheck | reading uninitialized value printf | ✔️ | n/a
+cppcheck | reading uninitialized value if | ✔️ | uninitvar
+cppcheck | reading uninitialized value lib call cref | ✔️ | uninitvar
+cppcheck | reading uninitialized value partial | ✔️ | uninitvar
+cppcheck | reading uninitialized value printf | ✔️ | uninitvar
 cppcheck | reading uninitialized value return | ❌ | n/a
-cppcheck | reference out of scope | ✔️ | n/a
-cppcheck | shifting more than width | ✔️ | n/a
+cppcheck | reference out of scope | ✔️ | returnReference
+cppcheck | shifting more than width | ✔️ | shiftTooManyBits
 cppcheck | signed integer overflow | ❌ | n/a
 cppcheck | stack overflow | ❌ | n/a
 cppcheck | std vector reserve set read | ❌ | n/a
@@ -246,14 +251,15 @@ Debug (unoptimized) / RelWithDebInfo (optimized)
 
 Undefined Behavior Type | clang | clang-tidy | cppcheck | gcc | msvc
 --- | --- | --- | --- | --- | ---
-access after realloc | ❌ | ✔️ | ✔️ | ❌ | ❌
-array out of bounds | ❌ | ✔️ | ❌ | ❌/✔️ | ❌
+access after realloc | ❌ | ✔️ | ❌ | ❌ | ❌
+array out of bounds | ❌ | ✔️ | ✔️ | ❌ | ❌
 automatic variable over stack | ❌ | ❌ | ❌ | ❌ | ❌
 bad alignment | ❌ | ❌ | ❌ | ❌ | ❌
+bad identifier name | ❌ | ❌ | ❌ | ❌ | ❌
 delete incomplete type | ✔️ | ✔️ | ❌ | ✔️ | ✔️
 dereferencing nullptr | ❌ | ✔️ | ✔️ | ❌ | ❌
 divide by zero | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-initialize std string with nullptr | ❌ | ❌ | ❌ | ❌ | ❌
+initialize std string with nullptr | ❌ | ❌ | ✔️ | ❌ | ❌
 large double to float | ❌ | ❌ | ❌ | ❌ | ❌
 large double to int | ❌ | ❌ | ❌ | ❌ | ❌
 malloc cast pod struct | ❌ | ❌ | ❌ | ❌ | ❌
@@ -271,7 +277,7 @@ reading uninitialized value add | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value cout | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value func arg | ❌ | ✔️ | ❌ | ❌/✔️ | ❌
 reading uninitialized value if | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-reading uninitialized value lib call cref | ❌ | ❌ | ✔️ | ❌ | ❌
+reading uninitialized value lib call cref | ❌ | ✔️ | ✔️ | ❌ | ❌
 reading uninitialized value partial | ❌ | ✔️ | ✔️ | ❌ | ❌
 reading uninitialized value printf | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value return | ✔️ | ✔️ | ❌ | ✔️ | n/a
@@ -301,6 +307,7 @@ clang | access after realloc | 0 | 0
 clang | array out of bounds | 0 | 0
 clang | automatic variable over stack | 139 | 0
 clang | bad alignment | 0 | 0
+clang | bad identifier name | 0 | 0
 clang | delete incomplete type | 0 | 0
 clang | dereferencing nullptr | 139 | 0
 clang | divide by zero | 136 | 0
@@ -341,6 +348,7 @@ gcc | access after realloc | 0 | 0
 gcc | array out of bounds | 0 | 0
 gcc | automatic variable over stack | 139 | 0
 gcc | bad alignment | 0 | 0
+gcc | bad identifier name | 0 | 0
 gcc | delete incomplete type | 0 | 0
 gcc | dereferencing nullptr | 139 | 139
 gcc | divide by zero | 136 | 132
@@ -379,6 +387,7 @@ msvc | access after realloc | 0 | 0
 msvc | array out of bounds | -1 | 0
 msvc | automatic variable over stack | -1073741571 | 0
 msvc | bad alignment | 0 | 0
+msvc | bad identifier name | 0 | 0
 msvc | delete incomplete type | 0 | 0
 msvc | dereferencing nullptr | -1073741819 | -1073741819
 msvc | divide by zero | -1073741676 | -1073741676
@@ -421,6 +430,7 @@ access after realloc | ❌ | ❌ | ❌
 array out of bounds | ❌ | ❌ | ✔️/❌
 automatic variable over stack | ✔️/❌ | ✔️/❌ | ✔️/❌
 bad alignment | ❌ | ❌ | ❌
+bad identifier name | ❌ | ❌ | ❌
 delete incomplete type | ❌ | ❌ | ❌
 dereferencing nullptr | ✔️/❌ | ✔️ | ✔️
 divide by zero | ✔️/❌ | ✔️ | ✔️
@@ -467,6 +477,7 @@ clang | address | access after realloc | 1 | 1
 clang | address | array out of bounds | 1 | 0
 clang | address | automatic variable over stack | 1 | 0
 clang | address | bad alignment | 0 | 0
+clang | address | bad identifier name | 0 | 0
 clang | address | delete incomplete type | 0 | 0
 clang | address | dereferencing nullptr | 1 | 0
 clang | address | divide by zero | 1 | 0
@@ -488,7 +499,7 @@ clang | address | reading uninitialized value if | 0 | 0
 clang | address | reading uninitialized value lib call cref | 0 | 0
 clang | address | reading uninitialized value partial | 0 | 0
 clang | address | reading uninitialized value printf | 0 | 0
-clang | address | reading uninitialized value return | 132 | 240
+clang | address | reading uninitialized value return | 132 | 112
 clang | address | reference out of scope | 0 | 0
 clang | address | shifting more than width | 0 | 0
 clang | address | signed integer overflow | 0 | 0
@@ -506,12 +517,13 @@ clang | address | virtual call in destructor link | 134 | 134
 clang | address,undefined | access after realloc | 1 | 1
 clang | address,undefined | array out of bounds | 1 | 1
 clang | address,undefined | automatic variable over stack | 1 | 1
-clang | address,undefined | bad alignment | 0 | 0
+clang | address,undefined | bad alignment | 1 | 1
+clang | address,undefined | bad identifier name | 0 | 0
 clang | address,undefined | delete incomplete type | 0 | 0
 clang | address,undefined | dereferencing nullptr | 1 | 1
 clang | address,undefined | divide by zero | 1 | 1
-clang | address,undefined | initialize std string with nullptr | 134 | 134
-clang | address,undefined | large double to float | 1 | 1
+clang | address,undefined | initialize std string with nullptr | 1 | 1
+clang | address,undefined | large double to float | 0 | 0
 clang | address,undefined | large double to int | 1 | 1
 clang | address,undefined | malloc cast pod struct | 0 | 0
 clang | address,undefined | mutate const value | 0 | 0
@@ -521,9 +533,9 @@ clang | address,undefined | out of bounds pointer | 0 | 0
 clang | address,undefined | preincrement plus postincrement | 0 | 0
 clang | address,undefined | preincrement plus value | 0 | 0
 clang | address,undefined | read from old type | 1 | 1
-clang | address,undefined | reading uninitialized value add | 0 | 1
+clang | address,undefined | reading uninitialized value add | 0 | 0
 clang | address,undefined | reading uninitialized value cout | 0 | 0
-clang | address,undefined | reading uninitialized value func arg | 0 | 1
+clang | address,undefined | reading uninitialized value func arg | 1 | 1
 clang | address,undefined | reading uninitialized value if | 0 | 0
 clang | address,undefined | reading uninitialized value lib call cref | 0 | 0
 clang | address,undefined | reading uninitialized value partial | 0 | 0
@@ -547,10 +559,11 @@ clang | memory | access after realloc | 0 | 0
 clang | memory | array out of bounds | 0 | 0
 clang | memory | automatic variable over stack | 77 | 0
 clang | memory | bad alignment | 0 | 0
+clang | memory | bad identifier name | 0 | 0
 clang | memory | delete incomplete type | 0 | 0
 clang | memory | dereferencing nullptr | 77 | 0
 clang | memory | divide by zero | 0 | 0
-clang | memory | initialize std string with nullptr | 134 | 134
+clang | memory | initialize std string with nullptr | 77 | 77
 clang | memory | large double to float | 0 | 0
 clang | memory | large double to int | 0 | 0
 clang | memory | malloc cast pod struct | 0 | 0
@@ -568,7 +581,7 @@ clang | memory | reading uninitialized value if | 77 | 0
 clang | memory | reading uninitialized value lib call cref | 0 | 0
 clang | memory | reading uninitialized value partial | 0 | 0
 clang | memory | reading uninitialized value printf | 0 | 0
-clang | memory | reading uninitialized value return | 132 | 80
+clang | memory | reading uninitialized value return | 132 | 48
 clang | memory | reference out of scope | 0 | 0
 clang | memory | shifting more than width | 0 | 0
 clang | memory | signed integer overflow | 0 | 0
@@ -586,12 +599,13 @@ clang | memory | virtual call in destructor link | 134 | 134
 clang | memory,undefined | access after realloc | 0 | 0
 clang | memory,undefined | array out of bounds | 0 | 77
 clang | memory,undefined | automatic variable over stack | 77 | 77
-clang | memory,undefined | bad alignment | 0 | 0
+clang | memory,undefined | bad alignment | 77 | 77
+clang | memory,undefined | bad identifier name | 0 | 0
 clang | memory,undefined | delete incomplete type | 0 | 0
 clang | memory,undefined | dereferencing nullptr | 77 | 77
 clang | memory,undefined | divide by zero | 77 | 77
-clang | memory,undefined | initialize std string with nullptr | 134 | 134
-clang | memory,undefined | large double to float | 77 | 77
+clang | memory,undefined | initialize std string with nullptr | 77 | 77
+clang | memory,undefined | large double to float | 0 | 0
 clang | memory,undefined | large double to int | 77 | 77
 clang | memory,undefined | malloc cast pod struct | 0 | 0
 clang | memory,undefined | mutate const value | 0 | 0
@@ -601,7 +615,7 @@ clang | memory,undefined | out of bounds pointer | 0 | 0
 clang | memory,undefined | preincrement plus postincrement | 0 | 0
 clang | memory,undefined | preincrement plus value | 0 | 0
 clang | memory,undefined | read from old type | 77 | 77
-clang | memory,undefined | reading uninitialized value add | 0 | 77
+clang | memory,undefined | reading uninitialized value add | 0 | 0
 clang | memory,undefined | reading uninitialized value cout | 0 | 0
 clang | memory,undefined | reading uninitialized value func arg | 0 | 77
 clang | memory,undefined | reading uninitialized value if | 77 | 0
@@ -626,12 +640,13 @@ clang | memory,undefined | virtual call in destructor link | 134 | 134
 clang | undefined | access after realloc | 0 | 0
 clang | undefined | array out of bounds | 0 | 1
 clang | undefined | automatic variable over stack | 1 | 1
-clang | undefined | bad alignment | 0 | 0
+clang | undefined | bad alignment | 1 | 1
+clang | undefined | bad identifier name | 0 | 0
 clang | undefined | delete incomplete type | 0 | 0
 clang | undefined | dereferencing nullptr | 1 | 1
 clang | undefined | divide by zero | 1 | 1
-clang | undefined | initialize std string with nullptr | 134 | 134
-clang | undefined | large double to float | 1 | 1
+clang | undefined | initialize std string with nullptr | 1 | 1
+clang | undefined | large double to float | 0 | 0
 clang | undefined | large double to int | 1 | 1
 clang | undefined | malloc cast pod struct | 0 | 0
 clang | undefined | mutate const value | 0 | 0
@@ -641,7 +656,7 @@ clang | undefined | out of bounds pointer | 0 | 0
 clang | undefined | preincrement plus postincrement | 0 | 0
 clang | undefined | preincrement plus value | 0 | 0
 clang | undefined | read from old type | 1 | 1
-clang | undefined | reading uninitialized value add | 0 | 1
+clang | undefined | reading uninitialized value add | 0 | 0
 clang | undefined | reading uninitialized value cout | 0 | 0
 clang | undefined | reading uninitialized value func arg | 0 | 1
 clang | undefined | reading uninitialized value if | 0 | 0
@@ -667,6 +682,7 @@ gcc | address | access after realloc | 1 | 1
 gcc | address | array out of bounds | 1 | 1
 gcc | address | automatic variable over stack | 1 | 1
 gcc | address | bad alignment | 0 | 0
+gcc | address | bad identifier name | 0 | 0
 gcc | address | delete incomplete type | 0 | 0
 gcc | address | dereferencing nullptr | 1 | 1
 gcc | address | divide by zero | 1 | 132
@@ -688,7 +704,7 @@ gcc | address | reading uninitialized value if | 0 | 0
 gcc | address | reading uninitialized value lib call cref | 0 | 0
 gcc | address | reading uninitialized value partial | 1 | 0
 gcc | address | reading uninitialized value printf | 0 | 0
-gcc | address | reading uninitialized value return | 0 | 1
+gcc | address | reading uninitialized value return | 0 | 0
 gcc | address | reference out of scope | 1 | 1
 gcc | address | shifting more than width | 0 | 0
 gcc | address | signed integer overflow | 0 | 0
@@ -705,10 +721,11 @@ gcc | address,leak,undefined | access after realloc | 1 | 1
 gcc | address,leak,undefined | array out of bounds | 1 | 1
 gcc | address,leak,undefined | automatic variable over stack | 1 | 1
 gcc | address,leak,undefined | bad alignment | 1 | 1
+gcc | address,leak,undefined | bad identifier name | 0 | 0
 gcc | address,leak,undefined | delete incomplete type | 0 | 0
 gcc | address,leak,undefined | dereferencing nullptr | 1 | 1
 gcc | address,leak,undefined | divide by zero | 1 | 1
-gcc | address,leak,undefined | initialize std string with nullptr | 134 | 134
+gcc | address,leak,undefined | initialize std string with nullptr | 1 | 1
 gcc | address,leak,undefined | large double to float | 0 | 0
 gcc | address,leak,undefined | large double to int | 0 | 0
 gcc | address,leak,undefined | malloc cast pod struct | 0 | 0
@@ -743,6 +760,7 @@ gcc | leak | access after realloc | 0 | 0
 gcc | leak | array out of bounds | 0 | 0
 gcc | leak | automatic variable over stack | 23 | 0
 gcc | leak | bad alignment | 0 | 0
+gcc | leak | bad identifier name | 0 | 0
 gcc | leak | delete incomplete type | 0 | 0
 gcc | leak | dereferencing nullptr | 23 | 23
 gcc | leak | divide by zero | 23 | 132
@@ -759,12 +777,12 @@ gcc | leak | preincrement plus value | 0 | 0
 gcc | leak | read from old type | 0 | 0
 gcc | leak | reading uninitialized value add | 0 | 0
 gcc | leak | reading uninitialized value cout | 0 | 0
-gcc | leak | reading uninitialized value func arg | 0 | 139
+gcc | leak | reading uninitialized value func arg | 0 | 23
 gcc | leak | reading uninitialized value if | 0 | 0
 gcc | leak | reading uninitialized value lib call cref | 0 | 0
-gcc | leak | reading uninitialized value partial | 139 | 0
+gcc | leak | reading uninitialized value partial | 23 | 0
 gcc | leak | reading uninitialized value printf | 0 | 0
-gcc | leak | reading uninitialized value return | 0 | 139
+gcc | leak | reading uninitialized value return | 0 | 23
 gcc | leak | reference out of scope | 23 | 23
 gcc | leak | shifting more than width | 0 | 0
 gcc | leak | signed integer overflow | 0 | 0
@@ -781,10 +799,11 @@ gcc | undefined | access after realloc | 0 | 0
 gcc | undefined | array out of bounds | 0 | 1
 gcc | undefined | automatic variable over stack | 139 | 139
 gcc | undefined | bad alignment | 0 | 0
+gcc | undefined | bad identifier name | 0 | 0
 gcc | undefined | delete incomplete type | 0 | 0
 gcc | undefined | dereferencing nullptr | 1 | 1
 gcc | undefined | divide by zero | 1 | 1
-gcc | undefined | initialize std string with nullptr | 134 | 134
+gcc | undefined | initialize std string with nullptr | 1 | 1
 gcc | undefined | large double to float | 0 | 0
 gcc | undefined | large double to int | 0 | 0
 gcc | undefined | malloc cast pod struct | 0 | 0
@@ -819,6 +838,7 @@ gcc | valgrind | access after realloc | 1 | 1
 gcc | valgrind | array out of bounds | 0 | 0
 gcc | valgrind | automatic variable over stack | 139 | 0
 gcc | valgrind | bad alignment | 0 | 0
+gcc | valgrind | bad identifier name | 0 | 0
 gcc | valgrind | delete incomplete type | 0 | 0
 gcc | valgrind | dereferencing nullptr | 139 | 139
 gcc | valgrind | divide by zero | 136 | 132
@@ -862,12 +882,13 @@ Undefined Behavior Type | address | address,undefined | memory | memory,undefine
 access after realloc | ✔️ | ✔️ | ❌ | ❌ | ❌
 array out of bounds | ✔️/❌ | ✔️ | ❌ | ❌/✔️ | ❌/✔️
 automatic variable over stack | ✔️/❌ | ✔️ | ✔️/❌ | ✔️ | ✔️
-bad alignment | ❌ | ❌ | ❌ | ❌ | ❌
+bad alignment | ❌ | ✔️ | ❌ | ✔️ | ✔️
+bad identifier name | ❌ | ❌ | ❌ | ❌ | ❌
 delete incomplete type | ❌ | ❌ | ❌ | ❌ | ❌
 dereferencing nullptr | ✔️/❌ | ✔️ | ✔️/❌ | ✔️ | ✔️
 divide by zero | ✔️/❌ | ✔️ | ❌ | ✔️ | ✔️
 initialize std string with nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-large double to float | ❌ | ✔️ | ❌ | ✔️ | ✔️
+large double to float | ❌ | ❌ | ❌ | ❌ | ❌
 large double to int | ❌ | ✔️ | ❌ | ✔️ | ✔️
 malloc cast pod struct | ❌ | ❌ | ❌ | ❌ | ❌
 mutate const value | ❌ | ❌ | ❌ | ❌ | ❌
@@ -877,9 +898,9 @@ out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌
 preincrement plus postincrement | ❌ | ❌ | ❌ | ❌ | ❌
 preincrement plus value | ❌ | ❌ | ❌ | ❌ | ❌
 read from old type | ❌ | ✔️ | ❌ | ✔️ | ✔️
-reading uninitialized value add | ❌ | ❌/✔️ | ❌ | ❌/✔️ | ❌/✔️
+reading uninitialized value add | ❌ | ❌ | ❌ | ❌ | ❌
 reading uninitialized value cout | ❌ | ❌ | ❌ | ❌ | ❌
-reading uninitialized value func arg | ❌/✔️ | ❌/✔️ | ❌/✔️ | ❌/✔️ | ❌/✔️
+reading uninitialized value func arg | ❌/✔️ | ✔️ | ❌/✔️ | ❌/✔️ | ❌/✔️
 reading uninitialized value if | ❌ | ❌ | ✔️/❌ | ✔️/❌ | ❌
 reading uninitialized value lib call cref | ❌ | ❌ | ❌ | ❌ | ❌
 reading uninitialized value partial | ❌ | ❌ | ❌ | ❌ | ❌
@@ -909,6 +930,7 @@ access after realloc | ✔️ | ✔️ | ❌ | ❌ | ✔️
 array out of bounds | ✔️ | ✔️ | ❌ | ❌/✔️ | ❌
 automatic variable over stack | ✔️ | ✔️ | ✔️/❌ | ✔️ | ✔️/❌
 bad alignment | ❌ | ✔️ | ❌ | ❌ | ❌
+bad identifier name | ❌ | ❌ | ❌ | ❌ | ❌
 delete incomplete type | ❌ | ❌ | ❌ | ❌ | ❌
 dereferencing nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 divide by zero | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
@@ -930,7 +952,7 @@ reading uninitialized value if | ❌ | ❌ | ❌ | ❌ | ✔️/❌
 reading uninitialized value lib call cref | ❌ | ❌ | ❌ | ❌ | ✔️
 reading uninitialized value partial | ✔️/❌ | ❌ | ✔️/❌ | ✔️/❌ | ✔️/❌
 reading uninitialized value printf | ❌ | ❌ | ❌ | ❌ | ✔️/❌
-reading uninitialized value return | ❌/✔️ | ✔️ | ❌/✔️ | ✔️ | ❌/✔️
+reading uninitialized value return | ❌ | ✔️ | ❌/✔️ | ✔️ | ❌/✔️
 reference out of scope | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 shifting more than width | ❌ | ✔️ | ❌ | ✔️ | ❌
 signed integer overflow | ❌ | ✔️/❌ | ❌ | ✔️/❌ | ❌
@@ -951,14 +973,15 @@ virtual call in destructor link | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 Undefined Behavior Type | Compiler Warning | Standalone Static Analysis | Runtime Crash | Extra Dynamic Analsyis
 --- | --- | --- | --- | ---
 access after realloc | ❌ | ✔️ | ❌ | ✔️
-array out of bounds | ✔️ | ✔️ | ✔️ | ✔️
+array out of bounds | ❌ | ✔️ | ✔️ | ✔️
 automatic variable over stack | ❌ | ❌ | ✔️ | ✔️
 bad alignment | ❌ | ❌ | ❌ | ✔️
+bad identifier name | ❌ | ❌ | ❌ | ❌
 delete incomplete type | ✔️ | ✔️ | ❌ | ❌
 dereferencing nullptr | ❌ | ✔️ | ✔️ | ✔️
 divide by zero | ✔️ | ✔️ | ✔️ | ✔️
-initialize std string with nullptr | ❌ | ❌ | ✔️ | ✔️
-large double to float | ❌ | ❌ | ❌ | ✔️
+initialize std string with nullptr | ❌ | ✔️ | ✔️ | ✔️
+large double to float | ❌ | ❌ | ❌ | ❌
 large double to int | ❌ | ❌ | ❌ | ✔️
 malloc cast pod struct | ❌ | ❌ | ❌ | ❌
 mutate const value | ❌ | ✔️ | ❌ | ❌
@@ -998,16 +1021,16 @@ virtual call in destructor link | ❌ | ❌ | ✔️ | ✔️
 
 
 ## Versions
-- Linux 057709d713c0 4.9.184-linuxkit #1 SMP Tue Jul 2 22:58:16 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
-- clang: 6.0.0-1ubuntu2 (tags/RELEASE\_600/final)
-- clang-tidy: 6.0
-- cppcheck 1.82
-- gcc (Ubuntu 7.4.0-1ubuntu1~18.04.1) 7.4.0 -std=c++17
-- GNU bash, version 4.4.19(1)-release (x86_64-pc-linux-gnu)
+- Linux 8482e64a9955 5.4.0-28-generic #32-Ubuntu SMP Wed Apr 22 17:40:10 UTC 2020 x86\_64 x86\_64 x86\_64 GNU/Linux
+- clang version 10.0.0-4ubuntu1
+- clang-tidy: 10.0
+- cppcheck 1.90
+- gcc (Ubuntu 9.3.0-10ubuntu2) 9.3.0
+- GNU bash, version 5.0.16(1)-release (x86\_64-pc-linux-gnu)
 - GNU parallel 20161222
 - MSVC: 2019 Version 14.22.27905
-- Python 3.6.8
-- valgrind: 3.13.0
+- Python 3.8.2
+- valgrind: 3.15.0
 - Windows SDK version 10.0.18362.0 to target Windows 10.0.17763
 
 ## Reference Warning Classes
@@ -1034,7 +1057,7 @@ MSVC | truncation of constant value | 4309 | W2
 ## Notes
 Valgrind was run on GCC compiled binaries. msan, asan, and ubsan are all different flags into clang's "fsanatize" parameter.
 
-Passing means the process halted with a non zero error code. Tests were on intel x86\_64. MSVC was tested on Windows 10 and the rest was tested on Ubuntu 18.04. Debug mode and RelWithDebInfo is in reference to CMake's build types.
+Passing means the process halted with a non zero error code. Tests were on intel x86\_64. MSVC was tested on Windows 10 and the rest was tested on Ubuntu 20.04. Debug mode and RelWithDebInfo is in reference to CMake's build types.
 
 There is only one case of each type. It's expected that slightly different implementations of the same types of undefined behavior may yield different results. Multiple runs were not performed consistently for statistical purposes.
 

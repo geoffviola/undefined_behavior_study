@@ -10,7 +10,8 @@ promoted left operand
 #include <iostream>
 
 int main() {
-  uint32_t u = 0U;
-  std::cout << (u << 33) << std::endl;
+  static constexpr uint32_t kU = 0U;
+  static constexpr int kShift = 33;
+  std::cout << (kU << kShift) << std::endl;
   return EXIT_SUCCESS;
 }

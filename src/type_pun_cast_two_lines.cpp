@@ -19,7 +19,7 @@ of the object, or (11.3) a char, unsigned char, or std​::​byte type.
 
 int main() {
   const int32_t a = 1;
-  auto f = reinterpret_cast<const float *>(&a);
+  const auto* const f = reinterpret_cast<const float *>(&a);
   std::cout << *f << '\n';
   return EXIT_SUCCESS;
 }
