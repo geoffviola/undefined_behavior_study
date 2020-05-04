@@ -11,6 +11,7 @@ set(executables
     array_out_of_bounds
     automatic_variable_over_stack
     bad_alignment
+    bad_identifier_name
     delete_incomplete_type
     dereferencing_nullptr
     divide_by_zero
