@@ -17,12 +17,12 @@ set(executables
     divide_by_zero
     initialize_std_string_with_nullptr
     large_double_to_int
-    large_double_to_float
     malloc_cast_pod_struct
     mutate_const_value
     no_undefined_behavior
     odr_violation_function
     odr_violation_struct_ret
+    operator_star_on_empty_optional
     out_of_bounds_pointer
     preincrement_plus_postincrement
     preincrement_plus_value
