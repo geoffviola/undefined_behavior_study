@@ -4,10 +4,10 @@ A study of undefined behavior on various platforms, compilers, and tools. The un
 ## Automated Results
 
 Linux 
-[![Build Status](https://travis-ci.org/geoffviola/undefined_behavior_study.svg?branch=master)](https://travis-ci.org/geoffviola/undefined_behavior_study)
+[![Build Status](https://travis-ci.com/geoffviola/undefined_behavior_study.svg?branch=master)](https://travis-ci.com/geoffviola/undefined_behavior_study)
 
 Windows 
-[![Build status](https://ci.appveyor.com/api/projects/status/sewu7060d0mn6v8i/branch/master?svg=true)](https://ci.appveyor.com/project/geoffviola/undefined_behavior_study/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/65bhemledj07s8jt?svg=true)](https://ci.appveyor.com/project/geoffviola/undefined-behavior-study)
 
 ## 1.Static Analysis
 ### 1.1.Compiler Warnings
@@ -22,7 +22,6 @@ clang | delete incomplete type | ✔️ | ✔️ | -Wdelete-incomplete
 clang | dereferencing nullptr | ❌ | ❌ | n/a
 clang | divide by zero | ✔️ | ✔️ | -Wdivision-by-zero
 clang | initialize std string with nullptr | ❌ | ❌ | n/a
-clang | large double to float | ❌ | ❌ | n/a
 clang | large double to int | ❌ | ❌ | n/a
 clang | malloc cast pod struct | ❌ | ❌ | n/a
 clang | mutate const value | ❌ | ❌ | n/a
@@ -68,7 +67,6 @@ gcc | delete incomplete type | ✔️ | ✔️ | -Wdelete-incomplete
 gcc | dereferencing nullptr | ❌ | ❌ | n/a
 gcc | divide by zero | ✔️ | ✔️ | -Wdiv-by-zero
 gcc | initialize std string with nullptr | ❌ | ❌ | n/a
-gcc | large double to float | ❌ | ❌ | n/a
 gcc | large double to int | ❌ | ❌ | n/a
 gcc | malloc cast pod struct | ❌ | ❌ | n/a
 gcc | mutate const value | ❌ | ❌ | n/a
@@ -114,7 +112,6 @@ msvc | delete incomplete type | ✔️ | ✔️ | 4150
 msvc | dereferencing nullptr | ❌ | ❌ | n/a
 msvc | divide by zero | ✔️ | ✔️ | 4723
 msvc | initialize std string with nullptr | ❌ | ❌ | n/a
-msvc | large double to float | ❌ | ❌ | n/a
 msvc | large double to int | ❌ | ❌ | n/a
 msvc | malloc cast pod struct | ❌ | ❌ | n/a
 msvc | mutate const value | ❌ | ❌ | n/a
@@ -162,7 +159,6 @@ clang-tidy | delete incomplete type | ✔️ | clang-diagnostic-delete-incomplet
 clang-tidy | dereferencing nullptr | ✔️ | clang-analyzer-core.NullDereference
 clang-tidy | divide by zero | ✔️ | clang-analyzer-core.DivideZero,clang-diagnostic-division-by-zero
 clang-tidy | initialize std string with nullptr | ❌ | n/a
-clang-tidy | large double to float | ❌ | n/a
 clang-tidy | large double to int | ❌ | n/a
 clang-tidy | malloc cast pod struct | ❌ | n/a
 clang-tidy | mutate const value | ✔️ | cppcoreguidelines-pro-type-const-cast
@@ -208,7 +204,6 @@ cppcheck | delete incomplete type | ❌ | n/a
 cppcheck | dereferencing nullptr | ✔️ | nullPointer
 cppcheck | divide by zero | ✔️ | zerodiv
 cppcheck | initialize std string with nullptr | ✔️ | nullPointer
-cppcheck | large double to float | ❌ | n/a
 cppcheck | large double to int | ❌ | n/a
 cppcheck | malloc cast pod struct | ❌ | n/a
 cppcheck | mutate const value | ❌ | n/a
@@ -260,7 +255,6 @@ delete incomplete type | ✔️ | ✔️ | ❌ | ✔️ | ✔️
 dereferencing nullptr | ❌ | ✔️ | ✔️ | ❌ | ❌
 divide by zero | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 initialize std string with nullptr | ❌ | ❌ | ✔️ | ❌ | ❌
-large double to float | ❌ | ❌ | ❌ | ❌ | ❌
 large double to int | ❌ | ❌ | ❌ | ❌ | ❌
 malloc cast pod struct | ❌ | ❌ | ❌ | ❌ | ❌
 mutate const value | ❌ | ✔️ | ❌ | ❌ | ❌
@@ -312,7 +306,6 @@ clang | delete incomplete type | 0 | 0
 clang | dereferencing nullptr | 139 | 0
 clang | divide by zero | 136 | 0
 clang | initialize std string with nullptr | 134 | 134
-clang | large double to float | 0 | 0
 clang | large double to int | 0 | 0
 clang | malloc cast pod struct | 0 | 0
 clang | mutate const value | 0 | 0
@@ -353,7 +346,6 @@ gcc | delete incomplete type | 0 | 0
 gcc | dereferencing nullptr | 139 | 139
 gcc | divide by zero | 136 | 132
 gcc | initialize std string with nullptr | 134 | 134
-gcc | large double to float | 0 | 0
 gcc | large double to int | 0 | 0
 gcc | malloc cast pod struct | 0 | 0
 gcc | mutate const value | 0 | 0
@@ -392,7 +384,6 @@ msvc | delete incomplete type | 0 | 0
 msvc | dereferencing nullptr | -1073741819 | -1073741819
 msvc | divide by zero | -1073741676 | -1073741676
 msvc | initialize std string with nullptr | -1073741819 | -1073741819
-msvc | large double to float | 0 | 0
 msvc | large double to int | 0 | 0
 msvc | malloc cast pod struct | 0 | 0
 msvc | mutate const value | 0 | 0
@@ -435,7 +426,6 @@ delete incomplete type | ❌ | ❌ | ❌
 dereferencing nullptr | ✔️/❌ | ✔️ | ✔️
 divide by zero | ✔️/❌ | ✔️ | ✔️
 initialize std string with nullptr | ✔️ | ✔️ | ✔️
-large double to float | ❌ | ❌ | ❌
 large double to int | ❌ | ❌ | ❌
 malloc cast pod struct | ❌ | ❌ | ❌
 mutate const value | ❌ | ❌ | ❌
@@ -482,7 +472,6 @@ clang | address | delete incomplete type | 0 | 0
 clang | address | dereferencing nullptr | 1 | 0
 clang | address | divide by zero | 1 | 0
 clang | address | initialize std string with nullptr | 134 | 134
-clang | address | large double to float | 0 | 0
 clang | address | large double to int | 0 | 0
 clang | address | malloc cast pod struct | 0 | 0
 clang | address | mutate const value | 0 | 0
@@ -523,7 +512,6 @@ clang | address,undefined | delete incomplete type | 0 | 0
 clang | address,undefined | dereferencing nullptr | 1 | 1
 clang | address,undefined | divide by zero | 1 | 1
 clang | address,undefined | initialize std string with nullptr | 1 | 1
-clang | address,undefined | large double to float | 0 | 0
 clang | address,undefined | large double to int | 1 | 1
 clang | address,undefined | malloc cast pod struct | 0 | 0
 clang | address,undefined | mutate const value | 0 | 0
@@ -564,7 +552,6 @@ clang | memory | delete incomplete type | 0 | 0
 clang | memory | dereferencing nullptr | 77 | 0
 clang | memory | divide by zero | 0 | 0
 clang | memory | initialize std string with nullptr | 77 | 77
-clang | memory | large double to float | 0 | 0
 clang | memory | large double to int | 0 | 0
 clang | memory | malloc cast pod struct | 0 | 0
 clang | memory | mutate const value | 0 | 0
@@ -605,7 +592,6 @@ clang | memory,undefined | delete incomplete type | 0 | 0
 clang | memory,undefined | dereferencing nullptr | 77 | 77
 clang | memory,undefined | divide by zero | 77 | 77
 clang | memory,undefined | initialize std string with nullptr | 77 | 77
-clang | memory,undefined | large double to float | 0 | 0
 clang | memory,undefined | large double to int | 77 | 77
 clang | memory,undefined | malloc cast pod struct | 0 | 0
 clang | memory,undefined | mutate const value | 0 | 0
@@ -646,7 +632,6 @@ clang | undefined | delete incomplete type | 0 | 0
 clang | undefined | dereferencing nullptr | 1 | 1
 clang | undefined | divide by zero | 1 | 1
 clang | undefined | initialize std string with nullptr | 1 | 1
-clang | undefined | large double to float | 0 | 0
 clang | undefined | large double to int | 1 | 1
 clang | undefined | malloc cast pod struct | 0 | 0
 clang | undefined | mutate const value | 0 | 0
@@ -687,7 +672,6 @@ gcc | address | delete incomplete type | 0 | 0
 gcc | address | dereferencing nullptr | 1 | 1
 gcc | address | divide by zero | 1 | 132
 gcc | address | initialize std string with nullptr | 134 | 134
-gcc | address | large double to float | 0 | 0
 gcc | address | large double to int | 0 | 0
 gcc | address | malloc cast pod struct | 0 | 0
 gcc | address | mutate const value | 0 | 0
@@ -726,7 +710,6 @@ gcc | address,leak,undefined | delete incomplete type | 0 | 0
 gcc | address,leak,undefined | dereferencing nullptr | 1 | 1
 gcc | address,leak,undefined | divide by zero | 1 | 1
 gcc | address,leak,undefined | initialize std string with nullptr | 1 | 1
-gcc | address,leak,undefined | large double to float | 0 | 0
 gcc | address,leak,undefined | large double to int | 0 | 0
 gcc | address,leak,undefined | malloc cast pod struct | 0 | 0
 gcc | address,leak,undefined | mutate const value | 0 | 0
@@ -765,7 +748,6 @@ gcc | leak | delete incomplete type | 0 | 0
 gcc | leak | dereferencing nullptr | 23 | 23
 gcc | leak | divide by zero | 23 | 132
 gcc | leak | initialize std string with nullptr | 134 | 134
-gcc | leak | large double to float | 0 | 0
 gcc | leak | large double to int | 0 | 0
 gcc | leak | malloc cast pod struct | 0 | 0
 gcc | leak | mutate const value | 0 | 0
@@ -804,7 +786,6 @@ gcc | undefined | delete incomplete type | 0 | 0
 gcc | undefined | dereferencing nullptr | 1 | 1
 gcc | undefined | divide by zero | 1 | 1
 gcc | undefined | initialize std string with nullptr | 1 | 1
-gcc | undefined | large double to float | 0 | 0
 gcc | undefined | large double to int | 0 | 0
 gcc | undefined | malloc cast pod struct | 0 | 0
 gcc | undefined | mutate const value | 0 | 0
@@ -843,7 +824,6 @@ gcc | valgrind | delete incomplete type | 0 | 0
 gcc | valgrind | dereferencing nullptr | 139 | 139
 gcc | valgrind | divide by zero | 136 | 132
 gcc | valgrind | initialize std string with nullptr | 134 | 134
-gcc | valgrind | large double to float | 0 | 0
 gcc | valgrind | large double to int | 0 | 0
 gcc | valgrind | malloc cast pod struct | 0 | 0
 gcc | valgrind | mutate const value | 0 | 0
@@ -888,7 +868,6 @@ delete incomplete type | ❌ | ❌ | ❌ | ❌ | ❌
 dereferencing nullptr | ✔️/❌ | ✔️ | ✔️/❌ | ✔️ | ✔️
 divide by zero | ✔️/❌ | ✔️ | ❌ | ✔️ | ✔️
 initialize std string with nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-large double to float | ❌ | ❌ | ❌ | ❌ | ❌
 large double to int | ❌ | ✔️ | ❌ | ✔️ | ✔️
 malloc cast pod struct | ❌ | ❌ | ❌ | ❌ | ❌
 mutate const value | ❌ | ❌ | ❌ | ❌ | ❌
@@ -935,7 +914,6 @@ delete incomplete type | ❌ | ❌ | ❌ | ❌ | ❌
 dereferencing nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 divide by zero | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 initialize std string with nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-large double to float | ❌ | ❌ | ❌ | ❌ | ❌
 large double to int | ❌ | ❌ | ❌ | ❌ | ❌
 malloc cast pod struct | ❌ | ❌ | ❌ | ❌ | ❌
 mutate const value | ❌ | ❌ | ❌ | ❌ | ❌
@@ -981,7 +959,6 @@ delete incomplete type | ✔️ | ✔️ | ❌ | ❌
 dereferencing nullptr | ❌ | ✔️ | ✔️ | ✔️
 divide by zero | ✔️ | ✔️ | ✔️ | ✔️
 initialize std string with nullptr | ❌ | ✔️ | ✔️ | ✔️
-large double to float | ❌ | ❌ | ❌ | ❌
 large double to int | ❌ | ❌ | ❌ | ✔️
 malloc cast pod struct | ❌ | ❌ | ❌ | ❌
 mutate const value | ❌ | ✔️ | ❌ | ❌
