@@ -30,6 +30,7 @@ clang | odr violation function | ❌ | ❌ | n/a
 clang | odr violation function lib | ❌ | ❌ | n/a
 clang | odr violation struct ret | ❌ | ❌ | n/a
 clang | odr violation struct ret lib | ❌ | ❌ | n/a
+clang | operator star on empty optional | ❌ | ❌ | n/a
 clang | out of bounds pointer | ❌ | ❌ | n/a
 clang | preincrement plus postincrement | ✔️ | ✔️ | -Wunsequenced
 clang | preincrement plus value | ✔️ | ✔️ | -Wunsequenced
@@ -75,6 +76,7 @@ gcc | odr violation function | ❌ | ❌ | n/a
 gcc | odr violation function lib | ❌ | ❌ | n/a
 gcc | odr violation struct ret | ❌ | ❌ | n/a
 gcc | odr violation struct ret lib | ❌ | ❌ | n/a
+gcc | operator star on empty optional | ❌ | ❌ | n/a
 gcc | out of bounds pointer | ❌ | ❌ | n/a
 gcc | preincrement plus postincrement | ✔️ | ✔️ | -Wsequence-point
 gcc | preincrement plus value | ✔️ | ✔️ | -Wsequence-point
@@ -120,6 +122,7 @@ msvc | odr violation function | ❌ | ❌ | n/a
 msvc | odr violation function lib | ❌ | ❌ | n/a
 msvc | odr violation struct ret | ❌ | ❌ | n/a
 msvc | odr violation struct ret lib | ❌ | ❌ | n/a
+msvc | operator star on empty optional | ❌ | ❌ | n/a
 msvc | out of bounds pointer | ❌ | ❌ | n/a
 msvc | preincrement plus postincrement | ❌ | ❌ | n/a
 msvc | preincrement plus value | ❌ | ❌ | n/a
@@ -167,6 +170,7 @@ clang-tidy | odr violation function | ❌ | n/a
 clang-tidy | odr violation function lib | ❌ | n/a
 clang-tidy | odr violation struct ret | ❌ | n/a
 clang-tidy | odr violation struct ret lib | ❌ | n/a
+clang-tidy | operator star on empty optional | ❌ | n/a
 clang-tidy | out of bounds pointer | ❌ | n/a
 clang-tidy | preincrement plus postincrement | ✔️ | clang-diagnostic-unsequenced
 clang-tidy | preincrement plus value | ✔️ | clang-diagnostic-unsequenced
@@ -212,6 +216,7 @@ cppcheck | odr violation function | ❌ | n/a
 cppcheck | odr violation function lib | ❌ | n/a
 cppcheck | odr violation struct ret | ❌ | n/a
 cppcheck | odr violation struct ret lib | ❌ | n/a
+cppcheck | operator star on empty optional | ❌ | n/a
 cppcheck | out of bounds pointer | ❌ | n/a
 cppcheck | preincrement plus postincrement | ❌ | n/a
 cppcheck | preincrement plus value | ❌ | n/a
@@ -263,6 +268,7 @@ odr violation function | ❌ | ❌ | ❌ | ❌ | ❌
 odr violation function lib | ❌ | ❌ | ❌ | ❌ | ❌
 odr violation struct ret | ❌ | ❌ | ❌ | ❌ | ❌
 odr violation struct ret lib | ❌ | ❌ | ❌ | ❌ | ❌
+operator star on empty optional | ❌ | ❌ | ❌ | ❌ | ❌
 out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌
 preincrement plus postincrement | ✔️ | ✔️ | ❌ | ✔️ | ❌
 preincrement plus value | ✔️ | ✔️ | ❌ | ✔️ | ❌
@@ -311,6 +317,7 @@ clang | malloc cast pod struct | 0 | 0
 clang | mutate const value | 0 | 0
 clang | odr violation function | 0 | 0
 clang | odr violation struct ret | 0 | 0
+clang | operator star on empty optional | 0 | 0
 clang | out of bounds pointer | 0 | 0
 clang | preincrement plus postincrement | 0 | 0
 clang | preincrement plus value | 0 | 0
@@ -351,6 +358,7 @@ gcc | malloc cast pod struct | 0 | 0
 gcc | mutate const value | 0 | 0
 gcc | odr violation function | 0 | 0
 gcc | odr violation struct ret | 0 | 0
+gcc | operator star on empty optional | 0 | 0
 gcc | out of bounds pointer | 0 | 0
 gcc | preincrement plus postincrement | 0 | 0
 gcc | preincrement plus value | 0 | 0
@@ -389,6 +397,7 @@ msvc | malloc cast pod struct | 0 | 0
 msvc | mutate const value | 0 | 0
 msvc | odr violation function | 0 | 0
 msvc | odr violation struct ret | 0 | 0
+msvc | operator star on empty optional | -1 | 0
 msvc | out of bounds pointer | 0 | 0
 msvc | preincrement plus postincrement | 0 | 0
 msvc | preincrement plus value | 0 | 0
@@ -431,6 +440,7 @@ malloc cast pod struct | ❌ | ❌ | ❌
 mutate const value | ❌ | ❌ | ❌
 odr violation function | ❌ | ❌ | ❌
 odr violation struct ret | ❌ | ❌ | ❌
+operator star on empty optional | ❌ | ❌ | ✔️/❌
 out of bounds pointer | ❌ | ❌ | ❌
 preincrement plus postincrement | ❌ | ❌ | ❌
 preincrement plus value | ❌ | ❌ | ❌
@@ -477,6 +487,7 @@ clang | address | malloc cast pod struct | 0 | 0
 clang | address | mutate const value | 0 | 0
 clang | address | odr violation function | 0 | 0
 clang | address | odr violation struct ret | 0 | 0
+clang | address | operator star on empty optional | 0 | 0
 clang | address | out of bounds pointer | 0 | 0
 clang | address | preincrement plus postincrement | 0 | 0
 clang | address | preincrement plus value | 0 | 0
@@ -517,6 +528,7 @@ clang | address,undefined | malloc cast pod struct | 0 | 0
 clang | address,undefined | mutate const value | 0 | 0
 clang | address,undefined | odr violation function | 0 | 0
 clang | address,undefined | odr violation struct ret | 0 | 0
+clang | address,undefined | operator star on empty optional | 0 | 0
 clang | address,undefined | out of bounds pointer | 0 | 0
 clang | address,undefined | preincrement plus postincrement | 0 | 0
 clang | address,undefined | preincrement plus value | 0 | 0
@@ -557,6 +569,7 @@ clang | memory | malloc cast pod struct | 0 | 0
 clang | memory | mutate const value | 0 | 0
 clang | memory | odr violation function | 0 | 0
 clang | memory | odr violation struct ret | 0 | 0
+clang | memory | operator star on empty optional | 0 | 0
 clang | memory | out of bounds pointer | 0 | 0
 clang | memory | preincrement plus postincrement | 0 | 0
 clang | memory | preincrement plus value | 0 | 0
@@ -597,6 +610,7 @@ clang | memory,undefined | malloc cast pod struct | 0 | 0
 clang | memory,undefined | mutate const value | 0 | 0
 clang | memory,undefined | odr violation function | 0 | 0
 clang | memory,undefined | odr violation struct ret | 0 | 0
+clang | memory,undefined | operator star on empty optional | 0 | 0
 clang | memory,undefined | out of bounds pointer | 0 | 0
 clang | memory,undefined | preincrement plus postincrement | 0 | 0
 clang | memory,undefined | preincrement plus value | 0 | 0
@@ -637,6 +651,7 @@ clang | undefined | malloc cast pod struct | 0 | 0
 clang | undefined | mutate const value | 0 | 0
 clang | undefined | odr violation function | 0 | 0
 clang | undefined | odr violation struct ret | 0 | 0
+clang | undefined | operator star on empty optional | 0 | 0
 clang | undefined | out of bounds pointer | 0 | 0
 clang | undefined | preincrement plus postincrement | 0 | 0
 clang | undefined | preincrement plus value | 0 | 0
@@ -677,6 +692,7 @@ gcc | address | malloc cast pod struct | 0 | 0
 gcc | address | mutate const value | 0 | 0
 gcc | address | odr violation function | 0 | 0
 gcc | address | odr violation struct ret | 0 | 0
+gcc | address | operator star on empty optional | 0 | 0
 gcc | address | out of bounds pointer | 0 | 0
 gcc | address | preincrement plus postincrement | 0 | 0
 gcc | address | preincrement plus value | 0 | 0
@@ -715,6 +731,7 @@ gcc | address,leak,undefined | malloc cast pod struct | 0 | 0
 gcc | address,leak,undefined | mutate const value | 0 | 0
 gcc | address,leak,undefined | odr violation function | 0 | 0
 gcc | address,leak,undefined | odr violation struct ret | 0 | 0
+gcc | address,leak,undefined | operator star on empty optional | 0 | 0
 gcc | address,leak,undefined | out of bounds pointer | 0 | 0
 gcc | address,leak,undefined | preincrement plus postincrement | 0 | 0
 gcc | address,leak,undefined | preincrement plus value | 0 | 0
@@ -753,6 +770,7 @@ gcc | leak | malloc cast pod struct | 0 | 0
 gcc | leak | mutate const value | 0 | 0
 gcc | leak | odr violation function | 0 | 0
 gcc | leak | odr violation struct ret | 0 | 0
+gcc | leak | operator star on empty optional | 0 | 0
 gcc | leak | out of bounds pointer | 0 | 0
 gcc | leak | preincrement plus postincrement | 0 | 0
 gcc | leak | preincrement plus value | 0 | 0
@@ -791,6 +809,7 @@ gcc | undefined | malloc cast pod struct | 0 | 0
 gcc | undefined | mutate const value | 0 | 0
 gcc | undefined | odr violation function | 0 | 0
 gcc | undefined | odr violation struct ret | 0 | 0
+gcc | undefined | operator star on empty optional | 0 | 0
 gcc | undefined | out of bounds pointer | 0 | 0
 gcc | undefined | preincrement plus postincrement | 0 | 0
 gcc | undefined | preincrement plus value | 0 | 0
@@ -829,6 +848,7 @@ gcc | valgrind | malloc cast pod struct | 0 | 0
 gcc | valgrind | mutate const value | 0 | 0
 gcc | valgrind | odr violation function | 0 | 0
 gcc | valgrind | odr violation struct ret | 0 | 0
+gcc | valgrind | operator star on empty optional | 0 | 0
 gcc | valgrind | out of bounds pointer | 0 | 0
 gcc | valgrind | preincrement plus postincrement | 0 | 0
 gcc | valgrind | preincrement plus value | 0 | 0
@@ -873,6 +893,7 @@ malloc cast pod struct | ❌ | ❌ | ❌ | ❌ | ❌
 mutate const value | ❌ | ❌ | ❌ | ❌ | ❌
 odr violation function | ❌ | ❌ | ❌ | ❌ | ❌
 odr violation struct ret | ❌ | ❌ | ❌ | ❌ | ❌
+operator star on empty optional | ❌ | ❌ | ❌ | ❌ | ❌
 out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌
 preincrement plus postincrement | ❌ | ❌ | ❌ | ❌ | ❌
 preincrement plus value | ❌ | ❌ | ❌ | ❌ | ❌
@@ -919,6 +940,7 @@ malloc cast pod struct | ❌ | ❌ | ❌ | ❌ | ❌
 mutate const value | ❌ | ❌ | ❌ | ❌ | ❌
 odr violation function | ❌ | ❌ | ❌ | ❌ | ❌
 odr violation struct ret | ❌ | ❌ | ❌ | ❌ | ❌
+operator star on empty optional | ❌ | ❌ | ❌ | ❌ | ❌
 out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌
 preincrement plus postincrement | ❌ | ❌ | ❌ | ❌ | ❌
 preincrement plus value | ❌ | ❌ | ❌ | ❌ | ❌
@@ -967,6 +989,7 @@ odr violation function | ❌ | ❌ | ❌ | ❌
 odr violation function lib | ❌ | ❌ | n/a | n/a
 odr violation struct ret | ❌ | ❌ | ❌ | ❌
 odr violation struct ret lib | ❌ | ❌ | n/a | n/a
+operator star on empty optional | ❌ | ❌ | ✔️ | ❌
 out of bounds pointer | ❌ | ❌ | ❌ | ❌
 preincrement plus postincrement | ✔️ | ✔️ | ❌ | ❌
 preincrement plus value | ✔️ | ✔️ | ❌ | ❌
