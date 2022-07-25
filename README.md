@@ -39,7 +39,7 @@ clang | reading uninitialized value add | ✔️ | ✔️ | -Wuninitialized
 clang | reading uninitialized value cout | ✔️ | ✔️ | -Wuninitialized
 clang | reading uninitialized value func arg | ❌ | ❌ | n/a
 clang | reading uninitialized value if | ✔️ | ✔️ | -Wuninitialized
-clang | reading uninitialized value lib call cref | ❌ | ❌ | n/a
+clang | reading uninitialized value lib call cref | ✔️ | ✔️ | -Wuninitialized-const-reference
 clang | reading uninitialized value partial | ❌ | ❌ | n/a
 clang | reading uninitialized value printf | ✔️ | ✔️ | -Wuninitialized
 clang | reading uninitialized value return | ✔️ | ✔️ | -Wreturn-type
@@ -60,7 +60,7 @@ clang | virtual call in destructor helper | ❌ | ❌ | n/a
 clang | virtual call in destructor lib | ❌ | ❌ | n/a
 clang | virtual call in destructor link | ❌ | ❌ | n/a
 gcc | access after realloc | ❌ | ❌ | n/a
-gcc | array out of bounds | ❌ | ❌ | n/a
+gcc | array out of bounds | ❌ | ✔️ | -Warray-bounds
 gcc | automatic variable over stack | ❌ | ❌ | n/a
 gcc | bad alignment | ❌ | ❌ | n/a
 gcc | bad identifier name | ❌ | ❌ | n/a
@@ -77,7 +77,7 @@ gcc | odr violation function lib | ❌ | ❌ | n/a
 gcc | odr violation struct ret | ❌ | ❌ | n/a
 gcc | odr violation struct ret lib | ❌ | ❌ | n/a
 gcc | operator star on empty optional | ❌ | ❌ | n/a
-gcc | out of bounds pointer | ❌ | ❌ | n/a
+gcc | out of bounds pointer | ❌ | ✔️ | -Warray-bounds
 gcc | preincrement plus postincrement | ✔️ | ✔️ | -Wsequence-point
 gcc | preincrement plus value | ✔️ | ✔️ | -Wsequence-point
 gcc | read from old type | ❌ | ❌ | n/a
@@ -85,7 +85,7 @@ gcc | reading uninitialized value add | ✔️ | ✔️ | -Wuninitialized
 gcc | reading uninitialized value cout | ✔️ | ✔️ | -Wuninitialized
 gcc | reading uninitialized value func arg | ❌ | ✔️ | -Wuninitialized
 gcc | reading uninitialized value if | ✔️ | ✔️ | -Wuninitialized
-gcc | reading uninitialized value lib call cref | ❌ | ❌ | n/a
+gcc | reading uninitialized value lib call cref | ✔️ | ✔️ | -Wmaybe-uninitialized
 gcc | reading uninitialized value partial | ❌ | ❌ | n/a
 gcc | reading uninitialized value printf | ✔️ | ✔️ | -Wuninitialized
 gcc | reading uninitialized value return | ✔️ | ✔️ | -Wreturn-type
@@ -95,8 +95,8 @@ gcc | signed integer overflow | ❌ | ❌ | n/a
 gcc | stack overflow | ❌ | ❌ | n/a
 gcc | std vector reserve set read | ❌ | ❌ | n/a
 gcc | strptime mktime unitialized | ❌ | ❌ | n/a
-gcc | type pun cast same line | ❌ | ✔️ | -Wstrict-aliasing
-gcc | type pun cast two lines | ❌ | ❌ | n/a
+gcc | type pun cast same line | ❌ | ✔️ | -Wstrict-aliasing,-Wuninitialized
+gcc | type pun cast two lines | ❌ | ✔️ | -Wuninitialized
 gcc | virtual call in constructor | ❌ | ❌ | n/a
 gcc | virtual call in constructor helper | ❌ | ❌ | n/a
 gcc | virtual call in constructor lib | ❌ | ❌ | n/a
@@ -157,7 +157,7 @@ clang-tidy | access after realloc | ✔️ | clang-analyzer-unix.Malloc
 clang-tidy | array out of bounds | ✔️ | cppcoreguidelines-pro-bounds-constant-array-index
 clang-tidy | automatic variable over stack | ❌ | n/a
 clang-tidy | bad alignment | ❌ | n/a
-clang-tidy | bad identifier name | ❌ | n/a
+clang-tidy | bad identifier name | ✔️ | bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp
 clang-tidy | delete incomplete type | ✔️ | clang-diagnostic-delete-incomplete
 clang-tidy | dereferencing nullptr | ✔️ | clang-analyzer-core.NullDereference
 clang-tidy | divide by zero | ✔️ | clang-analyzer-core.DivideZero,clang-diagnostic-division-by-zero
@@ -179,14 +179,14 @@ clang-tidy | reading uninitialized value add | ✔️ | cppcoreguidelines-init-v
 clang-tidy | reading uninitialized value cout | ✔️ | cppcoreguidelines-init-variables,clang-analyzer-core.CallAndMessage,clang-diagnostic-uninitialized
 clang-tidy | reading uninitialized value func arg | ✔️ | cppcoreguidelines-init-variables,clang-analyzer-core.CallAndMessage
 clang-tidy | reading uninitialized value if | ✔️ | cppcoreguidelines-init-variables,clang-analyzer-core.uninitialized.Branch,clang-diagnostic-uninitialized
-clang-tidy | reading uninitialized value lib call cref | ✔️ | cppcoreguidelines-init-variables
+clang-tidy | reading uninitialized value lib call cref | ✔️ | cppcoreguidelines-init-variables,clang-diagnostic-uninitialized-const-reference
 clang-tidy | reading uninitialized value partial | ✔️ | cppcoreguidelines-init-variables,clang-analyzer-core.CallAndMessage
 clang-tidy | reading uninitialized value printf | ✔️ | cppcoreguidelines-init-variables,clang-analyzer-core.CallAndMessage,cppcoreguidelines-pro-type-vararg,hicpp-vararg,clang-diagnostic-uninitialized
 clang-tidy | reading uninitialized value return | ✔️ | clang-diagnostic-return-type
-clang-tidy | reference out of scope | ✔️ | clang-analyzer-core.StackAddrEscapeBase,clang-diagnostic-return-stack-address
+clang-tidy | reference out of scope | ✔️ | clang-analyzer-core.StackAddressEscape,clang-diagnostic-return-stack-address
 clang-tidy | shifting more than width | ✔️ | hicpp-signed-bitwise,clang-analyzer-core.UndefinedBinaryOperatorResult,clang-diagnostic-shift-count-overflow
 clang-tidy | signed integer overflow | ❌ | n/a
-clang-tidy | stack overflow | ✔️ | clang-diagnostic-infinite-recursion
+clang-tidy | stack overflow | ✔️ | misc-no-recursion,clang-diagnostic-infinite-recursion
 clang-tidy | std vector reserve set read | ❌ | n/a
 clang-tidy | strptime mktime unitialized | ✔️ | cppcoreguidelines-pro-type-member-init,hicpp-member-init
 clang-tidy | type pun cast same line | ❌ | n/a
@@ -214,7 +214,7 @@ cppcheck | mutate const value | ❌ | n/a
 cppcheck | non trivial destructor and global | ❌ | n/a
 cppcheck | odr violation function | ❌ | n/a
 cppcheck | odr violation function lib | ❌ | n/a
-cppcheck | odr violation struct ret | ❌ | n/a
+cppcheck | odr violation struct ret | ✔️ | ctuOneDefinitionRuleViolation
 cppcheck | odr violation struct ret lib | ❌ | n/a
 cppcheck | operator star on empty optional | ❌ | n/a
 cppcheck | out of bounds pointer | ❌ | n/a
@@ -228,16 +228,16 @@ cppcheck | reading uninitialized value if | ✔️ | uninitvar
 cppcheck | reading uninitialized value lib call cref | ✔️ | uninitvar
 cppcheck | reading uninitialized value partial | ✔️ | uninitvar
 cppcheck | reading uninitialized value printf | ✔️ | uninitvar
-cppcheck | reading uninitialized value return | ❌ | n/a
+cppcheck | reading uninitialized value return | ✔️ | missingReturn
 cppcheck | reference out of scope | ✔️ | returnReference
 cppcheck | shifting more than width | ✔️ | shiftTooManyBits
 cppcheck | signed integer overflow | ❌ | n/a
 cppcheck | stack overflow | ❌ | n/a
-cppcheck | std vector reserve set read | ❌ | n/a
+cppcheck | std vector reserve set read | ✔️ | containerOutOfBounds
 cppcheck | strptime mktime unitialized | ❌ | n/a
 cppcheck | type pun cast same line | ❌ | n/a
 cppcheck | type pun cast two lines | ❌ | n/a
-cppcheck | virtual call in constructor | ❌ | n/a
+cppcheck | virtual call in constructor | ✔️ | ctuOneDefinitionRuleViolation
 cppcheck | virtual call in constructor helper | ❌ | n/a
 cppcheck | virtual call in constructor lib | ❌ | n/a
 cppcheck | virtual call in constructor link | ❌ | n/a
@@ -252,10 +252,10 @@ Debug (unoptimized) / RelWithDebInfo (optimized)
 Undefined Behavior Type | clang | clang-tidy | cppcheck | gcc | msvc
 --- | --- | --- | --- | --- | ---
 access after realloc | ❌ | ✔️ | ❌ | ❌ | ❌
-array out of bounds | ❌ | ✔️ | ✔️ | ❌ | ❌
+array out of bounds | ❌ | ✔️ | ✔️ | ❌/✔️ | ❌
 automatic variable over stack | ❌ | ❌ | ❌ | ❌ | ❌
 bad alignment | ❌ | ❌ | ❌ | ❌ | ❌
-bad identifier name | ❌ | ❌ | ❌ | ❌ | ❌
+bad identifier name | ❌ | ✔️ | ❌ | ❌ | ❌
 delete incomplete type | ✔️ | ✔️ | ❌ | ✔️ | ✔️
 dereferencing nullptr | ❌ | ✔️ | ✔️ | ❌ | ❌
 divide by zero | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
@@ -266,10 +266,10 @@ mutate const value | ❌ | ✔️ | ❌ | ❌ | ❌
 non trivial destructor and global | ❌ | ❌ | ❌ | ❌ | ❌
 odr violation function | ❌ | ❌ | ❌ | ❌ | ❌
 odr violation function lib | ❌ | ❌ | ❌ | ❌ | ❌
-odr violation struct ret | ❌ | ❌ | ❌ | ❌ | ❌
+odr violation struct ret | ❌ | ❌ | ✔️ | ❌ | ❌
 odr violation struct ret lib | ❌ | ❌ | ❌ | ❌ | ❌
 operator star on empty optional | ❌ | ❌ | ❌ | ❌ | ❌
-out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌
+out of bounds pointer | ❌ | ❌ | ❌ | ❌/✔️ | ❌
 preincrement plus postincrement | ✔️ | ✔️ | ❌ | ✔️ | ❌
 preincrement plus value | ✔️ | ✔️ | ❌ | ✔️ | ❌
 read from old type | ❌ | ❌ | ❌ | ❌ | ❌
@@ -277,19 +277,19 @@ reading uninitialized value add | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value cout | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value func arg | ❌ | ✔️ | ❌ | ❌/✔️ | ❌
 reading uninitialized value if | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-reading uninitialized value lib call cref | ❌ | ✔️ | ✔️ | ❌ | ❌
+reading uninitialized value lib call cref | ✔️ | ✔️ | ✔️ | ✔️ | ❌
 reading uninitialized value partial | ❌ | ✔️ | ✔️ | ❌ | ❌
 reading uninitialized value printf | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-reading uninitialized value return | ✔️ | ✔️ | ❌ | ✔️ | n/a
+reading uninitialized value return | ✔️ | ✔️ | ✔️ | ✔️ | n/a
 reference out of scope | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 shifting more than width | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 signed integer overflow | ❌ | ❌ | ❌ | ❌ | ❌
 stack overflow | ✔️ | ✔️ | ❌ | ❌ | ✔️
-std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌
+std vector reserve set read | ❌ | ❌ | ✔️ | ❌ | ❌
 strptime mktime unitialized | ❌ | ✔️ | ❌ | ❌ | n/a
 type pun cast same line | ❌ | ❌ | ❌ | ❌/✔️ | ❌
-type pun cast two lines | ❌ | ❌ | ❌ | ❌ | ❌
-virtual call in constructor | ✔️ | ✔️ | ❌ | ❌ | ❌
+type pun cast two lines | ❌ | ❌ | ❌ | ❌/✔️ | ❌
+virtual call in constructor | ✔️ | ✔️ | ✔️ | ❌ | ❌
 virtual call in constructor helper | ❌ | ✔️ | ❌ | ❌ | ❌
 virtual call in constructor lib | ❌ | ✔️ | ❌ | ❌ | ❌
 virtual call in constructor link | ❌ | ❌ | ❌ | ❌ | ❌
@@ -324,16 +324,16 @@ clang | preincrement plus value | 0 | 0
 clang | read from old type | 0 | 0
 clang | reading uninitialized value add | 0 | 0
 clang | reading uninitialized value cout | 0 | 0
-clang | reading uninitialized value func arg | 0 | 139
+clang | reading uninitialized value func arg | 139 | 139
 clang | reading uninitialized value if | 0 | 0
 clang | reading uninitialized value lib call cref | 0 | 0
-clang | reading uninitialized value partial | 0 | 0
+clang | reading uninitialized value partial | 139 | 0
 clang | reading uninitialized value printf | 0 | 0
-clang | reading uninitialized value return | 132 | 0
+clang | reading uninitialized value return | 132 | 48
 clang | reference out of scope | 0 | 0
 clang | shifting more than width | 0 | 0
 clang | signed integer overflow | 0 | 0
-clang | stack overflow | 139 | 0
+clang | stack overflow | 139 | 128
 clang | std vector reserve set read | 0 | 0
 clang | strptime mktime unitialized | 0 | 0
 clang | type pun cast same line | 0 | 0
@@ -365,16 +365,16 @@ gcc | preincrement plus value | 0 | 0
 gcc | read from old type | 0 | 0
 gcc | reading uninitialized value add | 0 | 0
 gcc | reading uninitialized value cout | 0 | 0
-gcc | reading uninitialized value func arg | 0 | 139
+gcc | reading uninitialized value func arg | 139 | 139
 gcc | reading uninitialized value if | 0 | 0
 gcc | reading uninitialized value lib call cref | 0 | 0
-gcc | reading uninitialized value partial | 139 | 0
+gcc | reading uninitialized value partial | 0 | 0
 gcc | reading uninitialized value printf | 0 | 0
 gcc | reading uninitialized value return | 0 | 139
 gcc | reference out of scope | 139 | 139
 gcc | shifting more than width | 0 | 0
 gcc | signed integer overflow | 0 | 0
-gcc | stack overflow | 139 | 139
+gcc | stack overflow | 139 | 124
 gcc | std vector reserve set read | 0 | 0
 gcc | strptime mktime unitialized | 0 | 0
 gcc | type pun cast same line | 0 | 0
@@ -447,16 +447,16 @@ preincrement plus value | ❌ | ❌ | ❌
 read from old type | ❌ | ❌ | ❌
 reading uninitialized value add | ❌ | ❌ | ✔️/❌
 reading uninitialized value cout | ❌ | ❌ | ✔️/❌
-reading uninitialized value func arg | ❌/✔️ | ❌/✔️ | ✔️
+reading uninitialized value func arg | ✔️ | ✔️ | ✔️
 reading uninitialized value if | ❌ | ❌ | ✔️/❌
 reading uninitialized value lib call cref | ❌ | ❌ | ❌
-reading uninitialized value partial | ❌ | ✔️/❌ | ✔️
+reading uninitialized value partial | ✔️/❌ | ❌ | ✔️
 reading uninitialized value printf | ❌ | ❌ | ✔️/❌
-reading uninitialized value return | ✔️/❌ | ❌/✔️ | n/a
+reading uninitialized value return | ✔️ | ❌/✔️ | n/a
 reference out of scope | ❌ | ✔️ | ❌
 shifting more than width | ❌ | ❌ | ❌
 signed integer overflow | ❌ | ❌ | ❌
-stack overflow | ✔️/❌ | ✔️ | ✔️
+stack overflow | ✔️ | ✔️ | ✔️
 std vector reserve set read | ❌ | ❌ | ✔️/❌
 strptime mktime unitialized | ❌ | ❌ | n/a
 type pun cast same line | ❌ | ❌ | ❌
@@ -497,13 +497,13 @@ clang | address | reading uninitialized value cout | 0 | 0
 clang | address | reading uninitialized value func arg | 0 | 1
 clang | address | reading uninitialized value if | 0 | 0
 clang | address | reading uninitialized value lib call cref | 0 | 0
-clang | address | reading uninitialized value partial | 0 | 0
+clang | address | reading uninitialized value partial | 1 | 0
 clang | address | reading uninitialized value printf | 0 | 0
-clang | address | reading uninitialized value return | 132 | 112
+clang | address | reading uninitialized value return | 132 | 16
 clang | address | reference out of scope | 0 | 0
 clang | address | shifting more than width | 0 | 0
 clang | address | signed integer overflow | 0 | 0
-clang | address | stack overflow | 1 | 0
+clang | address | stack overflow | 1 | 96
 clang | address | std vector reserve set read | 0 | 0
 clang | address | strptime mktime unitialized | 0 | 0
 clang | address | type pun cast same line | 0 | 0
@@ -522,7 +522,7 @@ clang | address,undefined | bad identifier name | 0 | 0
 clang | address,undefined | delete incomplete type | 0 | 0
 clang | address,undefined | dereferencing nullptr | 1 | 1
 clang | address,undefined | divide by zero | 1 | 1
-clang | address,undefined | initialize std string with nullptr | 1 | 1
+clang | address,undefined | initialize std string with nullptr | 134 | 134
 clang | address,undefined | large double to int | 1 | 1
 clang | address,undefined | malloc cast pod struct | 0 | 0
 clang | address,undefined | mutate const value | 0 | 0
@@ -536,15 +536,15 @@ clang | address,undefined | read from old type | 1 | 1
 clang | address,undefined | reading uninitialized value add | 0 | 0
 clang | address,undefined | reading uninitialized value cout | 0 | 0
 clang | address,undefined | reading uninitialized value func arg | 1 | 1
-clang | address,undefined | reading uninitialized value if | 0 | 0
+clang | address,undefined | reading uninitialized value if | 1 | 0
 clang | address,undefined | reading uninitialized value lib call cref | 0 | 0
-clang | address,undefined | reading uninitialized value partial | 0 | 0
+clang | address,undefined | reading uninitialized value partial | 1 | 0
 clang | address,undefined | reading uninitialized value printf | 0 | 0
 clang | address,undefined | reading uninitialized value return | 1 | 1
 clang | address,undefined | reference out of scope | 0 | 0
 clang | address,undefined | shifting more than width | 1 | 1
 clang | address,undefined | signed integer overflow | 1 | 1
-clang | address,undefined | stack overflow | 1 | 0
+clang | address,undefined | stack overflow | 1 | 1
 clang | address,undefined | std vector reserve set read | 0 | 0
 clang | address,undefined | strptime mktime unitialized | 0 | 0
 clang | address,undefined | type pun cast same line | 0 | 0
@@ -557,13 +557,13 @@ clang | address,undefined | virtual call in destructor helper | 134 | 134
 clang | address,undefined | virtual call in destructor link | 134 | 134
 clang | memory | access after realloc | 0 | 0
 clang | memory | array out of bounds | 0 | 0
-clang | memory | automatic variable over stack | 77 | 0
+clang | memory | automatic variable over stack | 1 | 0
 clang | memory | bad alignment | 0 | 0
 clang | memory | bad identifier name | 0 | 0
 clang | memory | delete incomplete type | 0 | 0
-clang | memory | dereferencing nullptr | 77 | 0
+clang | memory | dereferencing nullptr | 1 | 0
 clang | memory | divide by zero | 0 | 0
-clang | memory | initialize std string with nullptr | 77 | 77
+clang | memory | initialize std string with nullptr | 1 | 1
 clang | memory | large double to int | 0 | 0
 clang | memory | malloc cast pod struct | 0 | 0
 clang | memory | mutate const value | 0 | 0
@@ -576,16 +576,16 @@ clang | memory | preincrement plus value | 0 | 0
 clang | memory | read from old type | 0 | 0
 clang | memory | reading uninitialized value add | 0 | 0
 clang | memory | reading uninitialized value cout | 0 | 0
-clang | memory | reading uninitialized value func arg | 0 | 77
-clang | memory | reading uninitialized value if | 77 | 0
+clang | memory | reading uninitialized value func arg | 0 | 1
+clang | memory | reading uninitialized value if | 1 | 0
 clang | memory | reading uninitialized value lib call cref | 0 | 0
 clang | memory | reading uninitialized value partial | 0 | 0
 clang | memory | reading uninitialized value printf | 0 | 0
-clang | memory | reading uninitialized value return | 132 | 48
+clang | memory | reading uninitialized value return | 132 | 160
 clang | memory | reference out of scope | 0 | 0
 clang | memory | shifting more than width | 0 | 0
 clang | memory | signed integer overflow | 0 | 0
-clang | memory | stack overflow | 77 | 0
+clang | memory | stack overflow | 1 | 16
 clang | memory | std vector reserve set read | 0 | 0
 clang | memory | strptime mktime unitialized | 0 | 0
 clang | memory | type pun cast same line | 0 | 0
@@ -597,15 +597,15 @@ clang | memory | virtual call in destructor | 134 | 134
 clang | memory | virtual call in destructor helper | 134 | 134
 clang | memory | virtual call in destructor link | 134 | 134
 clang | memory,undefined | access after realloc | 0 | 0
-clang | memory,undefined | array out of bounds | 0 | 77
-clang | memory,undefined | automatic variable over stack | 77 | 77
-clang | memory,undefined | bad alignment | 77 | 77
+clang | memory,undefined | array out of bounds | 0 | 1
+clang | memory,undefined | automatic variable over stack | 1 | 1
+clang | memory,undefined | bad alignment | 1 | 1
 clang | memory,undefined | bad identifier name | 0 | 0
 clang | memory,undefined | delete incomplete type | 0 | 0
-clang | memory,undefined | dereferencing nullptr | 77 | 77
-clang | memory,undefined | divide by zero | 77 | 77
-clang | memory,undefined | initialize std string with nullptr | 77 | 77
-clang | memory,undefined | large double to int | 77 | 77
+clang | memory,undefined | dereferencing nullptr | 1 | 1
+clang | memory,undefined | divide by zero | 1 | 1
+clang | memory,undefined | initialize std string with nullptr | 1 | 1
+clang | memory,undefined | large double to int | 1 | 1
 clang | memory,undefined | malloc cast pod struct | 0 | 0
 clang | memory,undefined | mutate const value | 0 | 0
 clang | memory,undefined | odr violation function | 0 | 0
@@ -614,19 +614,19 @@ clang | memory,undefined | operator star on empty optional | 0 | 0
 clang | memory,undefined | out of bounds pointer | 0 | 0
 clang | memory,undefined | preincrement plus postincrement | 0 | 0
 clang | memory,undefined | preincrement plus value | 0 | 0
-clang | memory,undefined | read from old type | 77 | 77
+clang | memory,undefined | read from old type | 1 | 1
 clang | memory,undefined | reading uninitialized value add | 0 | 0
 clang | memory,undefined | reading uninitialized value cout | 0 | 0
-clang | memory,undefined | reading uninitialized value func arg | 0 | 77
-clang | memory,undefined | reading uninitialized value if | 77 | 0
+clang | memory,undefined | reading uninitialized value func arg | 0 | 1
+clang | memory,undefined | reading uninitialized value if | 1 | 0
 clang | memory,undefined | reading uninitialized value lib call cref | 0 | 0
 clang | memory,undefined | reading uninitialized value partial | 0 | 0
 clang | memory,undefined | reading uninitialized value printf | 0 | 0
-clang | memory,undefined | reading uninitialized value return | 77 | 77
+clang | memory,undefined | reading uninitialized value return | 1 | 1
 clang | memory,undefined | reference out of scope | 0 | 0
-clang | memory,undefined | shifting more than width | 77 | 77
-clang | memory,undefined | signed integer overflow | 77 | 77
-clang | memory,undefined | stack overflow | 77 | 0
+clang | memory,undefined | shifting more than width | 1 | 1
+clang | memory,undefined | signed integer overflow | 1 | 1
+clang | memory,undefined | stack overflow | 1 | 1
 clang | memory,undefined | std vector reserve set read | 0 | 0
 clang | memory,undefined | strptime mktime unitialized | 0 | 0
 clang | memory,undefined | type pun cast same line | 0 | 0
@@ -645,7 +645,7 @@ clang | undefined | bad identifier name | 0 | 0
 clang | undefined | delete incomplete type | 0 | 0
 clang | undefined | dereferencing nullptr | 1 | 1
 clang | undefined | divide by zero | 1 | 1
-clang | undefined | initialize std string with nullptr | 1 | 1
+clang | undefined | initialize std string with nullptr | 134 | 134
 clang | undefined | large double to int | 1 | 1
 clang | undefined | malloc cast pod struct | 0 | 0
 clang | undefined | mutate const value | 0 | 0
@@ -658,16 +658,16 @@ clang | undefined | preincrement plus value | 0 | 0
 clang | undefined | read from old type | 1 | 1
 clang | undefined | reading uninitialized value add | 0 | 0
 clang | undefined | reading uninitialized value cout | 0 | 0
-clang | undefined | reading uninitialized value func arg | 0 | 1
-clang | undefined | reading uninitialized value if | 0 | 0
+clang | undefined | reading uninitialized value func arg | 1 | 1
+clang | undefined | reading uninitialized value if | 1 | 0
 clang | undefined | reading uninitialized value lib call cref | 0 | 0
-clang | undefined | reading uninitialized value partial | 0 | 0
+clang | undefined | reading uninitialized value partial | 1 | 0
 clang | undefined | reading uninitialized value printf | 0 | 0
 clang | undefined | reading uninitialized value return | 1 | 1
 clang | undefined | reference out of scope | 0 | 0
 clang | undefined | shifting more than width | 1 | 1
 clang | undefined | signed integer overflow | 1 | 1
-clang | undefined | stack overflow | 1 | 0
+clang | undefined | stack overflow | 1 | 1
 clang | undefined | std vector reserve set read | 0 | 0
 clang | undefined | strptime mktime unitialized | 0 | 0
 clang | undefined | type pun cast same line | 0 | 0
@@ -699,16 +699,16 @@ gcc | address | preincrement plus value | 0 | 0
 gcc | address | read from old type | 0 | 0
 gcc | address | reading uninitialized value add | 0 | 0
 gcc | address | reading uninitialized value cout | 0 | 0
-gcc | address | reading uninitialized value func arg | 0 | 1
+gcc | address | reading uninitialized value func arg | 1 | 1
 gcc | address | reading uninitialized value if | 0 | 0
 gcc | address | reading uninitialized value lib call cref | 0 | 0
 gcc | address | reading uninitialized value partial | 1 | 0
 gcc | address | reading uninitialized value printf | 0 | 0
-gcc | address | reading uninitialized value return | 0 | 0
+gcc | address | reading uninitialized value return | 0 | 1
 gcc | address | reference out of scope | 1 | 1
 gcc | address | shifting more than width | 0 | 0
 gcc | address | signed integer overflow | 0 | 0
-gcc | address | stack overflow | 1 | 1
+gcc | address | stack overflow | 1 | 124
 gcc | address | std vector reserve set read | 0 | 0
 gcc | address | strptime mktime unitialized | 0 | 0
 gcc | address | type pun cast same line | 0 | 0
@@ -725,7 +725,7 @@ gcc | address,leak,undefined | bad identifier name | 0 | 0
 gcc | address,leak,undefined | delete incomplete type | 0 | 0
 gcc | address,leak,undefined | dereferencing nullptr | 1 | 1
 gcc | address,leak,undefined | divide by zero | 1 | 1
-gcc | address,leak,undefined | initialize std string with nullptr | 1 | 1
+gcc | address,leak,undefined | initialize std string with nullptr | 134 | 134
 gcc | address,leak,undefined | large double to int | 0 | 0
 gcc | address,leak,undefined | malloc cast pod struct | 0 | 0
 gcc | address,leak,undefined | mutate const value | 0 | 0
@@ -738,7 +738,7 @@ gcc | address,leak,undefined | preincrement plus value | 0 | 0
 gcc | address,leak,undefined | read from old type | 1 | 1
 gcc | address,leak,undefined | reading uninitialized value add | 0 | 0
 gcc | address,leak,undefined | reading uninitialized value cout | 0 | 0
-gcc | address,leak,undefined | reading uninitialized value func arg | 0 | 1
+gcc | address,leak,undefined | reading uninitialized value func arg | 1 | 1
 gcc | address,leak,undefined | reading uninitialized value if | 0 | 0
 gcc | address,leak,undefined | reading uninitialized value lib call cref | 0 | 0
 gcc | address,leak,undefined | reading uninitialized value partial | 0 | 0
@@ -747,7 +747,7 @@ gcc | address,leak,undefined | reading uninitialized value return | 1 | 1
 gcc | address,leak,undefined | reference out of scope | 1 | 1
 gcc | address,leak,undefined | shifting more than width | 1 | 1
 gcc | address,leak,undefined | signed integer overflow | 1 | 0
-gcc | address,leak,undefined | stack overflow | 1 | 1
+gcc | address,leak,undefined | stack overflow | 1 | 124
 gcc | address,leak,undefined | std vector reserve set read | 0 | 0
 gcc | address,leak,undefined | strptime mktime unitialized | 0 | 0
 gcc | address,leak,undefined | type pun cast same line | 0 | 0
@@ -786,7 +786,7 @@ gcc | leak | reading uninitialized value return | 0 | 23
 gcc | leak | reference out of scope | 23 | 23
 gcc | leak | shifting more than width | 0 | 0
 gcc | leak | signed integer overflow | 0 | 0
-gcc | leak | stack overflow | 23 | 23
+gcc | leak | stack overflow | 23 | 124
 gcc | leak | std vector reserve set read | 0 | 0
 gcc | leak | strptime mktime unitialized | 0 | 0
 gcc | leak | type pun cast same line | 0 | 0
@@ -803,7 +803,7 @@ gcc | undefined | bad identifier name | 0 | 0
 gcc | undefined | delete incomplete type | 0 | 0
 gcc | undefined | dereferencing nullptr | 1 | 1
 gcc | undefined | divide by zero | 1 | 1
-gcc | undefined | initialize std string with nullptr | 1 | 1
+gcc | undefined | initialize std string with nullptr | 134 | 134
 gcc | undefined | large double to int | 0 | 0
 gcc | undefined | malloc cast pod struct | 0 | 0
 gcc | undefined | mutate const value | 0 | 0
@@ -816,16 +816,16 @@ gcc | undefined | preincrement plus value | 0 | 0
 gcc | undefined | read from old type | 1 | 1
 gcc | undefined | reading uninitialized value add | 0 | 0
 gcc | undefined | reading uninitialized value cout | 0 | 0
-gcc | undefined | reading uninitialized value func arg | 0 | 1
+gcc | undefined | reading uninitialized value func arg | 139 | 1
 gcc | undefined | reading uninitialized value if | 0 | 0
 gcc | undefined | reading uninitialized value lib call cref | 0 | 0
-gcc | undefined | reading uninitialized value partial | 1 | 0
+gcc | undefined | reading uninitialized value partial | 139 | 0
 gcc | undefined | reading uninitialized value printf | 0 | 0
 gcc | undefined | reading uninitialized value return | 1 | 1
 gcc | undefined | reference out of scope | 1 | 1
 gcc | undefined | shifting more than width | 1 | 1
 gcc | undefined | signed integer overflow | 1 | 0
-gcc | undefined | stack overflow | 139 | 139
+gcc | undefined | stack overflow | 139 | 124
 gcc | undefined | std vector reserve set read | 0 | 0
 gcc | undefined | strptime mktime unitialized | 0 | 0
 gcc | undefined | type pun cast same line | 0 | 0
@@ -855,7 +855,7 @@ gcc | valgrind | preincrement plus value | 0 | 0
 gcc | valgrind | read from old type | 0 | 0
 gcc | valgrind | reading uninitialized value add | 1 | 0
 gcc | valgrind | reading uninitialized value cout | 1 | 0
-gcc | valgrind | reading uninitialized value func arg | 1 | 139
+gcc | valgrind | reading uninitialized value func arg | 139 | 139
 gcc | valgrind | reading uninitialized value if | 1 | 0
 gcc | valgrind | reading uninitialized value lib call cref | 1 | 1
 gcc | valgrind | reading uninitialized value partial | 139 | 0
@@ -864,7 +864,7 @@ gcc | valgrind | reading uninitialized value return | 0 | 139
 gcc | valgrind | reference out of scope | 139 | 139
 gcc | valgrind | shifting more than width | 0 | 0
 gcc | valgrind | signed integer overflow | 0 | 0
-gcc | valgrind | stack overflow | 139 | 139
+gcc | valgrind | stack overflow | 139 | 124
 gcc | valgrind | std vector reserve set read | 0 | 0
 gcc | valgrind | strptime mktime unitialized | 1 | 1
 gcc | valgrind | type pun cast same line | 0 | 0
@@ -900,16 +900,16 @@ preincrement plus value | ❌ | ❌ | ❌ | ❌ | ❌
 read from old type | ❌ | ✔️ | ❌ | ✔️ | ✔️
 reading uninitialized value add | ❌ | ❌ | ❌ | ❌ | ❌
 reading uninitialized value cout | ❌ | ❌ | ❌ | ❌ | ❌
-reading uninitialized value func arg | ❌/✔️ | ✔️ | ❌/✔️ | ❌/✔️ | ❌/✔️
-reading uninitialized value if | ❌ | ❌ | ✔️/❌ | ✔️/❌ | ❌
+reading uninitialized value func arg | ❌/✔️ | ✔️ | ❌/✔️ | ❌/✔️ | ✔️
+reading uninitialized value if | ❌ | ✔️/❌ | ✔️/❌ | ✔️/❌ | ✔️/❌
 reading uninitialized value lib call cref | ❌ | ❌ | ❌ | ❌ | ❌
-reading uninitialized value partial | ❌ | ❌ | ❌ | ❌ | ❌
+reading uninitialized value partial | ✔️/❌ | ✔️/❌ | ❌ | ❌ | ✔️/❌
 reading uninitialized value printf | ❌ | ❌ | ❌ | ❌ | ❌
 reading uninitialized value return | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 reference out of scope | ❌ | ❌ | ❌ | ❌ | ❌
 shifting more than width | ❌ | ✔️ | ❌ | ✔️ | ✔️
 signed integer overflow | ❌ | ✔️ | ❌ | ✔️ | ✔️
-stack overflow | ✔️/❌ | ✔️/❌ | ✔️/❌ | ✔️/❌ | ✔️/❌
+stack overflow | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌
 strptime mktime unitialized | ❌ | ❌ | ❌ | ❌ | ❌
 type pun cast same line | ❌ | ❌ | ❌ | ❌ | ❌
@@ -947,12 +947,12 @@ preincrement plus value | ❌ | ❌ | ❌ | ❌ | ❌
 read from old type | ❌ | ✔️ | ❌ | ✔️ | ❌
 reading uninitialized value add | ❌ | ❌ | ❌ | ❌ | ✔️/❌
 reading uninitialized value cout | ❌ | ❌ | ❌ | ❌ | ✔️/❌
-reading uninitialized value func arg | ❌/✔️ | ❌/✔️ | ❌/✔️ | ❌/✔️ | ✔️
+reading uninitialized value func arg | ✔️ | ✔️ | ❌/✔️ | ✔️ | ✔️
 reading uninitialized value if | ❌ | ❌ | ❌ | ❌ | ✔️/❌
 reading uninitialized value lib call cref | ❌ | ❌ | ❌ | ❌ | ✔️
 reading uninitialized value partial | ✔️/❌ | ❌ | ✔️/❌ | ✔️/❌ | ✔️/❌
 reading uninitialized value printf | ❌ | ❌ | ❌ | ❌ | ✔️/❌
-reading uninitialized value return | ❌ | ✔️ | ❌/✔️ | ✔️ | ❌/✔️
+reading uninitialized value return | ❌/✔️ | ✔️ | ❌/✔️ | ✔️ | ❌/✔️
 reference out of scope | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 shifting more than width | ❌ | ✔️ | ❌ | ✔️ | ❌
 signed integer overflow | ❌ | ✔️/❌ | ❌ | ✔️/❌ | ❌
@@ -973,10 +973,10 @@ virtual call in destructor link | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 Undefined Behavior Type | Compiler Warning | Standalone Static Analysis | Runtime Crash | Extra Dynamic Analsyis
 --- | --- | --- | --- | ---
 access after realloc | ❌ | ✔️ | ❌ | ✔️
-array out of bounds | ❌ | ✔️ | ✔️ | ✔️
+array out of bounds | ✔️ | ✔️ | ✔️ | ✔️
 automatic variable over stack | ❌ | ❌ | ✔️ | ✔️
 bad alignment | ❌ | ❌ | ❌ | ✔️
-bad identifier name | ❌ | ❌ | ❌ | ❌
+bad identifier name | ❌ | ✔️ | ❌ | ❌
 delete incomplete type | ✔️ | ✔️ | ❌ | ❌
 dereferencing nullptr | ❌ | ✔️ | ✔️ | ✔️
 divide by zero | ✔️ | ✔️ | ✔️ | ✔️
@@ -987,10 +987,10 @@ mutate const value | ❌ | ✔️ | ❌ | ❌
 non trivial destructor and global | ❌ | ❌ | n/a | n/a
 odr violation function | ❌ | ❌ | ❌ | ❌
 odr violation function lib | ❌ | ❌ | n/a | n/a
-odr violation struct ret | ❌ | ❌ | ❌ | ❌
+odr violation struct ret | ❌ | ✔️ | ❌ | ❌
 odr violation struct ret lib | ❌ | ❌ | n/a | n/a
 operator star on empty optional | ❌ | ❌ | ✔️ | ❌
-out of bounds pointer | ❌ | ❌ | ❌ | ❌
+out of bounds pointer | ✔️ | ❌ | ❌ | ❌
 preincrement plus postincrement | ✔️ | ✔️ | ❌ | ❌
 preincrement plus value | ✔️ | ✔️ | ❌ | ❌
 read from old type | ❌ | ❌ | ❌ | ✔️
@@ -998,7 +998,7 @@ reading uninitialized value add | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value cout | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value func arg | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value if | ✔️ | ✔️ | ✔️ | ✔️
-reading uninitialized value lib call cref | ❌ | ✔️ | ❌ | ✔️
+reading uninitialized value lib call cref | ✔️ | ✔️ | ❌ | ✔️
 reading uninitialized value partial | ❌ | ✔️ | ✔️ | ✔️
 reading uninitialized value printf | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value return | ✔️ | ✔️ | ✔️ | ✔️
@@ -1006,10 +1006,10 @@ reference out of scope | ✔️ | ✔️ | ✔️ | ✔️
 shifting more than width | ✔️ | ✔️ | ❌ | ✔️
 signed integer overflow | ❌ | ❌ | ❌ | ✔️
 stack overflow | ✔️ | ✔️ | ✔️ | ✔️
-std vector reserve set read | ❌ | ❌ | ✔️ | ❌
+std vector reserve set read | ❌ | ✔️ | ✔️ | ❌
 strptime mktime unitialized | ❌ | ✔️ | ❌ | ✔️
 type pun cast same line | ✔️ | ❌ | ❌ | ❌
-type pun cast two lines | ❌ | ❌ | ❌ | ❌
+type pun cast two lines | ✔️ | ❌ | ❌ | ❌
 virtual call in constructor | ✔️ | ✔️ | ✔️ | ✔️
 virtual call in constructor helper | ❌ | ✔️ | ✔️ | ✔️
 virtual call in constructor lib | ❌ | ✔️ | n/a | n/a
@@ -1020,17 +1020,22 @@ virtual call in destructor lib | ❌ | ✔️ | n/a | n/a
 virtual call in destructor link | ❌ | ❌ | ✔️ | ✔️
 
 
+
+
+
+
+
 ## Versions
-- Linux 8482e64a9955 5.4.0-28-generic #32-Ubuntu SMP Wed Apr 22 17:40:10 UTC 2020 x86\_64 x86\_64 x86\_64 GNU/Linux
-- clang version 10.0.0-4ubuntu1
-- clang-tidy: 10.0
-- cppcheck 1.90
-- gcc (Ubuntu 9.3.0-10ubuntu2) 9.3.0
-- GNU bash, version 5.0.16(1)-release (x86\_64-pc-linux-gnu)
-- GNU parallel 20161222
+- Linux a7b8494748fd 5.15.0-40-generic #43-Ubuntu SMP Wed Jun 15 12:54:21 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+- Ubuntu clang version 14.0.0-1ubuntu1
+- clang-tidy: 14.0
+- Cppcheck 2.7
+- gcc (Ubuntu 11.2.0-19ubuntu1) 11.2.0
+- GNU bash, version 5.1.16(1)-release (x86_64-pc-linux-gnu)
+- GNU parallel 20210822
 - MSVC: 2019 Version 14.22.27905
-- Python 3.8.2
-- valgrind: 3.15.0
+- Python 3.10.4
+- valgrind-3.18.1
 - Windows SDK version 10.0.18362.0 to target Windows 10.0.17763
 
 ## Reference Warning Classes
@@ -1075,6 +1080,37 @@ asan was able to identify the array out of bounds error over the undefined optio
 msan was similar to asan, except it didn't identify any new cases. It also benefited from pairing up with ubsan, but ubsan by itself was good enough.
 
 Reading from an uninitialized value is a very common mistake for beginners and experts. Compilers sometimes catch it as warnings. Valgrind can detect it, but clang with fsantize can often miss it.
+
+## Updates
+### 2022/07/25
+clang 10->14
+undefined behavior | new check
+------------------ | ---------
+reading uninitialized value lib call cref | -Wuninitialized-const-reference
+
+gcc 9.3->11.2
+undefined behavior | new check
+------------------ | ---------
+array out of bounds | -Warray-bounds
+out of bound pointer | -Warray-bounds
+reading uninitialized value lib call cref | -Wmaybe-uninitialized
+type pun cast same line | -Wuninitialized
+type pun cast two lines | -Wuninitialized
+
+clang-tidy 10->14
+undefined behavior | new check
+------------------ | ---------
+bad identifier name | bugprone-reserved-identifier
+reading uninitialized value lib call cref | clang-diagnostic-uninitialized-const-reference
+
+cppcheck 1.9->2.7
+undefined behavior | new check
+------------------ | ---------
+odr violation struct ret | ctuOneDefinitionRuleViolation
+reading uninitialized value return | missingReturn
+std vector reserve set read | containerOutOfBounds
+
+
 
 ## Variablility
 Valgrind seems to have different results over time. This may be due to version upgrades from 3.11 to 1.13 or the very nature of undefined behavior itself. It was observed that array out of bounds was undetected by valgrind during the upgrade. Not detecting uninitialized memory in release with debug info went undetected at some point later.

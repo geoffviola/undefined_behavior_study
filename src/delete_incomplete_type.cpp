@@ -13,17 +13,21 @@ If the object being deleted has incomplete class type at the point of deletion a
 #include <iostream>
 #include <memory>
 
+// intentionally missing
+//#include "non_trivial_destructor_and_global.h"
+
+// NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
 extern int global_int;
 class NonTrivialDestructor;
 NonTrivialDestructor* new_non_trivial_destructor_ptr();
 
 void foo() {
-  //std::unique_ptr<NonTrivialDestructor> a(get_non_trivial_destructor_ptr());
   const NonTrivialDestructor* a = new_non_trivial_destructor_ptr();
   delete a;
 }
 
 int main() {
+  foo();
   std::cout << global_int << '\n';
   return EXIT_SUCCESS;
 }

@@ -4,6 +4,7 @@ https://en.cppreference.com/book/uninitialized
 #include <cstdio>
 #include <cstdlib>
 
+// NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
 bool global_var = false;
 
 int main() {

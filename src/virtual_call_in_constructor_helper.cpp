@@ -4,7 +4,7 @@
 class Parent {
 public:
   inline Parent() { Helper(); }
-  ~Parent() = default;
+  virtual ~Parent() = default;
   Parent(const Parent &) = default;
   Parent &operator=(const Parent &) = default;
   Parent(Parent &&) = default;

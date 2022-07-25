@@ -13,7 +13,7 @@ use as a name in the global namespace.
 #include <cstdlib>
 #include <iostream>
 
-int _underscore_global = 0;
+const int _underscore_global = 0;
 
 int main() {
   const int __double_underscores_in_front = 1;

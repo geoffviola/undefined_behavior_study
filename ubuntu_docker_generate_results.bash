@@ -39,7 +39,7 @@ docker run \
   --rm \
   --cap-add SYS_PTRACE \
   --mount type=bind,source=$(pwd),target=$(pwd) \
-  ubuntu:focal-20200423 \
+  ubuntu:jammy-20220531 \
   /bin/bash -x $(pwd)/"$tmpfile" $INNER_FLAG
 rm "$tmpfile"
 

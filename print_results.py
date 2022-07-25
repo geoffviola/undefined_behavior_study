@@ -69,6 +69,12 @@ def process_static_analysis_results(results):
 
         for row in csv:
             if row[0] in ignore_targets:
+                # Allow cppcheck to be correct one file over
+                if ("cppcheck" in filename and
+                        row[0] == "reading_uninitialized_value_lib" and
+                        row[1] == "ctuuninitvar"):
+                    continue
+                # Consider warnings in known good files an internal error
                 if len(row) > 0 and row[1] != "":
                     print("static analysis is broken in", filename, row)
                     exit(1)

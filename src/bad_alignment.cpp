@@ -18,7 +18,7 @@ struct SomeChars {
 int main() {
   SomeChars some_chars = {};
   some_chars.four_chars[0] = '1';
-  const int32_t a = *reinterpret_cast<const int32_t *>(&some_chars.four_chars[0]);
+  const int32_t a = *reinterpret_cast<const int32_t *>(some_chars.four_chars.data());
   std::cout << a << '\n';
   return EXIT_SUCCESS;
 }
