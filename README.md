@@ -1,5 +1,9 @@
 # Undefined Behavior Study
-A study of undefined behavior on various platforms, compilers, and tools. The undefined behavior types were inspired by https://www.nayuki.io/page/undefined-behavior-in-c-and-cplusplus-programs.
+A study of undefined behavior on various platforms, compilers, and tools. 
+Some examples were inspired by https://www.nayuki.io/page/undefined-behavior-in-c-and-cplusplus-programs. There are some highlights in the video below.
+
+[![Explanation Video](https://user-images.githubusercontent.com/10720055/181924542-7395c433-4256-4e76-81c1-1c610550c086.jpg)](https://www.youtube.com/watch?v=EkZLN_D1BwU)
+
 
 ## Automated Results
 
