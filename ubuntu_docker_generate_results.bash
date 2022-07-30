@@ -19,10 +19,10 @@ mkdir /home/$(whoami)/.parallel
 touch /home/$(whoami)/.parallel/will-cite
 mkdir /home/$(whoami)/.parallel/semaphores
 chown -R $(whoami):$(whoami) /home/$(whoami)/.parallel
-su - $(whoami)
-cd $(pwd)
 if [[ \$* != *--interactive* ]]; then
-  ./generate_results.bash
+  su - $(whoami) -c 'cd $(pwd) && ./generate_results.bash'
+else
+  su - $(whoami) -c "cd $(pwd)"
 fi
 EOL
 

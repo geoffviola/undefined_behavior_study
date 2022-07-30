@@ -498,7 +498,7 @@ clang | address | preincrement plus value | 0 | 0
 clang | address | read from old type | 0 | 0
 clang | address | reading uninitialized value add | 0 | 0
 clang | address | reading uninitialized value cout | 0 | 0
-clang | address | reading uninitialized value func arg | 0 | 1
+clang | address | reading uninitialized value func arg | 1 | 1
 clang | address | reading uninitialized value if | 0 | 0
 clang | address | reading uninitialized value lib call cref | 0 | 0
 clang | address | reading uninitialized value partial | 1 | 0
@@ -904,7 +904,7 @@ preincrement plus value | ❌ | ❌ | ❌ | ❌ | ❌
 read from old type | ❌ | ✔️ | ❌ | ✔️ | ✔️
 reading uninitialized value add | ❌ | ❌ | ❌ | ❌ | ❌
 reading uninitialized value cout | ❌ | ❌ | ❌ | ❌ | ❌
-reading uninitialized value func arg | ❌/✔️ | ✔️ | ❌/✔️ | ❌/✔️ | ✔️
+reading uninitialized value func arg | ✔️ | ✔️ | ❌/✔️ | ❌/✔️ | ✔️
 reading uninitialized value if | ❌ | ✔️/❌ | ✔️/❌ | ✔️/❌ | ✔️/❌
 reading uninitialized value lib call cref | ❌ | ❌ | ❌ | ❌ | ❌
 reading uninitialized value partial | ✔️/❌ | ✔️/❌ | ❌ | ❌ | ✔️/❌
@@ -1040,7 +1040,7 @@ virtual call in destructor link | ❌ | ❌ | ✔️ | ✔️
 - MSVC: 2019 Version 14.22.27905
 - Python 3.10.4
 - valgrind-3.18.1
-- Windows SDK version 10.0.18362.0 to target Windows 10.0.17763
+- Windows SDK version 10.0.22621.0 to target Windows 10.0.17763.
 
 ## Reference Warning Classes
 Compiler | Name | Code | Class
