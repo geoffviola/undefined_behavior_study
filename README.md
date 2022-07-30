@@ -1116,5 +1116,5 @@ std vector reserve set read | containerOutOfBounds
 
 
 
-## Variablility
+## Variability
 Valgrind seems to have different results over time. This may be due to version upgrades from 3.11 to 1.13 or the very nature of undefined behavior itself. It was observed that array out of bounds was undetected by valgrind during the upgrade. Not detecting uninitialized memory in release with debug info went undetected at some point later.
