@@ -143,6 +143,7 @@ msvc | reading uninitialized value printf | ✔️ | ✔️ | 4700
 msvc | reference out of scope | ✔️ | ✔️ | 4172
 msvc | shifting more than width | ✔️ | ✔️ | 4293
 msvc | signed integer overflow | ❌ | ❌ | n/a
+msvc | sort comp reflexive | ❌ | ❌ | n/a
 msvc | stack overflow | ✔️ | ✔️ | 4717
 msvc | std vector reserve set read | ❌ | ❌ | n/a
 msvc | type pun cast same line | ❌ | ❌ | n/a
@@ -292,7 +293,7 @@ reading uninitialized value return | ✔️ | ✔️ | ✔️ | ✔️ | n/a
 reference out of scope | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 shifting more than width | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 signed integer overflow | ❌ | ❌ | ❌ | ❌ | ❌
-sort comp reflexive | ❌ | ❌ | ❌ | ❌ | n/a
+sort comp reflexive | ❌ | ❌ | ❌ | ❌ | ❌
 stack overflow | ✔️ | ✔️ | ❌ | ❌ | ✔️
 std vector reserve set read | ❌ | ❌ | ✔️ | ❌ | ❌
 strptime mktime unitialized | ❌ | ✔️ | ❌ | ❌ | n/a
@@ -423,6 +424,7 @@ msvc | reading uninitialized value printf | -1 | 0
 msvc | reference out of scope | 0 | 0
 msvc | shifting more than width | 0 | 0
 msvc | signed integer overflow | 0 | 0
+msvc | sort comp reflexive | 0 | 0
 msvc | stack overflow | -1073741571 | -1073741571
 msvc | std vector reserve set read | -1 | 0
 msvc | type pun cast same line | 0 | 0
@@ -467,7 +469,7 @@ reading uninitialized value return | ✔️ | ❌/✔️ | n/a
 reference out of scope | ❌ | ✔️ | ❌
 shifting more than width | ❌ | ❌ | ❌
 signed integer overflow | ❌ | ❌ | ❌
-sort comp reflexive | ❌ | ❌ | n/a
+sort comp reflexive | ❌ | ❌ | ❌
 stack overflow | ✔️ | ✔️ | ✔️
 std vector reserve set read | ❌ | ❌ | ✔️/❌
 strptime mktime unitialized | ❌ | ❌ | n/a
@@ -1043,7 +1045,6 @@ virtual call in destructor | ✔️ | ✔️ | ✔️ | ✔️
 virtual call in destructor helper | ❌ | ✔️ | ✔️ | ✔️
 virtual call in destructor lib | ❌ | ✔️ | n/a | n/a
 virtual call in destructor link | ❌ | ❌ | ✔️ | ✔️
-
 
 ## Versions
 - Linux a7b8494748fd 5.15.0-40-generic #43-Ubuntu SMP Wed Jun 15 12:54:21 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
