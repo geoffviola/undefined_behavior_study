@@ -23,7 +23,7 @@ cd clang-tidy
 export CXX=clang++
 cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE ../.. > cmake.txt
 cp compile_commands.json ../..
-clang-tidy --quiet -checks=*,-fuchsia-default-arguments,-cppcoreguidelines-owning-memory,-cppcoreguidelines-pro-type-reinterpret-cast,-cppcoreguidelines-no-malloc,-hicpp-no-malloc,-modernize-use-trailing-return-type,-fuchsia-default-arguments-calls,-llvmlibc-*,-readability-identifier-length,-altera-struct-pack-align ${SRC_DIR}/*.cpp 1> warnings.txt
+clang-tidy --quiet -checks=*,-fuchsia-default-arguments,-cppcoreguidelines-owning-memory,-cppcoreguidelines-pro-type-reinterpret-cast,-cppcoreguidelines-no-malloc,-hicpp-no-malloc,-modernize-use-trailing-return-type,-fuchsia-default-arguments-calls,-llvmlibc-*,-readability-identifier-length,-altera-struct-pack-align,-altera-unroll-loops ${SRC_DIR}/*.cpp 1> warnings.txt
 rm ../../compile_commands.json
 associate_warnings.py --cpp_dir=${SRC_DIR}
 cd ..

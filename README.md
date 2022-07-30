@@ -50,6 +50,7 @@ clang | reading uninitialized value return | ✔️ | ✔️ | -Wreturn-type
 clang | reference out of scope | ✔️ | ✔️ | -Wreturn-stack-address
 clang | shifting more than width | ✔️ | ✔️ | -Wshift-count-overflow
 clang | signed integer overflow | ❌ | ❌ | n/a
+clang | sort comp reflexive | ❌ | ❌ | n/a
 clang | stack overflow | ✔️ | ✔️ | -Winfinite-recursion
 clang | std vector reserve set read | ❌ | ❌ | n/a
 clang | strptime mktime unitialized | ❌ | ❌ | n/a
@@ -96,6 +97,7 @@ gcc | reading uninitialized value return | ✔️ | ✔️ | -Wreturn-type
 gcc | reference out of scope | ✔️ | ✔️ | -Wreturn-local-addr
 gcc | shifting more than width | ✔️ | ✔️ | -Wshift-count-overflow
 gcc | signed integer overflow | ❌ | ❌ | n/a
+gcc | sort comp reflexive | ❌ | ❌ | n/a
 gcc | stack overflow | ❌ | ❌ | n/a
 gcc | std vector reserve set read | ❌ | ❌ | n/a
 gcc | strptime mktime unitialized | ❌ | ❌ | n/a
@@ -190,6 +192,7 @@ clang-tidy | reading uninitialized value return | ✔️ | clang-diagnostic-retu
 clang-tidy | reference out of scope | ✔️ | clang-analyzer-core.StackAddressEscape,clang-diagnostic-return-stack-address
 clang-tidy | shifting more than width | ✔️ | hicpp-signed-bitwise,clang-analyzer-core.UndefinedBinaryOperatorResult,clang-diagnostic-shift-count-overflow
 clang-tidy | signed integer overflow | ❌ | n/a
+clang-tidy | sort comp reflexive | ❌ | n/a
 clang-tidy | stack overflow | ✔️ | misc-no-recursion,clang-diagnostic-infinite-recursion
 clang-tidy | std vector reserve set read | ❌ | n/a
 clang-tidy | strptime mktime unitialized | ✔️ | cppcoreguidelines-pro-type-member-init,hicpp-member-init
@@ -236,6 +239,7 @@ cppcheck | reading uninitialized value return | ✔️ | missingReturn
 cppcheck | reference out of scope | ✔️ | returnReference
 cppcheck | shifting more than width | ✔️ | shiftTooManyBits
 cppcheck | signed integer overflow | ❌ | n/a
+cppcheck | sort comp reflexive | ❌ | n/a
 cppcheck | stack overflow | ❌ | n/a
 cppcheck | std vector reserve set read | ✔️ | containerOutOfBounds
 cppcheck | strptime mktime unitialized | ❌ | n/a
@@ -288,6 +292,7 @@ reading uninitialized value return | ✔️ | ✔️ | ✔️ | ✔️ | n/a
 reference out of scope | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 shifting more than width | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 signed integer overflow | ❌ | ❌ | ❌ | ❌ | ❌
+sort comp reflexive | ❌ | ❌ | ❌ | ❌ | n/a
 stack overflow | ✔️ | ✔️ | ❌ | ❌ | ✔️
 std vector reserve set read | ❌ | ❌ | ✔️ | ❌ | ❌
 strptime mktime unitialized | ❌ | ✔️ | ❌ | ❌ | n/a
@@ -337,6 +342,7 @@ clang | reading uninitialized value return | 132 | 48
 clang | reference out of scope | 0 | 0
 clang | shifting more than width | 0 | 0
 clang | signed integer overflow | 0 | 0
+clang | sort comp reflexive | 0 | 0
 clang | stack overflow | 139 | 128
 clang | std vector reserve set read | 0 | 0
 clang | strptime mktime unitialized | 0 | 0
@@ -378,6 +384,7 @@ gcc | reading uninitialized value return | 0 | 139
 gcc | reference out of scope | 139 | 139
 gcc | shifting more than width | 0 | 0
 gcc | signed integer overflow | 0 | 0
+gcc | sort comp reflexive | 0 | 0
 gcc | stack overflow | 139 | 124
 gcc | std vector reserve set read | 0 | 0
 gcc | strptime mktime unitialized | 0 | 0
@@ -460,6 +467,7 @@ reading uninitialized value return | ✔️ | ❌/✔️ | n/a
 reference out of scope | ❌ | ✔️ | ❌
 shifting more than width | ❌ | ❌ | ❌
 signed integer overflow | ❌ | ❌ | ❌
+sort comp reflexive | ❌ | ❌ | n/a
 stack overflow | ✔️ | ✔️ | ✔️
 std vector reserve set read | ❌ | ❌ | ✔️/❌
 strptime mktime unitialized | ❌ | ❌ | n/a
@@ -507,6 +515,7 @@ clang | address | reading uninitialized value return | 132 | 16
 clang | address | reference out of scope | 0 | 0
 clang | address | shifting more than width | 0 | 0
 clang | address | signed integer overflow | 0 | 0
+clang | address | sort comp reflexive | 0 | 0
 clang | address | stack overflow | 1 | 96
 clang | address | std vector reserve set read | 0 | 0
 clang | address | strptime mktime unitialized | 0 | 0
@@ -539,7 +548,7 @@ clang | address,undefined | preincrement plus value | 0 | 0
 clang | address,undefined | read from old type | 1 | 1
 clang | address,undefined | reading uninitialized value add | 0 | 0
 clang | address,undefined | reading uninitialized value cout | 0 | 0
-clang | address,undefined | reading uninitialized value func arg | 1 | 1
+clang | address,undefined | reading uninitialized value func arg | 0 | 1
 clang | address,undefined | reading uninitialized value if | 1 | 0
 clang | address,undefined | reading uninitialized value lib call cref | 0 | 0
 clang | address,undefined | reading uninitialized value partial | 1 | 0
@@ -548,6 +557,7 @@ clang | address,undefined | reading uninitialized value return | 1 | 1
 clang | address,undefined | reference out of scope | 0 | 0
 clang | address,undefined | shifting more than width | 1 | 1
 clang | address,undefined | signed integer overflow | 1 | 1
+clang | address,undefined | sort comp reflexive | 0 | 0
 clang | address,undefined | stack overflow | 1 | 1
 clang | address,undefined | std vector reserve set read | 0 | 0
 clang | address,undefined | strptime mktime unitialized | 0 | 0
@@ -589,6 +599,7 @@ clang | memory | reading uninitialized value return | 132 | 160
 clang | memory | reference out of scope | 0 | 0
 clang | memory | shifting more than width | 0 | 0
 clang | memory | signed integer overflow | 0 | 0
+clang | memory | sort comp reflexive | 0 | 0
 clang | memory | stack overflow | 1 | 16
 clang | memory | std vector reserve set read | 0 | 0
 clang | memory | strptime mktime unitialized | 0 | 0
@@ -630,6 +641,7 @@ clang | memory,undefined | reading uninitialized value return | 1 | 1
 clang | memory,undefined | reference out of scope | 0 | 0
 clang | memory,undefined | shifting more than width | 1 | 1
 clang | memory,undefined | signed integer overflow | 1 | 1
+clang | memory,undefined | sort comp reflexive | 0 | 0
 clang | memory,undefined | stack overflow | 1 | 1
 clang | memory,undefined | std vector reserve set read | 0 | 0
 clang | memory,undefined | strptime mktime unitialized | 0 | 0
@@ -671,6 +683,7 @@ clang | undefined | reading uninitialized value return | 1 | 1
 clang | undefined | reference out of scope | 0 | 0
 clang | undefined | shifting more than width | 1 | 1
 clang | undefined | signed integer overflow | 1 | 1
+clang | undefined | sort comp reflexive | 0 | 0
 clang | undefined | stack overflow | 1 | 1
 clang | undefined | std vector reserve set read | 0 | 0
 clang | undefined | strptime mktime unitialized | 0 | 0
@@ -712,6 +725,7 @@ gcc | address | reading uninitialized value return | 0 | 1
 gcc | address | reference out of scope | 1 | 1
 gcc | address | shifting more than width | 0 | 0
 gcc | address | signed integer overflow | 0 | 0
+gcc | address | sort comp reflexive | 0 | 0
 gcc | address | stack overflow | 1 | 124
 gcc | address | std vector reserve set read | 0 | 0
 gcc | address | strptime mktime unitialized | 0 | 0
@@ -751,6 +765,7 @@ gcc | address,leak,undefined | reading uninitialized value return | 1 | 1
 gcc | address,leak,undefined | reference out of scope | 1 | 1
 gcc | address,leak,undefined | shifting more than width | 1 | 1
 gcc | address,leak,undefined | signed integer overflow | 1 | 0
+gcc | address,leak,undefined | sort comp reflexive | 0 | 0
 gcc | address,leak,undefined | stack overflow | 1 | 124
 gcc | address,leak,undefined | std vector reserve set read | 0 | 0
 gcc | address,leak,undefined | strptime mktime unitialized | 0 | 0
@@ -790,6 +805,7 @@ gcc | leak | reading uninitialized value return | 0 | 23
 gcc | leak | reference out of scope | 23 | 23
 gcc | leak | shifting more than width | 0 | 0
 gcc | leak | signed integer overflow | 0 | 0
+gcc | leak | sort comp reflexive | 0 | 0
 gcc | leak | stack overflow | 23 | 124
 gcc | leak | std vector reserve set read | 0 | 0
 gcc | leak | strptime mktime unitialized | 0 | 0
@@ -829,6 +845,7 @@ gcc | undefined | reading uninitialized value return | 1 | 1
 gcc | undefined | reference out of scope | 1 | 1
 gcc | undefined | shifting more than width | 1 | 1
 gcc | undefined | signed integer overflow | 1 | 0
+gcc | undefined | sort comp reflexive | 0 | 0
 gcc | undefined | stack overflow | 139 | 124
 gcc | undefined | std vector reserve set read | 0 | 0
 gcc | undefined | strptime mktime unitialized | 0 | 0
@@ -868,6 +885,7 @@ gcc | valgrind | reading uninitialized value return | 0 | 139
 gcc | valgrind | reference out of scope | 139 | 139
 gcc | valgrind | shifting more than width | 0 | 0
 gcc | valgrind | signed integer overflow | 0 | 0
+gcc | valgrind | sort comp reflexive | 0 | 0
 gcc | valgrind | stack overflow | 139 | 124
 gcc | valgrind | std vector reserve set read | 0 | 0
 gcc | valgrind | strptime mktime unitialized | 1 | 1
@@ -904,7 +922,7 @@ preincrement plus value | ❌ | ❌ | ❌ | ❌ | ❌
 read from old type | ❌ | ✔️ | ❌ | ✔️ | ✔️
 reading uninitialized value add | ❌ | ❌ | ❌ | ❌ | ❌
 reading uninitialized value cout | ❌ | ❌ | ❌ | ❌ | ❌
-reading uninitialized value func arg | ✔️ | ✔️ | ❌/✔️ | ❌/✔️ | ✔️
+reading uninitialized value func arg | ✔️ | ❌/✔️ | ❌/✔️ | ❌/✔️ | ✔️
 reading uninitialized value if | ❌ | ✔️/❌ | ✔️/❌ | ✔️/❌ | ✔️/❌
 reading uninitialized value lib call cref | ❌ | ❌ | ❌ | ❌ | ❌
 reading uninitialized value partial | ✔️/❌ | ✔️/❌ | ❌ | ❌ | ✔️/❌
@@ -913,6 +931,7 @@ reading uninitialized value return | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 reference out of scope | ❌ | ❌ | ❌ | ❌ | ❌
 shifting more than width | ❌ | ✔️ | ❌ | ✔️ | ✔️
 signed integer overflow | ❌ | ✔️ | ❌ | ✔️ | ✔️
+sort comp reflexive | ❌ | ❌ | ❌ | ❌ | ❌
 stack overflow | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌
 strptime mktime unitialized | ❌ | ❌ | ❌ | ❌ | ❌
@@ -960,6 +979,7 @@ reading uninitialized value return | ❌/✔️ | ✔️ | ❌/✔️ | ✔️ |
 reference out of scope | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 shifting more than width | ❌ | ✔️ | ❌ | ✔️ | ❌
 signed integer overflow | ❌ | ✔️/❌ | ❌ | ✔️/❌ | ❌
+sort comp reflexive | ❌ | ❌ | ❌ | ❌ | ❌
 stack overflow | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌
 strptime mktime unitialized | ❌ | ❌ | ❌ | ❌ | ✔️
@@ -1009,6 +1029,7 @@ reading uninitialized value return | ✔️ | ✔️ | ✔️ | ✔️
 reference out of scope | ✔️ | ✔️ | ✔️ | ✔️
 shifting more than width | ✔️ | ✔️ | ❌ | ✔️
 signed integer overflow | ❌ | ❌ | ❌ | ✔️
+sort comp reflexive | ❌ | ❌ | ❌ | ❌
 stack overflow | ✔️ | ✔️ | ✔️ | ✔️
 std vector reserve set read | ❌ | ✔️ | ✔️ | ❌
 strptime mktime unitialized | ❌ | ✔️ | ❌ | ✔️
@@ -1022,11 +1043,6 @@ virtual call in destructor | ✔️ | ✔️ | ✔️ | ✔️
 virtual call in destructor helper | ❌ | ✔️ | ✔️ | ✔️
 virtual call in destructor lib | ❌ | ✔️ | n/a | n/a
 virtual call in destructor link | ❌ | ❌ | ✔️ | ✔️
-
-
-
-
-
 
 
 ## Versions

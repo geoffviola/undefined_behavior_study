@@ -39,6 +39,7 @@ set(executables
     reference_out_of_scope
     shifting_more_than_width
     signed_integer_overflow
+    sort_comp_reflexive
     stack_overflow
     std_vector_reserve_set_read
     type_pun_cast_two_lines
