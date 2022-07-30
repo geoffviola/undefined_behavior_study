@@ -2,7 +2,7 @@ if (-not (Test-Path build)) {
     md build
 }
 cd build
-cmake .. -G "Visual Studio 16 2019" -A x64
+cmake .. -G "Visual Studio 17 2022" -A x64
 
 function Build-And-Run($Config) {
   echo "Build $Config"
