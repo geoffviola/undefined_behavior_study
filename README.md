@@ -188,7 +188,7 @@ clang-tidy | reading uninitialized value func arg | ✔️ | cppcoreguidelines-i
 clang-tidy | reading uninitialized value if | ✔️ | cppcoreguidelines-init-variables,clang-analyzer-core.uninitialized.Branch,clang-diagnostic-uninitialized
 clang-tidy | reading uninitialized value lib call cref | ✔️ | cppcoreguidelines-init-variables,clang-diagnostic-uninitialized-const-reference
 clang-tidy | reading uninitialized value partial | ✔️ | cppcoreguidelines-init-variables,clang-analyzer-core.CallAndMessage
-clang-tidy | reading uninitialized value printf | ✔️ | cppcoreguidelines-init-variables,clang-analyzer-core.CallAndMessage,cppcoreguidelines-pro-type-vararg,hicpp-vararg,clang-diagnostic-uninitialized
+clang-tidy | reading uninitialized value printf | ✔️ | cppcoreguidelines-init-variables,clang-analyzer-core.CallAndMessage,clang-diagnostic-uninitialized
 clang-tidy | reading uninitialized value return | ✔️ | clang-diagnostic-return-type
 clang-tidy | reference out of scope | ✔️ | clang-analyzer-core.StackAddressEscape,clang-diagnostic-return-stack-address
 clang-tidy | shifting more than width | ✔️ | hicpp-signed-bitwise,clang-analyzer-core.UndefinedBinaryOperatorResult,clang-diagnostic-shift-count-overflow
@@ -550,7 +550,7 @@ clang | address,undefined | preincrement plus value | 0 | 0
 clang | address,undefined | read from old type | 1 | 1
 clang | address,undefined | reading uninitialized value add | 0 | 0
 clang | address,undefined | reading uninitialized value cout | 0 | 0
-clang | address,undefined | reading uninitialized value func arg | 0 | 1
+clang | address,undefined | reading uninitialized value func arg | 1 | 1
 clang | address,undefined | reading uninitialized value if | 1 | 0
 clang | address,undefined | reading uninitialized value lib call cref | 0 | 0
 clang | address,undefined | reading uninitialized value partial | 1 | 0
@@ -924,7 +924,7 @@ preincrement plus value | ❌ | ❌ | ❌ | ❌ | ❌
 read from old type | ❌ | ✔️ | ❌ | ✔️ | ✔️
 reading uninitialized value add | ❌ | ❌ | ❌ | ❌ | ❌
 reading uninitialized value cout | ❌ | ❌ | ❌ | ❌ | ❌
-reading uninitialized value func arg | ✔️ | ❌/✔️ | ❌/✔️ | ❌/✔️ | ✔️
+reading uninitialized value func arg | ✔️ | ✔️ | ❌/✔️ | ❌/✔️ | ✔️
 reading uninitialized value if | ❌ | ✔️/❌ | ✔️/❌ | ✔️/❌ | ✔️/❌
 reading uninitialized value lib call cref | ❌ | ❌ | ❌ | ❌ | ❌
 reading uninitialized value partial | ✔️/❌ | ✔️/❌ | ❌ | ❌ | ✔️/❌
