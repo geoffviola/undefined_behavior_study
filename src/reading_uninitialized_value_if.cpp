@@ -8,9 +8,9 @@ https://en.cppreference.com/book/uninitialized
 int main() {
   bool b;
   if (b) {
-    std::cout << "uninitialized value is true" << std::endl;
+    std::cout << "uninitialized value is true" << '\n';
   } else {
-    std::cout << "uninitialized value is false" << std::endl;
+    std::cout << "uninitialized value is false" << '\n';
   }
   return EXIT_SUCCESS;
 }

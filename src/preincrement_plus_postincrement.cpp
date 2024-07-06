@@ -9,6 +9,6 @@ Undefined behavior
 int main() {
   int i = 0;
   i = ++i + i++;
-  std::cout << i << std::endl;
+  std::cout << i << '\n';
   return EXIT_SUCCESS;
 }

@@ -16,6 +16,6 @@ if 0 ≤ i − j ≤ n; otherwise, the behavior is undefined.
 int main() {
   static constexpr int kArraySize = 10;
   std::array<int32_t, kArraySize> arr{};
-  std::cout << static_cast<void *>(arr.data() - 1) << std::endl;
+  std::cout << static_cast<void *>(arr.data() - 1) << '\n';
   return EXIT_SUCCESS;
 }

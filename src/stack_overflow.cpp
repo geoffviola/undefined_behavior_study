@@ -11,6 +11,6 @@ static uint32_t call_self() {
 }
 
 int main() {
-  std::cout << call_self() << std::endl;
+  std::cout << call_self() << '\n';
   return EXIT_SUCCESS;
 }

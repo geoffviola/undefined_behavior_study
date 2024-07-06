@@ -4,6 +4,6 @@
 
 int main() {
   int32_t *p = nullptr;
-  std::cout << *p << std::endl;
+  std::cout << *p << '\n';
   return EXIT_SUCCESS;
 }

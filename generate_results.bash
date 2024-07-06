@@ -151,10 +151,8 @@ mkdir -p clang_fsanitize
 cd clang_fsanitize
 
 fsanitize_build clang address
-fsanitize_build clang memory
 fsanitize_build clang undefined
 fsanitize_build clang address,undefined
-fsanitize_build clang memory,undefined
 
 cd ..
 

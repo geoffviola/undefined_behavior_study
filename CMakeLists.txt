@@ -37,13 +37,17 @@ set(executables
     reading_uninitialized_value_partial
     reading_uninitialized_value_printf
     reference_out_of_scope
+    reinterpret_cast_bad_size
+    reinterpret_cast_float_to_int32
+    reinterpret_cast_int32_to_float
+    reinterpret_cast_int32_to_uint32
+    reinterpret_cast_uint32_to_int32
+    reinterpret_cast_unaligned_bytes_to_uint32
     shifting_more_than_width
     signed_integer_overflow
     sort_comp_reflexive
     stack_overflow
     std_vector_reserve_set_read
-    type_pun_cast_two_lines
-    type_pun_cast_same_line
     virtual_call_in_constructor_helper
     virtual_call_in_constructor_link
     virtual_call_in_destructor_helper

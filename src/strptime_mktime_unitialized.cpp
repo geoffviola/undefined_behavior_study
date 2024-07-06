@@ -1,6 +1,7 @@
 /*
 https://stackoverflow.com/a/24185697
 */
+#include <cstdint>
 #include <cstdlib>
 #include <ctime>
 #include <iostream>

@@ -8,7 +8,7 @@ Some examples were inspired by https://www.nayuki.io/page/undefined-behavior-in-
 ## Automated Results
 
 Linux 
-[![Build Status](https://travis-ci.com/geoffviola/undefined_behavior_study.svg?branch=master)](https://travis-ci.com/geoffviola/undefined_behavior_study)
+[![Build Status](https://app.travis-ci.com/geoffviola/undefined_behavior_study.svg?token=n7xWtQG4q8zpsz5mSNsp&branch=master)](https://app.travis-ci.com/geoffviola/undefined_behavior_study)
 
 Windows 
 [![Build status](https://ci.appveyor.com/api/projects/status/65bhemledj07s8jt?svg=true)](https://ci.appveyor.com/project/geoffviola/undefined-behavior-study)

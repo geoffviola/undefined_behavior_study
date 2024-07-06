@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Setup bionic with proper tools
+# Setup noble with proper tools
 
 tmpfile=$(mktemp ub-docker-script.XXXXXX)
 exec 3>"$tmpfile"
@@ -8,9 +8,10 @@ cat >&3 <<EOL
 #!/usr/bin/env bash
 set -x
 set -e
-adduser  --disabled-password --uid $(id -u) --gecos "" $(whoami) > /tmp/add_user.txt 2>&1
 apt -qq update > /tmp/update.txt 2>&1
-apt -qq -o Dpkg::Use-Pty=0 install clang clang-tidy cmake cppcheck g++ parallel python3 valgrind -y > /tmp/install.txt 2>&1
+apt -qq -o Dpkg::Use-Pty=0 install adduser clang clang-tidy cmake cppcheck g++ parallel perl python3 valgrind -y > /tmp/install.txt 2>&1
+deluser --remove-home ubuntu
+adduser  --disabled-password --uid $(id -u) --gecos "" $(whoami) > /tmp/add_user.txt 2>&1
 if [[ \$* == *--interactive* ]]; then
   usermod -aG sudo $(whoami)
   apt -qq -o Dpkg::Use-Pty=0 install man sudo vim -y >> /tmp/install.txt 2>&1
@@ -39,7 +40,7 @@ docker run \
   --rm \
   --cap-add SYS_PTRACE \
   --mount type=bind,source=$(pwd),target=$(pwd) \
-  ubuntu:jammy-20220531 \
+  ubuntu:noble-20240605 \
   /bin/bash -x $(pwd)/"$tmpfile" $INNER_FLAG
 rm "$tmpfile"
 

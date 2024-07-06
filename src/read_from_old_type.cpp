@@ -13,6 +13,6 @@ int main() {
   *p_boolean = kModifiedValue;
   // reading from b is now UB
   const bool out_bool = boolean;
-  std::cout << out_bool << std::endl;
+  std::cout << out_bool << '\n';
   return EXIT_SUCCESS;
 }

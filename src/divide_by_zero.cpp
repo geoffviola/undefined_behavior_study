@@ -10,6 +10,6 @@ If the second operand of / or % is zero the behavior is undefined
 
 int main() {
   int32_t a = 1;
-  std::cout << a / 0 << std::endl;
+  std::cout << a / 0 << '\n';
   return EXIT_SUCCESS;
 }

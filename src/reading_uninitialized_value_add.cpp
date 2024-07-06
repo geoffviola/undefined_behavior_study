@@ -8,6 +8,6 @@ https://en.cppreference.com/book/uninitialized
 int main() {
   int32_t a;
   int32_t b;
-  std::cout << a + b << std::endl;
+  std::cout << a + b << '\n';
   return EXIT_SUCCESS;
 }

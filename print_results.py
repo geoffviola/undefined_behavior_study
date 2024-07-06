@@ -225,7 +225,7 @@ def process_runtime_results(runtime_results):
         for row in csv:
             if row[0] in ignore_targets:
                 if row[1] != "0":
-                    print(filename, "broken")
+                    print(filename, "broken", row)
                     exit(1)
                 continue
             output_table[compiler][analyzer][row[0].replace(

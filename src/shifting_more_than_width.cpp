@@ -12,6 +12,6 @@ promoted left operand
 int main() {
   static constexpr uint32_t kU = 0U;
   static constexpr int kShift = 33;
-  std::cout << (kU << kShift) << std::endl;
+  std::cout << (kU << kShift) << '\n';
   return EXIT_SUCCESS;
 }

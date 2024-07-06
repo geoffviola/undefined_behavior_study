@@ -10,6 +10,6 @@ represented, the behavior is undefined.
 
 int main() {
   static constexpr double kLargeDouble = 1e3;
-  std::cout << static_cast<int>(static_cast<int8_t>(kLargeDouble)) << std::endl;
+  std::cout << static_cast<int>(static_cast<int8_t>(kLargeDouble)) << '\n';
   return 0;
 }
