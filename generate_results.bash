@@ -176,15 +176,31 @@ echo
 echo
 echo VERSIONS
 echo 
+echo linux kernel
 uname -a
+echo
+echo gcc
 gcc --version
+echo
+echo valgrind
 valgrind --version
 echo 
+echo clang++
 clang++ --version
+echo
+echo clang-tidy
 clang-tidy --version
+echo
+echo cppcheck
 cppcheck --version
+echo
+echo parallell
 parallel --version
+echo
+echo bash
 bash --version
+echo
+echo python3
 python3 --version
 
 echo

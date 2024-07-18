@@ -1,5 +1,3 @@
-#include "odr_violation_struct_ret_lib.h"
-
 struct Point {
   float y;
   float x;

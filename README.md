@@ -48,14 +48,18 @@ clang | reading uninitialized value partial | ❌ | ❌ | n/a
 clang | reading uninitialized value printf | ✔️ | ✔️ | -Wuninitialized
 clang | reading uninitialized value return | ✔️ | ✔️ | -Wreturn-type
 clang | reference out of scope | ✔️ | ✔️ | -Wreturn-stack-address
+clang | reinterpret cast bad size | ❌ | ❌ | n/a
+clang | reinterpret cast float to int32 | ❌ | ❌ | n/a
+clang | reinterpret cast int32 to float | ❌ | ❌ | n/a
+clang | reinterpret cast int32 to uint32 | ❌ | ❌ | n/a
+clang | reinterpret cast uint32 to int32 | ❌ | ❌ | n/a
+clang | reinterpret cast unaligned bytes to uint32 | ❌ | ❌ | n/a
 clang | shifting more than width | ✔️ | ✔️ | -Wshift-count-overflow
 clang | signed integer overflow | ❌ | ❌ | n/a
 clang | sort comp reflexive | ❌ | ❌ | n/a
 clang | stack overflow | ✔️ | ✔️ | -Winfinite-recursion
 clang | std vector reserve set read | ❌ | ❌ | n/a
 clang | strptime mktime unitialized | ❌ | ❌ | n/a
-clang | type pun cast same line | ❌ | ❌ | n/a
-clang | type pun cast two lines | ❌ | ❌ | n/a
 clang | virtual call in constructor | ✔️ | ✔️ | -Wcall-to-pure-virtual-from-ctor-dtor
 clang | virtual call in constructor helper | ❌ | ❌ | n/a
 clang | virtual call in constructor lib | ❌ | ❌ | n/a
@@ -64,8 +68,8 @@ clang | virtual call in destructor | ✔️ | ✔️ | -Wcall-to-pure-virtual-fr
 clang | virtual call in destructor helper | ❌ | ❌ | n/a
 clang | virtual call in destructor lib | ❌ | ❌ | n/a
 clang | virtual call in destructor link | ❌ | ❌ | n/a
-gcc | access after realloc | ❌ | ❌ | n/a
-gcc | array out of bounds | ❌ | ✔️ | -Warray-bounds
+gcc | access after realloc | ✔️ | ✔️ | -Wuse-after-free
+gcc | array out of bounds | ❌ | ✔️ | -Warray-bounds=
 gcc | automatic variable over stack | ❌ | ❌ | n/a
 gcc | bad alignment | ❌ | ❌ | n/a
 gcc | bad identifier name | ❌ | ❌ | n/a
@@ -82,7 +86,7 @@ gcc | odr violation function lib | ❌ | ❌ | n/a
 gcc | odr violation struct ret | ❌ | ❌ | n/a
 gcc | odr violation struct ret lib | ❌ | ❌ | n/a
 gcc | operator star on empty optional | ❌ | ❌ | n/a
-gcc | out of bounds pointer | ❌ | ✔️ | -Warray-bounds
+gcc | out of bounds pointer | ❌ | ✔️ | -Warray-bounds=
 gcc | preincrement plus postincrement | ✔️ | ✔️ | -Wsequence-point
 gcc | preincrement plus value | ✔️ | ✔️ | -Wsequence-point
 gcc | read from old type | ❌ | ❌ | n/a
@@ -95,14 +99,18 @@ gcc | reading uninitialized value partial | ❌ | ❌ | n/a
 gcc | reading uninitialized value printf | ✔️ | ✔️ | -Wuninitialized
 gcc | reading uninitialized value return | ✔️ | ✔️ | -Wreturn-type
 gcc | reference out of scope | ✔️ | ✔️ | -Wreturn-local-addr
+gcc | reinterpret cast bad size | ✔️ | ✔️ | -Wuninitialized,-Warray-bounds=
+gcc | reinterpret cast float to int32 | ❌ | ✔️ | -Wstrict-aliasing,-Wuninitialized
+gcc | reinterpret cast int32 to float | ❌ | ✔️ | -Wstrict-aliasing,-Wuninitialized
+gcc | reinterpret cast int32 to uint32 | ❌ | ❌ | n/a
+gcc | reinterpret cast uint32 to int32 | ❌ | ❌ | n/a
+gcc | reinterpret cast unaligned bytes to uint32 | ❌ | ❌ | n/a
 gcc | shifting more than width | ✔️ | ✔️ | -Wshift-count-overflow
 gcc | signed integer overflow | ❌ | ❌ | n/a
 gcc | sort comp reflexive | ❌ | ❌ | n/a
-gcc | stack overflow | ❌ | ❌ | n/a
+gcc | stack overflow | ✔️ | ✔️ | -Winfinite-recursion
 gcc | std vector reserve set read | ❌ | ❌ | n/a
 gcc | strptime mktime unitialized | ❌ | ❌ | n/a
-gcc | type pun cast same line | ❌ | ✔️ | -Wstrict-aliasing,-Wuninitialized
-gcc | type pun cast two lines | ❌ | ✔️ | -Wuninitialized
 gcc | virtual call in constructor | ❌ | ❌ | n/a
 gcc | virtual call in constructor helper | ❌ | ❌ | n/a
 gcc | virtual call in constructor lib | ❌ | ❌ | n/a
@@ -141,13 +149,17 @@ msvc | reading uninitialized value lib call cref | ❌ | ❌ | n/a
 msvc | reading uninitialized value partial | ❌ | ❌ | n/a
 msvc | reading uninitialized value printf | ✔️ | ✔️ | 4700
 msvc | reference out of scope | ✔️ | ✔️ | 4172
+msvc | reinterpret cast bad size | ❌ | ❌ | n/a
+msvc | reinterpret cast float to int32 | ❌ | ❌ | n/a
+msvc | reinterpret cast int32 to float | ❌ | ❌ | n/a
+msvc | reinterpret cast int32 to uint32 | ❌ | ❌ | n/a
+msvc | reinterpret cast uint32 to int32 | ❌ | ❌ | n/a
+msvc | reinterpret cast unaligned bytes to uint32 | ❌ | ❌ | n/a
 msvc | shifting more than width | ✔️ | ✔️ | 4293
 msvc | signed integer overflow | ❌ | ❌ | n/a
 msvc | sort comp reflexive | ❌ | ❌ | n/a
 msvc | stack overflow | ✔️ | ✔️ | 4717
 msvc | std vector reserve set read | ❌ | ❌ | n/a
-msvc | type pun cast same line | ❌ | ❌ | n/a
-msvc | type pun cast two lines | ❌ | ❌ | n/a
 msvc | virtual call in constructor | ❌ | ❌ | n/a
 msvc | virtual call in constructor helper | ❌ | ❌ | n/a
 msvc | virtual call in constructor lib | ❌ | ❌ | n/a
@@ -173,11 +185,11 @@ clang-tidy | large double to int | ❌ | n/a
 clang-tidy | malloc cast pod struct | ❌ | n/a
 clang-tidy | mutate const value | ✔️ | cppcoreguidelines-pro-type-const-cast
 clang-tidy | non trivial destructor and global | ❌ | n/a
-clang-tidy | odr violation function | ❌ | n/a
+clang-tidy | odr violation function | ✔️ | misc-include-cleaner
 clang-tidy | odr violation function lib | ❌ | n/a
-clang-tidy | odr violation struct ret | ❌ | n/a
+clang-tidy | odr violation struct ret | ✔️ | misc-include-cleaner
 clang-tidy | odr violation struct ret lib | ❌ | n/a
-clang-tidy | operator star on empty optional | ❌ | n/a
+clang-tidy | operator star on empty optional | ✔️ | bugprone-unchecked-optional-access
 clang-tidy | out of bounds pointer | ❌ | n/a
 clang-tidy | preincrement plus postincrement | ✔️ | clang-diagnostic-unsequenced
 clang-tidy | preincrement plus value | ✔️ | clang-diagnostic-unsequenced
@@ -191,16 +203,20 @@ clang-tidy | reading uninitialized value partial | ✔️ | cppcoreguidelines-in
 clang-tidy | reading uninitialized value printf | ✔️ | cppcoreguidelines-init-variables,clang-analyzer-core.CallAndMessage,clang-diagnostic-uninitialized
 clang-tidy | reading uninitialized value return | ✔️ | clang-diagnostic-return-type
 clang-tidy | reference out of scope | ✔️ | clang-analyzer-core.StackAddressEscape,clang-diagnostic-return-stack-address
-clang-tidy | shifting more than width | ✔️ | hicpp-signed-bitwise,clang-analyzer-core.UndefinedBinaryOperatorResult,clang-diagnostic-shift-count-overflow
+clang-tidy | reinterpret cast bad size | ❌ | n/a
+clang-tidy | reinterpret cast float to int32 | ❌ | n/a
+clang-tidy | reinterpret cast int32 to float | ❌ | n/a
+clang-tidy | reinterpret cast int32 to uint32 | ❌ | n/a
+clang-tidy | reinterpret cast uint32 to int32 | ❌ | n/a
+clang-tidy | reinterpret cast unaligned bytes to uint32 | ❌ | n/a
+clang-tidy | shifting more than width | ✔️ | clang-analyzer-core.BitwiseShift,clang-diagnostic-shift-count-overflow,hicpp-signed-bitwise
 clang-tidy | signed integer overflow | ❌ | n/a
 clang-tidy | sort comp reflexive | ❌ | n/a
 clang-tidy | stack overflow | ✔️ | misc-no-recursion,clang-diagnostic-infinite-recursion
 clang-tidy | std vector reserve set read | ❌ | n/a
 clang-tidy | strptime mktime unitialized | ✔️ | cppcoreguidelines-pro-type-member-init,hicpp-member-init
-clang-tidy | type pun cast same line | ❌ | n/a
-clang-tidy | type pun cast two lines | ❌ | n/a
-clang-tidy | virtual call in constructor | ✔️ | clang-analyzer-cplusplus.PureVirtualCall,clang-diagnostic-call-to-pure-virtual-from-ctor-dtor
-clang-tidy | virtual call in constructor helper | ✔️ | clang-analyzer-cplusplus.PureVirtualCall
+clang-tidy | virtual call in constructor | ✔️ | clang-analyzer-cplusplus.PureVirtualCall,clang-diagnostic-call-to-pure-virtual-from-ctor-dtor,misc-const-correctness
+clang-tidy | virtual call in constructor helper | ✔️ | clang-analyzer-cplusplus.PureVirtualCall,misc-const-correctness
 clang-tidy | virtual call in constructor lib | ✔️ | clang-analyzer-cplusplus.PureVirtualCall
 clang-tidy | virtual call in constructor link | ❌ | n/a
 clang-tidy | virtual call in destructor | ✔️ | clang-analyzer-cplusplus.PureVirtualCall,clang-diagnostic-call-to-pure-virtual-from-ctor-dtor
@@ -208,7 +224,7 @@ clang-tidy | virtual call in destructor helper | ✔️ | clang-analyzer-cpluspl
 clang-tidy | virtual call in destructor lib | ✔️ | clang-analyzer-cplusplus.PureVirtualCall
 clang-tidy | virtual call in destructor link | ❌ | n/a
 cppcheck | access after realloc | ❌ | n/a
-cppcheck | array out of bounds | ✔️ | containerOutOfBoundsIndexExpression
+cppcheck | array out of bounds | ✔️ | containerOutOfBounds,containerOutOfBoundsIndexExpression
 cppcheck | automatic variable over stack | ❌ | n/a
 cppcheck | bad alignment | ❌ | n/a
 cppcheck | bad identifier name | ❌ | n/a
@@ -238,14 +254,18 @@ cppcheck | reading uninitialized value partial | ✔️ | uninitvar
 cppcheck | reading uninitialized value printf | ✔️ | uninitvar
 cppcheck | reading uninitialized value return | ✔️ | missingReturn
 cppcheck | reference out of scope | ✔️ | returnReference
+cppcheck | reinterpret cast bad size | ❌ | n/a
+cppcheck | reinterpret cast float to int32 | ❌ | n/a
+cppcheck | reinterpret cast int32 to float | ❌ | n/a
+cppcheck | reinterpret cast int32 to uint32 | ❌ | n/a
+cppcheck | reinterpret cast uint32 to int32 | ❌ | n/a
+cppcheck | reinterpret cast unaligned bytes to uint32 | ❌ | n/a
 cppcheck | shifting more than width | ✔️ | shiftTooManyBits
 cppcheck | signed integer overflow | ❌ | n/a
 cppcheck | sort comp reflexive | ❌ | n/a
 cppcheck | stack overflow | ❌ | n/a
 cppcheck | std vector reserve set read | ✔️ | containerOutOfBounds
 cppcheck | strptime mktime unitialized | ❌ | n/a
-cppcheck | type pun cast same line | ❌ | n/a
-cppcheck | type pun cast two lines | ❌ | n/a
 cppcheck | virtual call in constructor | ✔️ | ctuOneDefinitionRuleViolation
 cppcheck | virtual call in constructor helper | ❌ | n/a
 cppcheck | virtual call in constructor lib | ❌ | n/a
@@ -260,7 +280,7 @@ Debug (unoptimized) / RelWithDebInfo (optimized)
 
 Undefined Behavior Type | clang | clang-tidy | cppcheck | gcc | msvc
 --- | --- | --- | --- | --- | ---
-access after realloc | ❌ | ✔️ | ❌ | ❌ | ❌
+access after realloc | ❌ | ✔️ | ❌ | ✔️ | ❌
 array out of bounds | ❌ | ✔️ | ✔️ | ❌/✔️ | ❌
 automatic variable over stack | ❌ | ❌ | ❌ | ❌ | ❌
 bad alignment | ❌ | ❌ | ❌ | ❌ | ❌
@@ -273,11 +293,11 @@ large double to int | ❌ | ❌ | ❌ | ❌ | ❌
 malloc cast pod struct | ❌ | ❌ | ❌ | ❌ | ❌
 mutate const value | ❌ | ✔️ | ❌ | ❌ | ❌
 non trivial destructor and global | ❌ | ❌ | ❌ | ❌ | ❌
-odr violation function | ❌ | ❌ | ❌ | ❌ | ❌
+odr violation function | ❌ | ✔️ | ❌ | ❌ | ❌
 odr violation function lib | ❌ | ❌ | ❌ | ❌ | ❌
-odr violation struct ret | ❌ | ❌ | ✔️ | ❌ | ❌
+odr violation struct ret | ❌ | ✔️ | ✔️ | ❌ | ❌
 odr violation struct ret lib | ❌ | ❌ | ❌ | ❌ | ❌
-operator star on empty optional | ❌ | ❌ | ❌ | ❌ | ❌
+operator star on empty optional | ❌ | ✔️ | ❌ | ❌ | ❌
 out of bounds pointer | ❌ | ❌ | ❌ | ❌/✔️ | ❌
 preincrement plus postincrement | ✔️ | ✔️ | ❌ | ✔️ | ❌
 preincrement plus value | ✔️ | ✔️ | ❌ | ✔️ | ❌
@@ -291,14 +311,18 @@ reading uninitialized value partial | ❌ | ✔️ | ✔️ | ❌ | ❌
 reading uninitialized value printf | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value return | ✔️ | ✔️ | ✔️ | ✔️ | n/a
 reference out of scope | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+reinterpret cast bad size | ❌ | ❌ | ❌ | ✔️ | ❌
+reinterpret cast float to int32 | ❌ | ❌ | ❌ | ❌/✔️ | ❌
+reinterpret cast int32 to float | ❌ | ❌ | ❌ | ❌/✔️ | ❌
+reinterpret cast int32 to uint32 | ❌ | ❌ | ❌ | ❌ | ❌
+reinterpret cast uint32 to int32 | ❌ | ❌ | ❌ | ❌ | ❌
+reinterpret cast unaligned bytes to uint32 | ❌ | ❌ | ❌ | ❌ | ❌
 shifting more than width | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 signed integer overflow | ❌ | ❌ | ❌ | ❌ | ❌
 sort comp reflexive | ❌ | ❌ | ❌ | ❌ | ❌
-stack overflow | ✔️ | ✔️ | ❌ | ❌ | ✔️
+stack overflow | ✔️ | ✔️ | ❌ | ✔️ | ✔️
 std vector reserve set read | ❌ | ❌ | ✔️ | ❌ | ❌
 strptime mktime unitialized | ❌ | ✔️ | ❌ | ❌ | n/a
-type pun cast same line | ❌ | ❌ | ❌ | ❌/✔️ | ❌
-type pun cast two lines | ❌ | ❌ | ❌ | ❌/✔️ | ❌
 virtual call in constructor | ✔️ | ✔️ | ✔️ | ❌ | ❌
 virtual call in constructor helper | ❌ | ✔️ | ❌ | ❌ | ❌
 virtual call in constructor lib | ❌ | ✔️ | ❌ | ❌ | ❌
@@ -320,7 +344,7 @@ clang | bad alignment | 0 | 0
 clang | bad identifier name | 0 | 0
 clang | delete incomplete type | 0 | 0
 clang | dereferencing nullptr | 139 | 0
-clang | divide by zero | 136 | 0
+clang | divide by zero | 0 | 0
 clang | initialize std string with nullptr | 134 | 134
 clang | large double to int | 0 | 0
 clang | malloc cast pod struct | 0 | 0
@@ -334,21 +358,25 @@ clang | preincrement plus value | 0 | 0
 clang | read from old type | 0 | 0
 clang | reading uninitialized value add | 0 | 0
 clang | reading uninitialized value cout | 0 | 0
-clang | reading uninitialized value func arg | 139 | 139
-clang | reading uninitialized value if | 0 | 0
+clang | reading uninitialized value func arg | 0 | 139
+clang | reading uninitialized value if | 0 | 48
 clang | reading uninitialized value lib call cref | 0 | 0
-clang | reading uninitialized value partial | 139 | 0
+clang | reading uninitialized value partial | 0 | 0
 clang | reading uninitialized value printf | 0 | 0
 clang | reading uninitialized value return | 132 | 48
 clang | reference out of scope | 0 | 0
+clang | reinterpret cast bad size | 0 | 0
+clang | reinterpret cast float to int32 | 0 | 0
+clang | reinterpret cast int32 to float | 0 | 0
+clang | reinterpret cast int32 to uint32 | 0 | 0
+clang | reinterpret cast uint32 to int32 | 0 | 0
+clang | reinterpret cast unaligned bytes to uint32 | 0 | 0
 clang | shifting more than width | 0 | 0
 clang | signed integer overflow | 0 | 0
 clang | sort comp reflexive | 0 | 0
-clang | stack overflow | 139 | 128
+clang | stack overflow | 139 | 48
 clang | std vector reserve set read | 0 | 0
 clang | strptime mktime unitialized | 0 | 0
-clang | type pun cast same line | 0 | 0
-clang | type pun cast two lines | 0 | 0
 clang | virtual call in constructor | 134 | 134
 clang | virtual call in constructor helper | 134 | 134
 clang | virtual call in constructor link | 134 | 134
@@ -376,21 +404,25 @@ gcc | preincrement plus value | 0 | 0
 gcc | read from old type | 0 | 0
 gcc | reading uninitialized value add | 0 | 0
 gcc | reading uninitialized value cout | 0 | 0
-gcc | reading uninitialized value func arg | 139 | 139
+gcc | reading uninitialized value func arg | 0 | 139
 gcc | reading uninitialized value if | 0 | 0
 gcc | reading uninitialized value lib call cref | 0 | 0
 gcc | reading uninitialized value partial | 0 | 0
 gcc | reading uninitialized value printf | 0 | 0
-gcc | reading uninitialized value return | 0 | 139
+gcc | reading uninitialized value return | 132 | 139
 gcc | reference out of scope | 139 | 139
+gcc | reinterpret cast bad size | 0 | 0
+gcc | reinterpret cast float to int32 | 0 | 0
+gcc | reinterpret cast int32 to float | 0 | 0
+gcc | reinterpret cast int32 to uint32 | 0 | 0
+gcc | reinterpret cast uint32 to int32 | 0 | 0
+gcc | reinterpret cast unaligned bytes to uint32 | 0 | 0
 gcc | shifting more than width | 0 | 0
 gcc | signed integer overflow | 0 | 0
 gcc | sort comp reflexive | 0 | 0
 gcc | stack overflow | 139 | 124
 gcc | std vector reserve set read | 0 | 0
 gcc | strptime mktime unitialized | 0 | 0
-gcc | type pun cast same line | 0 | 0
-gcc | type pun cast two lines | 0 | 0
 gcc | virtual call in constructor helper | 134 | 134
 gcc | virtual call in constructor link | 134 | 134
 gcc | virtual call in destructor helper | 134 | 134
@@ -422,13 +454,17 @@ msvc | reading uninitialized value lib call cref | 0 | 0
 msvc | reading uninitialized value partial | -1 | -1073740791
 msvc | reading uninitialized value printf | -1 | 0
 msvc | reference out of scope | 0 | 0
+msvc | reinterpret cast bad size | 0 | 0
+msvc | reinterpret cast float to int32 | 0 | 0
+msvc | reinterpret cast int32 to float | 0 | 0
+msvc | reinterpret cast int32 to uint32 | 0 | 0
+msvc | reinterpret cast uint32 to int32 | 0 | 0
+msvc | reinterpret cast unaligned bytes to uint32 | 0 | 0
 msvc | shifting more than width | 0 | 0
 msvc | signed integer overflow | 0 | 0
 msvc | sort comp reflexive | 0 | 0
 msvc | stack overflow | -1073741571 | -1073741571
 msvc | std vector reserve set read | -1 | 0
-msvc | type pun cast same line | 0 | 0
-msvc | type pun cast two lines | 0 | 0
 msvc | virtual call in constructor helper | -1 | -1073740791
 msvc | virtual call in constructor link | -1 | -1073740791
 msvc | virtual call in destructor helper | -1 | -1073740791
@@ -446,7 +482,7 @@ bad alignment | ❌ | ❌ | ❌
 bad identifier name | ❌ | ❌ | ❌
 delete incomplete type | ❌ | ❌ | ❌
 dereferencing nullptr | ✔️/❌ | ✔️ | ✔️
-divide by zero | ✔️/❌ | ✔️ | ✔️
+divide by zero | ❌ | ✔️ | ✔️
 initialize std string with nullptr | ✔️ | ✔️ | ✔️
 large double to int | ❌ | ❌ | ❌
 malloc cast pod struct | ❌ | ❌ | ❌
@@ -460,21 +496,25 @@ preincrement plus value | ❌ | ❌ | ❌
 read from old type | ❌ | ❌ | ❌
 reading uninitialized value add | ❌ | ❌ | ✔️/❌
 reading uninitialized value cout | ❌ | ❌ | ✔️/❌
-reading uninitialized value func arg | ✔️ | ✔️ | ✔️
-reading uninitialized value if | ❌ | ❌ | ✔️/❌
+reading uninitialized value func arg | ❌/✔️ | ❌/✔️ | ✔️
+reading uninitialized value if | ❌/✔️ | ❌ | ✔️/❌
 reading uninitialized value lib call cref | ❌ | ❌ | ❌
-reading uninitialized value partial | ✔️/❌ | ❌ | ✔️
+reading uninitialized value partial | ❌ | ❌ | ✔️
 reading uninitialized value printf | ❌ | ❌ | ✔️/❌
-reading uninitialized value return | ✔️ | ❌/✔️ | n/a
+reading uninitialized value return | ✔️ | ✔️ | n/a
 reference out of scope | ❌ | ✔️ | ❌
+reinterpret cast bad size | ❌ | ❌ | ❌
+reinterpret cast float to int32 | ❌ | ❌ | ❌
+reinterpret cast int32 to float | ❌ | ❌ | ❌
+reinterpret cast int32 to uint32 | ❌ | ❌ | ❌
+reinterpret cast uint32 to int32 | ❌ | ❌ | ❌
+reinterpret cast unaligned bytes to uint32 | ❌ | ❌ | ❌
 shifting more than width | ❌ | ❌ | ❌
 signed integer overflow | ❌ | ❌ | ❌
 sort comp reflexive | ❌ | ❌ | ❌
 stack overflow | ✔️ | ✔️ | ✔️
 std vector reserve set read | ❌ | ❌ | ✔️/❌
 strptime mktime unitialized | ❌ | ❌ | n/a
-type pun cast same line | ❌ | ❌ | ❌
-type pun cast two lines | ❌ | ❌ | ❌
 virtual call in constructor | ✔️ | n/a | n/a
 virtual call in constructor helper | ✔️ | ✔️ | ✔️
 virtual call in constructor link | ✔️ | ✔️ | ✔️
@@ -494,7 +534,7 @@ clang | address | bad alignment | 0 | 0
 clang | address | bad identifier name | 0 | 0
 clang | address | delete incomplete type | 0 | 0
 clang | address | dereferencing nullptr | 1 | 0
-clang | address | divide by zero | 1 | 0
+clang | address | divide by zero | 0 | 0
 clang | address | initialize std string with nullptr | 134 | 134
 clang | address | large double to int | 0 | 0
 clang | address | malloc cast pod struct | 0 | 0
@@ -509,20 +549,24 @@ clang | address | read from old type | 0 | 0
 clang | address | reading uninitialized value add | 0 | 0
 clang | address | reading uninitialized value cout | 0 | 0
 clang | address | reading uninitialized value func arg | 1 | 1
-clang | address | reading uninitialized value if | 0 | 0
+clang | address | reading uninitialized value if | 0 | 48
 clang | address | reading uninitialized value lib call cref | 0 | 0
-clang | address | reading uninitialized value partial | 1 | 0
+clang | address | reading uninitialized value partial | 0 | 0
 clang | address | reading uninitialized value printf | 0 | 0
-clang | address | reading uninitialized value return | 132 | 16
-clang | address | reference out of scope | 0 | 0
+clang | address | reading uninitialized value return | 132 | 48
+clang | address | reference out of scope | 1 | 0
+clang | address | reinterpret cast bad size | 1 | 0
+clang | address | reinterpret cast float to int32 | 0 | 0
+clang | address | reinterpret cast int32 to float | 0 | 0
+clang | address | reinterpret cast int32 to uint32 | 0 | 0
+clang | address | reinterpret cast uint32 to int32 | 0 | 0
+clang | address | reinterpret cast unaligned bytes to uint32 | 0 | 0
 clang | address | shifting more than width | 0 | 0
 clang | address | signed integer overflow | 0 | 0
 clang | address | sort comp reflexive | 0 | 0
-clang | address | stack overflow | 1 | 96
+clang | address | stack overflow | 1 | 48
 clang | address | std vector reserve set read | 0 | 0
 clang | address | strptime mktime unitialized | 0 | 0
-clang | address | type pun cast same line | 0 | 0
-clang | address | type pun cast two lines | 0 | 0
 clang | address | virtual call in constructor | 134 | 134
 clang | address | virtual call in constructor helper | 134 | 134
 clang | address | virtual call in constructor link | 134 | 134
@@ -551,114 +595,34 @@ clang | address,undefined | read from old type | 1 | 1
 clang | address,undefined | reading uninitialized value add | 0 | 0
 clang | address,undefined | reading uninitialized value cout | 0 | 0
 clang | address,undefined | reading uninitialized value func arg | 1 | 1
-clang | address,undefined | reading uninitialized value if | 1 | 0
+clang | address,undefined | reading uninitialized value if | 1 | 56
 clang | address,undefined | reading uninitialized value lib call cref | 0 | 0
-clang | address,undefined | reading uninitialized value partial | 1 | 0
+clang | address,undefined | reading uninitialized value partial | 0 | 0
 clang | address,undefined | reading uninitialized value printf | 0 | 0
 clang | address,undefined | reading uninitialized value return | 1 | 1
-clang | address,undefined | reference out of scope | 0 | 0
+clang | address,undefined | reference out of scope | 1 | 0
+clang | address,undefined | reinterpret cast bad size | 1 | 1
+clang | address,undefined | reinterpret cast float to int32 | 0 | 0
+clang | address,undefined | reinterpret cast int32 to float | 0 | 0
+clang | address,undefined | reinterpret cast int32 to uint32 | 0 | 0
+clang | address,undefined | reinterpret cast uint32 to int32 | 0 | 0
+clang | address,undefined | reinterpret cast unaligned bytes to uint32 | 0 | 0
 clang | address,undefined | shifting more than width | 1 | 1
 clang | address,undefined | signed integer overflow | 1 | 1
 clang | address,undefined | sort comp reflexive | 0 | 0
 clang | address,undefined | stack overflow | 1 | 1
 clang | address,undefined | std vector reserve set read | 0 | 0
 clang | address,undefined | strptime mktime unitialized | 0 | 0
-clang | address,undefined | type pun cast same line | 0 | 0
-clang | address,undefined | type pun cast two lines | 0 | 0
 clang | address,undefined | virtual call in constructor | 134 | 134
 clang | address,undefined | virtual call in constructor helper | 134 | 134
 clang | address,undefined | virtual call in constructor link | 134 | 134
 clang | address,undefined | virtual call in destructor | 134 | 134
 clang | address,undefined | virtual call in destructor helper | 134 | 134
 clang | address,undefined | virtual call in destructor link | 134 | 134
-clang | memory | access after realloc | 0 | 0
-clang | memory | array out of bounds | 0 | 0
-clang | memory | automatic variable over stack | 1 | 0
-clang | memory | bad alignment | 0 | 0
-clang | memory | bad identifier name | 0 | 0
-clang | memory | delete incomplete type | 0 | 0
-clang | memory | dereferencing nullptr | 1 | 0
-clang | memory | divide by zero | 0 | 0
-clang | memory | initialize std string with nullptr | 1 | 1
-clang | memory | large double to int | 0 | 0
-clang | memory | malloc cast pod struct | 0 | 0
-clang | memory | mutate const value | 0 | 0
-clang | memory | odr violation function | 0 | 0
-clang | memory | odr violation struct ret | 0 | 0
-clang | memory | operator star on empty optional | 0 | 0
-clang | memory | out of bounds pointer | 0 | 0
-clang | memory | preincrement plus postincrement | 0 | 0
-clang | memory | preincrement plus value | 0 | 0
-clang | memory | read from old type | 0 | 0
-clang | memory | reading uninitialized value add | 0 | 0
-clang | memory | reading uninitialized value cout | 0 | 0
-clang | memory | reading uninitialized value func arg | 0 | 1
-clang | memory | reading uninitialized value if | 1 | 0
-clang | memory | reading uninitialized value lib call cref | 0 | 0
-clang | memory | reading uninitialized value partial | 0 | 0
-clang | memory | reading uninitialized value printf | 0 | 0
-clang | memory | reading uninitialized value return | 132 | 160
-clang | memory | reference out of scope | 0 | 0
-clang | memory | shifting more than width | 0 | 0
-clang | memory | signed integer overflow | 0 | 0
-clang | memory | sort comp reflexive | 0 | 0
-clang | memory | stack overflow | 1 | 16
-clang | memory | std vector reserve set read | 0 | 0
-clang | memory | strptime mktime unitialized | 0 | 0
-clang | memory | type pun cast same line | 0 | 0
-clang | memory | type pun cast two lines | 0 | 0
-clang | memory | virtual call in constructor | 134 | 134
-clang | memory | virtual call in constructor helper | 134 | 134
-clang | memory | virtual call in constructor link | 134 | 134
-clang | memory | virtual call in destructor | 134 | 134
-clang | memory | virtual call in destructor helper | 134 | 134
-clang | memory | virtual call in destructor link | 134 | 134
-clang | memory,undefined | access after realloc | 0 | 0
-clang | memory,undefined | array out of bounds | 0 | 1
-clang | memory,undefined | automatic variable over stack | 1 | 1
-clang | memory,undefined | bad alignment | 1 | 1
-clang | memory,undefined | bad identifier name | 0 | 0
-clang | memory,undefined | delete incomplete type | 0 | 0
-clang | memory,undefined | dereferencing nullptr | 1 | 1
-clang | memory,undefined | divide by zero | 1 | 1
-clang | memory,undefined | initialize std string with nullptr | 1 | 1
-clang | memory,undefined | large double to int | 1 | 1
-clang | memory,undefined | malloc cast pod struct | 0 | 0
-clang | memory,undefined | mutate const value | 0 | 0
-clang | memory,undefined | odr violation function | 0 | 0
-clang | memory,undefined | odr violation struct ret | 0 | 0
-clang | memory,undefined | operator star on empty optional | 0 | 0
-clang | memory,undefined | out of bounds pointer | 0 | 0
-clang | memory,undefined | preincrement plus postincrement | 0 | 0
-clang | memory,undefined | preincrement plus value | 0 | 0
-clang | memory,undefined | read from old type | 1 | 1
-clang | memory,undefined | reading uninitialized value add | 0 | 0
-clang | memory,undefined | reading uninitialized value cout | 0 | 0
-clang | memory,undefined | reading uninitialized value func arg | 0 | 1
-clang | memory,undefined | reading uninitialized value if | 1 | 0
-clang | memory,undefined | reading uninitialized value lib call cref | 0 | 0
-clang | memory,undefined | reading uninitialized value partial | 0 | 0
-clang | memory,undefined | reading uninitialized value printf | 0 | 0
-clang | memory,undefined | reading uninitialized value return | 1 | 1
-clang | memory,undefined | reference out of scope | 0 | 0
-clang | memory,undefined | shifting more than width | 1 | 1
-clang | memory,undefined | signed integer overflow | 1 | 1
-clang | memory,undefined | sort comp reflexive | 0 | 0
-clang | memory,undefined | stack overflow | 1 | 1
-clang | memory,undefined | std vector reserve set read | 0 | 0
-clang | memory,undefined | strptime mktime unitialized | 0 | 0
-clang | memory,undefined | type pun cast same line | 0 | 0
-clang | memory,undefined | type pun cast two lines | 0 | 0
-clang | memory,undefined | virtual call in constructor | 134 | 134
-clang | memory,undefined | virtual call in constructor helper | 134 | 134
-clang | memory,undefined | virtual call in constructor link | 134 | 134
-clang | memory,undefined | virtual call in destructor | 134 | 134
-clang | memory,undefined | virtual call in destructor helper | 134 | 134
-clang | memory,undefined | virtual call in destructor link | 134 | 134
 clang | undefined | access after realloc | 0 | 0
 clang | undefined | array out of bounds | 0 | 1
 clang | undefined | automatic variable over stack | 1 | 1
-clang | undefined | bad alignment | 1 | 1
+clang | undefined | bad alignment | 0 | 1
 clang | undefined | bad identifier name | 0 | 0
 clang | undefined | delete incomplete type | 0 | 0
 clang | undefined | dereferencing nullptr | 1 | 1
@@ -676,21 +640,25 @@ clang | undefined | preincrement plus value | 0 | 0
 clang | undefined | read from old type | 1 | 1
 clang | undefined | reading uninitialized value add | 0 | 0
 clang | undefined | reading uninitialized value cout | 0 | 0
-clang | undefined | reading uninitialized value func arg | 1 | 1
-clang | undefined | reading uninitialized value if | 1 | 0
+clang | undefined | reading uninitialized value func arg | 0 | 1
+clang | undefined | reading uninitialized value if | 1 | 1
 clang | undefined | reading uninitialized value lib call cref | 0 | 0
-clang | undefined | reading uninitialized value partial | 1 | 0
+clang | undefined | reading uninitialized value partial | 0 | 0
 clang | undefined | reading uninitialized value printf | 0 | 0
 clang | undefined | reading uninitialized value return | 1 | 1
 clang | undefined | reference out of scope | 0 | 0
+clang | undefined | reinterpret cast bad size | 0 | 1
+clang | undefined | reinterpret cast float to int32 | 0 | 0
+clang | undefined | reinterpret cast int32 to float | 0 | 0
+clang | undefined | reinterpret cast int32 to uint32 | 0 | 0
+clang | undefined | reinterpret cast uint32 to int32 | 0 | 0
+clang | undefined | reinterpret cast unaligned bytes to uint32 | 0 | 0
 clang | undefined | shifting more than width | 1 | 1
 clang | undefined | signed integer overflow | 1 | 1
 clang | undefined | sort comp reflexive | 0 | 0
 clang | undefined | stack overflow | 1 | 1
 clang | undefined | std vector reserve set read | 0 | 0
 clang | undefined | strptime mktime unitialized | 0 | 0
-clang | undefined | type pun cast same line | 0 | 0
-clang | undefined | type pun cast two lines | 0 | 0
 clang | undefined | virtual call in constructor | 134 | 134
 clang | undefined | virtual call in constructor helper | 134 | 134
 clang | undefined | virtual call in constructor link | 134 | 134
@@ -721,18 +689,22 @@ gcc | address | reading uninitialized value cout | 0 | 0
 gcc | address | reading uninitialized value func arg | 1 | 1
 gcc | address | reading uninitialized value if | 0 | 0
 gcc | address | reading uninitialized value lib call cref | 0 | 0
-gcc | address | reading uninitialized value partial | 1 | 0
+gcc | address | reading uninitialized value partial | 0 | 0
 gcc | address | reading uninitialized value printf | 0 | 0
-gcc | address | reading uninitialized value return | 0 | 1
+gcc | address | reading uninitialized value return | 132 | 132
 gcc | address | reference out of scope | 1 | 1
+gcc | address | reinterpret cast bad size | 1 | 1
+gcc | address | reinterpret cast float to int32 | 0 | 0
+gcc | address | reinterpret cast int32 to float | 0 | 0
+gcc | address | reinterpret cast int32 to uint32 | 0 | 0
+gcc | address | reinterpret cast uint32 to int32 | 0 | 0
+gcc | address | reinterpret cast unaligned bytes to uint32 | 0 | 0
 gcc | address | shifting more than width | 0 | 0
 gcc | address | signed integer overflow | 0 | 0
 gcc | address | sort comp reflexive | 0 | 0
 gcc | address | stack overflow | 1 | 124
 gcc | address | std vector reserve set read | 0 | 0
 gcc | address | strptime mktime unitialized | 0 | 0
-gcc | address | type pun cast same line | 0 | 0
-gcc | address | type pun cast two lines | 0 | 0
 gcc | address | virtual call in constructor helper | 134 | 134
 gcc | address | virtual call in constructor link | 134 | 134
 gcc | address | virtual call in destructor helper | 134 | 134
@@ -765,14 +737,18 @@ gcc | address,leak,undefined | reading uninitialized value partial | 0 | 0
 gcc | address,leak,undefined | reading uninitialized value printf | 0 | 0
 gcc | address,leak,undefined | reading uninitialized value return | 1 | 1
 gcc | address,leak,undefined | reference out of scope | 1 | 1
+gcc | address,leak,undefined | reinterpret cast bad size | 1 | 1
+gcc | address,leak,undefined | reinterpret cast float to int32 | 0 | 0
+gcc | address,leak,undefined | reinterpret cast int32 to float | 0 | 0
+gcc | address,leak,undefined | reinterpret cast int32 to uint32 | 0 | 0
+gcc | address,leak,undefined | reinterpret cast uint32 to int32 | 0 | 0
+gcc | address,leak,undefined | reinterpret cast unaligned bytes to uint32 | 0 | 0
 gcc | address,leak,undefined | shifting more than width | 1 | 1
-gcc | address,leak,undefined | signed integer overflow | 1 | 0
+gcc | address,leak,undefined | signed integer overflow | 1 | 1
 gcc | address,leak,undefined | sort comp reflexive | 0 | 0
 gcc | address,leak,undefined | stack overflow | 1 | 124
 gcc | address,leak,undefined | std vector reserve set read | 0 | 0
 gcc | address,leak,undefined | strptime mktime unitialized | 0 | 0
-gcc | address,leak,undefined | type pun cast same line | 0 | 0
-gcc | address,leak,undefined | type pun cast two lines | 0 | 0
 gcc | address,leak,undefined | virtual call in constructor helper | 134 | 134
 gcc | address,leak,undefined | virtual call in constructor link | 134 | 134
 gcc | address,leak,undefined | virtual call in destructor helper | 134 | 134
@@ -801,18 +777,22 @@ gcc | leak | reading uninitialized value cout | 0 | 0
 gcc | leak | reading uninitialized value func arg | 0 | 23
 gcc | leak | reading uninitialized value if | 0 | 0
 gcc | leak | reading uninitialized value lib call cref | 0 | 0
-gcc | leak | reading uninitialized value partial | 23 | 0
+gcc | leak | reading uninitialized value partial | 0 | 0
 gcc | leak | reading uninitialized value printf | 0 | 0
-gcc | leak | reading uninitialized value return | 0 | 23
+gcc | leak | reading uninitialized value return | 132 | 23
 gcc | leak | reference out of scope | 23 | 23
+gcc | leak | reinterpret cast bad size | 0 | 0
+gcc | leak | reinterpret cast float to int32 | 0 | 0
+gcc | leak | reinterpret cast int32 to float | 0 | 0
+gcc | leak | reinterpret cast int32 to uint32 | 0 | 0
+gcc | leak | reinterpret cast uint32 to int32 | 0 | 0
+gcc | leak | reinterpret cast unaligned bytes to uint32 | 0 | 0
 gcc | leak | shifting more than width | 0 | 0
 gcc | leak | signed integer overflow | 0 | 0
 gcc | leak | sort comp reflexive | 0 | 0
 gcc | leak | stack overflow | 23 | 124
 gcc | leak | std vector reserve set read | 0 | 0
 gcc | leak | strptime mktime unitialized | 0 | 0
-gcc | leak | type pun cast same line | 0 | 0
-gcc | leak | type pun cast two lines | 0 | 0
 gcc | leak | virtual call in constructor helper | 134 | 134
 gcc | leak | virtual call in constructor link | 134 | 134
 gcc | leak | virtual call in destructor helper | 134 | 134
@@ -838,21 +818,25 @@ gcc | undefined | preincrement plus value | 0 | 0
 gcc | undefined | read from old type | 1 | 1
 gcc | undefined | reading uninitialized value add | 0 | 0
 gcc | undefined | reading uninitialized value cout | 0 | 0
-gcc | undefined | reading uninitialized value func arg | 139 | 1
+gcc | undefined | reading uninitialized value func arg | 0 | 1
 gcc | undefined | reading uninitialized value if | 0 | 0
 gcc | undefined | reading uninitialized value lib call cref | 0 | 0
-gcc | undefined | reading uninitialized value partial | 139 | 0
+gcc | undefined | reading uninitialized value partial | 0 | 0
 gcc | undefined | reading uninitialized value printf | 0 | 0
 gcc | undefined | reading uninitialized value return | 1 | 1
 gcc | undefined | reference out of scope | 1 | 1
+gcc | undefined | reinterpret cast bad size | 1 | 1
+gcc | undefined | reinterpret cast float to int32 | 0 | 0
+gcc | undefined | reinterpret cast int32 to float | 0 | 0
+gcc | undefined | reinterpret cast int32 to uint32 | 0 | 0
+gcc | undefined | reinterpret cast uint32 to int32 | 0 | 0
+gcc | undefined | reinterpret cast unaligned bytes to uint32 | 0 | 0
 gcc | undefined | shifting more than width | 1 | 1
-gcc | undefined | signed integer overflow | 1 | 0
+gcc | undefined | signed integer overflow | 1 | 1
 gcc | undefined | sort comp reflexive | 0 | 0
 gcc | undefined | stack overflow | 139 | 124
 gcc | undefined | std vector reserve set read | 0 | 0
 gcc | undefined | strptime mktime unitialized | 0 | 0
-gcc | undefined | type pun cast same line | 0 | 0
-gcc | undefined | type pun cast two lines | 0 | 0
 gcc | undefined | virtual call in constructor helper | 134 | 134
 gcc | undefined | virtual call in constructor link | 134 | 134
 gcc | undefined | virtual call in destructor helper | 134 | 134
@@ -878,21 +862,25 @@ gcc | valgrind | preincrement plus value | 0 | 0
 gcc | valgrind | read from old type | 0 | 0
 gcc | valgrind | reading uninitialized value add | 1 | 0
 gcc | valgrind | reading uninitialized value cout | 1 | 0
-gcc | valgrind | reading uninitialized value func arg | 139 | 139
+gcc | valgrind | reading uninitialized value func arg | 1 | 139
 gcc | valgrind | reading uninitialized value if | 1 | 0
 gcc | valgrind | reading uninitialized value lib call cref | 1 | 1
-gcc | valgrind | reading uninitialized value partial | 139 | 0
+gcc | valgrind | reading uninitialized value partial | 1 | 0
 gcc | valgrind | reading uninitialized value printf | 1 | 0
-gcc | valgrind | reading uninitialized value return | 0 | 139
+gcc | valgrind | reading uninitialized value return | 132 | 139
 gcc | valgrind | reference out of scope | 139 | 139
+gcc | valgrind | reinterpret cast bad size | 0 | 1
+gcc | valgrind | reinterpret cast float to int32 | 0 | 0
+gcc | valgrind | reinterpret cast int32 to float | 0 | 0
+gcc | valgrind | reinterpret cast int32 to uint32 | 0 | 0
+gcc | valgrind | reinterpret cast uint32 to int32 | 0 | 0
+gcc | valgrind | reinterpret cast unaligned bytes to uint32 | 0 | 0
 gcc | valgrind | shifting more than width | 0 | 0
 gcc | valgrind | signed integer overflow | 0 | 0
 gcc | valgrind | sort comp reflexive | 0 | 0
 gcc | valgrind | stack overflow | 139 | 124
 gcc | valgrind | std vector reserve set read | 0 | 0
 gcc | valgrind | strptime mktime unitialized | 1 | 1
-gcc | valgrind | type pun cast same line | 0 | 0
-gcc | valgrind | type pun cast two lines | 0 | 0
 gcc | valgrind | virtual call in constructor helper | 134 | 134
 gcc | valgrind | virtual call in constructor link | 134 | 134
 gcc | valgrind | virtual call in destructor helper | 134 | 134
@@ -901,50 +889,54 @@ gcc | valgrind | virtual call in destructor link | 134 | 134
 ### 3.2.1.Extra Dynamic Analysis Summary Clang
 Debug (unoptimized) / RelWithDebInfo (optimized)
 
-Undefined Behavior Type | address | address,undefined | memory | memory,undefined | undefined
---- |--- |--- |--- |--- | ---
-access after realloc | ✔️ | ✔️ | ❌ | ❌ | ❌
-array out of bounds | ✔️/❌ | ✔️ | ❌ | ❌/✔️ | ❌/✔️
-automatic variable over stack | ✔️/❌ | ✔️ | ✔️/❌ | ✔️ | ✔️
-bad alignment | ❌ | ✔️ | ❌ | ✔️ | ✔️
-bad identifier name | ❌ | ❌ | ❌ | ❌ | ❌
-delete incomplete type | ❌ | ❌ | ❌ | ❌ | ❌
-dereferencing nullptr | ✔️/❌ | ✔️ | ✔️/❌ | ✔️ | ✔️
-divide by zero | ✔️/❌ | ✔️ | ❌ | ✔️ | ✔️
-initialize std string with nullptr | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-large double to int | ❌ | ✔️ | ❌ | ✔️ | ✔️
-malloc cast pod struct | ❌ | ❌ | ❌ | ❌ | ❌
-mutate const value | ❌ | ❌ | ❌ | ❌ | ❌
-odr violation function | ❌ | ❌ | ❌ | ❌ | ❌
-odr violation struct ret | ❌ | ❌ | ❌ | ❌ | ❌
-operator star on empty optional | ❌ | ❌ | ❌ | ❌ | ❌
-out of bounds pointer | ❌ | ❌ | ❌ | ❌ | ❌
-preincrement plus postincrement | ❌ | ❌ | ❌ | ❌ | ❌
-preincrement plus value | ❌ | ❌ | ❌ | ❌ | ❌
-read from old type | ❌ | ✔️ | ❌ | ✔️ | ✔️
-reading uninitialized value add | ❌ | ❌ | ❌ | ❌ | ❌
-reading uninitialized value cout | ❌ | ❌ | ❌ | ❌ | ❌
-reading uninitialized value func arg | ✔️ | ✔️ | ❌/✔️ | ❌/✔️ | ✔️
-reading uninitialized value if | ❌ | ✔️/❌ | ✔️/❌ | ✔️/❌ | ✔️/❌
-reading uninitialized value lib call cref | ❌ | ❌ | ❌ | ❌ | ❌
-reading uninitialized value partial | ✔️/❌ | ✔️/❌ | ❌ | ❌ | ✔️/❌
-reading uninitialized value printf | ❌ | ❌ | ❌ | ❌ | ❌
-reading uninitialized value return | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-reference out of scope | ❌ | ❌ | ❌ | ❌ | ❌
-shifting more than width | ❌ | ✔️ | ❌ | ✔️ | ✔️
-signed integer overflow | ❌ | ✔️ | ❌ | ✔️ | ✔️
-sort comp reflexive | ❌ | ❌ | ❌ | ❌ | ❌
-stack overflow | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌
-strptime mktime unitialized | ❌ | ❌ | ❌ | ❌ | ❌
-type pun cast same line | ❌ | ❌ | ❌ | ❌ | ❌
-type pun cast two lines | ❌ | ❌ | ❌ | ❌ | ❌
-virtual call in constructor | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-virtual call in constructor helper | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-virtual call in constructor link | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-virtual call in destructor | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-virtual call in destructor helper | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
-virtual call in destructor link | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+Undefined Behavior Type | address | address,undefined | undefined
+--- |--- |--- | ---
+access after realloc | ✔️ | ✔️ | ❌
+array out of bounds | ✔️/❌ | ✔️ | ❌/✔️
+automatic variable over stack | ✔️/❌ | ✔️ | ✔️
+bad alignment | ❌ | ✔️ | ❌/✔️
+bad identifier name | ❌ | ❌ | ❌
+delete incomplete type | ❌ | ❌ | ❌
+dereferencing nullptr | ✔️/❌ | ✔️ | ✔️
+divide by zero | ❌ | ✔️ | ✔️
+initialize std string with nullptr | ✔️ | ✔️ | ✔️
+large double to int | ❌ | ✔️ | ✔️
+malloc cast pod struct | ❌ | ❌ | ❌
+mutate const value | ❌ | ❌ | ❌
+odr violation function | ❌ | ❌ | ❌
+odr violation struct ret | ❌ | ❌ | ❌
+operator star on empty optional | ❌ | ❌ | ❌
+out of bounds pointer | ❌ | ❌ | ❌
+preincrement plus postincrement | ❌ | ❌ | ❌
+preincrement plus value | ❌ | ❌ | ❌
+read from old type | ❌ | ✔️ | ✔️
+reading uninitialized value add | ❌ | ❌ | ❌
+reading uninitialized value cout | ❌ | ❌ | ❌
+reading uninitialized value func arg | ✔️ | ✔️ | ❌/✔️
+reading uninitialized value if | ❌/✔️ | ✔️ | ✔️
+reading uninitialized value lib call cref | ❌ | ❌ | ❌
+reading uninitialized value partial | ❌ | ❌ | ❌
+reading uninitialized value printf | ❌ | ❌ | ❌
+reading uninitialized value return | ✔️ | ✔️ | ✔️
+reference out of scope | ✔️/❌ | ✔️/❌ | ❌
+reinterpret cast bad size | ✔️/❌ | ✔️ | ❌/✔️
+reinterpret cast float to int32 | ❌ | ❌ | ❌
+reinterpret cast int32 to float | ❌ | ❌ | ❌
+reinterpret cast int32 to uint32 | ❌ | ❌ | ❌
+reinterpret cast uint32 to int32 | ❌ | ❌ | ❌
+reinterpret cast unaligned bytes to uint32 | ❌ | ❌ | ❌
+shifting more than width | ❌ | ✔️ | ✔️
+signed integer overflow | ❌ | ✔️ | ✔️
+sort comp reflexive | ❌ | ❌ | ❌
+stack overflow | ✔️ | ✔️ | ✔️
+std vector reserve set read | ❌ | ❌ | ❌
+strptime mktime unitialized | ❌ | ❌ | ❌
+virtual call in constructor | ✔️ | ✔️ | ✔️
+virtual call in constructor helper | ✔️ | ✔️ | ✔️
+virtual call in constructor link | ✔️ | ✔️ | ✔️
+virtual call in destructor | ✔️ | ✔️ | ✔️
+virtual call in destructor helper | ✔️ | ✔️ | ✔️
+virtual call in destructor link | ✔️ | ✔️ | ✔️
 
 ### 3.2.2.Extra Dynamic Analysis Summary Gcc
 Debug (unoptimized) / RelWithDebInfo (optimized)
@@ -972,21 +964,25 @@ preincrement plus value | ❌ | ❌ | ❌ | ❌ | ❌
 read from old type | ❌ | ✔️ | ❌ | ✔️ | ❌
 reading uninitialized value add | ❌ | ❌ | ❌ | ❌ | ✔️/❌
 reading uninitialized value cout | ❌ | ❌ | ❌ | ❌ | ✔️/❌
-reading uninitialized value func arg | ✔️ | ✔️ | ❌/✔️ | ✔️ | ✔️
+reading uninitialized value func arg | ✔️ | ✔️ | ❌/✔️ | ❌/✔️ | ✔️
 reading uninitialized value if | ❌ | ❌ | ❌ | ❌ | ✔️/❌
 reading uninitialized value lib call cref | ❌ | ❌ | ❌ | ❌ | ✔️
-reading uninitialized value partial | ✔️/❌ | ❌ | ✔️/❌ | ✔️/❌ | ✔️/❌
+reading uninitialized value partial | ❌ | ❌ | ❌ | ❌ | ✔️/❌
 reading uninitialized value printf | ❌ | ❌ | ❌ | ❌ | ✔️/❌
-reading uninitialized value return | ❌/✔️ | ✔️ | ❌/✔️ | ✔️ | ❌/✔️
+reading uninitialized value return | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 reference out of scope | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
+reinterpret cast bad size | ✔️ | ✔️ | ❌ | ✔️ | ❌/✔️
+reinterpret cast float to int32 | ❌ | ❌ | ❌ | ❌ | ❌
+reinterpret cast int32 to float | ❌ | ❌ | ❌ | ❌ | ❌
+reinterpret cast int32 to uint32 | ❌ | ❌ | ❌ | ❌ | ❌
+reinterpret cast uint32 to int32 | ❌ | ❌ | ❌ | ❌ | ❌
+reinterpret cast unaligned bytes to uint32 | ❌ | ❌ | ❌ | ❌ | ❌
 shifting more than width | ❌ | ✔️ | ❌ | ✔️ | ❌
-signed integer overflow | ❌ | ✔️/❌ | ❌ | ✔️/❌ | ❌
+signed integer overflow | ❌ | ✔️ | ❌ | ✔️ | ❌
 sort comp reflexive | ❌ | ❌ | ❌ | ❌ | ❌
 stack overflow | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 std vector reserve set read | ❌ | ❌ | ❌ | ❌ | ❌
 strptime mktime unitialized | ❌ | ❌ | ❌ | ❌ | ✔️
-type pun cast same line | ❌ | ❌ | ❌ | ❌ | ❌
-type pun cast two lines | ❌ | ❌ | ❌ | ❌ | ❌
 virtual call in constructor | n/a | n/a | n/a | n/a | n/a
 virtual call in constructor helper | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 virtual call in constructor link | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
@@ -998,7 +994,7 @@ virtual call in destructor link | ✔️ | ✔️ | ✔️ | ✔️ | ✔️
 ### 4.Overall Summary
 Undefined Behavior Type | Compiler Warning | Standalone Static Analysis | Runtime Crash | Extra Dynamic Analsyis
 --- | --- | --- | --- | ---
-access after realloc | ❌ | ✔️ | ❌ | ✔️
+access after realloc | ✔️ | ✔️ | ❌ | ✔️
 array out of bounds | ✔️ | ✔️ | ✔️ | ✔️
 automatic variable over stack | ❌ | ❌ | ✔️ | ✔️
 bad alignment | ❌ | ❌ | ❌ | ✔️
@@ -1011,11 +1007,11 @@ large double to int | ❌ | ❌ | ❌ | ✔️
 malloc cast pod struct | ❌ | ❌ | ❌ | ❌
 mutate const value | ❌ | ✔️ | ❌ | ❌
 non trivial destructor and global | ❌ | ❌ | n/a | n/a
-odr violation function | ❌ | ❌ | ❌ | ❌
+odr violation function | ❌ | ✔️ | ❌ | ❌
 odr violation function lib | ❌ | ❌ | n/a | n/a
 odr violation struct ret | ❌ | ✔️ | ❌ | ❌
 odr violation struct ret lib | ❌ | ❌ | n/a | n/a
-operator star on empty optional | ❌ | ❌ | ✔️ | ❌
+operator star on empty optional | ❌ | ✔️ | ✔️ | ❌
 out of bounds pointer | ✔️ | ❌ | ❌ | ❌
 preincrement plus postincrement | ✔️ | ✔️ | ❌ | ❌
 preincrement plus value | ✔️ | ✔️ | ❌ | ❌
@@ -1029,14 +1025,18 @@ reading uninitialized value partial | ❌ | ✔️ | ✔️ | ✔️
 reading uninitialized value printf | ✔️ | ✔️ | ✔️ | ✔️
 reading uninitialized value return | ✔️ | ✔️ | ✔️ | ✔️
 reference out of scope | ✔️ | ✔️ | ✔️ | ✔️
+reinterpret cast bad size | ✔️ | ❌ | ❌ | ✔️
+reinterpret cast float to int32 | ✔️ | ❌ | ❌ | ❌
+reinterpret cast int32 to float | ✔️ | ❌ | ❌ | ❌
+reinterpret cast int32 to uint32 | ❌ | ❌ | ❌ | ❌
+reinterpret cast uint32 to int32 | ❌ | ❌ | ❌ | ❌
+reinterpret cast unaligned bytes to uint32 | ❌ | ❌ | ❌ | ❌
 shifting more than width | ✔️ | ✔️ | ❌ | ✔️
 signed integer overflow | ❌ | ❌ | ❌ | ✔️
 sort comp reflexive | ❌ | ❌ | ❌ | ❌
 stack overflow | ✔️ | ✔️ | ✔️ | ✔️
 std vector reserve set read | ❌ | ✔️ | ✔️ | ❌
 strptime mktime unitialized | ❌ | ✔️ | ❌ | ✔️
-type pun cast same line | ✔️ | ❌ | ❌ | ❌
-type pun cast two lines | ✔️ | ❌ | ❌ | ❌
 virtual call in constructor | ✔️ | ✔️ | ✔️ | ✔️
 virtual call in constructor helper | ❌ | ✔️ | ✔️ | ✔️
 virtual call in constructor lib | ❌ | ✔️ | n/a | n/a
@@ -1047,16 +1047,16 @@ virtual call in destructor lib | ❌ | ✔️ | n/a | n/a
 virtual call in destructor link | ❌ | ❌ | ✔️ | ✔️
 
 ## Versions
-- Linux a7b8494748fd 5.15.0-40-generic #43-Ubuntu SMP Wed Jun 15 12:54:21 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
-- Ubuntu clang version 14.0.0-1ubuntu1
-- clang-tidy: 14.0
-- Cppcheck 2.7
-- gcc (Ubuntu 11.2.0-19ubuntu1) 11.2.0
-- GNU bash, version 5.1.16(1)-release (x86_64-pc-linux-gnu)
-- GNU parallel 20210822
-- MSVC: 2019 Version 14.22.27905
-- Python 3.10.4
-- valgrind-3.18.1
+- Linux 1b21937069a7 6.5.0-41-generic #41~22.04.2-Ubuntu SMP PREEMPT_DYNAMIC Mon Jun  3 11:32:55 UTC 2 x86_64 x86_64 x86_64 GNU/Linux
+- Ubuntu clang version 18.1.3 (1ubuntu1)
+- clang-tidy: 18.1.3
+- Cppcheck 2.13.0
+- gcc (Ubuntu 13.2.0-23ubuntu4) 13.2.0
+- GNU bash, version 5.2.21(1)-release (x86_64-pc-linux-gnu)
+- GNU parallel 20231122
+- MSVC: 2022 MSVC 19.40.33811.0
+- Python 3.12.3
+- valgrind-3.22.0
 - Windows SDK version 10.0.22621.0 to target Windows 10.0.17763.
 
 ## Reference Warning Classes
@@ -1132,6 +1132,25 @@ reading uninitialized value return | missingReturn
 std vector reserve set read | containerOutOfBounds
 
 
+### 2024/07/06
+gcc 11.2.0->13.2.0
+undefined behavior | new check
+------------------ | ---------
+access after realloc | -Wuse-after-free
+stack overflow | -Winfinite-recursion
+
+clang-tidy 14.0 -> 18.1.3
+undefined behavior | new check
+------------------ | ---------
+odr violation function | misc-include-cleaner*
+odr violation struct ret | misc-include-cleaner*
+operator star on empty optional | bugprone-unchecked-optional-access
+
+*misc-include-cleaner doesn't really call out the ODR violation, but it is a strong indicator.
+
+Clang's memory sanitizer removed. Its results were similar to address. Also, the results were questionable, since it didn't work with a memory compiled standard library.
+
+The type pun examples were changed to reinterpret cast ones. There are more examples to stress that the standard has strict requirements on reinterpret cast. Still most of them aren't checked.
 
 ## Variability
 Valgrind seems to have different results over time. This may be due to version upgrades from 3.11 to 1.13 or the very nature of undefined behavior itself. It was observed that array out of bounds was undetected by valgrind during the upgrade. Not detecting uninitialized memory in release with debug info went undetected at some point later.

@@ -3,7 +3,7 @@
 
 class Parent {
 public:
-  inline Parent() { Foo(); }
+  Parent() { Foo(); }
   virtual ~Parent() = default;
   Parent(const Parent &) = default;
   Parent &operator=(const Parent &) = default;
@@ -15,7 +15,7 @@ public:
 
 class Child : public Parent {
 public:
-  inline void Foo() override { std::cout << "here\n"; }
+  void Foo() override { std::cout << "here\n"; }
 };
 
 int main() {

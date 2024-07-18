@@ -1,7 +1,6 @@
 /*
 https://en.cppreference.com/book/uninitialized
 */
-#include <cstdint>
 #include <cstdlib>
 #include <iostream>
 

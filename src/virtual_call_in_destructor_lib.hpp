@@ -1,8 +1,5 @@
 #pragma once
 
-#include <cstdlib>
-#include <iostream>
-
 class Parent {
 public:
   Parent() = default;

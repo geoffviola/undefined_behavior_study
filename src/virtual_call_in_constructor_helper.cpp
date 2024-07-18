@@ -3,7 +3,7 @@
 
 class Parent {
 public:
-  inline Parent() { Helper(); }
+  Parent() { Helper(); }
   virtual ~Parent() = default;
   Parent(const Parent &) = default;
   Parent &operator=(const Parent &) = default;
@@ -13,12 +13,12 @@ public:
   virtual void Foo() = 0;
 
 private:
-  inline void Helper() { Foo(); }
+  void Helper() { Foo(); }
 };
 
 class Child : public Parent {
 public:
-  inline void Foo() override { std::cout << "here\n"; }
+  void Foo() override { std::cout << "here\n"; }
 };
 
 int main() {
