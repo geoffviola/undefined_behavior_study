@@ -9,6 +9,8 @@ define equiv(a, b) as !comp(a, b) && !comp(b, a), then the requirements are that
 comp and equiv both be transitive relations:
 
 https://eel.is/c++draft/concept.strictweakorder#2
+
+1 <= 1 == true -> reflexive
 */
 
 #include <algorithm>

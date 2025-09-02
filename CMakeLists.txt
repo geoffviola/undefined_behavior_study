@@ -17,6 +17,7 @@ set(executables
     delete_incomplete_type
     dereferencing_nullptr
     divide_by_zero
+    empty_deq_begin
     initialize_std_string_with_nullptr
     large_double_to_int
     malloc_cast_pod_struct
@@ -45,7 +46,8 @@ set(executables
     reinterpret_cast_unaligned_bytes_to_uint32
     shifting_more_than_width
     signed_integer_overflow
-    sort_comp_reflexive
+    sort_comp_reflexive_double_nan
+    sort_comp_reflexive_int_less_equal
     stack_overflow
     std_vector_reserve_set_read
     virtual_call_in_constructor_helper
